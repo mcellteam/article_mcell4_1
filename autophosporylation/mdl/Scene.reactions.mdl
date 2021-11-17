@@ -1,0 +1,9 @@
+DEFINE_REACTIONS
+{
+  A -> Ap [21.199999999999999] //: A -> Ap
+  A_Ap -> Ap + Ap [200] //: A_Ap -> Ap + Ap
+  Ap_P -> A + P [539] //: Ap_P -> A + P
+  A + Ap -> A_Ap [1e+07] //: A + Ap -> A_Ap
+  Ap + P -> Ap_P [8e+08] //: Ap + P -> Ap_P
+}
+

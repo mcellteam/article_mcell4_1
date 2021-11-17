@@ -1,0 +1,14 @@
+REACTION_DATA_OUTPUT
+{
+  STEP=1.00000000000000002e-02
+  {COUNT[A,WORLD]} =>  "./react_data/seed_" & seed & "/A_MDLString.dat"
+  {COUNT[B,WORLD]} =>  "./react_data/seed_" & seed & "/B_MDLString.dat"
+  {COUNT[M,WORLD]} =>  "./react_data/seed_" & seed & "/M_MDLString.dat"
+  {COUNT[AB,WORLD]} =>  "./react_data/seed_" & seed & "/AB_MDLString.dat"
+  {COUNT[MA,WORLD]} =>  "./react_data/seed_" & seed & "/MA_MDLString.dat"
+  {COUNT[BM,WORLD]} =>  "./react_data/seed_" & seed & "/BM_MDLString.dat"
+  {COUNT[MAB,WORLD]} =>  "./react_data/seed_" & seed & "/MAB_MDLString.dat"
+  {COUNT[ABM,WORLD]} =>  "./react_data/seed_" & seed & "/ABM_MDLString.dat"
+  {COUNT[MABM,WORLD]} =>  "./react_data/seed_" & seed & "/MABM_MDLString.dat"
+}
+

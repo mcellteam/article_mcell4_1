@@ -1,0 +1,63 @@
+begin parameters
+  # general parameters
+  ITERATIONS 20000000
+  MCELL_TIME_STEP 9.99999999999999955e-07
+  V 2.99969063660253908e-03 * 1e-15 # volume in litres
+
+  # diffusion constants
+  MCELL_DIFFUSION_CONSTANT_3D_A 9.99999999999999955e-07
+  MCELL_DIFFUSION_CONSTANT_3D_A_Ap 9.99999999999999955e-07
+  MCELL_DIFFUSION_CONSTANT_3D_Ap 9.99999999999999955e-07
+  MCELL_DIFFUSION_CONSTANT_3D_Ap_P 9.99999999999999955e-07
+  MCELL_DIFFUSION_CONSTANT_3D_P 9.99999999999999955e-07
+
+  # parameters to control rates in MCell and BioNetGen
+  NA_V 6.02214e23 * V
+  VOL_RXN 1
+  MCELL_REDEFINE_VOL_RXN NA_V
+
+  # reaction rates
+  k0 21.199999999999999
+  k1 200
+  k2 539
+  k3 1e+07 / NA_V * VOL_RXN
+  k4 8e+08 / NA_V * VOL_RXN
+
+  # seed species counts
+  seed_count_1 103
+  seed_count_2 5
+  seed_count_3 9
+end parameters
+
+begin molecule types
+  A()
+  A_Ap()
+  Ap()
+  Ap_P()
+  P()
+end molecule types
+
+begin compartments
+  box 3 V * 1e15 # volume in fL (um^3)
+end compartments
+
+begin seed species
+  @box:A@box seed_count_1
+  @box:Ap@box seed_count_2
+  @box:P@box seed_count_3
+end seed species
+
+begin observables
+  Molecules Ap Ap  
+  Molecules A A  
+end observables
+
+begin reaction rules
+  A -> Ap k0
+  A_Ap -> Ap + Ap k1
+  Ap_P -> A + P k2
+  A + Ap -> A_Ap k3
+  Ap + P -> Ap_P k4
+end reaction rules
+
+simulate({method=>"nf",seed=>1,t_end=>20,n_steps=>2000,glm=>1000000})

@@ -1,0 +1,7 @@
+REACTION_DATA_OUTPUT
+{
+  STEP=1.00000000000000002e-02
+  {COUNT[Ap/*Molecules*/,WORLD]} =>  "./react_data/seed_" & seed & "/Ap_MDLString.dat"
+  {COUNT[A/*Molecules*/,WORLD]} =>  "./react_data/seed_" & seed & "/A_MDLString.dat"
+}
+

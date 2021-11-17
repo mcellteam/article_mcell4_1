@@ -1,0 +1,3 @@
+nfsim/test.gdat,NFSim,0-1,1
+output_ode_hiSS.dat,ODE steady state 1,0-1,1
+output_ode_loSS.dat,ODE steady state 2,0-1,1

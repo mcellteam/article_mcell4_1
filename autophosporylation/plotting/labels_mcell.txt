@@ -1,0 +1,6 @@
+MCell4 Ap
+MCell4 A
+ODE steady state 1 Ap
+ODE steady state 1 A
+ODE steady state 2 Ap
+ODE steady state 2 A

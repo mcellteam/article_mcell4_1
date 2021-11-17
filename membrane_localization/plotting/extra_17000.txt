@@ -1,0 +1,3 @@
+AvgsMemloc_FPRlargbox_10traj.txt,NERDSS,2,1e-6
+ode_17000_cn.dat,ODE,0,1
+pde_17000.dat,PDE,0,1

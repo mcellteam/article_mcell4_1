@@ -1,0 +1,1117 @@
+{
+ "mcell" : 
+ {
+  "blender_version" : 
+  [
+   2,
+   79,
+   0
+  ],
+  "cellblender_version" : "0.1.54",
+  "data_model_version" : "DM_2017_06_23_1300",
+  "define_molecules" : 
+  {
+   "data_model_version" : "DM_2014_10_24_1638",
+   "molecule_list" : 
+   [
+    {
+     "bngl_component_list" : [],
+     "custom_space_step" : "",
+     "custom_time_step" : "",
+     "data_model_version" : "DM_2018_10_16_1632",
+     "description" : "",
+     "diffusion_constant" : "4.99999999999999977e-07",
+     "display" : 
+     {
+      "color" : 
+      [
+       1.0,
+       0.0,
+       0.0
+      ],
+      "emit" : 0.0,
+      "glyph" : "Sphere_1",
+      "scale" : 1.0
+     },
+     "export_viz" : false,
+     "maximum_step_length" : "",
+     "mol_bngl_label" : "",
+     "mol_name" : "A",
+     "mol_type" : "3D",
+     "spatial_structure" : "None",
+     "target_only" : false
+    },
+    {
+     "bngl_component_list" : [],
+     "custom_space_step" : "",
+     "custom_time_step" : "",
+     "data_model_version" : "DM_2018_10_16_1632",
+     "description" : "",
+     "diffusion_constant" : "2.49999999999999989e-07",
+     "display" : 
+     {
+      "color" : 
+      [
+       0.0,
+       1.0,
+       0.0
+      ],
+      "emit" : 0.0,
+      "glyph" : "Sphere_1",
+      "scale" : 1.0
+     },
+     "export_viz" : false,
+     "maximum_step_length" : "",
+     "mol_bngl_label" : "",
+     "mol_name" : "AB",
+     "mol_type" : "3D",
+     "spatial_structure" : "None",
+     "target_only" : false
+    },
+    {
+     "bngl_component_list" : [],
+     "custom_space_step" : "",
+     "custom_time_step" : "",
+     "data_model_version" : "DM_2018_10_16_1632",
+     "description" : "",
+     "diffusion_constant" : "4.90000000000000004e-09",
+     "display" : 
+     {
+      "color" : 
+      [
+       0.0,
+       0.0,
+       1.0
+      ],
+      "emit" : 0.0,
+      "glyph" : "Sphere_1",
+      "scale" : 1.0
+     },
+     "export_viz" : false,
+     "maximum_step_length" : "",
+     "mol_bngl_label" : "",
+     "mol_name" : "ABM",
+     "mol_type" : "2D",
+     "spatial_structure" : "None",
+     "target_only" : false
+    },
+    {
+     "bngl_component_list" : [],
+     "custom_space_step" : "",
+     "custom_time_step" : "",
+     "data_model_version" : "DM_2018_10_16_1632",
+     "description" : "",
+     "diffusion_constant" : "4.99999999999999977e-07",
+     "display" : 
+     {
+      "color" : 
+      [
+       1.0,
+       1.0,
+       0.0
+      ],
+      "emit" : 0.0,
+      "glyph" : "Sphere_1",
+      "scale" : 1.0
+     },
+     "export_viz" : false,
+     "maximum_step_length" : "",
+     "mol_bngl_label" : "",
+     "mol_name" : "B",
+     "mol_type" : "3D",
+     "spatial_structure" : "None",
+     "target_only" : false
+    },
+    {
+     "bngl_component_list" : [],
+     "custom_space_step" : "",
+     "custom_time_step" : "",
+     "data_model_version" : "DM_2018_10_16_1632",
+     "description" : "",
+     "diffusion_constant" : "4.94999999999999966e-09",
+     "display" : 
+     {
+      "color" : 
+      [
+       0.0,
+       1.0,
+       1.0
+      ],
+      "emit" : 0.0,
+      "glyph" : "Sphere_1",
+      "scale" : 1.0
+     },
+     "export_viz" : false,
+     "maximum_step_length" : "",
+     "mol_bngl_label" : "",
+     "mol_name" : "BM",
+     "mol_type" : "2D",
+     "spatial_structure" : "None",
+     "target_only" : false
+    },
+    {
+     "bngl_component_list" : [],
+     "custom_space_step" : "",
+     "custom_time_step" : "",
+     "data_model_version" : "DM_2018_10_16_1632",
+     "description" : "",
+     "diffusion_constant" : "5.0000000000000001e-09",
+     "display" : 
+     {
+      "color" : 
+      [
+       1.0,
+       0.0,
+       1.0
+      ],
+      "emit" : 0.0,
+      "glyph" : "Sphere_1",
+      "scale" : 1.0
+     },
+     "export_viz" : false,
+     "maximum_step_length" : "",
+     "mol_bngl_label" : "",
+     "mol_name" : "M",
+     "mol_type" : "2D",
+     "spatial_structure" : "None",
+     "target_only" : false
+    },
+    {
+     "bngl_component_list" : [],
+     "custom_space_step" : "",
+     "custom_time_step" : "",
+     "data_model_version" : "DM_2018_10_16_1632",
+     "description" : "",
+     "diffusion_constant" : "4.94999999999999966e-09",
+     "display" : 
+     {
+      "color" : 
+      [
+       1.0,
+       0.0,
+       0.0
+      ],
+      "emit" : 0.0,
+      "glyph" : "Sphere_1",
+      "scale" : 1.0
+     },
+     "export_viz" : false,
+     "maximum_step_length" : "",
+     "mol_bngl_label" : "",
+     "mol_name" : "MA",
+     "mol_type" : "2D",
+     "spatial_structure" : "None",
+     "target_only" : false
+    },
+    {
+     "bngl_component_list" : [],
+     "custom_space_step" : "",
+     "custom_time_step" : "",
+     "data_model_version" : "DM_2018_10_16_1632",
+     "description" : "",
+     "diffusion_constant" : "4.90000000000000004e-09",
+     "display" : 
+     {
+      "color" : 
+      [
+       0.0,
+       1.0,
+       0.0
+      ],
+      "emit" : 0.0,
+      "glyph" : "Sphere_1",
+      "scale" : 1.0
+     },
+     "export_viz" : false,
+     "maximum_step_length" : "",
+     "mol_bngl_label" : "",
+     "mol_name" : "MAB",
+     "mol_type" : "2D",
+     "spatial_structure" : "None",
+     "target_only" : false
+    },
+    {
+     "bngl_component_list" : [],
+     "custom_space_step" : "",
+     "custom_time_step" : "",
+     "data_model_version" : "DM_2018_10_16_1632",
+     "description" : "",
+     "diffusion_constant" : "2.47499999999999983e-09",
+     "display" : 
+     {
+      "color" : 
+      [
+       0.0,
+       0.0,
+       1.0
+      ],
+      "emit" : 0.0,
+      "glyph" : "Sphere_1",
+      "scale" : 1.0
+     },
+     "export_viz" : false,
+     "maximum_step_length" : "",
+     "mol_bngl_label" : "",
+     "mol_name" : "MABM",
+     "mol_type" : "2D",
+     "spatial_structure" : "None",
+     "target_only" : false
+    }
+   ]
+  },
+  "define_reactions" : 
+  {
+   "data_model_version" : "DM_2014_10_24_1638",
+   "reaction_list" : 
+   [
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "50000",
+     "name" : "A + B -> AB",
+     "products" : "AB",
+     "reactants" : "A + B",
+     "rxn_name" : "A + B -> AB",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "1",
+     "name" : "AB -> A + B",
+     "products" : "A + B",
+     "reactants" : "AB",
+     "rxn_name" : "AB -> A + B",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "2e+06",
+     "name" : "M' + A@IN -> MA'",
+     "products" : "MA'",
+     "reactants" : "M' + A@IN",
+     "rxn_name" : "M' + A@IN -> MA'",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "1",
+     "name" : "MA' -> M' + A@IN",
+     "products" : "M' + A@IN",
+     "reactants" : "MA'",
+     "rxn_name" : "MA' -> M' + A@IN",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "2e+06",
+     "name" : "M' + B@IN -> BM'",
+     "products" : "BM'",
+     "reactants" : "M' + B@IN",
+     "rxn_name" : "M' + B@IN -> BM'",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "1",
+     "name" : "BM' -> M' + B@IN",
+     "products" : "M' + B@IN",
+     "reactants" : "BM'",
+     "rxn_name" : "BM' -> M' + B@IN",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "2e+06",
+     "name" : "M' + AB@IN -> MAB'",
+     "products" : "MAB'",
+     "reactants" : "M' + AB@IN",
+     "rxn_name" : "M' + AB@IN -> MAB'",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "1",
+     "name" : "MAB' -> M' + AB@IN",
+     "products" : "M' + AB@IN",
+     "reactants" : "MAB'",
+     "rxn_name" : "MAB' -> M' + AB@IN",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "2e+06",
+     "name" : "M' + AB@IN -> ABM'",
+     "products" : "ABM'",
+     "reactants" : "M' + AB@IN",
+     "rxn_name" : "M' + AB@IN -> ABM'",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "1",
+     "name" : "ABM' -> M' + AB@IN",
+     "products" : "M' + AB@IN",
+     "reactants" : "ABM'",
+     "rxn_name" : "ABM' -> M' + AB@IN",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "50000",
+     "name" : "MA' + B@IN -> MAB'",
+     "products" : "MAB'",
+     "reactants" : "MA' + B@IN",
+     "rxn_name" : "MA' + B@IN -> MAB'",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "1",
+     "name" : "MAB' -> MA' + B@IN",
+     "products" : "MA' + B@IN",
+     "reactants" : "MAB'",
+     "rxn_name" : "MAB' -> MA' + B@IN",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "50000",
+     "name" : "BM' + A@IN -> ABM'",
+     "products" : "ABM'",
+     "reactants" : "BM' + A@IN",
+     "rxn_name" : "BM' + A@IN -> ABM'",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "1",
+     "name" : "ABM' -> BM' + A@IN",
+     "products" : "BM' + A@IN",
+     "reactants" : "ABM'",
+     "rxn_name" : "ABM' -> BM' + A@IN",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "0.041500000000000002",
+     "name" : "MA' + BM' -> MABM'",
+     "products" : "MABM'",
+     "reactants" : "MA' + BM'",
+     "rxn_name" : "MA' + BM' -> MABM'",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "1",
+     "name" : "MABM' -> MA' + BM'",
+     "products" : "MA' + BM'",
+     "reactants" : "MABM'",
+     "rxn_name" : "MABM' -> MA' + BM'",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "1.6611",
+     "name" : "MAB' + M' -> MABM'",
+     "products" : "MABM'",
+     "reactants" : "MAB' + M'",
+     "rxn_name" : "MAB' + M' -> MABM'",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "1",
+     "name" : "MABM' -> MAB' + M'",
+     "products" : "MAB' + M'",
+     "reactants" : "MABM'",
+     "rxn_name" : "MABM' -> MAB' + M'",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "1.6611",
+     "name" : "ABM' + M' -> MABM'",
+     "products" : "MABM'",
+     "reactants" : "ABM' + M'",
+     "rxn_name" : "ABM' + M' -> MABM'",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "1",
+     "name" : "MABM' -> ABM' + M'",
+     "products" : "ABM' + M'",
+     "reactants" : "MABM'",
+     "rxn_name" : "MABM' -> ABM' + M'",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    }
+   ]
+  },
+  "define_surface_classes" : 
+  {
+   "data_model_version" : "DM_2014_10_24_1638",
+   "surface_class_list" : 
+   [
+    {
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "name" : "reflect_edge",
+     "surface_class_prop_list" : 
+     [
+      {
+       "affected_mols" : "ALL_SURFACE_MOLECULES",
+       "clamp_value" : "0",
+       "data_model_version" : "DM_2015_11_08_1756",
+       "molecule" : "",
+       "name" : "",
+       "surf_class_orient" : "'",
+       "surf_class_type" : "REFLECTIVE"
+      }
+     ]
+    }
+   ]
+  },
+  "geometrical_objects" : 
+  {
+   "object_list" : 
+   [
+    {
+     "define_surface_regions" : 
+     [
+      {
+       "include_elements" : 
+       [
+        4,
+        10
+       ],
+       "name" : "bottom"
+      }
+     ],
+     "element_connections" : 
+     [
+      [
+       1,
+       2,
+       0
+      ],
+      [
+       3,
+       6,
+       2
+      ],
+      [
+       7,
+       4,
+       6
+      ],
+      [
+       5,
+       0,
+       4
+      ],
+      [
+       6,
+       0,
+       2
+      ],
+      [
+       3,
+       5,
+       7
+      ],
+      [
+       1,
+       3,
+       2
+      ],
+      [
+       3,
+       7,
+       6
+      ],
+      [
+       7,
+       5,
+       4
+      ],
+      [
+       5,
+       1,
+       0
+      ],
+      [
+       6,
+       4,
+       0
+      ],
+      [
+       3,
+       1,
+       5
+      ]
+     ],
+     "material_names" : 
+     [
+      "membrane"
+     ],
+     "name" : "box",
+     "vertex_list" : 
+     [
+      [
+       -0.234999999403954,
+       -0.234999999403954,
+       -2.5
+      ],
+      [
+       -0.234999999403954,
+       -0.234999999403954,
+       2.5
+      ],
+      [
+       -0.234999999403954,
+       0.234999999403954,
+       -2.5
+      ],
+      [
+       -0.234999999403954,
+       0.234999999403954,
+       2.5
+      ],
+      [
+       0.234999999403954,
+       -0.234999999403954,
+       -2.5
+      ],
+      [
+       0.234999999403954,
+       -0.234999999403954,
+       2.5
+      ],
+      [
+       0.234999999403954,
+       0.234999999403954,
+       -2.5
+      ],
+      [
+       0.234999999403954,
+       0.234999999403954,
+       2.5
+      ]
+     ]
+    }
+   ]
+  },
+  "initialization" : 
+  {
+   "accurate_3d_reactions" : true,
+   "center_molecules_on_grid" : false,
+   "command_options" : "",
+   "data_model_version" : "DM_2017_11_18_0130",
+   "export_all_ascii" : true,
+   "interaction_radius" : "",
+   "iterations" : "2000000",
+   "microscopic_reversibility" : "OFF",
+   "notifications" : 
+   {
+    "all_notifications" : "INDIVIDUAL",
+    "box_triangulation_report" : false,
+    "diffusion_constant_report" : "BRIEF",
+    "file_output_report" : false,
+    "final_summary" : true,
+    "iteration_report" : true,
+    "molecule_collision_report" : false,
+    "partition_location_report" : false,
+    "probability_report" : "ON",
+    "probability_report_threshold" : "0",
+    "progress_report" : true,
+    "release_event_report" : true,
+    "species_reactions_report" : true,
+    "varying_probability_report" : true
+   },
+   "partitions" : 
+   {
+    "include" : true,
+    "recursion_flag" : false,
+    "x_end" : "3",
+    "x_start" : "-3",
+    "x_step" : "0.5",
+    "y_end" : "3",
+    "y_start" : "-3",
+    "y_step" : "0.5",
+    "z_end" : "3",
+    "z_start" : "-3",
+    "z_step" : "0.5"
+   },
+   "radial_directions" : "",
+   "radial_subdivisions" : "",
+   "space_step" : "",
+   "surface_grid_density" : "40000",
+   "time_step" : "1e-06",
+   "time_step_max" : "",
+   "vacancy_search_distance" : "10",
+   "warnings" : 
+   {
+    "all_warnings" : "INDIVIDUAL",
+    "degenerate_polygons" : "WARNING",
+    "high_probability_threshold" : "1",
+    "high_reaction_probability" : "IGNORED",
+    "large_molecular_displacement" : "WARNING",
+    "lifetime_threshold" : "50",
+    "lifetime_too_short" : "WARNING",
+    "missed_reaction_threshold" : "0.001",
+    "missed_reactions" : "WARNING",
+    "missing_surface_orientation" : "ERROR",
+    "negative_diffusion_constant" : "WARNING",
+    "negative_reaction_rate" : "WARNING",
+    "useless_volume_orientation" : "WARNING"
+   }
+  },
+  "materials" : 
+  {
+   "material_dict" : 
+   {
+    "membrane" : 
+    {
+     "diffuse_color" : 
+     {
+      "a" : 0.25,
+      "b" : 0.8,
+      "g" : 0.8,
+      "r" : 0.8
+     }
+    }
+   }
+  },
+  "model_language" : "mcell4",
+  "model_objects" : 
+  {
+   "data_model_version" : "DM_2018_01_11_1330",
+   "model_object_list" : 
+   [
+    {
+     "description" : "",
+     "dynamic" : false,
+     "dynamic_display_source" : "script",
+     "is_bngl_compartment" : true,
+     "membrane_name" : "",
+     "name" : "box",
+     "object_source" : "blender",
+     "parent_object" : "",
+     "script_name" : ""
+    }
+   ]
+  },
+  "modify_surface_regions" : 
+  {
+   "data_model_version" : "DM_2014_10_24_1638",
+   "modify_surface_regions_list" : 
+   [
+    {
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "name" : "",
+     "object_name" : "box",
+     "region_name" : "bottom",
+     "region_selection" : "SEL",
+     "surf_class_name" : "reflect_edge"
+    }
+   ]
+  },
+  "mol_viz" : 
+  {
+   "active_seed_index" : 0,
+   "color_index" : 0,
+   "color_list" : 
+   [
+    [
+     0.8,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.8,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.8
+    ],
+    [
+     0.0,
+     0.8,
+     0.8
+    ],
+    [
+     0.8,
+     0.0,
+     0.8
+    ],
+    [
+     0.8,
+     0.8,
+     0.0
+    ],
+    [
+     1.0,
+     1.0,
+     1.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ]
+   ],
+   "data_model_version" : "DM_2015_04_13_1700",
+   "file_dir" : "",
+   "file_index" : 959,
+   "file_name" : "",
+   "file_num" : 1001,
+   "file_start_index" : 0,
+   "file_step_index" : 1,
+   "file_stop_index" : 1000,
+   "manual_select_viz_dir" : false,
+   "render_and_save" : false,
+   "seed_list" : [],
+   "viz_enable" : true,
+   "viz_list" : []
+  },
+  "parameter_system" : 
+  {
+   "model_parameters" : {}
+  },
+  "reaction_data_output" : 
+  {
+   "always_generate" : true,
+   "combine_seeds" : true,
+   "data_model_version" : "DM_2016_03_15_1800",
+   "mol_colors" : false,
+   "output_buf_size" : "",
+   "plot_layout" : " ",
+   "plot_legend" : "0",
+   "reaction_output_list" : 
+   [
+    {
+     "count_location" : "World",
+     "data_file_name" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "mdl_file_prefix" : "A",
+     "mdl_string" : "COUNT[A/*Molecules*/,WORLD]",
+     "molecule_name" : "",
+     "name" : "",
+     "object_name" : "",
+     "plotting_enabled" : true,
+     "reaction_name" : "",
+     "region_name" : "",
+     "rxn_or_mol" : "MDLString"
+    },
+    {
+     "count_location" : "World",
+     "data_file_name" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "mdl_file_prefix" : "B",
+     "mdl_string" : "COUNT[B/*Molecules*/,WORLD]",
+     "molecule_name" : "",
+     "name" : "",
+     "object_name" : "",
+     "plotting_enabled" : true,
+     "reaction_name" : "",
+     "region_name" : "",
+     "rxn_or_mol" : "MDLString"
+    },
+    {
+     "count_location" : "World",
+     "data_file_name" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "mdl_file_prefix" : "AB",
+     "mdl_string" : "COUNT[AB/*Molecules*/,WORLD]",
+     "molecule_name" : "",
+     "name" : "",
+     "object_name" : "",
+     "plotting_enabled" : true,
+     "reaction_name" : "",
+     "region_name" : "",
+     "rxn_or_mol" : "MDLString"
+    },
+    {
+     "count_location" : "World",
+     "data_file_name" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "mdl_file_prefix" : "M",
+     "mdl_string" : "COUNT[M'/*Molecules*/,WORLD]",
+     "molecule_name" : "",
+     "name" : "",
+     "object_name" : "",
+     "plotting_enabled" : true,
+     "reaction_name" : "",
+     "region_name" : "",
+     "rxn_or_mol" : "MDLString"
+    },
+    {
+     "count_location" : "World",
+     "data_file_name" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "mdl_file_prefix" : "MA",
+     "mdl_string" : "COUNT[MA'/*Molecules*/,WORLD]",
+     "molecule_name" : "",
+     "name" : "",
+     "object_name" : "",
+     "plotting_enabled" : true,
+     "reaction_name" : "",
+     "region_name" : "",
+     "rxn_or_mol" : "MDLString"
+    },
+    {
+     "count_location" : "World",
+     "data_file_name" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "mdl_file_prefix" : "BM",
+     "mdl_string" : "COUNT[BM'/*Molecules*/,WORLD]",
+     "molecule_name" : "",
+     "name" : "",
+     "object_name" : "",
+     "plotting_enabled" : true,
+     "reaction_name" : "",
+     "region_name" : "",
+     "rxn_or_mol" : "MDLString"
+    },
+    {
+     "count_location" : "World",
+     "data_file_name" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "mdl_file_prefix" : "MAB",
+     "mdl_string" : "COUNT[MAB'/*Molecules*/,WORLD]",
+     "molecule_name" : "",
+     "name" : "",
+     "object_name" : "",
+     "plotting_enabled" : true,
+     "reaction_name" : "",
+     "region_name" : "",
+     "rxn_or_mol" : "MDLString"
+    },
+    {
+     "count_location" : "World",
+     "data_file_name" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "mdl_file_prefix" : "ABM",
+     "mdl_string" : "COUNT[ABM'/*Molecules*/,WORLD]",
+     "molecule_name" : "",
+     "name" : "",
+     "object_name" : "",
+     "plotting_enabled" : true,
+     "reaction_name" : "",
+     "region_name" : "",
+     "rxn_or_mol" : "MDLString"
+    },
+    {
+     "count_location" : "World",
+     "data_file_name" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "mdl_file_prefix" : "MABM",
+     "mdl_string" : "COUNT[MABM'/*Molecules*/,WORLD]",
+     "molecule_name" : "",
+     "name" : "",
+     "object_name" : "",
+     "plotting_enabled" : true,
+     "reaction_name" : "",
+     "region_name" : "",
+     "rxn_or_mol" : "MDLString"
+    }
+   ],
+   "rxn_step" : "1.00000000000000002e-02"
+  },
+  "release_sites" : 
+  {
+   "data_model_version" : "DM_2014_10_24_1638",
+   "release_site_list" : 
+   [
+    {
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "molecule" : "M",
+     "name" : "rel_m",
+     "object_expr" : "box[bottom]",
+     "orient" : "'",
+     "pattern" : "",
+     "quantity" : "3755",
+     "quantity_type" : "NUMBER_TO_RELEASE",
+     "release_probability" : "1",
+     "shape" : "OBJECT",
+     "stddev" : "0"
+    },
+    {
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "molecule" : "A@box",
+     "name" : "Release of A@box at box",
+     "object_expr" : "box[ALL]",
+     "orient" : ";",
+     "pattern" : "",
+     "quantity" : "665",
+     "quantity_type" : "NUMBER_TO_RELEASE",
+     "release_probability" : "1",
+     "shape" : "OBJECT",
+     "stddev" : "0"
+    },
+    {
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "molecule" : "B@box",
+     "name" : "Release of B@box at box",
+     "object_expr" : "box[ALL]",
+     "orient" : ";",
+     "pattern" : "",
+     "quantity" : "665",
+     "quantity_type" : "NUMBER_TO_RELEASE",
+     "release_probability" : "1",
+     "shape" : "OBJECT",
+     "stddev" : "0"
+    }
+   ]
+  },
+  "scripting" : 
+  {
+   "data_model_version" : "DM_2017_11_30_1830",
+   "dm_external_file_name" : "",
+   "dm_internal_file_name" : "",
+   "force_property_update" : true,
+   "ignore_cellblender_data" : false,
+   "script_texts" : {},
+   "scripting_list" : []
+  },
+  "simulation_control" : 
+  {
+   "export_format" : "mcell_mdl_modular"
+  }
+ }
+}

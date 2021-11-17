@@ -1,0 +1,2 @@
+output_ode_hiSS.dat,ODE high steady state,0-1,1
+output_ode_loSS.dat,ODE low steady state,0-1,1
