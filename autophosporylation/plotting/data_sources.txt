@@ -1,0 +1,14 @@
+Files:
+
+output_gillespie_1e4_Time_Ap_Un_StateID.dat
+output_NERDSS_1e4_Time_Ap_Un_StateID.dat
+output_ode_hiSS.dat
+output_ode_loSS.dat
+
+are from data accompanying article
+
+Margaret E Johnson, Athena Chen, James R Faeder, Philipp Henning, Ion I Moraru, 
+Martin Meier-Schellersheim,315Robert F Murphy, Thorsten Prüstel, Julie A Theriot, 
+and Adelinde M Uhrmacher. 
+Quantifying the roles of space and stochasticity in computer simulations for cell 
+biology and cellular biochemistry.Molecular Biology of the Cell, 32(2):186–210, 2021.
