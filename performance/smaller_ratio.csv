@@ -1,0 +1,8 @@
+Benchmark,MCell3,MCell4,MCell3/MCell4
+Synaptic Ca Homeostasis Presynaptic,16.3334,14.8058,1.103175782
+Rat Neuromuscular Junction,13.547004,8.67851,1.560982703
+Neuropil - full model,29.59175,38.3421,0.7717821924
+Neuropil - with simplified geometry,29.731443,11.0666,2.686592359
+Mitochondria Presynaptic,19.295052,13.5051,1.428723371
+Membrane Localization,7192.579639,4412.44,1.63006854235
+Auto-phosphorylation,980.279276,844.112,1.16131422844
