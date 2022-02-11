@@ -1,0 +1,77 @@
+begin model
+
+begin parameters
+  MCELL_DIFFUSION_CONSTANT_3D_Ca 1e-6
+  MCELL_DIFFUSION_CONSTANT_3D_V_release 0
+  MCELL_DIFFUSION_CONSTANT_3D_snare 0
+  NA  6.022e23
+  V  1 * 1e-15 #lt
+  NA_V  NA * V
+  #MCELL_REDEFINE_NA_V 1
+  #ITERATIONS 5000
+  ksp   0.612e8/NA_V # 1/M 1/s
+  ksm 2.32e3 # 1/s
+  kap  3.82e6/NA_V # 1/M 1/s
+  kam 13     # 1/s
+  gamma 2e3 # 1/s
+  delta 0.417e-3 # 1/s # spontaneous release rate
+  k_dock 0.2 # 1/s
+  a 0.025 # Reduced release probability for asynchronous
+  b 0.25 # Calcium binding cooperativity factor
+  Ca0  1e-7*NA_V # Basal calcium concentratiom # 1/M Nr_ca_molecules
+end parameters
+
+begin compartments
+# 3D (volume) compartment with volume 1um^3
+    CP 3 1e-3
+end compartments
+
+begin molecule types
+
+  snare(s~0~1~2~3~4~5,a~0~1~2,dv~0~1)
+  Ca
+  V_release()
+  
+end molecule types
+
+begin species
+  # SNARE complex
+  snare(s~0,a~0,dv~1)@CP 70
+  # fixed calcium number
+  Ca@CP Ca0
+end species
+
+begin observables
+  Molecules SNARE_sync snare(s~5)
+  Molecules SNARE_async snare(a~2)
+  Molecules V_release V_release()
+end observables
+
+begin reaction rules
+
+  # Calcium binding to synchronous sensor
+  snare(s~0) + Ca <-> snare(s~1) 5*ksp, 1*b^0*ksm
+  snare(s~1) + Ca <-> snare(s~2) 4*ksp, 2*b^1*ksm
+  snare(s~2) + Ca <-> snare(s~3) 3*ksp, 3*b^2*ksm
+  snare(s~3) + Ca <-> snare(s~4) 2*ksp, 4*b^3*ksm
+  snare(s~4) + Ca <-> snare(s~5) 1*ksp, 5*b^4*ksm
+
+  # Calcium binding to asynchronous sensor
+  snare(a~0) + Ca <-> snare(a~1) 2*kap, 1*b^0*kam
+  snare(a~1) + Ca <-> snare(a~2) 1*kap, 2*b^1*kam
+
+  # Vesicle release
+  # spontaneous
+  snare(dv~1) -> snare(dv~0) + V_release() delta
+  #synchronous
+  snare(s~5,dv~1) -> snare(s~5,dv~0) + V_release() gamma
+  # asynchronous
+  snare(dv~1,a~2) -> snare(dv~0,a~2) + V_release() a*gamma  
+  #Vesicle docking to SNARE
+  snare(dv~0) -> snare(dv~1) k_dock
+
+ end reaction rules
+
+end model
+
+simulate({method=>"ode",seed=>2,t_end=>1,n_steps=>1000})
