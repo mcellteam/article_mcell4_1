@@ -1,7 +1,0 @@
-Ca()  1
-CaM(C~0,N~0,ng,camkii!1).CaMKII(docked~y,r!2,l!3,c!4,Y286~0,S306~0,cam!1,u~1).CaMKII(docked~y,r!5,l!2,c!6,Y286~0,S306~0,cam,u~1).CaMKII(docked~y,r!3,l!7,c!8,Y286~0,S306~0,cam,u~1).CaMKII(docked~y,r!9,l!10,c!4,Y286~0,S306~0,cam,u~0).CaMKII(docked~y,r!11,l!5,c!12,Y286~0,S306~0,cam,u~1).CaMKII(docked~y,r!13,l!9,c!6,Y286~0,S306~0,cam,u~0).CaMKII(docked~y,r!7,l!14,c!15,Y286~0,S306~0,cam,u~1).CaMKII(docked~y,r!10,l!16,c!8,Y286~0,S306~0,cam,u~0).CaMKII(docked~y,r!14,l!11,c!17,Y286~0,S306~0,cam,u~1).CaMKII(docked~y,r!18,l!13,c!12,Y286~0,S306~0,cam,u~0).CaMKII(docked~y,r!16,l!19,c!15,Y286~0,S306~0,cam,u~0).CaMKII(docked~y,r!19,l!18,c!17,Y286~0,S306~0,cam,u~0)  1
-CaM(C~0,N~0,ng,camkii)  338
-CaM(C~0,N~1,ng,camkii)  1
-CaMKII(docked~y,r!1,l!2,c!3,Y286~0,S306~0,cam,u~0).CaMKII(docked~y,r!4,l!1,c!5,Y286~0,S306~0,cam,u~0).CaMKII(docked~y,r!2,l!6,c!7,Y286~0,S306~0,cam,u~0).CaMKII(docked~y,r!8,l!9,c!3,Y286~0,S306~0,cam,u~1).CaMKII(docked~y,r!10,l!4,c!11,Y286~0,S306~0,cam,u~0).CaMKII(docked~y,r!12,l!8,c!5,Y286~0,S306~0,cam,u~1).CaMKII(docked~y,r!6,l!13,c!14,Y286~0,S306~0,cam,u~0).CaMKII(docked~y,r!9,l!15,c!7,Y286~0,S306~0,cam,u~1).CaMKII(docked~y,r!13,l!10,c!16,Y286~0,S306~0,cam,u~0).CaMKII(docked~y,r!17,l!12,c!11,Y286~0,S306~0,cam,u~1).CaMKII(docked~y,r!15,l!18,c!14,Y286~0,S306~0,cam,u~1).CaMKII(docked~y,r!18,l!17,c!16,Y286~0,S306~0,cam,u~1)  74
-PP1(camkii)  14
-dummy()  1000
