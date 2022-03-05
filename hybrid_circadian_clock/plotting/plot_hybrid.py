@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import sys
+import os
 import matplotlib.patches as mpatches
 from matplotlib.lines import Line2D
 
@@ -96,7 +97,11 @@ data = [
     (6, nfsim, 'y', 'SSA'),
     (7, ode, 'k', 'ODE')
 ]        
-        
+
+def load_csv(file):
+    df = pd.read_csv(file)
+    df = df.set_index('time')
+    return df        
 
 # shared function to store plots
 def finalize_and_save_plot(out, fig):     
@@ -108,7 +113,58 @@ def finalize_and_save_plot(out, fig):
     
     fig.set_size_inches((14,2.5))                
     plt.savefig(out, dpi=600)   
+
+def plot_averages(dir):
+    
+    # load all .csv files in directory passed as the first argument
+    data = {}
+    
+    file_list = os.listdir(dir)
+    for file in file_list:
+        file_path = os.path.join(dir, file)
+        if os.path.isfile(file_path):
+            name_ext = os.path.splitext(file)
+            if name_ext[1] == '.gdat':
+                data[name_ext[0]] = load_gdat(file_path)
+            elif name_ext[1] == '.csv':
+                data[name_ext[0]] = load_csv(file_path)
+            
+    fig, ax = plt.subplots()
+    legend = []
+    first = True
+    for name,df in data.items():
+        df = df.truncate(after = 0.16)  
+        df = df.rename({'A_mean': 'A (mean)', 'R_mean': 'R (mean)'}, axis='columns')
+        yA = df['A (mean)']
+        yR = df['R (mean)']
         
+        if first:
+            ax.plot(df.index, yA, c = 'r')
+            ax.plot(df.index, yR, c = 'b')
+            first = False    
+        else:    
+            ax.plot(df.index, yA)
+            ax.plot(df.index, yR)
+        
+        if name == 'nfsim':
+            name = 'NFSim'
+        elif name == 'ssa':
+            name = 'SSA'
+        elif name == 'hybrid_D1000':
+            name = 'hybrid D=1e-5'
+        elif name == 'particle_D1000':
+            name = 'particle D=1e-5'
+        elif name == 'hybrid_D10':
+            name = 'hybrid D=1e-7'
+        elif name == 'particle_D10':
+            name = 'particle D=1e-7'
+        
+        legend.append(name + ' - A (mean)')
+        legend.append(name + ' - R (mean)')
+    
+    plt.legend(legend)
+    
+    finalize_and_save_plot("hybrid_" + os.path.basename(dir) + ".png", fig)
         
 def plot_low_pass(out, nfsim_seed):
     fig, ax = plt.subplots()
@@ -181,5 +237,10 @@ if __name__ == '__main__':
     plot_low_pass("hybrid_low_pass_nfsim.png", 14)
     
     plot_peaks_error_bars(out="hybrid_peaks.png")
+    
+    plot_averages("averages_fast")
+    plot_averages("averages_slow_hybrid")
+    plot_averages("averages_slow_particle")
+    
     
     
