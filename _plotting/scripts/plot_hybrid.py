@@ -4,10 +4,9 @@ import pandas as pd
 import sys
 import os
 import matplotlib.patches as mpatches
+from io import StringIO
 from matplotlib.lines import Line2D
-
-from get_peaks_bngl import load_gdat_file
-from get_peaks import prepare_data
+from hybrid_get_peaks import prepare_data
 
 
 particle_D10 = {
@@ -98,6 +97,12 @@ data = [
     (7, ode, 'k', 'ODE')
 ]        
 
+
+def load_gdat_file(file):
+    wholefile = open(file).read()
+    df = pd.read_csv(StringIO(wholefile[1:]), index_col=0, skipinitialspace=True, delim_whitespace=True)
+    return df
+
 def load_csv(file):
     df = pd.read_csv(file)
     df = df.set_index('time')
@@ -139,8 +144,8 @@ def plot_averages(dir):
         yR = df['R (mean)']
         
         if first:
-            ax.plot(df.index, yA, c = 'r')
-            ax.plot(df.index, yR, c = 'b')
+            ax.plot(df.index, yA, c = 'b')
+            ax.plot(df.index, yR, c = 'r')
             first = False    
         else:    
             ax.plot(df.index, yA)
@@ -163,6 +168,7 @@ def plot_averages(dir):
         legend.append(name + ' - R (mean)')
     
     plt.legend(legend)
+    plt.ylabel("N(t)")
     
     finalize_and_save_plot("hybrid_" + os.path.basename(dir) + ".png", fig)
         

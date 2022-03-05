@@ -1,3 +1,6 @@
 /plots*
 /hybrid_low_pass_nfsim.png
 /hybrid_peaks.png
+/hybrid_averages_fast.png
+/hybrid_averages_slow_hybrid.png
+/hybrid_averages_slow_particle.png

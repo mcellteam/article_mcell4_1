@@ -6,12 +6,6 @@ from get_peaks import *
 from io import StringIO
 
 
-def load_gdat_file(file):
-    wholefile = open(file).read()
-    
-    df = pd.read_csv(StringIO(wholefile[1:]), index_col=0, skipinitialspace=True, delim_whitespace=True)
-
-    return df
    
 def get_all_peaks_bngl(dir):
     res = pd.DataFrame(columns = ['seed', 'A_first', 'A_second', 'R_first', 'R_second'])
