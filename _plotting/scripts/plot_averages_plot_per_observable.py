@@ -34,6 +34,7 @@ import os
 import sys
 import argparse
 from load_data import *
+from shared import *
 
 class Options:
     def __init__(self):
@@ -103,6 +104,7 @@ def main():
 
     clrs = ['b', 'g', 'r'] 
         
+    # generate one image per iteration
     for obs in sorted(all_observables): 
         if selected_observables and obs not in selected_observables:
             continue
@@ -122,28 +124,30 @@ def main():
             df = pd.DataFrame()           
             df['time'] = data.iloc[:, 0]
             df['means'] = data.iloc[:, 1:].mean(axis=1)
-            print(opts.labels[i], df['means'])
+            #print(opts.labels[i], df['means'])
             df['mean_minus_std'] = df['means'] - data.iloc[:, 1:].std(axis=1)
             df['mean_plus_std'] = df['means'] + data.iloc[:, 1:].std(axis=1)
     
             # free collected data to decrease memory consumption        
             del data
                     
-            ax.plot(df['time'], df['means'], label=obs + "1", c=clrs[i])
-            ax.fill_between(
+            ax_plot(ax, df['time'], df['means'], label=obs + "1", c=clrs[i])
+            ax_fill_between(
+                ax,
                 df['time'], 
                 df['mean_minus_std'], df['mean_plus_std'],
                 alpha=0.1, facecolor=clrs[i])
     
             legend_names.append(opts.labels[i])
     
+        
+        plt.xlabel(X_LABEL_TIME_UNIT_S)
+        plt.ylabel(Y_LABEL_N_PARAM_TIME)
+
+        
         plt.legend(legend_names)
-        
-        plt.xlabel("time [s]")
-        plt.ylabel("N(t)")
-        
-        plt.savefig(obs + '.png', dpi=600)
-        plt.close(fig)
+        plt.savefig(obs + '.png', dpi=OUTPUT_DPI)
+
 
 
 if __name__ == '__main__':

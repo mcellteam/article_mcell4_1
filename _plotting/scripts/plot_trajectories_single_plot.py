@@ -34,6 +34,7 @@ import os
 import sys
 import argparse
 from load_data import *
+from shared import *
 
 class Options:
     def __init__(self):
@@ -94,6 +95,34 @@ def process_opts():
 
     return opts
 
+def plot_extra_data(opts, ax, labels, current_label):
+    max_time = None
+    if opts.max_time:
+        max_time = opts.max_time 
+    
+    # returns a list of DFs
+    if opts.extra:
+        extra_dfs = load_extra_data(opts.extra)
+    else:
+        extra_dfs = {}
+
+    if max_time:
+        # limit extra data to maximum time 
+        for i in range(len(extra_dfs)):
+            df = extra_dfs[i]
+            extra_dfs[i] = df[df.index <= max_time]
+            
+
+    #for k,df in extra_dfs.items():
+    for i in range(len(extra_dfs)):        
+        df = extra_dfs[i]
+        for name, col in df.iteritems():
+            line, = ax_plot(ax, df.index, col, label=name)
+            if labels:
+                line.set_label(labels[current_label])
+                current_label += 1
+            ax.legend() # TODO: what does this do?
+
 def main():
     
     opts = process_opts()
@@ -113,7 +142,6 @@ def main():
     names = ['MCell4', 'MCell3R', 'BNG']
     clrs = ['b', 'g', 'r'] 
 
-    
     fig,ax = plt.subplots()
 
     linestyles = [
@@ -123,8 +151,6 @@ def main():
         'dotted', 
         'dashdot', 
         (0, (3, 1, 1, 1, 1, 1)),    # 'densely dashdotdotted', 
-#        (0, (3, 1, 3, 1, 1, 1)),
-#        (0, (3, 1, 3, 1, 1, 1, 1, 1)),
     ]
     
     cm = plt.get_cmap('tab10')
@@ -132,7 +158,7 @@ def main():
     colors = [cm(i) for i in range(NUM_COLORS)]
     ax.set_prop_cycle(linestyle = linestyles, color = colors)
     
-    max_time = None
+
 
     if opts.for_membrane_localization:
         # default size is fine here
@@ -142,6 +168,7 @@ def main():
 
     
     dfs = {}
+    # prepare data for 
     for obs in sorted(all_observables): 
         print("Processing observable " + obs)
         
@@ -184,56 +211,30 @@ def main():
                 s = 'solid'
             
                 if i == 0:
-                    ax.plot(df.index, df[sim_obs_name], label=l, linestyle=s, linewidth=2, zorder=100) #
+                    ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s, linewidth=2, zorder=100) #
                 else:
-                    ax.plot(df.index, df[sim_obs_name], label=l) #
+                    ax_plot(ax, df.index, df[sim_obs_name], label=l) #
 
             else:            
-                ax.plot(df.index, df[sim_obs_name], label=l) #
-                ax.fill_between(
+                ax_plot(ax, df.index, df[sim_obs_name], label=l) #
+                ax_fill_between(
+                    ax,
                     df.index, 
                     df[sim_obs_name + '_minus_std'], df[sim_obs_name + '_plus_std'],
                     alpha=0.2, facecolor=clrs[i])
     
             
 
-    if opts.max_time:
-        max_time = opts.max_time 
-    
-    # returns a list of DFs
-    if opts.extra:
-        extra_dfs = load_extra_data(opts.extra)
-    else:
-        extra_dfs = {}
+    # extra data to be plotted
+    plot_extra_data(opts, ax, labels, current_label)
 
-    if max_time:
-        #for k,df in extra_dfs.items():
-        for i in range(len(extra_dfs)):
-            df = extra_dfs[i]
-            extra_dfs[i] = df[df.index <= max_time]
-            
+    plt.xlabel(X_LABEL_TIME_UNIT_S)
+    plt.ylabel(Y_LABEL_N_PARAM_TIME)
 
-    #for k,df in extra_dfs.items():
-    for i in range(len(extra_dfs)):        
-        df = extra_dfs[i]
-        for name, col in df.iteritems():
-            line, = ax.plot(df.index, col, label=name)
-            if labels:
-                line.set_label(labels[current_label])
-                current_label += 1
-
-            ax.legend()
-        
-    plt.xlabel("time [s]")
-    plt.ylabel("N(t)")
-    
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     plt.subplots_adjust(right=0.7, bottom=0.2)
     
-    #plt.show()
-    
-    plt.savefig(opts.output, dpi=600)
-    #plt.close(fig)
+    plt.savefig(opts.output, dpi=OUTPUT_DPI)
 
 
 if __name__ == '__main__':

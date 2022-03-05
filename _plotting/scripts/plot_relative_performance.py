@@ -50,13 +50,13 @@ def main():
         sys.exit("Input file must be set with -d.")
     
     df = pd.read_csv(args.data)
-    print(df)
+    #print(df)
     
     x = df['Benchmark']
     y = df['MCell3/MCell4']
     
     x = ['\n'.join(textwrap.wrap(l, 18)) for l in x]
-    print(x)
+    #print(x)
     
     plt.axhline(y=1,linewidth=1, color='c')
     plt.bar(x, y)
@@ -65,7 +65,6 @@ def main():
     plt.xticks(x, rotation=45)
     
     plt.savefig(args.output, dpi=600)
-    #plt.show()
 
 if __name__ == '__main__':
     main()

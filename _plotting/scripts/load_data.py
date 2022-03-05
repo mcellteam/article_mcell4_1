@@ -162,7 +162,7 @@ def get_all_observables_names(counts):
 def load_gdat_file(fname, sel_str, time_mult):
     print("Loading ", fname)
     df = pd.read_csv(fname, index_col=0, skipinitialspace=True, delim_whitespace=True)
-    print(df)
+    #print(df)
     
     col_names = pd.DataFrame
     sel = [int(i) for i in sel_str.split('-') ]
