@@ -86,6 +86,7 @@ ode = {
 #lag_time2: (0.025599999999999998, 0),
 }
         
+# used in plot_peaks_error_bars        
 data = [
     (1, particle_D10, 'r', 'particle D=1e-7'),
     (2, hybrid_D10, 'b', 'hybrid D=1e-7'),
@@ -97,101 +98,88 @@ data = [
 ]        
         
 
-def plot_data(only_filtering = False, base_stochastic = False, base_avg = True):
-    fig, ax = plt.subplots()
-    
-    if only_filtering:
-        plot_compression = 1
-    else:
-        plot_compression = 10
-    
-    if not base_avg:
-        # load base data
-        if base_stochastic:
-            df_ode = load_gdat_file('../nfsim/bng/nf_00002/test.gdat')
-        else:
-            df_ode = load_gdat_file('../ode/test.gdat')
-        
-        df_ode_plot = df_ode.truncate(after = 0.16)
-        if only_filtering:
-            ax.plot(df_ode_plot.index, df_ode_plot['A'], label='A')
-            ax.plot(df_ode_plot.index, df_ode_plot['R'], label='R')
-    
-        # must use full data for filter
-        df_lowpass = df_ode.copy()
-        df_lowpass = prepare_data(df_lowpass, 'A')
-        df_lowpass = prepare_data(df_lowpass, 'R')
-    else:
-        df_lowpass = pd.read_csv('averages_D1000_and_well_mixed/nfsim.csv')
-        df_lowpass = df_lowpass.set_index('time')
-
-    if only_filtering:
-        df_lowpass = df_lowpass.truncate(after = 0.16)  
-        #print(df_lowpass)
-    
-        ax.plot(df_lowpass.index, df_lowpass['A_mean']/plot_compression, label='A (low pass)', c = 'b')
-        ax.plot(df_lowpass.index, df_lowpass['R_mean']/plot_compression, label='R (low pass)', c = 'r')
-
-    if not only_filtering:
-        plt.legend(['A (low pass)', 'R (low pass)'])
-    else:
-        plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)'])
-    
-    if not only_filtering:
-            
-        base = 1350/10
-        step = 200/len(data)
-        
-        for d in data[:-1]:
-            for v in ['A_first', 'A_second', 'R_first', 'R_second']:
-                # example data
-                x = d[1][v][0] #np.arange(0.1, 0.2, 0.05)
-                xerr = d[1][v][1] 
-                y = base + d[0] * step
-                
-                # error bar values w/ different -/+ errors that
-                # also vary with the x-position
-                c = 'b' if 'A' in v else 'r'
-                
-                ax.errorbar(x, y, xerr=xerr, fmt='|', capsize=3, c=c)
-                
-                # 0.007
-                #  + 2.5
-                plt.text(0-0.007, y + 1, d[3], c='k')
-        
-        plt.yticks([])
-        
-    # lines for ode
-    if not base_stochastic:
-        for v in ['A_first', 'A_second', 'R_first', 'R_second']:
-            c = 'b' if 'A' in v else 'r'
-            plt.axvline(x=data[6][1][v][0], c=c)
-        
+# shared function to store plots
+def finalize_and_save_plot(out, fig):     
     plt.xlabel("time [s]")
-    
-    
+                
     plt.grid(axis="x")
     border = 0.007857
     plt.xlim([0 - border, 0.16 + border])
     
-    if not only_filtering:
-        red_patch = Line2D([0], [0], color='red', label='A (low pass peaks)')
-        blue_patch = Line2D([0], [0], color='blue', label='R (low pass peaks)')
-        plt.legend(handles=[red_patch, blue_patch])
-    
-    if only_filtering:
-        plt.ylabel("N(t)")
+    fig.set_size_inches((14,2.5))                
+    plt.savefig(out, dpi=600)   
         
-                
-    plt.show()
+        
+def plot_low_pass(out, nfsim_seed):
+    fig, ax = plt.subplots()
+    
+    # load base data
+    df_nfsim = load_gdat_file('../nfsim/bng/nf_' + str(nfsim_seed).zfill(5) + '/test.gdat')
+    
+    df_nfsim_plot = df_nfsim.truncate(after = 0.16)
+    if True:
+        ax.plot(df_nfsim_plot.index, df_nfsim_plot['A'], label='A')
+        ax.plot(df_nfsim_plot.index, df_nfsim_plot['R'], label='R')
+
+    # must use full data for filter
+    df_lowpass = df_nfsim.copy()
+    df_lowpass = prepare_data(df_lowpass, 'A')
+    df_lowpass = prepare_data(df_lowpass, 'R')
+
+    df_lowpass = df_lowpass.truncate(after = 0.16)  
+    #print(df_lowpass)
+
+    ax.plot(df_lowpass.index, df_lowpass['A'], label='A', c = 'b')
+    ax.plot(df_lowpass.index, df_lowpass['R'], label='R', c = 'r')
+
+    plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)'])
+    plt.ylabel("N(t)")
+    
+    finalize_and_save_plot(out, fig)
+            
+
+def plot_peaks_error_bars(out):
+    fig, ax = plt.subplots()
+    
+    plt.legend(['A (low pass)', 'R (low pass)'])
+    
+    base = 1350/10
+    step = 200/len(data)
+    
+    for d in data[:-1]:
+        for v in ['A_first', 'A_second', 'R_first', 'R_second']:
+            # example data
+            x = d[1][v][0] #np.arange(0.1, 0.2, 0.05)
+            xerr = d[1][v][1] 
+            y = base + d[0] * step
+            
+            # error bar values w/ different -/+ errors that
+            # also vary with the x-position
+            c = 'b' if 'A' in v else 'r'
+            
+            ax.errorbar(x, y, xerr=xerr, fmt='|', capsize=3, c=c)
+            
+            # 0.007
+            #  + 2.5
+            plt.text(0-0.0068, y - 3, d[3], c='k')
+    
+    plt.yticks([])
+
+    red_patch = Line2D([0], [0], color='blue', label='A (low pass peaks)')
+    blue_patch = Line2D([0], [0], color='red', label='R (low pass peaks)')
+    plt.legend(handles=[red_patch, blue_patch])
+    
+    finalize_and_save_plot(out, fig)
 
 
 if __name__ == '__main__':
-    #plot_data()
     
-    #plot_data(True)
+    #for s in range(1, 20):
+    #    plot_low_pass("hybrid_low_pass_nfsim" + str(s).zfill(5) + ".png", s)
     
-    # peaks
-    plot_data(False, True)
+    # NFSim seed 14 quite nicely matches the averages 
+    plot_low_pass("hybrid_low_pass_nfsim.png", 14)
+    
+    plot_peaks_error_bars(out="hybrid_peaks.png")
     
     
