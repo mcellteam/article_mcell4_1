@@ -44,6 +44,7 @@ class Options:
         self.extra = None
         self.labels = None
         self.max_time = None
+        self.for_membrane_localization = False
         self.output = None
 
         
@@ -56,6 +57,7 @@ def create_argparse():
     parser.add_argument('-e', '--extra', type=str)
     parser.add_argument('-t', '--max-time', type=str)
     parser.add_argument('-l', '--labels', type=str)
+    parser.add_argument('-x', '--membrane-localization', action='store_true', help='special option to generate plots for membrane localization model')
     parser.add_argument('-o', '--output', type=str)
     return parser
 
@@ -82,7 +84,10 @@ def process_opts():
 
     if args.labels:
         opts.labels = args.labels
-        
+    
+    if args.membrane_localization:    
+        opts.for_membrane_localization = args.membrane_localization
+                
     opts.extra = args.extra
     
     opts.output = args.output
@@ -265,8 +270,6 @@ def main():
     all_observables = all_observables.union(set(counts[2].keys()))
     
     fig,ax = plt.subplots()
-    #ax.set_title(obs)
-    fig.set_size_inches((14,2.5))
 
     linestyles = [
         'solid',
@@ -286,9 +289,20 @@ def main():
     
     max_time = None
 
+    if opts.for_membrane_localization:
+        # default size is fine here
+        ax.set_title('MA')
+    else:
+        fig.set_size_inches((14,2.5))
+
+    
     dfs = {}
     for obs in sorted(all_observables): 
         print("Processing observable " + obs)
+        
+        if opts.for_membrane_localization:
+            if obs != 'MA':
+                continue
         
         legend_names = []
         for i in range(len(counts)):
@@ -321,11 +335,20 @@ def main():
             else:
                 l = 'MCell4'
             
-            ax.plot(df.index, df[sim_obs_name], label=l) #
-            ax.fill_between(
-                df.index, 
-                df[sim_obs_name + '_minus_std'], df[sim_obs_name + '_plus_std'],
-                alpha=0.2, facecolor=clrs[i])
+            if opts.for_membrane_localization:
+                s = 'solid'
+            
+                if i == 0:
+                    ax.plot(df.index, df[sim_obs_name], label=l, linestyle=s, linewidth=2, zorder=100) #
+                else:
+                    ax.plot(df.index, df[sim_obs_name], label=l) #
+
+            else:            
+                ax.plot(df.index, df[sim_obs_name], label=l) #
+                ax.fill_between(
+                    df.index, 
+                    df[sim_obs_name + '_minus_std'], df[sim_obs_name + '_plus_std'],
+                    alpha=0.2, facecolor=clrs[i])
     
             
 
