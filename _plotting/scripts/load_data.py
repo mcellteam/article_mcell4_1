@@ -119,7 +119,7 @@ def load_counts(opts):
     counts = []
     if opts.mcell4_dir:
         if os.path.exists(opts.mcell4_dir):
-            print("Reading MCell data from " + opts.mcell4_dir)
+            print("Loading MCell data from " + opts.mcell4_dir)
             counts.append(get_mcell_observables_counts(opts.mcell4_dir))
         else:
             print("Directory " + opts.mcell4_dir + " with MCell4 data not found, ignored")
@@ -129,7 +129,7 @@ def load_counts(opts):
 
     if opts.mcell3_dir:
         if os.path.exists(opts.mcell3_dir):
-            print("Reading MCell data from " + opts.mcell3_dir)
+            print("Loading MCell data from " + opts.mcell3_dir)
             counts.append(get_mcell_observables_counts(opts.mcell3_dir))
         else:
             print("Error: directory " + opts.mcell3_dir + " with MCell3 data not found, ignored")
@@ -140,7 +140,7 @@ def load_counts(opts):
     # get_nfsim_observables_counts may return an empty dict
     if opts.bng_dir:
         if os.path.exists(opts.bng_dir):
-            print("Reading BNG data from " + opts.bng_dir)
+            print("Loading BNG data from " + opts.bng_dir)
             counts.append(get_nfsim_observables_counts(opts))
         else:
             print("Error: directory " + opts.bng_dir + " with BNG data not found, ignored")
@@ -160,14 +160,14 @@ def get_all_observables_names(counts):
 
 
 def load_gdat_file(fname, sel_str, time_mult):
-    print("Loading ", fname)
+    print("Loading " + fname)
     df = pd.read_csv(fname, index_col=0, skipinitialspace=True, delim_whitespace=True)
     #print(df)
     
     col_names = pd.DataFrame
     sel = [int(i) for i in sel_str.split('-') ]
     col_names = df.columns[sel]
-    print("Selecting", col_names)
+    #print("Selecting", col_names)
     
     if not col_names.empty:
         df_sel = df[col_names]

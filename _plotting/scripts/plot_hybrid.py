@@ -99,11 +99,13 @@ data = [
 
 
 def load_gdat_file(file):
+    print("Loading " + file)
     wholefile = open(file).read()
     df = pd.read_csv(StringIO(wholefile[1:]), index_col=0, skipinitialspace=True, delim_whitespace=True)
     return df
 
 def load_csv(file):
+    print("Loading " + file)
     df = pd.read_csv(file)
     df = df.set_index('time')
     return df        
@@ -118,6 +120,7 @@ def finalize_and_save_plot(out, fig):
     
     fig.set_size_inches((14,2.5))                
     plt.savefig(out, dpi=600)   
+    print("Plot " + out + " generated")
 
 def plot_averages(dir):
     

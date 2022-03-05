@@ -109,7 +109,7 @@ def main():
         if selected_observables and obs not in selected_observables:
             continue
         
-        print("Processing observable " + obs)
+        #print("Processing observable " + obs)
         
         fig,ax = plt.subplots()
         ax.set_title(obs)
@@ -147,6 +147,7 @@ def main():
         
         plt.legend(legend_names)
         plt.savefig(obs + '.png', dpi=OUTPUT_DPI)
+        print("Plot " + obs + '.png' + " generated")
 
 
 

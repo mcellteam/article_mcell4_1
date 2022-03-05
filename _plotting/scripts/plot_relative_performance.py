@@ -73,6 +73,7 @@ def main():
     plt.xticks(x, rotation=45)
     
     plt.savefig(args.output, dpi=OUTPUT_DPI)
+    print("Plot " + args.output + " generated")
 
 if __name__ == '__main__':
     main()

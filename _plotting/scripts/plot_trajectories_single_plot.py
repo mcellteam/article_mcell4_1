@@ -170,7 +170,7 @@ def main():
     dfs = {}
     # prepare data for 
     for obs in sorted(all_observables): 
-        print("Processing observable " + obs)
+        #print("Processing observable " + obs)
         
         if opts.for_membrane_localization:
             if obs != 'MA':
@@ -235,7 +235,7 @@ def main():
     plt.subplots_adjust(right=0.7, bottom=0.2)
     
     plt.savefig(opts.output, dpi=OUTPUT_DPI)
-
+    print("Plot " + opts.output + " generated")
 
 if __name__ == '__main__':
     main()

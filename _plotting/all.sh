@@ -6,4 +6,5 @@ rm -r result/*.png
 ./camkii.sh &
 ./membrane_loc.sh &
 ./performance.sh &
+./hybrid.sh &
 wait
