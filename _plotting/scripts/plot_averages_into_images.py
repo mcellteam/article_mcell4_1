@@ -41,7 +41,7 @@ class Options:
         self.mcell4_dir = None
         self.bng_dir = None
         self.single_bng_run = False
-        self.labels = ['MCell4', 'MCell3R', 'NFSim']
+        self.labels = None
 
         
 def create_argparse():
@@ -72,7 +72,7 @@ def process_opts():
         opts.single_bng_run = args.single_bng_run 
 
     if args.labels:
-        opts.labels = args.labels.split(',') 
+        opts.labels = args.labels
 
     return opts
 
@@ -83,10 +83,16 @@ def main():
     counts = load_counts(opts)
 
     all_observables = get_all_observables_names(counts)
-            
-    clrs = ['b', 'g', 'r'] 
 
-    
+    current_label = 0
+
+    if opts.labels:
+        labels = load_labels(opts.labels)
+    else:
+        labels = None
+
+    clrs = ['b', 'g', 'r'] 
+        
     for obs in sorted(all_observables): 
         print("Processing observable " + obs)
         
