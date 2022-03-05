@@ -42,6 +42,7 @@ class Options:
         self.bng_dir = None
         self.single_bng_run = False
         self.labels = None
+        self.selected_observables = None
 
         
 def create_argparse():
@@ -50,7 +51,8 @@ def create_argparse():
     parser.add_argument('-m3', '--mcell3', type=str, help='mcell3 react_data directory')
     parser.add_argument('-b', '--bng', type=str, help='bionetgen directory')
     parser.add_argument('-s', '--single_bng_run', action='store_true', help='the bionetgen directory contains only a single .gdat file')
-    parser.add_argument('-l', '--labels', type=str, help='comma-separated list of labels (used in order -m4,-m3,-b')
+    parser.add_argument('-l', '--labels', type=str, help='file with list of labels (used in order -m4,-m3,-b')
+    parser.add_argument('-x', '--selected-observables', type=str, help='file with selected observable names')
     return parser
 
 
@@ -74,6 +76,9 @@ def process_opts():
     if args.labels:
         opts.labels = args.labels
 
+    if args.selected_observables:
+        opts.selected_observables = args.selected_observables
+
     return opts
 
 def main():
@@ -90,10 +95,18 @@ def main():
         labels = load_labels(opts.labels)
     else:
         labels = None
+        
+    selected_observables = set()
+    if opts.selected_observables:
+        selected_observables = set(load_labels(opts.selected_observables))
+        print("Plotting only " + str(selected_observables))
 
     clrs = ['b', 'g', 'r'] 
         
     for obs in sorted(all_observables): 
+        if selected_observables and obs not in selected_observables:
+            continue
+        
         print("Processing observable " + obs)
         
         fig,ax = plt.subplots()
