@@ -1,0 +1,914 @@
+{
+ "mcell" : 
+ {
+  "blender_version" : 
+  [
+   2,
+   79,
+   0
+  ],
+  "cellblender_version" : "0.1.54",
+  "data_model_version" : "DM_2017_06_23_1300",
+  "define_molecules" : 
+  {
+   "data_model_version" : "DM_2014_10_24_1638",
+   "molecule_list" : 
+   [
+    {
+     "bngl_component_list" : [],
+     "custom_space_step" : "",
+     "custom_time_step" : "",
+     "data_model_version" : "DM_2018_10_16_1632",
+     "description" : "",
+     "diffusion_constant" : "9.99999999999999955e-08",
+     "display" : 
+     {
+      "color" : 
+      [
+       1.0,
+       0.0,
+       0.0
+      ],
+      "emit" : 0.0,
+      "glyph" : "Sphere_1",
+      "scale" : 1.0
+     },
+     "export_viz" : false,
+     "maximum_step_length" : "",
+     "mol_bngl_label" : "",
+     "mol_name" : "A",
+     "mol_type" : "3D",
+     "spatial_structure" : "None",
+     "target_only" : false
+    },
+    {
+     "bngl_component_list" : [],
+     "custom_space_step" : "",
+     "custom_time_step" : "",
+     "data_model_version" : "DM_2018_10_16_1632",
+     "description" : "",
+     "diffusion_constant" : "9.99999999999999955e-08",
+     "display" : 
+     {
+      "color" : 
+      [
+       0.0,
+       1.0,
+       0.0
+      ],
+      "emit" : 0.0,
+      "glyph" : "Sphere_1",
+      "scale" : 1.0
+     },
+     "export_viz" : false,
+     "maximum_step_length" : "",
+     "mol_bngl_label" : "",
+     "mol_name" : "AR",
+     "mol_type" : "3D",
+     "spatial_structure" : "None",
+     "target_only" : false
+    },
+    {
+     "bngl_component_list" : [],
+     "custom_space_step" : "",
+     "custom_time_step" : "",
+     "data_model_version" : "DM_2018_10_16_1632",
+     "description" : "",
+     "diffusion_constant" : "9.99999999999999955e-08",
+     "display" : 
+     {
+      "color" : 
+      [
+       0.0,
+       0.0,
+       1.0
+      ],
+      "emit" : 0.0,
+      "glyph" : "Sphere_1",
+      "scale" : 1.0
+     },
+     "export_viz" : false,
+     "maximum_step_length" : "",
+     "mol_bngl_label" : "",
+     "mol_name" : "PrmA",
+     "mol_type" : "3D",
+     "spatial_structure" : "None",
+     "target_only" : false
+    },
+    {
+     "bngl_component_list" : [],
+     "custom_space_step" : "",
+     "custom_time_step" : "",
+     "data_model_version" : "DM_2018_10_16_1632",
+     "description" : "",
+     "diffusion_constant" : "9.99999999999999955e-08",
+     "display" : 
+     {
+      "color" : 
+      [
+       1.0,
+       1.0,
+       0.0
+      ],
+      "emit" : 0.0,
+      "glyph" : "Sphere_1",
+      "scale" : 1.0
+     },
+     "export_viz" : false,
+     "maximum_step_length" : "",
+     "mol_bngl_label" : "",
+     "mol_name" : "PrmA_bound",
+     "mol_type" : "3D",
+     "spatial_structure" : "None",
+     "target_only" : false
+    },
+    {
+     "bngl_component_list" : [],
+     "custom_space_step" : "",
+     "custom_time_step" : "",
+     "data_model_version" : "DM_2018_10_16_1632",
+     "description" : "",
+     "diffusion_constant" : "9.99999999999999955e-08",
+     "display" : 
+     {
+      "color" : 
+      [
+       0.0,
+       1.0,
+       1.0
+      ],
+      "emit" : 0.0,
+      "glyph" : "Sphere_1",
+      "scale" : 1.0
+     },
+     "export_viz" : false,
+     "maximum_step_length" : "",
+     "mol_bngl_label" : "",
+     "mol_name" : "PrmR",
+     "mol_type" : "3D",
+     "spatial_structure" : "None",
+     "target_only" : false
+    },
+    {
+     "bngl_component_list" : [],
+     "custom_space_step" : "",
+     "custom_time_step" : "",
+     "data_model_version" : "DM_2018_10_16_1632",
+     "description" : "",
+     "diffusion_constant" : "9.99999999999999955e-08",
+     "display" : 
+     {
+      "color" : 
+      [
+       1.0,
+       0.0,
+       1.0
+      ],
+      "emit" : 0.0,
+      "glyph" : "Sphere_1",
+      "scale" : 1.0
+     },
+     "export_viz" : false,
+     "maximum_step_length" : "",
+     "mol_bngl_label" : "",
+     "mol_name" : "PrmR_bound",
+     "mol_type" : "3D",
+     "spatial_structure" : "None",
+     "target_only" : false
+    },
+    {
+     "bngl_component_list" : [],
+     "custom_space_step" : "",
+     "custom_time_step" : "",
+     "data_model_version" : "DM_2018_10_16_1632",
+     "description" : "",
+     "diffusion_constant" : "9.99999999999999955e-08",
+     "display" : 
+     {
+      "color" : 
+      [
+       1.0,
+       0.0,
+       0.0
+      ],
+      "emit" : 0.0,
+      "glyph" : "Sphere_1",
+      "scale" : 1.0
+     },
+     "export_viz" : false,
+     "maximum_step_length" : "",
+     "mol_bngl_label" : "",
+     "mol_name" : "R",
+     "mol_type" : "3D",
+     "spatial_structure" : "None",
+     "target_only" : false
+    },
+    {
+     "bngl_component_list" : [],
+     "custom_space_step" : "",
+     "custom_time_step" : "",
+     "data_model_version" : "DM_2018_10_16_1632",
+     "description" : "",
+     "diffusion_constant" : "9.99999999999999955e-08",
+     "display" : 
+     {
+      "color" : 
+      [
+       0.0,
+       1.0,
+       0.0
+      ],
+      "emit" : 0.0,
+      "glyph" : "Sphere_1",
+      "scale" : 1.0
+     },
+     "export_viz" : false,
+     "maximum_step_length" : "",
+     "mol_bngl_label" : "",
+     "mol_name" : "mRNA_A",
+     "mol_type" : "3D",
+     "spatial_structure" : "None",
+     "target_only" : false
+    },
+    {
+     "bngl_component_list" : [],
+     "custom_space_step" : "",
+     "custom_time_step" : "",
+     "data_model_version" : "DM_2018_10_16_1632",
+     "description" : "",
+     "diffusion_constant" : "9.99999999999999955e-08",
+     "display" : 
+     {
+      "color" : 
+      [
+       0.0,
+       0.0,
+       1.0
+      ],
+      "emit" : 0.0,
+      "glyph" : "Sphere_1",
+      "scale" : 1.0
+     },
+     "export_viz" : false,
+     "maximum_step_length" : "",
+     "mol_bngl_label" : "",
+     "mol_name" : "mRNA_R",
+     "mol_type" : "3D",
+     "spatial_structure" : "None",
+     "target_only" : false
+    }
+   ]
+  },
+  "define_reactions" : 
+  {
+   "data_model_version" : "DM_2014_10_24_1638",
+   "reaction_list" : 
+   [
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "1.204e+09",
+     "name" : "A + R -> AR",
+     "products" : "AR",
+     "reactants" : "A + R",
+     "rxn_name" : "A + R -> AR",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "50",
+     "name" : "PrmA -> PrmA + mRNA_A",
+     "products" : "PrmA + mRNA_A",
+     "reactants" : "PrmA",
+     "rxn_name" : "PrmA -> PrmA + mRNA_A",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "500",
+     "name" : "PrmA_bound -> PrmA_bound + mRNA_A",
+     "products" : "PrmA_bound + mRNA_A",
+     "reactants" : "PrmA_bound",
+     "rxn_name" : "PrmA_bound -> PrmA_bound + mRNA_A",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "1.00000000000000002e-02",
+     "name" : "PrmR -> PrmR + mRNA_R",
+     "products" : "PrmR + mRNA_R",
+     "reactants" : "PrmR",
+     "rxn_name" : "PrmR -> PrmR + mRNA_R",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "50",
+     "name" : "PrmR_bound -> PrmR_bound + mRNA_R",
+     "products" : "PrmR_bound + mRNA_R",
+     "reactants" : "PrmR_bound",
+     "rxn_name" : "PrmR_bound -> PrmR_bound + mRNA_R",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "6.02e+08",
+     "name" : "PrmA + A -> PrmA_bound",
+     "products" : "PrmA_bound",
+     "reactants" : "PrmA + A",
+     "rxn_name" : "PrmA + A -> PrmA_bound",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "50",
+     "name" : "PrmA_bound -> PrmA + A",
+     "products" : "PrmA + A",
+     "reactants" : "PrmA_bound",
+     "rxn_name" : "PrmA_bound -> PrmA + A",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "6.02e+08",
+     "name" : "PrmR + A -> PrmR_bound",
+     "products" : "PrmR_bound",
+     "reactants" : "PrmR + A",
+     "rxn_name" : "PrmR + A -> PrmR_bound",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "100",
+     "name" : "PrmR_bound -> PrmR + A",
+     "products" : "PrmR + A",
+     "reactants" : "PrmR_bound",
+     "rxn_name" : "PrmR_bound -> PrmR + A",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "50",
+     "name" : "mRNA_A -> mRNA_A + A",
+     "products" : "mRNA_A + A",
+     "reactants" : "mRNA_A",
+     "rxn_name" : "mRNA_A -> mRNA_A + A",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "5",
+     "name" : "mRNA_R -> mRNA_R + R",
+     "products" : "mRNA_R + R",
+     "reactants" : "mRNA_R",
+     "rxn_name" : "mRNA_R -> mRNA_R + R",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "10",
+     "name" : "mRNA_A -> NULL",
+     "products" : "NULL",
+     "reactants" : "mRNA_A",
+     "rxn_name" : "mRNA_A -> 0",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "0.5",
+     "name" : "mRNA_R -> NULL",
+     "products" : "NULL",
+     "reactants" : "mRNA_R",
+     "rxn_name" : "mRNA_R -> 0",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "1",
+     "name" : "A -> NULL",
+     "products" : "NULL",
+     "reactants" : "A",
+     "rxn_name" : "A -> 0",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "0.20000000000000001",
+     "name" : "R -> NULL",
+     "products" : "NULL",
+     "reactants" : "R",
+     "rxn_name" : "R -> 0",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    },
+    {
+     "bkwd_rate" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "fwd_rate" : "1",
+     "name" : "AR -> R",
+     "products" : "R",
+     "reactants" : "AR",
+     "rxn_name" : "AR -> R",
+     "rxn_type" : "irreversible",
+     "variable_rate" : "",
+     "variable_rate_switch" : false,
+     "variable_rate_text" : "",
+     "variable_rate_valid" : false
+    }
+   ]
+  },
+  "define_surface_classes" : 
+  {
+   "data_model_version" : "DM_2014_10_24_1638",
+   "surface_class_list" : []
+  },
+  "geometrical_objects" : 
+  {
+   "object_list" : 
+   [
+    {
+     "element_connections" : 
+     [
+      [
+       3,
+       0,
+       1
+      ],
+      [
+       7,
+       2,
+       3
+      ],
+      [
+       5,
+       6,
+       7
+      ],
+      [
+       1,
+       4,
+       5
+      ],
+      [
+       2,
+       4,
+       0
+      ],
+      [
+       7,
+       1,
+       5
+      ],
+      [
+       3,
+       2,
+       0
+      ],
+      [
+       7,
+       6,
+       2
+      ],
+      [
+       5,
+       4,
+       6
+      ],
+      [
+       1,
+       0,
+       4
+      ],
+      [
+       2,
+       6,
+       4
+      ],
+      [
+       7,
+       3,
+       1
+      ]
+     ],
+     "material_names" : 
+     [
+      "membrane"
+     ],
+     "name" : "Cube",
+     "vertex_list" : 
+     [
+      [
+       -0.806008994579315,
+       -0.806008994579315,
+       -0.806008994579315
+      ],
+      [
+       -0.806008994579315,
+       -0.806008994579315,
+       0.806008994579315
+      ],
+      [
+       -0.806008994579315,
+       0.806008994579315,
+       -0.806008994579315
+      ],
+      [
+       -0.806008994579315,
+       0.806008994579315,
+       0.806008994579315
+      ],
+      [
+       0.806008994579315,
+       -0.806008994579315,
+       -0.806008994579315
+      ],
+      [
+       0.806008994579315,
+       -0.806008994579315,
+       0.806008994579315
+      ],
+      [
+       0.806008994579315,
+       0.806008994579315,
+       -0.806008994579315
+      ],
+      [
+       0.806008994579315,
+       0.806008994579315,
+       0.806008994579315
+      ]
+     ]
+    }
+   ]
+  },
+  "initialization" : 
+  {
+   "accurate_3d_reactions" : true,
+   "center_molecules_on_grid" : false,
+   "command_options" : "",
+   "data_model_version" : "DM_2017_11_18_0130",
+   "export_all_ascii" : true,
+   "interaction_radius" : "",
+   "iterations" : "180000000",
+   "microscopic_reversibility" : "OFF",
+   "notifications" : 
+   {
+    "all_notifications" : "INDIVIDUAL",
+    "box_triangulation_report" : false,
+    "diffusion_constant_report" : "BRIEF",
+    "file_output_report" : false,
+    "final_summary" : true,
+    "iteration_report" : true,
+    "molecule_collision_report" : false,
+    "partition_location_report" : false,
+    "probability_report" : "ON",
+    "probability_report_threshold" : "0",
+    "progress_report" : true,
+    "release_event_report" : true,
+    "species_reactions_report" : true,
+    "varying_probability_report" : true
+   },
+   "partitions" : 
+   {
+    "include" : true,
+    "recursion_flag" : false,
+    "x_end" : "1",
+    "x_start" : "-1",
+    "x_step" : "0.050000000000000003",
+    "y_end" : "1",
+    "y_start" : "-1",
+    "y_step" : "0.050000000000000003",
+    "z_end" : "1",
+    "z_start" : "-1",
+    "z_step" : "0.050000000000000003"
+   },
+   "radial_directions" : "",
+   "radial_subdivisions" : "",
+   "space_step" : "",
+   "surface_grid_density" : "10000",
+   "time_step" : "2.5e-07",
+   "time_step_max" : "",
+   "vacancy_search_distance" : "10",
+   "warnings" : 
+   {
+    "all_warnings" : "INDIVIDUAL",
+    "degenerate_polygons" : "WARNING",
+    "high_probability_threshold" : "1",
+    "high_reaction_probability" : "IGNORED",
+    "large_molecular_displacement" : "WARNING",
+    "lifetime_threshold" : "50",
+    "lifetime_too_short" : "WARNING",
+    "missed_reaction_threshold" : "0.001",
+    "missed_reactions" : "WARNING",
+    "missing_surface_orientation" : "ERROR",
+    "molecule_placement_failure" : "ERROR",
+    "negative_diffusion_constant" : "WARNING",
+    "negative_reaction_rate" : "WARNING",
+    "useless_volume_orientation" : "WARNING"
+   }
+  },
+  "materials" : 
+  {
+   "material_dict" : 
+   {
+    "membrane" : 
+    {
+     "diffuse_color" : 
+     {
+      "a" : 0.25,
+      "b" : 0.8,
+      "g" : 0.8,
+      "r" : 0.8
+     }
+    }
+   }
+  },
+  "model_language" : "mcell4",
+  "model_objects" : 
+  {
+   "data_model_version" : "DM_2018_01_11_1330",
+   "model_object_list" : 
+   [
+    {
+     "description" : "",
+     "dynamic" : false,
+     "dynamic_display_source" : "script",
+     "is_bngl_compartment" : true,
+     "membrane_name" : "",
+     "name" : "Cube",
+     "object_source" : "blender",
+     "parent_object" : "",
+     "script_name" : ""
+    }
+   ]
+  },
+  "modify_surface_regions" : 
+  {
+   "data_model_version" : "DM_2014_10_24_1638",
+   "modify_surface_regions_list" : []
+  },
+  "mol_viz" : 
+  {
+   "active_seed_index" : 0,
+   "color_index" : 0,
+   "color_list" : 
+   [
+    [
+     0.8,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.8,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.8
+    ],
+    [
+     0.0,
+     0.8,
+     0.8
+    ],
+    [
+     0.8,
+     0.0,
+     0.8
+    ],
+    [
+     0.8,
+     0.8,
+     0.0
+    ],
+    [
+     1.0,
+     1.0,
+     1.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ]
+   ],
+   "data_model_version" : "DM_2015_04_13_1700",
+   "file_dir" : "",
+   "file_index" : 959,
+   "file_name" : "",
+   "file_num" : 1001,
+   "file_start_index" : 0,
+   "file_step_index" : 1,
+   "file_stop_index" : 1000,
+   "manual_select_viz_dir" : false,
+   "render_and_save" : false,
+   "seed_list" : [],
+   "viz_enable" : true,
+   "viz_list" : []
+  },
+  "parameter_system" : 
+  {
+   "model_parameters" : {}
+  },
+  "reaction_data_output" : 
+  {
+   "always_generate" : true,
+   "combine_seeds" : true,
+   "data_model_version" : "DM_2016_03_15_1800",
+   "mol_colors" : false,
+   "output_buf_size" : "",
+   "plot_layout" : " ",
+   "plot_legend" : "0",
+   "reaction_output_list" : 
+   [
+    {
+     "count_location" : "World",
+     "data_file_name" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "mdl_file_prefix" : "A",
+     "mdl_string" : "COUNT[A/*Molecules*/,WORLD]",
+     "molecule_name" : "",
+     "name" : "",
+     "object_name" : "",
+     "plotting_enabled" : true,
+     "reaction_name" : "",
+     "region_name" : "",
+     "rxn_or_mol" : "MDLString"
+    },
+    {
+     "count_location" : "World",
+     "data_file_name" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "mdl_file_prefix" : "R",
+     "mdl_string" : "COUNT[R/*Molecules*/,WORLD]",
+     "molecule_name" : "",
+     "name" : "",
+     "object_name" : "",
+     "plotting_enabled" : true,
+     "reaction_name" : "",
+     "region_name" : "",
+     "rxn_or_mol" : "MDLString"
+    },
+    {
+     "count_location" : "World",
+     "data_file_name" : "",
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "mdl_file_prefix" : "AR",
+     "mdl_string" : "COUNT[AR/*Molecules*/,WORLD]",
+     "molecule_name" : "",
+     "name" : "",
+     "object_name" : "",
+     "plotting_enabled" : true,
+     "reaction_name" : "",
+     "region_name" : "",
+     "rxn_or_mol" : "MDLString"
+    }
+   ],
+   "rxn_step" : "2.50000000000000005e-03"
+  },
+  "release_sites" : 
+  {
+   "data_model_version" : "DM_2014_10_24_1638",
+   "release_site_list" : 
+   [
+    {
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "molecule" : "PrmA@Cube",
+     "name" : "Release of PrmA@Cube at Cube",
+     "object_expr" : "Cube[ALL]",
+     "orient" : ";",
+     "pattern" : "",
+     "quantity" : "1",
+     "quantity_type" : "NUMBER_TO_RELEASE",
+     "release_probability" : "1",
+     "shape" : "OBJECT",
+     "stddev" : "0"
+    },
+    {
+     "data_model_version" : "DM_2018_01_11_1330",
+     "description" : "",
+     "molecule" : "PrmR@Cube",
+     "name" : "Release of PrmR@Cube at Cube",
+     "object_expr" : "Cube[ALL]",
+     "orient" : ";",
+     "pattern" : "",
+     "quantity" : "1",
+     "quantity_type" : "NUMBER_TO_RELEASE",
+     "release_probability" : "1",
+     "shape" : "OBJECT",
+     "stddev" : "0"
+    }
+   ]
+  },
+  "scripting" : 
+  {
+   "data_model_version" : "DM_2017_11_30_1830",
+   "dm_external_file_name" : "",
+   "dm_internal_file_name" : "",
+   "force_property_update" : true,
+   "ignore_cellblender_data" : false,
+   "script_texts" : {},
+   "scripting_list" : []
+  },
+  "simulation_control" : 
+  {
+   "export_format" : "mcell_mdl_modular"
+  },
+  "use_bng_units" : false
+ }
+}

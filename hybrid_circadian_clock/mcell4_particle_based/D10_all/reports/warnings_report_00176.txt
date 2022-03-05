@@ -1,0 +1,2 @@
+Warning: Some reactions were missed because total reaction probability exceeded 1.
+  A + R  --  0.014% of reactions missed.

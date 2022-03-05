@@ -1,0 +1,108 @@
+# This file was an automatically exported from MCell
+# Used units:
+
+begin parameters
+  # general parameters
+  ITERATIONS 2500000
+  MCELL_TIME_STEP 9.99999999999999955e-08
+
+  # diffusion constants
+  MCELL_DIFFUSION_CONSTANT_3D_A 9.99999999999999955e-08
+  MCELL_DIFFUSION_CONSTANT_3D_AR 9.99999999999999955e-08
+  MCELL_DIFFUSION_CONSTANT_3D_PrmA 9.99999999999999955e-08
+  MCELL_DIFFUSION_CONSTANT_3D_PrmA_bound 9.99999999999999955e-08
+  MCELL_DIFFUSION_CONSTANT_3D_PrmR 9.99999999999999955e-08
+  MCELL_DIFFUSION_CONSTANT_3D_PrmR_bound 9.99999999999999955e-08
+  MCELL_DIFFUSION_CONSTANT_3D_R 9.99999999999999955e-08
+  MCELL_DIFFUSION_CONSTANT_3D_mRNA_A 9.99999999999999955e-08
+  MCELL_DIFFUSION_CONSTANT_3D_mRNA_R 9.99999999999999955e-08
+
+  THICKNESS 0.01 # um, assumed membrane thickness
+  # volume rxn rate conversion factor for um^3 to litres
+  RATE_CONV_VOLUME 1e-15
+
+  # surface-surface rxn rate conversion factor for um^2 to um^3 using membrane thickness, in um
+  RATE_CONV_THICKNESS THICKNESS
+
+  # parameters to convert rates in MCell and BioNetGen
+  MCELL2BNG_VOL_CONV 6.02214e23 * RATE_CONV_VOLUME
+  VOL_RXN 1
+  MCELL_REDEFINE_VOL_RXN MCELL2BNG_VOL_CONV
+
+  MCELL2BNG_SURF_CONV 1/RATE_CONV_THICKNESS
+  SURF_RXN 1
+  MCELL_REDEFINE_SURF_RXN MCELL2BNG_SURF_CONV
+
+
+  # reaction rates
+  k0 1.204e+09 * (VOL_RXN / MCELL2BNG_VOL_CONV)
+  k1 13404.778133594124
+  k2 1.34047781335941225e+05
+  k3 2.6809556267188248
+  k4 13404.778133594124
+  k5 6.02e+08 * (VOL_RXN / MCELL2BNG_VOL_CONV)
+  k6 13404.778133594124
+  k7 6.02e+08 * (VOL_RXN / MCELL2BNG_VOL_CONV)
+  k8 26809.556267188247
+  k9 13404.778133594124
+  k10 1340.4778133594123
+  k11 2680.9556267188245
+  k12 134.04778133594124
+  k13 268.09556267188248
+  k14 53.619112534376498
+  k15 268.09556267188248
+  VOLUME_Cube 0.015625000000000003 # um^3
+
+  # seed species counts
+  seed_count_1 1
+  seed_count_2 1
+end parameters
+
+begin molecule types
+  A()
+  AR()
+  PrmA()
+  PrmA_bound()
+  PrmR()
+  PrmR_bound()
+  R()
+  mRNA_A()
+  mRNA_R()
+end molecule types
+
+begin compartments
+  Cube 3 VOLUME_Cube
+end compartments
+
+begin seed species
+  PrmA@Cube seed_count_1
+  PrmR@Cube seed_count_2
+end seed species
+
+begin observables
+  Molecules A A 
+  Molecules R R 
+  Molecules AR AR 
+end observables
+
+begin reaction rules
+  A + R -> AR k0
+  PrmA -> PrmA + mRNA_A k1
+  PrmA_bound -> PrmA_bound + mRNA_A k2
+  PrmR -> PrmR + mRNA_R k3
+  PrmR_bound -> PrmR_bound + mRNA_R k4
+  PrmA + A -> PrmA_bound k5
+  PrmA_bound -> PrmA + A k6
+  PrmR + A -> PrmR_bound k7
+  PrmR_bound -> PrmR + A k8
+  mRNA_A -> mRNA_A + A k9
+  mRNA_R -> mRNA_R + R k10
+  mRNA_A -> 0 k11
+  mRNA_R -> 0 k12
+  A -> 0 k13
+  R -> 0 k14
+  AR -> R k15
+end reaction rules
+
+generate_network({overwrite=>1})
+simulate({method=>"ssa",seed=>620,t_end=>0.25,n_steps=>2500})

@@ -1,0 +1,9 @@
+# nfsim generated species list for system: 'test'
+# warning! this feature is not yet fully tested! 
+A()  2
+AR()  258
+PrmA()  1
+PrmR()  1
+R()  356
+mRNA_A()  10
+mRNA_R()  1

@@ -1,0 +1,67 @@
+BioNetGen version 2.5.1
+Reading from file test.bngl (level 0)
+Read 39 parameters.
+Read 9 molecule types.
+Read 1 compartments.
+Read 2 species.
+Read 3 observable(s).
+Read 16 reaction rule(s).
+ACTION: generate_network( test )
+Iteration   0:     2 species      0 rxns  0.00e+00 CPU s
+Iteration   1:     4 species      2 rxns  0.00e+00 CPU s
+Iteration   2:     6 species      6 rxns  0.00e+00 CPU s
+Iteration   3:     9 species     11 rxns  0.00e+00 CPU s
+Iteration   4:     9 species     16 rxns  0.00e+00 CPU s
+Cumulative CPU time for each rule
+Rule   1:     1 reactions 0.00e+00 CPU s 0.00e+00 CPU s/rxn
+Rule   2:     1 reactions 0.00e+00 CPU s 0.00e+00 CPU s/rxn
+Rule   3:     1 reactions 0.00e+00 CPU s 0.00e+00 CPU s/rxn
+Rule   4:     1 reactions 0.00e+00 CPU s 0.00e+00 CPU s/rxn
+Rule   5:     1 reactions 0.00e+00 CPU s 0.00e+00 CPU s/rxn
+Rule   6:     1 reactions 0.00e+00 CPU s 0.00e+00 CPU s/rxn
+Rule   7:     1 reactions 0.00e+00 CPU s 0.00e+00 CPU s/rxn
+Rule   8:     1 reactions 0.00e+00 CPU s 0.00e+00 CPU s/rxn
+Rule   9:     1 reactions 0.00e+00 CPU s 0.00e+00 CPU s/rxn
+Rule  10:     1 reactions 0.00e+00 CPU s 0.00e+00 CPU s/rxn
+Rule  11:     1 reactions 0.00e+00 CPU s 0.00e+00 CPU s/rxn
+Rule  12:     1 reactions 0.00e+00 CPU s 0.00e+00 CPU s/rxn
+Rule  13:     1 reactions 0.00e+00 CPU s 0.00e+00 CPU s/rxn
+Rule  14:     1 reactions 0.00e+00 CPU s 0.00e+00 CPU s/rxn
+Rule  15:     1 reactions 0.00e+00 CPU s 0.00e+00 CPU s/rxn
+Rule  16:     1 reactions 0.00e+00 CPU s 0.00e+00 CPU s/rxn
+Total   :    16 reactions 0.00e+00 CPU s 0.00e+00 CPU s/rxn
+Wrote network in net format to ./test.net.
+CPU TIME: generate_network 0.01 s.
+ACTION: simulate( method=>"ssa" )
+Network simulation using ssa
+WARNING: writeFile(): Overwriting existing file ./test.net.
+Wrote network in net format to ./test.net.
+Running run_network on ntbhusar
+full command: /home/ahusar/bng/RuleBender/BioNetGen/bin/run_network -o ./test -p ssa -h 176 --cdat 1 --fdat 0 -g ./test.net ./test.net 0.0001 2500
+[simulation PID is: 53524]
+run_network 3.0
+Read 39 parameters from ./test.net
+Read 9 species from ./test.net
+Read 3 group(s) from ./test.net
+Read 0 function(s) from ./test.net
+Found species with index 0 at line 59: assuming this is the null species.
+Found species with index 0 at line 60: assuming this is the null species.
+Found species with index 0 at line 64: assuming this is the null species.
+Found species with index 0 at line 65: assuming this is the null species.
+Read 16 reaction(s) from ./test.net
+16 reaction(s) have nonzero rate
+rxn_rate_update_interval=1
+Average number of update rxns is 4.56
+Initialization took 0.00 CPU seconds
+Stochastic simulation using direct Gillespie algorithm
+TOTAL STEPS: 175470          
+Time course of concentrations written to file ./test.cdat.
+Time course of groups written to file ./test.gdat.
+Propagation took 5.00e-02 CPU seconds
+Program times:  0.05 CPU s 0.00 clock s 
+Updating species concentrations from ./test.cdat
+CPU TIME: simulate 0.05 s.
+Finished processing file test.bngl.
+CPU TIME: total 0.07 s.
+DIR:/mnt/code/src4/mcell_tests/examples/mcell4/hybrid_circadian_clock/ssa/bng/nf_00176
+CMD:perl /home/ahusar/bng/RuleBender/BioNetGen/BNG2.pl test.bngl

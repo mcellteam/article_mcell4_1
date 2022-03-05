@@ -1,0 +1,4 @@
+Warning: Some reactions were missed because total reaction probability exceeded 1.
+  A + R  --  0.002% of reactions missed.
+  PrmA + A  --  0.06% of reactions missed.
+  PrmR + A  --  0.013% of reactions missed.

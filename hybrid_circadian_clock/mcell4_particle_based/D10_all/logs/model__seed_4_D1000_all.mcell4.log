@@ -1,0 +1,980 @@
+DIR:/nadata/cnl/home/ahusar/article/mcell_tests/examples/mcell4/hybrid_circadian_clock/mcell4_particle_based/D10_all
+CMD:/nadata/cnl/home/ahusar/tools/anaconda/envs/default/bin/python ../model.py -seed 4 D1000_all
+Initializing 64000 waypoints... 
+Partition contains 40^3 subpartitions, subpartition size is 0.05 microns.
+Copyright (C) 2006-2021 by
+  The National Center for Multiscale Modeling of Biological Systems,
+  The Salk Institute for Biological Studies, and
+  Pittsburgh Supercomputing Center, Carnegie Mellon University,
+
+**********************************************************************
+MCell development is supported by the NIGMS-funded (P41GM103712)
+National Center for Multiscale Modeling of Biological Systems (MMBioS).
+Please acknowledge MCell in your publications.
+**********************************************************************
+
+BNGConfig:
+  initial_seed: 		4
+  time_unit: 		2.5e-07
+  length_unit: 		0.01
+  grid_density: 		10000
+  rx_radius_3d: 		0.56419
+  rxn_and_species_report: 		1
+BNGNotifications:
+  rxn_probability_changed: 		1
+SimulationConfig:
+  vacancy_search_dist2: 		1e+06
+  partition0_llf: 		(-100, -100, -100)
+  partition_edge_length: 		200
+  num_subparts_per_partition_edge: 		40
+  num_subparts_per_partition_edge_squared: 		1600
+  num_subparts: 		64000
+  subpart_edge_length: 		5
+  subpart_edge_length_rcp: 		0.2
+  num_radial_subdivisions: 		1024
+  use_expanded_list: 		1
+  randomize_smol_pos: 		1
+  check_overlapped_walls: 		1
+  rxn_class_cleanup_periodicity: 		0
+  species_cleanup_periodicity: 		0
+  sort_mols_by_subpart: 		0
+  memory_limit_gb: 		-1
+  simulation_stats_every_n_iterations: 		0
+  has_intersecting_counted_objects: 		0
+Total number of ray-subvolume intersection tests (number of ray_trace calls): 0
+Total number of ray-polygon intersection tests: 10427
+Total number of ray-polygon intersections: 0
+Total number of mol reflections from a wall: 0
+Total number of vol mol vol mol collisions: 0
+Total number of molecule moves between walls: 0
+Total number of usages of waypoints for counted volumes: 0
+Total number of counted volume recomputations: 0
+Total number of diffuse 3d calls: 0
+begin parameters
+end parameters
+begin molecule types
+  A() D=1e-05, custom_time_step=0, custom_space_step=0
+  AR() D=1e-05, custom_time_step=0, custom_space_step=0
+  PrmA() D=1e-05, custom_time_step=0, custom_space_step=0
+  PrmA_bound() D=1e-05, custom_time_step=0, custom_space_step=0
+  PrmR() D=1e-05, custom_time_step=0, custom_space_step=0
+  PrmR_bound() D=1e-05, custom_time_step=0, custom_space_step=0
+  R() D=1e-05, custom_time_step=0, custom_space_step=0
+  mRNA_A() D=1e-05, custom_time_step=0, custom_space_step=0
+  mRNA_R() D=1e-05, custom_time_step=0, custom_space_step=0
+  ALL_MOLECULES() D=0, custom_time_step=0, custom_space_step=0
+  ALL_VOLUME_MOLECULES() D=0, custom_time_step=0, custom_space_step=0
+  ALL_SURFACE_MOLECULES() D=0, custom_time_step=0, custom_space_step=0
+end molecule types
+begin compartments
+  Cube 3 3.40282e+38
+end compartments
+begin seed species
+end seed species
+begin reaction rules
+end reaction rules
+Species array: 
+0:
+  species_id: 		0 [uint16_t] 		/* Unique ID for this species */
+  name: *		ALL_MOLECULES [string] 		/* Symbol table entry (name) */
+  D: 		0 [double] 		/* Diffusion constant */
+  space_step: 		0 [double] 		/* Characteristic step length */
+  time_step: 		1 [double] 		/* Minimum (maximum?) sensible timestep */
+  flags: 		SPECIES_CPLX_FLAG_ONE_MOL_NO_COMPONENTS,  (0x80000c)
+  CplxInstance:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 9 (ALL_MOLECULES)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+
+1:
+  species_id: 		1 [uint16_t] 		/* Unique ID for this species */
+  name: *		ALL_VOLUME_MOLECULES [string] 		/* Symbol table entry (name) */
+  D: 		0 [double] 		/* Diffusion constant */
+  space_step: 		0 [double] 		/* Characteristic step length */
+  time_step: 		1 [double] 		/* Minimum (maximum?) sensible timestep */
+  flags: 		SPECIES_CPLX_FLAG_ONE_MOL_NO_COMPONENTS,  (0x80000c)
+  CplxInstance:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 10 (ALL_VOLUME_MOLECULES)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+
+2:
+  species_id: 		2 [uint16_t] 		/* Unique ID for this species */
+  name: *		ALL_SURFACE_MOLECULES [string] 		/* Symbol table entry (name) */
+  D: 		0 [double] 		/* Diffusion constant */
+  space_step: 		0 [double] 		/* Characteristic step length */
+  time_step: 		1 [double] 		/* Minimum (maximum?) sensible timestep */
+  flags: 		SPECIES_CPLX_MOL_FLAG_SURF, SPECIES_CPLX_FLAG_ONE_MOL_NO_COMPONENTS,  (0x80000d)
+  CplxInstance:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 11 (ALL_SURFACE_MOLECULES)
+      flags: SPECIES_CPLX_MOL_FLAG_SURF,  (0x1)
+      compartment: NONE
+      components: 
+
+3:
+  species_id: 		3 [uint16_t] 		/* Unique ID for this species */
+  name: *		PrmA@Cube [string] 		/* Symbol table entry (name) */
+  D: 		1.00000000000000008e-05 [double] 		/* Diffusion constant */
+  space_step: 		3.16228 [double] 		/* Characteristic step length */
+  time_step: 		1 [double] 		/* Minimum (maximum?) sensible timestep */
+  flags: 		SPECIES_CPLX_FLAG_ONE_MOL_NO_COMPONENTS,  (0x80c)
+  CplxInstance:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 2 (PrmA)
+      flags:  (0x0)
+      compartment: 0
+      components: 
+
+4:
+  species_id: 		4 [uint16_t] 		/* Unique ID for this species */
+  name: *		PrmR@Cube [string] 		/* Symbol table entry (name) */
+  D: 		1.00000000000000008e-05 [double] 		/* Diffusion constant */
+  space_step: 		3.16228 [double] 		/* Characteristic step length */
+  time_step: 		1 [double] 		/* Minimum (maximum?) sensible timestep */
+  flags: 		SPECIES_CPLX_FLAG_ONE_MOL_NO_COMPONENTS,  (0x80c)
+  CplxInstance:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 4 (PrmR)
+      flags:  (0x0)
+      compartment: 0
+      components: 
+
+RxnRule 0: 
+  name: A + R -> AR
+  id: 0
+  type: Standard
+  base_rate_constant: 1.204e+09
+  variable_rates.size: 0
+  mol_instances_are_fully_maintained: 0
+  reactants:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 0 (A)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:A
+
+  Cplx 1:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 6 (R)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:R
+
+  products:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 1 (AR)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:AR
+
+
+RxnRule 1: 
+  name: PrmA -> PrmA + mRNA_A
+  id: 1
+  type: Standard
+  base_rate_constant: 50
+  variable_rates.size: 0
+  mol_instances_are_fully_maintained: 0
+  reactants:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 2 (PrmA)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:PrmA
+
+  products:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 2 (PrmA)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:PrmA
+
+  Cplx 1:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 7 (mRNA_A)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:mRNA_A
+
+
+RxnRule 2: 
+  name: PrmA_bound -> PrmA_bound + mRNA_A
+  id: 2
+  type: Standard
+  base_rate_constant: 500
+  variable_rates.size: 0
+  mol_instances_are_fully_maintained: 0
+  reactants:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 3 (PrmA_bound)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:PrmA_bound
+
+  products:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 3 (PrmA_bound)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:PrmA_bound
+
+  Cplx 1:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 7 (mRNA_A)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:mRNA_A
+
+
+RxnRule 3: 
+  name: PrmR -> PrmR + mRNA_R
+  id: 3
+  type: Standard
+  base_rate_constant: 0.01
+  variable_rates.size: 0
+  mol_instances_are_fully_maintained: 0
+  reactants:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 4 (PrmR)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:PrmR
+
+  products:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 4 (PrmR)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:PrmR
+
+  Cplx 1:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 8 (mRNA_R)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:mRNA_R
+
+
+RxnRule 4: 
+  name: PrmR_bound -> PrmR_bound + mRNA_R
+  id: 4
+  type: Standard
+  base_rate_constant: 50
+  variable_rates.size: 0
+  mol_instances_are_fully_maintained: 0
+  reactants:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 5 (PrmR_bound)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:PrmR_bound
+
+  products:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 5 (PrmR_bound)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:PrmR_bound
+
+  Cplx 1:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 8 (mRNA_R)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:mRNA_R
+
+
+RxnRule 5: 
+  name: PrmA + A -> PrmA_bound
+  id: 5
+  type: Standard
+  base_rate_constant: 6.02e+08
+  variable_rates.size: 0
+  mol_instances_are_fully_maintained: 0
+  reactants:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 2 (PrmA)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:PrmA
+
+  Cplx 1:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 0 (A)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:A
+
+  products:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 3 (PrmA_bound)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:PrmA_bound
+
+
+RxnRule 6: 
+  name: PrmA_bound -> PrmA + A
+  id: 6
+  type: Standard
+  base_rate_constant: 50
+  variable_rates.size: 0
+  mol_instances_are_fully_maintained: 0
+  reactants:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 3 (PrmA_bound)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:PrmA_bound
+
+  products:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 2 (PrmA)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:PrmA
+
+  Cplx 1:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 0 (A)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:A
+
+
+RxnRule 7: 
+  name: PrmR + A -> PrmR_bound
+  id: 7
+  type: Standard
+  base_rate_constant: 6.02e+08
+  variable_rates.size: 0
+  mol_instances_are_fully_maintained: 0
+  reactants:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 4 (PrmR)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:PrmR
+
+  Cplx 1:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 0 (A)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:A
+
+  products:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 5 (PrmR_bound)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:PrmR_bound
+
+
+RxnRule 8: 
+  name: PrmR_bound -> PrmR + A
+  id: 8
+  type: Standard
+  base_rate_constant: 100
+  variable_rates.size: 0
+  mol_instances_are_fully_maintained: 0
+  reactants:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 5 (PrmR_bound)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:PrmR_bound
+
+  products:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 4 (PrmR)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:PrmR
+
+  Cplx 1:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 0 (A)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:A
+
+
+RxnRule 9: 
+  name: mRNA_A -> mRNA_A + A
+  id: 9
+  type: Standard
+  base_rate_constant: 50
+  variable_rates.size: 0
+  mol_instances_are_fully_maintained: 0
+  reactants:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 7 (mRNA_A)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:mRNA_A
+
+  products:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 7 (mRNA_A)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:mRNA_A
+
+  Cplx 1:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 0 (A)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:A
+
+
+RxnRule 10: 
+  name: mRNA_R -> mRNA_R + R
+  id: 10
+  type: Standard
+  base_rate_constant: 5
+  variable_rates.size: 0
+  mol_instances_are_fully_maintained: 0
+  reactants:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 8 (mRNA_R)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:mRNA_R
+
+  products:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 8 (mRNA_R)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:mRNA_R
+
+  Cplx 1:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 6 (R)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:R
+
+
+RxnRule 11: 
+  name: mRNA_A -> 0
+  id: 11
+  type: Standard
+  base_rate_constant: 10
+  variable_rates.size: 0
+  mol_instances_are_fully_maintained: 0
+  reactants:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 7 (mRNA_A)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:mRNA_A
+
+  products:
+
+RxnRule 12: 
+  name: mRNA_R -> 0
+  id: 12
+  type: Standard
+  base_rate_constant: 0.5
+  variable_rates.size: 0
+  mol_instances_are_fully_maintained: 0
+  reactants:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 8 (mRNA_R)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:mRNA_R
+
+  products:
+
+RxnRule 13: 
+  name: A -> 0
+  id: 13
+  type: Standard
+  base_rate_constant: 1
+  variable_rates.size: 0
+  mol_instances_are_fully_maintained: 0
+  reactants:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 0 (A)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:A
+
+  products:
+
+RxnRule 14: 
+  name: R -> 0
+  id: 14
+  type: Standard
+  base_rate_constant: 0.2
+  variable_rates.size: 0
+  mol_instances_are_fully_maintained: 0
+  reactants:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 6 (R)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:R
+
+  products:
+
+RxnRule 15: 
+  name: AR -> R
+  id: 15
+  type: Standard
+  base_rate_constant: 1
+  variable_rates.size: 0
+  mol_instances_are_fully_maintained: 0
+  reactants:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 1 (AR)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:AR
+
+  products:
+  Cplx 0:
+    orientation: 0
+    mol_instances:
+    0:
+      mol_type_id: 6 (R)
+      flags:  (0x0)
+      compartment: NONE
+      components: 
+      graph:
+    0: m:R
+
+
+Region array: 
+0:
+  Region : name:Cube,ALL, species_id: invalid
+    initial_region_molecules :
+Release event:
+  event_time: 		0 [double] 		
+  periodicity_interval: 		0 [double] 		
+  type_index: 		200 [event_type_index_t] 		
+  name: 		initial surface releases [string]
+  species_id: 		4294967295 [species_id_t]
+  actual_release_time: 		0 [double]
+  release_number_method: 		ReleaseNumberMethod::INVALID [ReleaseNumberMethod]
+  release_number: 		4294967295 [uint]
+  concentration: 		3.40282e+38 [double]
+  orientation: 		0 [double]
+  release_shape: 		ReleaseShape::INITIAL_SURF_REGION [ReleaseShape]
+  location: 		(3.40282e+38, 3.40282e+38, 3.40282e+38) [Vec3]
+  diameter: 		(3.40282e+38, 3.40282e+38, 3.40282e+38) [Vec3]
+  cumm_area_and_pwall_index_pairs:
+  region_llf: 		(3.40282e+38, 3.40282e+38, 3.40282e+38) [Vec3]
+  region_urb: 		(3.40282e+38, 3.40282e+38, 3.40282e+38) [Vec3]
+  delay: 		0 [double]
+  number_of_trains: 		1 [uint]
+  train_interval: 		1e-12 [double]
+  train_duration: 		1e-12 [double]
+  release_interval: 		1e+140 [double]
+Release event:
+  event_time: 		0 [double] 		
+  periodicity_interval: 		0 [double] 		
+  type_index: 		200 [event_type_index_t] 		
+  name: 		Release of PrmA@Cube at Cube [string]
+  species_id: 		3 [species_id_t]
+  actual_release_time: 		0 [double]
+  release_number_method: 		ReleaseNumberMethod::CONST_NUM [ReleaseNumberMethod]
+  release_number: 		1 [uint]
+  concentration: 		3.40282e+38 [double]
+  orientation: 		0 [double]
+  release_shape: 		ReleaseShape::REGION [ReleaseShape]
+  location: 		(3.40282e+38, 3.40282e+38, 3.40282e+38) [Vec3]
+  diameter: 		(3.40282e+38, 3.40282e+38, 3.40282e+38) [Vec3]
+  cumm_area_and_pwall_index_pairs:
+  region_llf: 		(-80.6009, -80.6009, -80.6009) [Vec3]
+  region_urb: 		(80.6009, 80.6009, 80.6009) [Vec3]
+Cube  delay: 		0 [double]
+  number_of_trains: 		1 [uint]
+  train_interval: 		1e-12 [double]
+  train_duration: 		1e-12 [double]
+  release_interval: 		1e+140 [double]
+Release event:
+  event_time: 		0 [double] 		
+  periodicity_interval: 		0 [double] 		
+  type_index: 		200 [event_type_index_t] 		
+  name: 		Release of PrmR@Cube at Cube [string]
+  species_id: 		4 [species_id_t]
+  actual_release_time: 		0 [double]
+  release_number_method: 		ReleaseNumberMethod::CONST_NUM [ReleaseNumberMethod]
+  release_number: 		1 [uint]
+  concentration: 		3.40282e+38 [double]
+  orientation: 		0 [double]
+  release_shape: 		ReleaseShape::REGION [ReleaseShape]
+  location: 		(3.40282e+38, 3.40282e+38, 3.40282e+38) [Vec3]
+  diameter: 		(3.40282e+38, 3.40282e+38, 3.40282e+38) [Vec3]
+  cumm_area_and_pwall_index_pairs:
+  region_llf: 		(-80.6009, -80.6009, -80.6009) [Vec3]
+  region_urb: 		(80.6009, 80.6009, 80.6009) [Vec3]
+Cube  delay: 		0 [double]
+  number_of_trains: 		1 [uint]
+  train_interval: 		1e-12 [double]
+  train_duration: 		1e-12 [double]
+  release_interval: 		1e+140 [double]
+MolOrRxnCountEvent:
+  event_time: 		0 [double] 		
+  periodicity_interval: 		10000 [double] 		
+  type_index: 		290 [event_type_index_t] 		
+ mol_count_infos:
+  0
+    buffer_id: 0 [count_buffer_id_t] 		
+    terms:
+0:
+      type: World
+      sign_in_expression: 1 [int]
+      orientation: 0 [orientation_t]
+      type: MoleculesPattern      species_molecules_pattern: A [CplxInstance]
+
+      primary_compartment_id: 4294967294 [compartment_id_t]
+      rxn_rule_id: 4294967295 [rxn_rule_id_t]
+      region_expr: none
+MolOrRxnCountEvent:
+  event_time: 		0 [double] 		
+  periodicity_interval: 		10000 [double] 		
+  type_index: 		290 [event_type_index_t] 		
+ mol_count_infos:
+  0
+    buffer_id: 1 [count_buffer_id_t] 		
+    terms:
+0:
+      type: World
+      sign_in_expression: 1 [int]
+      orientation: 0 [orientation_t]
+      type: MoleculesPattern      species_molecules_pattern: R [CplxInstance]
+
+      primary_compartment_id: 4294967294 [compartment_id_t]
+      rxn_rule_id: 4294967295 [rxn_rule_id_t]
+      region_expr: none
+MolOrRxnCountEvent:
+  event_time: 		0 [double] 		
+  periodicity_interval: 		10000 [double] 		
+  type_index: 		290 [event_type_index_t] 		
+ mol_count_infos:
+  0
+    buffer_id: 2 [count_buffer_id_t] 		
+    terms:
+0:
+      type: World
+      sign_in_expression: 1 [int]
+      orientation: 0 [orientation_t]
+      type: MoleculesPattern      species_molecules_pattern: AR [CplxInstance]
+
+      primary_compartment_id: 4294967294 [compartment_id_t]
+      rxn_rule_id: 4294967295 [rxn_rule_id_t]
+      region_expr: none
+Diffuse-react event:
+  event_time: 		0 [double] 		
+  periodicity_interval: 		1 [double] 		
+  type_index: 		500 [event_type_index_t] 		
+  barrier_time_from_event_time: 		3.40282e+38 [double] (may be unset initally)		
+Periodic Call Event:
+  event_time: 		0 [double] 		
+  periodicity_interval: 		1 [double] 		
+  type_index: 		990 [event_type_index_t] 		
+  function_ptr:		0x7fc42a820ed0
+Defragmentation event:
+  event_time: 		100 [double] 		
+  periodicity_interval: 		100 [double] 		
+  type_index: 		900 [event_type_index_t] 		
+Mol order shuffle event:
+  event_time: 		10000 [double] 		
+  periodicity_interval: 		10000 [double] 		
+  type_index: 		910 [event_type_index_t] 		
+Generated file data_layout.json for plotting in CellBlender.
+Iterations: 0 of 180000000
+Released 1 PrmA@Cube from "Release of PrmA@Cube at Cube" at iteration 0.
+Released 1 PrmR@Cube from "Release of PrmR@Cube at Cube" at iteration 0.
+Iterations: 10000 of 180000000 (155087 iter/sec) [active/total species 5/9, rxn classes 2, active/total reactant classes 2/2]
+Iterations: 20000 of 180000000 (926784 iter/sec) [active/total species 5/9, rxn classes 2, active/total reactant classes 2/2]
+Iterations: 30000 of 180000000 (712048 iter/sec) [active/total species 6/11, rxn classes 3, active/total reactant classes 3/3]
+Iterations: 40000 of 180000000 (729395 iter/sec) [active/total species 6/11, rxn classes 3, active/total reactant classes 3/3]
+Iterations: 50000 of 180000000 (670286 iter/sec) [active/total species 7/12, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 60000 of 180000000 (527983 iter/sec) [active/total species 7/12, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 70000 of 180000000 (541917 iter/sec) [active/total species 7/12, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 80000 of 180000000 (585686 iter/sec) [active/total species 7/12, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 90000 of 180000000 (453618 iter/sec) [active/total species 7/12, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 100000 of 180000000 (467530 iter/sec) [active/total species 7/12, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 110000 of 180000000 (411760 iter/sec) [active/total species 7/13, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 120000 of 180000000 (462942 iter/sec) [active/total species 7/13, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 130000 of 180000000 (483559 iter/sec) [active/total species 7/13, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 140000 of 180000000 (421977 iter/sec) [active/total species 7/13, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 150000 of 180000000 (344104 iter/sec) [active/total species 7/13, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 160000 of 180000000 (338972 iter/sec) [active/total species 7/13, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 170000 of 180000000 (320072 iter/sec) [active/total species 7/13, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 180000 of 180000000 (341018 iter/sec) [active/total species 7/13, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 190000 of 180000000 (318776 iter/sec) [active/total species 7/13, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 200000 of 180000000 (341285 iter/sec) [active/total species 7/13, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 210000 of 180000000 (345423 iter/sec) [active/total species 7/13, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 220000 of 180000000 (322134 iter/sec) [active/total species 7/13, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 230000 of 180000000 (252092 iter/sec) [active/total species 7/13, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 240000 of 180000000 (199708 iter/sec) [active/total species 7/13, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 250000 of 180000000 (217993 iter/sec) [active/total species 7/13, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 260000 of 180000000 (213525 iter/sec) [active/total species 7/13, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 270000 of 180000000 (202294 iter/sec) [active/total species 7/13, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 280000 of 180000000 (170459 iter/sec) [active/total species 7/13, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 290000 of 180000000 (165722 iter/sec) [active/total species 7/13, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 300000 of 180000000 (125389 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 310000 of 180000000 (157203 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 320000 of 180000000 (144902 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 330000 of 180000000 (129857 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 340000 of 180000000 (114325 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 350000 of 180000000 (115116 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 360000 of 180000000 (110302 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 370000 of 180000000 (108829 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 380000 of 180000000 (106111 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 390000 of 180000000 (114445 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 400000 of 180000000 (111983 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 410000 of 180000000 (107733 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 420000 of 180000000 (101227 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 430000 of 180000000 (103199 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 440000 of 180000000 (103859 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 450000 of 180000000 (103977 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 460000 of 180000000 (102819 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 470000 of 180000000 (91555.8 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 480000 of 180000000 (98715.7 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 490000 of 180000000 (99246.7 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 500000 of 180000000 (94695.2 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 510000 of 180000000 (97250.7 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 520000 of 180000000 (95106.8 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 530000 of 180000000 (97722.1 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 540000 of 180000000 (95972.1 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 550000 of 180000000 (87640.9 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 560000 of 180000000 (85683.9 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 570000 of 180000000 (79770.9 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 580000 of 180000000 (80546.4 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 590000 of 180000000 (81178.7 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 600000 of 180000000 (87007.2 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 610000 of 180000000 (80737 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 620000 of 180000000 (79595.7 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 630000 of 180000000 (76582.6 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 640000 of 180000000 (75719.7 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 650000 of 180000000 (68492.2 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 660000 of 180000000 (66051.1 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 670000 of 180000000 (71570.7 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 680000 of 180000000 (71880.9 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 690000 of 180000000 (63656.6 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 700000 of 180000000 (71574.8 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 710000 of 180000000 (69879.2 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 720000 of 180000000 (70815.5 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 730000 of 180000000 (69691.3 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 740000 of 180000000 (61686.5 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 750000 of 180000000 (66835.5 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 760000 of 180000000 (66811 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 770000 of 180000000 (61156.1 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 780000 of 180000000 (62217.7 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 790000 of 180000000 (61814.6 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 800000 of 180000000 (53480.5 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 810000 of 180000000 (60005.3 iter/sec) [active/total species 7/14, rxn classes 6, active/total reactant classes 4/4]
+Iterations: 820000 of 180000000 (60928.8 iter/sec) [active/total species 8/15, rxn classes 7, active/total reactant classes 4/4]
+Iterations: 830000 of 180000000 (56957.7 iter/sec) [active/total species 8/15, rxn classes 7, active/total reactant classes 4/4]
+Iterations: 840000 of 180000000 (51154.8 iter/sec) [active/total species 8/15, rxn classes 7, active/total reactant classes 4/4]
+Iterations: 850000 of 180000000 (52104.8 iter/sec) [active/total species 8/15, rxn classes 7, active/total reactant classes 4/4]
+Seting diffusion constants to variant D1000_all
+Caught Ctrl-C signal in iteration 858984.
+Flushing buffers.
+Traceback (most recent call last):
+  File "/nadata/cnl/home/ahusar/article/mcell_tests/examples/mcell4/hybrid_circadian_clock/mcell4_particle_based/D10_all/../model.py", line 140, in <module>
+    model.run_iterations(ITERATIONS)
+KeyboardInterrupt
