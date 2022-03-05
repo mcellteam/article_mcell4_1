@@ -34,6 +34,7 @@ import os
 import sys
 import argparse
 import textwrap
+from shared import *
 
 def create_argparse():
     parser = argparse.ArgumentParser(description='MCell4 Runner')
@@ -49,22 +50,29 @@ def main():
     if not args.data:
         sys.exit("Input file must be set with -d.")
     
+    print("Loading " + args.data)
     df = pd.read_csv(args.data)
     #print(df)
     
     x = df['Benchmark']
     y = df['MCell3/MCell4']
     
+    # wrap label names because they may be long 
     x = ['\n'.join(textwrap.wrap(l, 18)) for l in x]
+    
     #print(x)
     
     plt.axhline(y=1,linewidth=1, color='c')
-    plt.bar(x, y)
+    
+    plt_bar(plt, x, y)
+    
     plt.ylabel("Relative performance")
     plt.subplots_adjust(bottom=0.3)
+    
+    # rotate labels by 45 degrees
     plt.xticks(x, rotation=45)
     
-    plt.savefig(args.output, dpi=600)
+    plt.savefig(args.output, dpi=OUTPUT_DPI)
 
 if __name__ == '__main__':
     main()

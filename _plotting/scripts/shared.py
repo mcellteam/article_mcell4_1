@@ -23,3 +23,7 @@ def ax_fill_between(
     return ax.fill_between(
          x_index, y_data_low, y_data_high, **kwargs)
 
+# wrapper for plt.bar call
+def plt_bar(plt, x_index, y_data, **kwargs):
+    return plt.bar(x_index, y_data, **kwargs)
+    
