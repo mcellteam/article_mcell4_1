@@ -1,1 +1,1 @@
-python ../../_plotting/scripts/plot_mcell_and_extra.py -e extra_nfsim.txt -t 20 -l labels_nfsim.txt -o nfsim.png
+python ../../_plotting/scripts/plot_trajectories_single_plot.py -e extra_nfsim.txt -t 20 -l labels_nfsim.txt -o nfsim.png
