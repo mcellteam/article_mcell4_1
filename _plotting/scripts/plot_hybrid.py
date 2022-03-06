@@ -8,6 +8,7 @@ from io import StringIO
 from matplotlib.lines import Line2D
 from hybrid_get_peaks import prepare_data
 
+from shared import *
 
 particle_D10 = {
 'A_first': (0.01292041015625, 0.0009311716138931673),
@@ -147,12 +148,12 @@ def plot_averages(dir):
         yR = df['R (mean)']
         
         if first:
-            ax.plot(df.index, yA, c = 'b')
-            ax.plot(df.index, yR, c = 'r')
+            ax_plot(ax, df.index, yA, c = 'b')
+            ax_plot(ax, df.index, yR, c = 'r')
             first = False    
         else:    
-            ax.plot(df.index, yA)
-            ax.plot(df.index, yR)
+            ax_plot(ax, df.index, yA)
+            ax_plot(ax, df.index, yR)
         
         if name == 'nfsim':
             name = 'NFSim'
@@ -171,7 +172,7 @@ def plot_averages(dir):
         legend.append(name + ' - R (mean)')
     
     plt.legend(legend)
-    plt.ylabel("N(t)")
+    plt.ylabel(Y_LABEL_N_PARAM_TIME)
     
     finalize_and_save_plot("hybrid_" + os.path.basename(dir) + ".png", fig)
         
@@ -183,8 +184,8 @@ def plot_low_pass(out, nfsim_seed):
     
     df_nfsim_plot = df_nfsim.truncate(after = 0.16)
     if True:
-        ax.plot(df_nfsim_plot.index, df_nfsim_plot['A'], label='A')
-        ax.plot(df_nfsim_plot.index, df_nfsim_plot['R'], label='R')
+        ax_plot(ax, df_nfsim_plot.index, df_nfsim_plot['A'], label='A')
+        ax_plot(ax, df_nfsim_plot.index, df_nfsim_plot['R'], label='R')
 
     # must use full data for filter
     df_lowpass = df_nfsim.copy()
@@ -194,11 +195,11 @@ def plot_low_pass(out, nfsim_seed):
     df_lowpass = df_lowpass.truncate(after = 0.16)  
     #print(df_lowpass)
 
-    ax.plot(df_lowpass.index, df_lowpass['A'], label='A', c = 'b')
-    ax.plot(df_lowpass.index, df_lowpass['R'], label='R', c = 'r')
+    ax_plot(ax, df_lowpass.index, df_lowpass['A'], label='A', c = 'b')
+    ax_plot(ax, df_lowpass.index, df_lowpass['R'], label='R', c = 'r')
 
     plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)'])
-    plt.ylabel("N(t)")
+    plt.ylabel(Y_LABEL_N_PARAM_TIME)
     
     finalize_and_save_plot(out, fig)
             
@@ -222,7 +223,7 @@ def plot_peaks_error_bars(out):
             # also vary with the x-position
             c = 'b' if 'A' in v else 'r'
             
-            ax.errorbar(x, y, xerr=xerr, fmt='|', capsize=3, c=c)
+            ax_errorbar(ax, x, y, xerr=xerr, fmt='|', capsize=3, c=c)
             
             # 0.007
             #  + 2.5
