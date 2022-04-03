@@ -33,4 +33,10 @@ def ax_fill_between(
 # wrapper for plt.bar call
 def plt_bar(plt, x_index, y_data, **kwargs):
     return plt.bar(x_index, y_data, **kwargs)
+
+
+# adds (a), (b), ...
+def add_plot_index(plt, ax, name):
+    plt.text(-0.07, 1, '(' + name + ')', horizontalalignment='center',
+             verticalalignment='center', transform = ax.transAxes)
     

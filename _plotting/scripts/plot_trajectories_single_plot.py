@@ -44,6 +44,7 @@ class Options:
         self.single_bng_run = False
         self.extra = None
         self.labels = None
+        self.index = None
         self.max_time = None
         self.for_membrane_localization = False
         self.output = None
@@ -59,6 +60,7 @@ def create_argparse():
     parser.add_argument('-t', '--max-time', type=str)
     parser.add_argument('-l', '--labels', type=str)
     parser.add_argument('-x', '--membrane-localization', action='store_true', help='special option to generate plots for membrane localization model')
+    parser.add_argument('-i', '--index', type=str)
     parser.add_argument('-o', '--output', type=str)
     return parser
 
@@ -85,6 +87,9 @@ def process_opts():
 
     if args.labels:
         opts.labels = args.labels
+
+    if args.index:
+        opts.index = args.index
     
     if args.membrane_localization:    
         opts.for_membrane_localization = args.membrane_localization
@@ -233,6 +238,9 @@ def main():
 
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     plt.subplots_adjust(right=0.7, bottom=0.2)
+    
+    if opts.index:
+        add_plot_index(plt, ax, opts.index)
     
     plt.savefig(opts.output, dpi=OUTPUT_DPI)
     print("Plot " + opts.output + " generated")

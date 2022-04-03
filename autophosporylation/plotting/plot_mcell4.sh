@@ -1,1 +1,1 @@
-python ../../_plotting/scripts/plot_trajectories_single_plot.py -m4 react_data_mcell4/ -e extra_mcell.txt -t 20 -l labels_mcell.txt -o mcell4.png
+python ../../_plotting/scripts/plot_trajectories_single_plot.py -m4 react_data_mcell4/ -e extra_mcell.txt -t 20 -l labels_mcell.txt -o mcell4.png -i a
