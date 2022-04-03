@@ -249,8 +249,8 @@ if __name__ == '__main__':
     plot_peaks_error_bars(out="hybrid_peaks.png")
     
     plot_averages("averages_fast")
-    plot_averages("averages_slow_hybrid")
-    plot_averages("averages_slow_particle")
+    plot_averages("averages_hybrid_slow")
+    plot_averages("averages_particle_slow")
     
     
     
