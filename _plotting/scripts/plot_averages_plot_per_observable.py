@@ -96,15 +96,16 @@ def main():
         labels = load_labels(opts.labels)
     else:
         labels = None
-        
-    selected_observables = set()
+    
+    index_names = []    
+    selected_observables = []
     if opts.selected_observables:
-        selected_observables = set(load_labels(opts.selected_observables))
-        print("Plotting only " + str(selected_observables))
+        index_names, selected_observables = load_selected_observables(opts.selected_observables)
 
     clrs = ['b', 'g', 'r'] 
         
     # generate one image per iteration
+    index = 0
     for obs in sorted(all_observables): 
         if selected_observables and obs not in selected_observables:
             continue
@@ -112,7 +113,7 @@ def main():
         #print("Processing observable " + obs)
         
         fig,ax = plt.subplots()
-        ax.set_title(obs)
+        #ax.set_title(obs)
         
         legend_names = []
         for i in range(len(counts)):
@@ -138,16 +139,17 @@ def main():
                 df['mean_minus_std'], df['mean_plus_std'],
                 alpha=0.1, facecolor=clrs[i])
     
-            legend_names.append(opts.labels[i])
+            legend_names.append(labels[i] + " " + obs)
     
         
         plt.xlabel(X_LABEL_TIME_UNIT_S)
         plt.ylabel(Y_LABEL_N_PARAM_TIME)
-
-        
         plt.legend(legend_names)
+        add_plot_index(plt, ax, index_names[index], x_offset=-0.03)
         plt.savefig(obs + '.png', dpi=OUTPUT_DPI)
+        
         print("Plot " + obs + '.png' + " generated")
+        index += 1
 
 
 

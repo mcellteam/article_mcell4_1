@@ -201,3 +201,13 @@ def load_labels(fname):
 
     return res
 
+def load_selected_observables(fname):
+    before_split = load_labels(fname)
+
+    index_names = []
+    observables = []
+    for line in before_split:
+        s = line.split(' ')
+        index_names.append(s[0])
+        observables.append(s[1])
+    return index_names, observables

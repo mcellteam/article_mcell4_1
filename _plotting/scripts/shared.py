@@ -36,7 +36,7 @@ def plt_bar(plt, x_index, y_data, **kwargs):
 
 
 # adds (a), (b), ...
-def add_plot_index(plt, ax, name):
-    plt.text(-0.07, 1, '(' + name + ')', horizontalalignment='center',
+def add_plot_index(plt, ax, name, x_offset = 0):
+    plt.text(-0.07 + x_offset, 1, '(' + name + ')', horizontalalignment='center',
              verticalalignment='center', transform = ax.transAxes)
     

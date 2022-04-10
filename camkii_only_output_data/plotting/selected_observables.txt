@@ -1,4 +1,4 @@
-Ca
-CaM1C
-CaM1N
-KCaM2N
+A Ca
+B CaM1C
+C CaM1N
+D KCaM2N

@@ -41,6 +41,7 @@ def create_argparse():
     parser.add_argument('-d', '--data', type=str, help='cvs file with benchmark results')
     parser.add_argument('-l', '--labels', type=str)
     parser.add_argument('-o', '--output', type=str)
+    parser.add_argument('-i', '--index-name', type=str)
     return parser
 
 
@@ -62,6 +63,8 @@ def main():
     
     #print(x)
     
+    fig,ax = plt.subplots()
+    
     plt.axhline(y=1,linewidth=1, color='c')
     
     plt_bar(plt, x, y)
@@ -72,6 +75,9 @@ def main():
     # rotate labels by 45 degrees
     plt.xticks(x, rotation=45)
     
+    if args.index_name:
+        add_plot_index(plt, ax, args.index_name)
+        
     plt.savefig(args.output, dpi=OUTPUT_DPI)
     print("Plot " + args.output + " generated")
 

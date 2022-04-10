@@ -10,6 +10,8 @@ from hybrid_get_peaks import prepare_data
 
 from shared import *
 
+INDEX_NAME_OFFSET=0.02
+
 particle_D10 = {
 'A_first': (0.01292041015625, 0.0009311716138931673),
 'A_second': (0.07806904296875, 0.009939225324979456),
@@ -123,7 +125,7 @@ def finalize_and_save_plot(out, fig):
     plt.savefig(out, dpi=600)   
     print("Plot " + out + " generated")
 
-def plot_averages(dir):
+def plot_averages(dir, index_name):
     
     # load all .csv files in directory passed as the first argument
     data = {}
@@ -174,9 +176,11 @@ def plot_averages(dir):
     plt.legend(legend)
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
     
+    add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)
+    
     finalize_and_save_plot("hybrid_" + os.path.basename(dir) + ".png", fig)
         
-def plot_low_pass(out, nfsim_seed):
+def plot_low_pass(out, nfsim_seed, index_name):
     fig, ax = plt.subplots()
     
     # load base data
@@ -201,10 +205,12 @@ def plot_low_pass(out, nfsim_seed):
     plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)'])
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
     
+    add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)
+    
     finalize_and_save_plot(out, fig)
             
 
-def plot_peaks_error_bars(out):
+def plot_peaks_error_bars(out, index_name):
     fig, ax = plt.subplots()
     
     plt.legend(['A (low pass)', 'R (low pass)'])
@@ -235,6 +241,8 @@ def plot_peaks_error_bars(out):
     blue_patch = Line2D([0], [0], color='red', label='R (low pass peaks)')
     plt.legend(handles=[red_patch, blue_patch])
     
+    add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)
+    
     finalize_and_save_plot(out, fig)
 
 
@@ -244,13 +252,13 @@ if __name__ == '__main__':
     #    plot_low_pass("hybrid_low_pass_nfsim" + str(s).zfill(5) + ".png", s)
     
     # NFSim seed 14 quite nicely matches the averages 
-    plot_low_pass("hybrid_low_pass_nfsim.png", 14)
+    plot_low_pass("hybrid_low_pass_nfsim.png", 14, "A")
     
-    plot_peaks_error_bars(out="hybrid_peaks.png")
+    plot_peaks_error_bars("hybrid_peaks.png", "B")
     
-    plot_averages("averages_fast")
-    plot_averages("averages_hybrid_slow")
-    plot_averages("averages_particle_slow")
+    plot_averages("averages_fast", "C")
+    plot_averages("averages_hybrid_slow", "D")
+    plot_averages("averages_particle_slow", "E")
     
     
     
