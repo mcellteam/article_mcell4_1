@@ -47,6 +47,7 @@ class Options:
         self.index_name = None
         self.max_time = None
         self.for_membrane_localization = False
+        self.for_camkii = False
         self.output = None
 
         
@@ -60,6 +61,7 @@ def create_argparse():
     parser.add_argument('-t', '--max-time', type=str)
     parser.add_argument('-l', '--labels', type=str)
     parser.add_argument('-x', '--membrane-localization', action='store_true', help='special option to generate plots for membrane localization model')
+    parser.add_argument('-c', '--camkii', action='store_true', help='special option to generate plots for camkii model')
     parser.add_argument('-i', '--index-name', type=str)
     parser.add_argument('-o', '--output', type=str)
     return parser
@@ -93,6 +95,9 @@ def process_opts():
     
     if args.membrane_localization:    
         opts.for_membrane_localization = args.membrane_localization
+
+    if args.camkii:    
+        opts.for_camkii = args.camkii
                 
     opts.extra = args.extra
     
@@ -158,28 +163,27 @@ def main():
         (0, (3, 1, 1, 1, 1, 1)),    # 'densely dashdotdotted', 
     ]
     
-    cm = plt.get_cmap('tab10')
-    NUM_COLORS = 6
-    colors = [cm(i) for i in range(NUM_COLORS)]
-    ax.set_prop_cycle(linestyle = linestyles, color = colors)
-    
-
-
-    if opts.for_membrane_localization:
-        # default size is fine here
-        #ax.set_title('MA')
-        pass
-    else:
+    if not (opts.for_membrane_localization or opts.for_camkii):
         fig.set_size_inches((14,2.5))
+
+        cm = plt.get_cmap('tab10')
+        NUM_COLORS = 6
+        colors = [cm(i) for i in range(NUM_COLORS)]
+        ax.set_prop_cycle(linestyle = linestyles, color = colors)
 
     
     dfs = {}
+    color_index = 0
     # prepare data for 
     for obs in sorted(all_observables): 
         #print("Processing observable " + obs)
         
         if opts.for_membrane_localization:
             if obs != 'MA':
+                continue
+
+        if opts.for_camkii:
+            if obs not in ['pKCaM2C', 'pKCaM_tot', 'pKCam4Ca']:
                 continue
         
         legend_names = []
@@ -202,7 +206,8 @@ def main():
 
             df = df.set_index('time')
             
-            max_time = max(df.index)
+            if opts.max_time:
+                df = df[df.index <= opts.max_time]
     
             # free collected data to decrease memory consumption        
             del data
@@ -213,13 +218,13 @@ def main():
             else:
                 l = 'MCell4'
             
-            if opts.for_membrane_localization:
+            if opts.for_membrane_localization or opts.for_camkii:
                 s = 'solid'
             
                 if i == 0:
-                    ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s, linewidth=2, zorder=100) #
+                    ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s, linewidth=2, zorder=100, c=clrs[color_index]) #
                 else:
-                    ax_plot(ax, df.index, df[sim_obs_name], label=l) #
+                    ax_plot(ax, df.index, df[sim_obs_name], label=l, c=clrs[color_index]) #
 
             else:            
                 ax_plot(ax, df.index, df[sim_obs_name], label=l) #
@@ -227,8 +232,9 @@ def main():
                     ax,
                     df.index, 
                     df[sim_obs_name + '_minus_std'], df[sim_obs_name + '_plus_std'],
-                    alpha=0.2, facecolor=clrs[i])
-    
+                    alpha=0.2)
+            
+            color_index += 1
             
 
     # extra data to be plotted
