@@ -36,6 +36,8 @@ import argparse
 import textwrap
 from shared import *
 
+plt.style.use(['../../_plotting/styles/plot_relative_performance.mplstyle','../../_plotting/styles/master.mplstyle'])
+
 def create_argparse():
     parser = argparse.ArgumentParser(description='MCell4 Runner')
     parser.add_argument('-d', '--data', type=str, help='cvs file with benchmark results')

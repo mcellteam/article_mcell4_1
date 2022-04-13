@@ -7,6 +7,7 @@ from scipy.signal import find_peaks
 from scipy.signal import butter, lfilter, freqz
 import matplotlib.pyplot as plt
 
+plt.style.use(['../../_plotting/styles/hybrid_get_peaks.mplstyle','../../_plotting/styles/master.mplstyle'])
 
 def butter_lowpass(cutoff, fs, order=5):
     nyq = 0.5 * fs

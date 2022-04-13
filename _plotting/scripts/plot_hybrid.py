@@ -10,6 +10,8 @@ from hybrid_get_peaks import prepare_data
 
 from shared import *
 
+plt.style.use(['../../_plotting/styles/plot_hybrid.mplstyle','../../_plotting/styles/master.mplstyle'])
+
 particle_D10 = {
 'A_first': (0.01292041015625, 0.0009311716138931673),
 'A_second': (0.07806904296875, 0.009939225324979456),
