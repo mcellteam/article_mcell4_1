@@ -36,6 +36,8 @@ import argparse
 from load_data import *
 from shared import *
 
+plt.style.use(['../../_plotting/styles/plot_trajectories_single_plot.mplstyle','../../_plotting/styles/master.mplstyle'])
+
 class Options:
     def __init__(self):
         self.mcell3_dir = None

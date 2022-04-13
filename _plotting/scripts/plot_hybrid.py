@@ -10,6 +10,8 @@ from hybrid_get_peaks import prepare_data
 
 from shared import *
 
+plt.style.use(['../../_plotting/styles/plot_hybrid.mplstyle','../../_plotting/styles/master.mplstyle'])
+
 INDEX_NAME_OFFSET=0.02
 
 particle_D10 = {

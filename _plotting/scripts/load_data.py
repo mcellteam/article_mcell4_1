@@ -33,6 +33,8 @@ import matplotlib.pyplot as plt
 import os
 import sys
 import argparse
+import warnings
+warnings.simplefilter(action='ignore', category=pd.errors.PerformanceWarning) #suppress performance warnings
 
 def get_mcell_observables_counts(dir):
     counts = {}
