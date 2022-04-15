@@ -7,7 +7,7 @@ plt.style.use('../../_plotting/styles/master.mplstyle')
 X_LABEL_TIME_UNIT_S = "time [s]"
 Y_LABEL_N_PARAM_TIME = "N(t)"
 
-OUTPUT_DPI = 600
+# OUTPUT_DPI = 600 # 'dpi' now controlled by master stylesheet
 
 # wrapper for ax.plot call
 def ax_plot(
@@ -39,6 +39,9 @@ def plt_bar(plt, x_index, y_data, **kwargs):
 
 # adds (a), (b), ...
 def add_plot_index(plt, ax, name, x_offset = 0):
-    plt.text(-0.07 + x_offset, 1, '(' + name + ')', horizontalalignment='center',
-             verticalalignment='center', transform = ax.transAxes)
+    # plt.text(-0.07 + x_offset, 1, '(' + name + ')', horizontalalignment='center',
+    #          verticalalignment='center', transform = ax.transAxes)
+    plt.text(-0.02 + x_offset, 1.15, '(' + name + ')', horizontalalignment='center',
+             verticalalignment='center', transform=ax.transAxes, fontsize=16)
+
     

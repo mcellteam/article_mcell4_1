@@ -142,13 +142,15 @@ def main():
                 alpha=0.1, facecolor=clrs[i])
     
             legend_names.append(labels[i] + " " + obs)
-    
-        
+
+
         plt.xlabel(X_LABEL_TIME_UNIT_S)
         plt.ylabel(Y_LABEL_N_PARAM_TIME)
         plt.legend(legend_names)
-        add_plot_index(plt, ax, index_names[index], x_offset=-0.03)
-        plt.savefig(obs + '.png', dpi=OUTPUT_DPI)
+        # add_plot_index(plt, ax, index_names[index], x_offset=-0.03)
+        plt.text(.03, .95, '(' + index_names[index] + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+        # plt.savefig(obs + '.png', dpi=OUTPUT_DPI) # 'dpi' now controlled by master stylesheet
+        plt.savefig(obs + '.png')
         
         print("Plot " + obs + '.png' + " generated")
         index += 1

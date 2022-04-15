@@ -172,7 +172,6 @@ def main():
         NUM_COLORS = 6
         colors = [cm(i) for i in range(NUM_COLORS)]
         ax.set_prop_cycle(linestyle = linestyles, color = colors)
-
     
     dfs = {}
     color_index = 0
@@ -245,13 +244,26 @@ def main():
     plt.xlabel(X_LABEL_TIME_UNIT_S)
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
 
-    plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+    if opts.output in {'mcell4.png','mcell3.png','nfsim.png'}:
+        plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))  # original
+    else:
+        plt.legend(loc='upper right')  # jy
+
+
+    # plt.legend(loc='center left', bbox_to_anchor=(1, 0.5)) #original
+    # plt.legend(loc='upper right') #jy
     plt.subplots_adjust(right=0.7, bottom=0.2)
+
+    # print('opts.index_name = ', opts.index_name)
+    # print('opts.output = ', opts.output)
+
     
     if opts.index_name:
-        add_plot_index(plt, ax, opts.index_name)
+        # add_plot_index(plt, ax, opts.index_name)
+        plt.text(.03, .97, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
     
-    plt.savefig(opts.output, dpi=OUTPUT_DPI)
+    # plt.savefig(opts.output, dpi=OUTPUT_DPI) # 'dpi' now controlled by master stylesheet
+    plt.savefig(opts.output)
     print("Plot " + opts.output + " generated")
 
 if __name__ == '__main__':

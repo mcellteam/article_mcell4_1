@@ -97,7 +97,8 @@ def plot_peaks(df, df_orig, obs_name, p0, p1, seed):
     plt.axvline(x=p1, color='r')
                 
     os.makedirs("plots", exist_ok=True)
-    plt.savefig('plots/' + seed + '_' + obs_name + '.png', dpi=300)
+    # plt.savefig('plots/' + seed + '_' + obs_name + '.png', dpi=300) # 'dpi' now controlled by master stylesheet
+    plt.savefig('plots/' + seed + '_' + obs_name + '.png')
     plt.close(fig)
     
         

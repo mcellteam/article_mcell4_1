@@ -1,12 +1,6 @@
-figure.dpi: 600
+figure.dpi: 1000
 figure.autolayout: True
-axes.labelsize: 16
+font.size: 16
+legend.frameon: False
 legend.fontsize: 16
-
-
-
-
-
-
-
-
+legend.labelspacing: 0.3

@@ -303,5 +303,20 @@ ytick.minor.visible
 ytick.minor.width
 ytick.right
 
+legend.loc codes:
+[default] best
+upper right
+upper left
+lower left
+lower right
+right
+center left
+center right
+lower center
+upper center
+center
+Note: specified W/ OUT quotes
+
+
 source:
 https://matplotlib.org/stable/api/matplotlib_configuration_api.html#matplotlib.rcParams
