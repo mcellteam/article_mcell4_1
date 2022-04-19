@@ -1,4 +1,4 @@
-# NO LONGER UPDATING OR WORKING ON THIS BRANCH (working directly on master branch)
+NO LONGER UPDATING OR WORKING ON THIS BRANCH (working directly on master branch)
 
 # article_mcell4
 This repository contains data and models for the MCell4 article
