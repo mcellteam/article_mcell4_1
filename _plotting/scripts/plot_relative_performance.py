@@ -84,7 +84,6 @@ def main():
 
     fig, ax = plt.subplots()
 
-
     # df['MCell3/MCell4'].plot(kind="barh", width = .8)
 
     dict = df.to_dict()
@@ -97,30 +96,44 @@ def main():
     cm = plt.cm.get_cmap('tab10')
     NUM_COLORS = len(names)
     colors = [cm(i) for i in range(NUM_COLORS)] # type is list
-    bars = plt.barh(names, results, color=colors, align='center')
+    bar_height = 0.8
+    bars = plt.barh(names, results, color=colors, align='center', height = bar_height)
 
     # rects = ax.barh(range(len(names)), results, color=colors)
 
     # ax.invert_yaxis()
-    ax.set_xlabel('Relative Performance')
-    ax.set_yticklabels(names)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax.spines['bottom'].set_visible(False)
     ax.spines['left'].set_visible(False)
     plt.axvline(x = 1, color = 'r')
+    ax.annotate('1', (1, len(names)), color='red')
+
+
+    if max(results) < 3:
+        ax.xaxis.set_ticks(np.arange(0, 4, 1))
+
+    ax.set_xlabel('Relative Performance')
+    ax.set_yticklabels(names)
 
     for bar in bars:
         width = bar.get_width()
         label_y = bar.get_y() + bar.get_height() / 2
-        plt.text(width, label_y, s="{:.2f}".format(width))
+        if width < 1 :
+            plt.annotate("{:.2f}".format(width), xy=(1, label_y), ha='left', va='center')
+        else:
+            plt.annotate("{:.2f}".format(width), xy=(width, label_y), ha='left', va='center')
 
 
         # add_plot_index(plt, ax, args.index_name)
         # add_plot_index(plt, ax, args.index_name, x_offset=-.5)
         # add_plot_index(plt, ax, args.index_name)
         #(plt, ax, name, x_offset = 0)
-    plt.text(.03, .95, '(' + args.index_name + ')', horizontalalignment='left',verticalalignment='top', transform=fig.transFigure)
+    # plt.text(.03, .95, '(' + args.index_name + ')', horizontalalignment='left',verticalalignment='top', transform=fig.transFigure)
+    plt.text(.02, .98, '(' + args.index_name + ')', horizontalalignment='left',verticalalignment='top', transform=fig.transFigure)
+
+
+    plt.autoscale()
 
     # plt.savefig(args.output, dpi=OUTPUT_DPI) # 'dpi' now controlled by master stylesheet
     plt.savefig(args.output)

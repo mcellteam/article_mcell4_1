@@ -3,4 +3,11 @@ figure.autolayout: True
 font.size: 16
 legend.frameon: False
 legend.fontsize: 16
-legend.labelspacing: 0.3
+legend.labelspacing: 0.15
+lines.linewidth : 1.2
+axes.xmargin: 0
+axes.ymargin: 0
+
+
+
+

@@ -116,7 +116,7 @@ def load_csv(file):
     return df        
 
 # shared function to store plots
-def finalize_and_save_plot(out, fig):     
+def finalize_and_save_plot(out, fig):
     plt.xlabel("time [s]")
                 
     plt.grid(axis="x")
@@ -144,6 +144,8 @@ def plot_averages(dir, index_name):
                 data[name_ext[0]] = load_csv(file_path)
             
     fig, ax = plt.subplots()
+    ax.spines['right'].set_visible(False)
+    ax.spines['top'].set_visible(False)
     legend = []
     first = True
     for name,df in data.items():
@@ -159,19 +161,19 @@ def plot_averages(dir, index_name):
         else:    
             ax_plot(ax, df.index, yA)
             ax_plot(ax, df.index, yR)
-        
+
         if name == 'nfsim':
             name = 'NFSim'
         elif name == 'ssa':
             name = 'SSA'
         elif name == 'hybrid_D1000':
-            name = 'hybrid D=1e-5'
+            name = 'hybrid D=' + str(1e-5)
         elif name == 'particle_D1000':
-            name = 'particle D=1e-5'
+            name = 'particle D=' + str(1e-5)
         elif name == 'hybrid_D10':
-            name = 'hybrid D=1e-7'
+            name = 'hybrid D=' + str(1e-7)
         elif name == 'particle_D10':
-            name = 'particle D=1e-7'
+            name = 'particle D=' + str(1e-7)
         
         legend.append(name + ' - A (mean)')
         legend.append(name + ' - R (mean)')
@@ -183,12 +185,13 @@ def plot_averages(dir, index_name):
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
     
     # add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)
-    plt.text(.02, .95, '(' + index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-    
+    plt.text(.02, .98, '(' + index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
     finalize_and_save_plot("hybrid_" + os.path.basename(dir) + ".png", fig)
         
 def plot_low_pass(out, nfsim_seed, index_name):
     fig, ax = plt.subplots()
+    ax.spines['right'].set_visible(False)
+    ax.spines['top'].set_visible(False)
     
     # load base data
     df_nfsim = load_gdat_file('../nfsim/bng/nf_' + str(nfsim_seed).zfill(5) + '/test.gdat')
@@ -214,14 +217,14 @@ def plot_low_pass(out, nfsim_seed, index_name):
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
     
     # add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)
-    plt.text(.02, .95, '(' + index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-
-    
+    plt.text(.02, .98, '(' + index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
     finalize_and_save_plot(out, fig)
             
 
 def plot_peaks_error_bars(out, index_name):
     fig, ax = plt.subplots()
+    ax.spines['right'].set_visible(False)
+    ax.spines['top'].set_visible(False)
     
     # plt.legend(['A (low pass)', 'R (low pass)']) #original
     plt.legend(['A (low pass)', 'R (low pass)'], loc='center left', bbox_to_anchor=(1, 0.5))
@@ -254,10 +257,10 @@ def plot_peaks_error_bars(out, index_name):
     blue_patch = Line2D([0], [0], color='red', label='R (low pass peaks)')
     # plt.legend(handles=[red_patch, blue_patch]) #original
     plt.legend(handles=[red_patch, blue_patch], loc='center left', bbox_to_anchor=(1, 0.5))
+    # plt.legend(handles=[red_patch, blue_patch], loc='lower center', bbox_to_anchor=(1, 0.5))
 
     # add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)
-    plt.text(.05, .95, '(' + index_name + ')', horizontalalignment='left', verticalalignment='top',transform=fig.transFigure)
-    
+    plt.text(.02, .98, '(' + index_name + ')', horizontalalignment='left', verticalalignment='top',transform=fig.transFigure)
     finalize_and_save_plot(out, fig)
 
 

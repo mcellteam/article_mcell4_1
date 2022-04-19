@@ -155,6 +155,8 @@ def main():
     clrs = ['b', 'g', 'r'] 
 
     fig,ax = plt.subplots()
+    ax.spines['right'].set_visible(False)
+    ax.spines['top'].set_visible(False)
 
     linestyles = [
         'solid',
@@ -248,6 +250,7 @@ def main():
         plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))  # original
     else:
         plt.legend(loc='upper right')  # jy
+    plt.tight_layout()
 
 
     # plt.legend(loc='center left', bbox_to_anchor=(1, 0.5)) #original
@@ -260,7 +263,7 @@ def main():
     
     if opts.index_name:
         # add_plot_index(plt, ax, opts.index_name)
-        plt.text(.03, .97, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+        plt.text(.02, .98, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
     
     # plt.savefig(opts.output, dpi=OUTPUT_DPI) # 'dpi' now controlled by master stylesheet
     plt.savefig(opts.output)
