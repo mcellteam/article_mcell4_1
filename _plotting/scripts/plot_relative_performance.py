@@ -38,8 +38,6 @@ import textwrap
 import csv
 from shared import *
 
-plt.style.use(['../../_plotting/styles/plot_relative_performance.mplstyle','../../_plotting/styles/master.mplstyle'])
-
 def create_argparse():
     parser = argparse.ArgumentParser(description='MCell4 Runner')
     parser.add_argument('-d', '--data', type=str, help='cvs file with benchmark results')
@@ -50,12 +48,19 @@ def create_argparse():
 
 
 def main():
+    plt.style.use(['../../_plotting/styles/plot_relative_performance.mplstyle', '../../_plotting/styles/master.mplstyle'])
+
+
+
     parser = create_argparse()
     args = parser.parse_args()
     if not args.data:
         sys.exit("Input file must be set with -d.")
     
     print("Loading " + args.data)
+    filename, file_extension = os.path.splitext(args.output)
+    pdf_name = filename + '.pdf'
+    pdf = matplotlib.backends.backend_pdf.PdfPages(pdf_name)
     df = pd.read_csv(args.data) # 'df' type: <class 'pandas.core.frame.DataFrame'>
 
     # df = df.sort_values(by=['Benchmark'])
@@ -115,7 +120,7 @@ def main():
         ax.xaxis.set_ticks(np.arange(0, 4, 1))
 
     ax.set_xlabel('Relative Performance')
-    ax.set_yticklabels(names)
+    ax.yaxis.set_ticks(names)
 
     for bar in bars:
         width = bar.get_width()
@@ -124,7 +129,6 @@ def main():
             plt.annotate("{:.2f}".format(width), xy=(1, label_y), ha='left', va='center')
         else:
             plt.annotate("{:.2f}".format(width), xy=(width, label_y), ha='left', va='center')
-
 
         # add_plot_index(plt, ax, args.index_name)
         # add_plot_index(plt, ax, args.index_name, x_offset=-.5)
@@ -140,12 +144,8 @@ def main():
     plt.savefig(args.output)
     print("Plot " + args.output + " generated")
 
-    print('Saving figures to PDF...')
 
 
-    for fig in xrange(1, figure().number):  ## will open an empty extra figure :(
-        pdf.savefig(args.output)
-    pdf.close()
 
     '''
     str(colors) =  
