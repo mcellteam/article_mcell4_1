@@ -1,3 +1,6 @@
+# NO LONGER UPDATING OR WORKING ON THIS BRANCH
+# WILL BE WORKING DIRECTLY ON MASTER
+
 # article_mcell4
 This repository contains data and models for the MCell4 article
 
