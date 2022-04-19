@@ -30,6 +30,7 @@ For more information, please refer to [http://unlicense.org]
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.backends.backend_pdf
 import os
 import sys
 import argparse
@@ -138,6 +139,13 @@ def main():
     # plt.savefig(args.output, dpi=OUTPUT_DPI) # 'dpi' now controlled by master stylesheet
     plt.savefig(args.output)
     print("Plot " + args.output + " generated")
+
+    print('Saving figures to PDF...')
+
+
+    for fig in xrange(1, figure().number):  ## will open an empty extra figure :(
+        pdf.savefig(args.output)
+    pdf.close()
 
     '''
     str(colors) =  
