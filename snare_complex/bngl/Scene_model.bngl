@@ -62,11 +62,11 @@ begin reaction rules
 
   # Vesicle release
   # spontaneous
-  snare(dv~1) -> snare(dv~0) + V_release() delta
+  #snare(dv~1) -> snare(dv~0) + V_release() delta
   #synchronous
-  snare(s~5,dv~1) -> snare(s~5,dv~0) + V_release() gamma
+  sr:snare(s~5,dv~1) -> snare(s~5,dv~0) + V_release() gamma
   # asynchronous
-  snare(dv~1,a~2) -> snare(dv~0,a~2) + V_release() a*gamma  
+  asr:snare(dv~1,a~2) -> snare(dv~0,a~2) + V_release() a*gamma  
   #Vesicle docking to SNARE
   snare(dv~0) -> snare(dv~1) k_dock
 
