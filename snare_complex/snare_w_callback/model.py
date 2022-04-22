@@ -12,6 +12,22 @@ if os.path.exists(os.path.join(MODEL_PATH, 'customization.py')):
     import customization
 else:
     customization = None
+    
+# process command-line arguments
+if customization and 'custom_argparse_and_parameters' in dir(customization):
+    # custom argument processing and parameter setup
+    customization.custom_argparse_and_parameters()
+else:
+    if len(sys.argv) == 1:
+        # no arguments
+        pass
+    elif len(sys.argv) == 3 and sys.argv[1] == '-seed':
+        # overwrite value of seed defined in module parameters
+        shared.parameter_overrides['SEED'] = int(sys.argv[2])
+    else:
+        print("Error: invalid command line arguments")
+        print("  usage: " + sys.argv[0] + "[-seed N]")
+        sys.exit(1)
 
 
 model = m.Model()
