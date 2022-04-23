@@ -33,6 +33,7 @@ import matplotlib.pyplot as plt
 import os
 import sys
 import argparse
+import math
 from load_data import *
 from shared import *
 
@@ -152,7 +153,7 @@ def main():
                         
     M4 = 'MCell4'
     names = ['MCell4', 'MCell3R', 'BNG']
-    clrs = ['b', 'g', 'r'] 
+    
 
     fig,ax = plt.subplots()
     ax.spines['right'].set_visible(False)
@@ -167,13 +168,20 @@ def main():
         (0, (3, 1, 1, 1, 1, 1)),    # 'densely dashdotdotted', 
     ]
     
-    if not (opts.for_membrane_localization or opts.for_camkii):
+    if not opts.for_membrane_localization and not opts.for_camkii:
         fig.set_size_inches((14,2.5))
 
         cm = plt.get_cmap('tab10')
         NUM_COLORS = 6
         colors = [cm(i) for i in range(NUM_COLORS)]
         ax.set_prop_cycle(linestyle = linestyles, color = colors)
+        
+        clrs = [None]*10 
+    else:
+        clrs = ['b', 'g', 'r'] 
+
+    if opts.for_camkii:
+        ax.set_ylim([0, 0.5])
     
     dfs = {}
     color_index = 0
@@ -204,8 +212,14 @@ def main():
             sim_obs_name = sim_name + '_' + obs 
             
             df[sim_obs_name] = data.iloc[:, 1:].mean(axis=1)
-            df[sim_obs_name + '_minus_std'] = df[sim_obs_name] - data.iloc[:, 1:].std(axis=1)
-            df[sim_obs_name + '_plus_std'] = df[sim_obs_name] + data.iloc[:, 1:].std(axis=1)
+            
+            if opts.for_camkii:
+                df[sim_obs_name + '_minus_std'] = df[sim_obs_name] - data.iloc[:, 1:].sem(axis=1)
+                df[sim_obs_name + '_plus_std'] = df[sim_obs_name] + data.iloc[:, 1:].sem(axis=1)
+            else:
+                df[sim_obs_name + '_minus_std'] = df[sim_obs_name] - data.iloc[:, 1:].std(axis=1)
+                df[sim_obs_name + '_plus_std'] = df[sim_obs_name] + data.iloc[:, 1:].std(axis=1)
+                
 
             df = df.set_index('time')
             
@@ -221,14 +235,21 @@ def main():
             else:
                 l = 'MCell4'
             
-            if opts.for_membrane_localization or opts.for_camkii:
+            if opts.for_membrane_localization:
                 s = 'solid'
             
                 if i == 0:
                     ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s, linewidth=2, zorder=100, c=clrs[color_index]) #
                 else:
                     ax_plot(ax, df.index, df[sim_obs_name], label=l, c=clrs[color_index]) #
-
+            elif opts.for_camkii:
+                ax_plot(ax, df.index, df[sim_obs_name], label=l, color=clrs[color_index]) #
+                ax_fill_between(
+                    ax,
+                    df.index, 
+                    df[sim_obs_name + '_minus_std'], df[sim_obs_name + '_plus_std'],
+                    alpha=0.2, 
+                    color=clrs[color_index])
             else:            
                 ax_plot(ax, df.index, df[sim_obs_name], label=l) #
                 ax_fill_between(
