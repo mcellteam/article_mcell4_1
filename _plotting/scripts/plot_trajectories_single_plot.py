@@ -49,8 +49,10 @@ class Options:
         self.labels = None
         self.index_name = None
         self.max_time = None
+        self.for_autoph = False
         self.for_membrane_localization = False
         self.for_camkii = False
+        self.for_snare = False
         self.output = None
 
         
@@ -63,8 +65,10 @@ def create_argparse():
     parser.add_argument('-e', '--extra', type=str)
     parser.add_argument('-t', '--max-time', type=str)
     parser.add_argument('-l', '--labels', type=str)
+    parser.add_argument('-a', '--autophosphorylation', action='store_true', help='special option to generate plots for autophosporylaion ')
     parser.add_argument('-x', '--membrane-localization', action='store_true', help='special option to generate plots for membrane localization model')
     parser.add_argument('-c', '--camkii', action='store_true', help='special option to generate plots for camkii model')
+    parser.add_argument('-n', '--snare', action='store_true', help='special option to generate plots for snare complex model')
     parser.add_argument('-i', '--index-name', type=str)
     parser.add_argument('-o', '--output', type=str)
     return parser
@@ -96,11 +100,17 @@ def process_opts():
     if args.index_name:
         opts.index_name = args.index_name
     
+    if args.autophosphorylation:    
+        opts.for_autoph = args.autophosphorylation
+
     if args.membrane_localization:    
         opts.for_membrane_localization = args.membrane_localization
 
     if args.camkii:    
         opts.for_camkii = args.camkii
+
+    if args.snare:    
+        opts.for_snare = args.snare
                 
     opts.extra = args.extra
     
@@ -168,7 +178,7 @@ def main():
         (0, (3, 1, 1, 1, 1, 1)),    # 'densely dashdotdotted', 
     ]
     
-    if not opts.for_membrane_localization and not opts.for_camkii:
+    if opts.for_autoph:
         fig.set_size_inches((14,2.5))
 
         cm = plt.get_cmap('tab10')
@@ -176,10 +186,12 @@ def main():
         colors = [cm(i) for i in range(NUM_COLORS)]
         ax.set_prop_cycle(linestyle = linestyles, color = colors)
         
-        clrs = [None]*10 
+        clrs = [None]*10
+    elif opts.for_snare: 
+        clrs = ['b', 'b', 'r', 'r', 'g', 'g']
     else:
-        clrs = ['b', 'g', 'r'] 
-
+        clrs = ['b', 'g', 'r']
+        
     if opts.for_camkii:
         ax.set_ylim([0, 0.5])
     
@@ -203,7 +215,7 @@ def main():
                 continue
             
             data = counts[i][obs]
-            #print(data)
+            #print(obs)
             
             df = pd.DataFrame()           
             df['time'] = data.iloc[:, 0]
@@ -242,6 +254,15 @@ def main():
                     ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s, linewidth=2, zorder=100, c=clrs[color_index]) #
                 else:
                     ax_plot(ax, df.index, df[sim_obs_name], label=l, c=clrs[color_index]) #
+                    
+            elif  opts.for_snare:
+                if i == 0:
+                    # first file
+                    s = 'solid'
+                else:
+                    s = '--'
+                ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s, c=clrs[color_index])
+            
             elif opts.for_camkii:
                 ax_plot(ax, df.index, df[sim_obs_name], label=l, color=clrs[color_index]) #
                 ax_fill_between(
@@ -250,13 +271,16 @@ def main():
                     df[sim_obs_name + '_minus_std'], df[sim_obs_name + '_plus_std'],
                     alpha=0.2, 
                     color=clrs[color_index])
-            else:            
+                
+            elif opts.for_autoph:            
                 ax_plot(ax, df.index, df[sim_obs_name], label=l) #
                 ax_fill_between(
                     ax,
                     df.index, 
                     df[sim_obs_name + '_minus_std'], df[sim_obs_name + '_plus_std'],
                     alpha=0.2)
+            else:
+                sys.exit("Must select plot type")
             
             color_index += 1
             

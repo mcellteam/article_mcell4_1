@@ -8,4 +8,5 @@ rm -r result/*.png
 ./membrane_loc.sh &
 ./performance.sh &
 ./hybrid.sh &
+./snare_complex.sh &
 wait
