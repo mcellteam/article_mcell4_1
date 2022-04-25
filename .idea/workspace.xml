@@ -2,14 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f23342e4-7770-4f01-98e0-33a11ab250fb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/_plotting/snare_rxn_diagram.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_plotting/performance.sh" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/performance.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_relative_performance.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_relative_performance.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_plotting/snare_complex.sh" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/snare_complex.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_plotting/styles/master.mplstyle" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/styles/master.mplstyle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/styles/plot_averages_plot_per_observable.mplstyle" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/styles/plot_averages_plot_per_observable.mplstyle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/styles/plot_hybrid.mplstyle" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/styles/plot_hybrid.mplstyle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_plotting/styles/plot_relative_performance.mplstyle" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/styles/plot_relative_performance.mplstyle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/performance/plotting/plot.sh" beforeDir="false" afterPath="$PROJECT_DIR$/performance/plotting/plot.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/snare_complex/run_all.py" beforeDir="false" afterPath="$PROJECT_DIR$/snare_complex/run_all.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/styles/plot_trajectories_single_plot.mplstyle" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/styles/plot_trajectories_single_plot.mplstyle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/performance/plotting/Fig17_performance_ratio.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/performance/plotting/Fig17_performance_ratio.pdf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +56,7 @@
       <workItem from="1650474187696" duration="4479000" />
       <workItem from="1650575257398" duration="481000" />
       <workItem from="1650651366061" duration="18635000" />
-      <workItem from="1650756549999" duration="11496000" />
+      <workItem from="1650756549999" duration="16423000" />
     </task>
     <servers />
   </component>

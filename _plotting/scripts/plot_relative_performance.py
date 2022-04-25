@@ -37,6 +37,7 @@ import argparse
 import textwrap
 import csv
 from shared import *
+import textwrap
 
 
 def create_argparse():
@@ -76,7 +77,9 @@ def main():
     # fig = plt.figure(figsize=(7,7))
     # fig = plt.figure(constrained_layout=True)
     fig = plt.figure()
-    fig.set_figwidth(7)
+    # fig.set_figwidth(3.5)
+    fig.set_size_inches(7,3.5)
+
 
     for data in datas:
 
@@ -177,15 +180,28 @@ def main():
         if max(results) > 3:
             ax.xaxis.set_ticks(np.arange(0, 40, 10))
 
-        ax.set_xlabel('Relative Performance')
-        ax.yaxis.set_ticks(names)
+        ax.set_xlabel('Rel. Performance')
+        # ax.yaxis.set_ticks(names)
+        # plt.yticks(wrap=True,linespacing=0.8)
+        # plt.yticks(x_axis, [textwrap.fill(label, 10) for name in names],
+        #            rotation=10, fontsize=12, horizontalalignment="center")
+
+
+        # from textwrap import wrap
+        # names_wrapped = ['\n'.join(wrap(l, 14)) for l in names]
+        # print('labels =\n', str(names_wrapped))
+        # # ax.yaxis.set_ticks(names_wrapped)
+
 
         for bar in bars:
             width = bar.get_width()
             label_y = bar.get_y() + bar.get_height() / 2
+
             if width < 1:
+                # plt.annotate("{:.2f}".format(width), xy=(1.05, label_y), ha='left', va='center')
                 plt.annotate("{:.2f}".format(width), xy=(1.05, label_y), ha='left', va='center')
             else:
+                # plt.annotate("{:.2f}".format(width), xy=(width+.05, label_y), ha='left', va='center')
                 plt.annotate("{:.2f}".format(width), xy=(width+.05, label_y), ha='left', va='center')
 
             # add_plot_index(plt, ax, args.index_name)
@@ -208,18 +224,24 @@ def main():
         index_name = '(?)'
         if data == dataA:
             index_name = '(A)'
-            plt.text(-3.7, 1.1, index_name, horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
+            # plt.text(-2, 1.1, index_name, horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
             # plt.text(.1, .9, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transSubfigure)
             # plt.text(0, 1, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+            plt.yticks(names, [textwrap.fill(name, 24) for name in names], linespacing=0.9, size=12)
 
 
 
         elif data == dataB:
             index_name = '(B)'
-            plt.text(-2.2, 1.1, index_name, horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
+            # plt.text(-2, 1.1, index_name, horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
             # plt.text(.5, .9, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transSubfigure)
             # plt.text(.5, 1, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+            plt.yticks(names, [textwrap.fill(name, 10) for name in names], linespacing=0.9, size=12)
 
+        # plt.subplots_adjust(wspace=1.4, left=0.25, bottom=0.15, top=0.9)
+        plt.subplots_adjust(wspace=1.4, left=0.32, bottom=0.18, top=0.9)
+        plt.text(0, .98, '(A)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+        plt.text(0.54, .98, '(B)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
 
         # plt.subplot_tool()
         # plt.show()
@@ -234,7 +256,7 @@ def main():
         # plt.savefig(args.output)
         # print("Plot " + args.output + " generated")
 
-    plt.subplots_adjust(wspace=2.5, bottom=0.2, top=0.9)
+    # plt.subplots_adjust(wspace=3.0, bottom=0.2, top=0.9)
 
 
     # print('Getting figures list..')
@@ -244,7 +266,8 @@ def main():
     # pdf.savefig(figs[0])
     # pdf.savefig(figs[1])
 
-    pdf.savefig(fig, bbox_inches='tight')
+    # pdf.savefig(fig, bbox_inches='tight')
+    pdf.savefig(fig)
     # pdf.savefig(fig)
 
     pdf.close()
