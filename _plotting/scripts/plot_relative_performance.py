@@ -57,7 +57,8 @@ def main():
     dataA = '../smaller_ratio.csv'
     dataB = '../larger_ratio.csv'
     datas = [dataA, dataB]
-    pdf_name = 'Fig17_performance_ratio.pdf'
+    base_name = 'Fig17_performance_ratio'
+    pdf_name = base_name + '.pdf'
     pdf = matplotlib.backends.backend_pdf.PdfPages(pdf_name)
 
     # FOR USE WITH CLI OPTIONS, RATHER THAN PRECONFIGURED
@@ -76,10 +77,10 @@ def main():
 
     # fig = plt.figure(figsize=(7,7))
     # fig = plt.figure(constrained_layout=True)
-    fig = plt.figure()
     # fig.set_figwidth(3.5)
-    fig.set_size_inches(7,3.5)
-
+    # fig.set_size_inches(7,3.5)
+    fig = plt.figure()
+    fig.set_figwidth(7)
 
     for data in datas:
 
@@ -121,10 +122,18 @@ def main():
 
         if data == dataA:
             print('Working on subplot A')
-            ax = fig.add_subplot(121)
+            # ax = fig.add_subplot(121)
+            # ax = fig.add_subplot(211)
+            ax = plt.subplot2grid((7, 2), (0, 0), rowspan=7)
         elif data == dataB:
             print('Working on subplot B')
-            ax = fig.add_subplot(122)
+            # ax = fig.add_subplot(122)
+            # ax = fig.add_subplot(212)
+            ax = plt.subplot2grid((7, 2), (0, 1), rowspan=3)
+
+
+
+
 
         # fig.set_tight_layout(True)
 
@@ -155,6 +164,7 @@ def main():
         colors = [cm(i) for i in range(NUM_COLORS)]  # type is list
         bar_height = 0.8
         # bars = plt.barh(names, results, color=colors, align='center', height=bar_height)
+        # bars = plt.barh(names, results, color='b', align='center', height=bar_height)
         bars = plt.barh(names, results, color='b', align='center', height=bar_height)
 
         # rects = ax.barh(range(len(names)), results, color=colors)
@@ -172,13 +182,12 @@ def main():
         ax.spines['right'].set_visible(False)
         ax.spines['bottom'].set_visible(False)
         ax.spines['left'].set_visible(False)
-        plt.axvline(x=1, color='r',linestyle='--')
-        ax.annotate('1', (1, len(names)), color='red')
+        # ax.annotate('1', (1, len(names)-1), color='red')
 
         if max(results) < 3:
             ax.xaxis.set_ticks(np.arange(0, 4, 1))
         if max(results) > 3:
-            ax.xaxis.set_ticks(np.arange(0, 40, 10))
+            ax.xaxis.set_ticks(np.arange(0, 50, 10))
 
         ax.set_xlabel('Rel. Performance')
         # ax.yaxis.set_ticks(names)
@@ -202,7 +211,12 @@ def main():
                 plt.annotate("{:.2f}".format(width), xy=(1.05, label_y), ha='left', va='center')
             else:
                 # plt.annotate("{:.2f}".format(width), xy=(width+.05, label_y), ha='left', va='center')
-                plt.annotate("{:.2f}".format(width), xy=(width+.05, label_y), ha='left', va='center')
+                if data == dataA:
+                    plt.annotate("{:.2f}".format(width), xy=(width+.05, label_y), ha='left', va='center')
+                elif data == dataB:
+                    plt.annotate("{:.2f}".format(width), xy=(width + .65, label_y), ha='left', va='center')
+
+
 
             # add_plot_index(plt, ax, args.index_name)
             # add_plot_index(plt, ax, args.index_name, x_offset=-.5)
@@ -227,7 +241,10 @@ def main():
             # plt.text(-2, 1.1, index_name, horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
             # plt.text(.1, .9, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transSubfigure)
             # plt.text(0, 1, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-            plt.yticks(names, [textwrap.fill(name, 24) for name in names], linespacing=0.9, size=12)
+            plt.yticks(names, [textwrap.fill(name, 20) for name in names], linespacing=1.0)
+            dataA_ylim = ax.get_ylim()
+            plt.axvline(x=1, ymin=0, ymax=1, color='r', linestyle='--')
+            plt.tight_layout()
 
 
 
@@ -236,12 +253,25 @@ def main():
             # plt.text(-2, 1.1, index_name, horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
             # plt.text(.5, .9, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transSubfigure)
             # plt.text(.5, 1, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-            plt.yticks(names, [textwrap.fill(name, 10) for name in names], linespacing=0.9, size=12)
+            plt.yticks(names, [textwrap.fill(name, 10) for name in names], linespacing=1.0)
+
+            # ylim = ax.get_ylim()
+            # print('\n\nold ylim = \n\n', str(ylim))
+            # figs = list(map(plt.figure, plt.get_fignums()))
+            # dataA_ylim = (dataA_ylim[0] + 4, dataA_ylim[1] + 4)
+            # print("new ylim = %s\n\n" % str(dataA_ylim))
+
+            # ax.set_ylim(dataA_ylim)
+
+            # plt.axvline(x=1, ymin=0, ymax=4 / 7, color='r', linestyle='--')
+            plt.axvline(x=1, ymin=0, ymax=1, color='r', linestyle='--')
+            plt.tight_layout()
+
 
         # plt.subplots_adjust(wspace=1.4, left=0.25, bottom=0.15, top=0.9)
-        plt.subplots_adjust(wspace=1.4, left=0.32, bottom=0.18, top=0.9)
-        plt.text(0, .98, '(A)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-        plt.text(0.54, .98, '(B)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+        plt.subplots_adjust(wspace=1.1, left=0.25, right=.95, bottom=0.15, top=0.9)
+        plt.text(.01, .98, '(A)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+        plt.text(0.51, .98, '(B)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
 
         # plt.subplot_tool()
         # plt.show()
@@ -267,7 +297,8 @@ def main():
     # pdf.savefig(figs[1])
 
     # pdf.savefig(fig, bbox_inches='tight')
-    pdf.savefig(fig)
+    # pdf.savefig(fig)
+    plt.savefig(base_name + '.tiff')
     # pdf.savefig(fig)
 
     pdf.close()

@@ -1,6 +1,8 @@
 #!/bin/bash -x
 
 rm -r result/*.png
+rm -r result/*.eps
+rm -r result/*.tiff
 
 ./autophosphorylation.sh &  
 ./camkii.sh &

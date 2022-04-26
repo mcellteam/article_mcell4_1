@@ -291,7 +291,7 @@ def main():
     plt.xlabel(X_LABEL_TIME_UNIT_S)
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
 
-    if opts.output in {'mcell4.png','mcell3.png','nfsim.png'}:
+    if opts.output in {'mcell4','mcell3','nfsim'}:
         plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))  # original
     else:
         plt.legend(loc='upper right')  # jy
@@ -308,11 +308,12 @@ def main():
     
     if opts.index_name:
         # add_plot_index(plt, ax, opts.index_name)
-        plt.text(.02, .98, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+        plt.text(.01, .99, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
     
     # plt.savefig(opts.output, dpi=OUTPUT_DPI) # 'dpi' now controlled by master stylesheet
-    plt.savefig(opts.output)
-    print("Plot " + opts.output + " generated")
+    # plt.savefig(opts.output)
+    # print("Plot " + opts.output + " generated")
+    plt.savefig(opts.output + '.tiff')
 
 if __name__ == '__main__':
     main()

@@ -1,1 +1,1 @@
-python ../../_plotting/scripts/plot_trajectories_single_plot.py --autophosphorylation -b nfsim -e extra_nfsim.txt -t 20 -l labels_nfsim.txt -o nfsim.png -i C
+python ../../_plotting/scripts/plot_trajectories_single_plot.py --autophosphorylation -b nfsim -e extra_nfsim.txt -t 20 -l labels_nfsim.txt -o nfsim -i C

@@ -185,8 +185,9 @@ def plot_averages(dir, index_name):
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
     
     # add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)
-    plt.text(.02, .98, '(' + index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-    finalize_and_save_plot("hybrid_" + os.path.basename(dir) + ".png", fig)
+    plt.text(.01, .99, '(' + index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+    # finalize_and_save_plot("hybrid_" + os.path.basename(dir) + ".png", fig)
+    plt.savefig("hybrid_" + os.path.basename(dir) + '.tiff')
         
 def plot_low_pass(out, nfsim_seed, index_name):
     fig, ax = plt.subplots()
@@ -217,9 +218,10 @@ def plot_low_pass(out, nfsim_seed, index_name):
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
     
     # add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)
-    plt.text(.02, .98, '(' + index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-    finalize_and_save_plot(out, fig)
-            
+    plt.text(.01, .99, '(' + index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+    # finalize_and_save_plot(out, fig)
+
+    plt.savefig(out + '.tiff')
 
 def plot_peaks_error_bars(out, index_name):
     fig, ax = plt.subplots()
@@ -260,8 +262,10 @@ def plot_peaks_error_bars(out, index_name):
     # plt.legend(handles=[red_patch, blue_patch], loc='lower center', bbox_to_anchor=(1, 0.5))
 
     # add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)
-    plt.text(.02, .98, '(' + index_name + ')', horizontalalignment='left', verticalalignment='top',transform=fig.transFigure)
-    finalize_and_save_plot(out, fig)
+    plt.text(.01, .99, '(' + index_name + ')', horizontalalignment='left', verticalalignment='top',transform=fig.transFigure)
+
+    plt.savefig(out + '.tiff')
+    # finalize_and_save_plot(out, fig)
 
 
 if __name__ == '__main__':
@@ -270,9 +274,11 @@ if __name__ == '__main__':
     #    plot_low_pass("hybrid_low_pass_nfsim" + str(s).zfill(5) + ".png", s)
     
     # NFSim seed 14 quite nicely matches the averages 
-    plot_low_pass("hybrid_low_pass_nfsim.png", 14, "A")
+    # plot_low_pass("hybrid_low_pass_nfsim.png", 14, "A")
+    plot_low_pass("hybrid_low_pass_nfsim", 14, "A")
     
-    plot_peaks_error_bars("hybrid_peaks.png", "B")
+    # plot_peaks_error_bars("hybrid_peaks.png", "B")
+    plot_peaks_error_bars("hybrid_peaks", "B")
     
     plot_averages("averages_fast", "C")
     plot_averages("averages_hybrid_slow", "D")

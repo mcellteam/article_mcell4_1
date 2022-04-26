@@ -104,7 +104,10 @@ def main():
     if opts.selected_observables:
         index_names, selected_observables = load_selected_observables(opts.selected_observables)
 
-    clrs = ['b', 'g', 'r'] 
+    clrs = ['b', 'g', 'r']
+
+    fig = plt.figure()
+    fig.set_figwidth(7)
         
     # generate one image per iteration
     index = 0
@@ -113,8 +116,23 @@ def main():
             continue
         
         #print("Processing observable " + obs)
+
         
-        fig,ax = plt.subplots()
+        # fig,ax = plt.subplots()
+
+        if index == 0:
+            print('Working on subplot A')
+            ax = fig.add_subplot(221)
+        elif  index == 1:
+            print('Working on subplot B')
+            ax = fig.add_subplot(222)
+        elif index == 2:
+            print('Working on subplot C')
+            ax = fig.add_subplot(223)
+        elif index == 3:
+            print('Working on subplot D')
+            ax = fig.add_subplot(224)
+
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
         #ax.set_title(obs)
@@ -153,13 +171,17 @@ def main():
 
         # add_plot_index(plt, ax, index_names[index], x_offset=-0.03)
         # plt.text(.03, .95, '(' + index_names[index] + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-        plt.text(.02, .98, '(' + index_names[index] + ')', horizontalalignment='left', verticalalignment='top',
-                 transform=fig.transFigure)
+        #plt.text(.01, .99, '(' + index_names[index] + ')', horizontalalignment='left', verticalalignment='top',transform=fig.transFigure)
+        plt.subplots_adjust(wspace=.3, hspace=.3)
+        plt.text(-.10, 1.10, index_names[index], horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
         # plt.savefig(obs + '.png', dpi=OUTPUT_DPI) # 'dpi' now controlled by master stylesheet
-        plt.savefig(obs + '.png')
-        
-        print("Plot " + obs + '.png' + " generated")
+        # plt.savefig(obs + '.png')
+        # plt.savefig(obs + '.tiff')
+        print("Plot " + obs + " generated")
         index += 1
+
+
+    plt.savefig('Fig13_CAMKII_validation.tiff')
 
 
 
