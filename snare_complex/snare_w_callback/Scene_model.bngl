@@ -31,7 +31,7 @@ begin molecule types
   snare(s~0~1~2~3~4~5,a~0~1~2,dv~0~1)
   Ca
   V_release()
-  
+
 end molecule types
 
 begin species
@@ -61,12 +61,10 @@ begin reaction rules
   snare(a~1) + Ca <-> snare(a~2) 1*kap, 2*b^1*kam
 
   # Vesicle release
-  # spontaneous
-  #spr:snare(dv~1) -> snare(dv~0) + V_release() delta
   #synchronous
-  sr:snare(s~5,dv~1) -> snare(s~5,dv~0) + V_release() gamma
+  sync: snare(s~5,dv~1) -> snare(s~5,dv~0) + V_release() gamma
   # asynchronous
-  asr:snare(dv~1,a~2) -> snare(dv~0,a~2) + V_release() a*gamma  
+  async: snare(dv~1,a~2) -> snare(dv~0,a~2) + V_release() a*gamma
   #Vesicle docking to SNARE
   snare(dv~0) -> snare(dv~1) k_dock
 

@@ -21,7 +21,7 @@ def release_event_callback(rxn_info, context):
 
   print('rxn at t: ', rxn_info.time)
   print('rxn at pos: ', rxn_info.pos3d)
-  print('object: ',rxn_info.geometry_object.name,'  wall: ',rxn_info.wall_index)
+  #print('object: ',rxn_info.geometry_object.name,'  wall: ',rxn_info.wall_index)
   g = rxn_info.geometry_object
   widx = rxn_info.wall_index
   t = np.array(g.vertex_list)[g.wall_list[widx]]
@@ -93,7 +93,14 @@ def custom_init_and_run(model):
     )
 
     #when these reactions occur glutame is released
-    rel_rxns = [asr, sr]
+    #rel_rxns = ['sr','asr']
+
+    sync_pat = re.compile('^sync.*')
+    async_pat = re.compile('^async.*')
+    rel_rxn_pat = re.compile('^[a]?sync.*')
+
+    rel_rxns = [ rxn for rxn in model.reaction_rules if rel_rxn_pat.fullmatch(rxn.name) ]
+    print(rel_rxns)
 
     for rxn in rel_rxns:
         model.register_reaction_callback(

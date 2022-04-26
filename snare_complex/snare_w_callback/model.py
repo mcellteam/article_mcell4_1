@@ -12,7 +12,6 @@ if os.path.exists(os.path.join(MODEL_PATH, 'customization.py')):
     import customization
 else:
     customization = None
-    
 # process command-line arguments
 if customization and 'custom_argparse_and_parameters' in dir(customization):
     # custom argument processing and parameter setup
@@ -39,9 +38,17 @@ model.load_bngl('./Scene_model.bngl')
 # reaction rules, also creates compartment CP as a box with
 # volume 1um^3 and creates release sites for molecules A and B model.load_bngl(’example.bngl’)
 
-model.initialize()
-model.run_iterations(1e6)
-model.end_simulation()
+if customization and 'custom_init_and_run' in dir(customization):
+    customization.custom_init_and_run(model)
+else:
+    model.initialize()
+    model.export_viz_data_model()
 
-# initialize simulation state # simulate 10 iterations
-# final simulation step
+    if DUMP:
+        model.dump_internal_state()
+
+    if EXPORT_DATA_MODEL and model.viz_outputs:
+        model.export_data_model()
+
+    model.run_iterations(1e6)
+    model.end_simulation()

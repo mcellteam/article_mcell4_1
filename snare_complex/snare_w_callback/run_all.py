@@ -8,16 +8,16 @@ import matplotlib.pyplot as plt
 GCG
 02.10.22
 '''
-
-python_path ='/Applications/Blender-2.93-CellBlender/blender.app/Contents/Resources/2.93/python/bin/python3.9'
-run_file = 'model.py'
-tdir = './'
-#run mcell
-Proc = sp.call([python_path, run_file],cwd = tdir)
-if Proc != 0:
- print('MCell did not run')
-else:
- print('MCell sim done')
+# 
+# python_path ='/Applications/Blender-2.93-CellBlender/blender.app/Contents/Resources/2.93/python/bin/python3.9'
+# run_file = 'model.py'
+# tdir = './'
+# #run mcell
+# Proc = sp.call([python_path, run_file],cwd = tdir)
+# if Proc != 0:
+#  print('MCell did not run')
+# else:
+#  print('MCell sim done')
 
 # for Windows:
 # replace C:\\cmw2021\\ with the actual path where you unpacked CellBlender
