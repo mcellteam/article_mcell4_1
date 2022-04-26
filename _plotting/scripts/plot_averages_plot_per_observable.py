@@ -172,8 +172,8 @@ def main():
         # add_plot_index(plt, ax, index_names[index], x_offset=-0.03)
         # plt.text(.03, .95, '(' + index_names[index] + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
         #plt.text(.01, .99, '(' + index_names[index] + ')', horizontalalignment='left', verticalalignment='top',transform=fig.transFigure)
-        plt.subplots_adjust(wspace=.3, hspace=.3)
-        plt.text(-.10, 1.10, index_names[index], horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
+        plt.subplots_adjust(top=.90, bottom=.10, left=.10, right=.90, wspace=.5, hspace=.5)
+        plt.text(-.25, 1.10, index_names[index], horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
         # plt.savefig(obs + '.png', dpi=OUTPUT_DPI) # 'dpi' now controlled by master stylesheet
         # plt.savefig(obs + '.png')
         # plt.savefig(obs + '.tiff')

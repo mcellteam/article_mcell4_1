@@ -178,8 +178,8 @@ def plot_averages(dir, index_name):
         legend.append(name + ' - A (mean)')
         legend.append(name + ' - R (mean)')
     
-    # plt.legend(legend) #original
-    plt.legend(legend, loc='center left', bbox_to_anchor=(1, 0.5))
+    plt.legend(legend) #original
+    # plt.legend(legend, loc='center left', bbox_to_anchor=(1, 0.5)) #***
     # print('dir = ', str(dir))
     # print('index_name = ', str(index_name))
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
@@ -213,8 +213,8 @@ def plot_low_pass(out, nfsim_seed, index_name):
     ax_plot(ax, df_lowpass.index, df_lowpass['A'], label='A', c = 'b')
     ax_plot(ax, df_lowpass.index, df_lowpass['R'], label='R', c = 'r')
 
-    # plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)']) #original
-    plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)'], loc='center left', bbox_to_anchor=(1, 0.5))
+    plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)']) #original
+    # plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)'], loc='center left', bbox_to_anchor=(1, 0.5)) #***
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
     
     # add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)
@@ -228,8 +228,8 @@ def plot_peaks_error_bars(out, index_name):
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
     
-    # plt.legend(['A (low pass)', 'R (low pass)']) #original
-    plt.legend(['A (low pass)', 'R (low pass)'], loc='center left', bbox_to_anchor=(1, 0.5))
+    plt.legend(['A (low pass)', 'R (low pass)']) #original
+    # plt.legend(['A (low pass)', 'R (low pass)'], loc='center left', bbox_to_anchor=(1, 0.5)) #***
     
     base = 1350/10
     step = 200/len(data)
@@ -257,8 +257,8 @@ def plot_peaks_error_bars(out, index_name):
 
     red_patch = Line2D([0], [0], color='blue', label='A (low pass peaks)')
     blue_patch = Line2D([0], [0], color='red', label='R (low pass peaks)')
-    # plt.legend(handles=[red_patch, blue_patch]) #original
-    plt.legend(handles=[red_patch, blue_patch], loc='center left', bbox_to_anchor=(1, 0.5))
+    plt.legend(handles=[red_patch, blue_patch]) #original
+    # plt.legend(handles=[red_patch, blue_patch], loc='center left', bbox_to_anchor=(1, 0.5)) #***
     # plt.legend(handles=[red_patch, blue_patch], loc='lower center', bbox_to_anchor=(1, 0.5))
 
     # add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)

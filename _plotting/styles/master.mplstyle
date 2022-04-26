@@ -2,7 +2,7 @@ figure.dpi: 600
 font.family: Arial
 font.size: 12
 axes.labelsize: 12
-legend.fontsize: 12
+legend.fontsize: 10
 xtick.labelsize: 12
 ytick.labelsize: 12
 #figure.constrained_layout.use: False
@@ -12,6 +12,7 @@ legend.labelspacing: 0.15
 lines.linewidth : 2
 axes.xmargin: 0
 axes.ymargin: 0
+
 
 
 
