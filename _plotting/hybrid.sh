@@ -11,4 +11,5 @@ cd ../hybrid_circadian_clock/plotting
 #	hybrid_peaks.png \
 #	$DST
 
-cp *.tiff $DST/
+#cp *.tiff $DST/
+cp *.pdf $DST/

@@ -7,3 +7,4 @@ cd ../camkii_only_output_data/plotting
 #cp CaM1N.png $DST/05_CaMKII_03_CaM1N.png
 #cp KCaM2N.png $DST/05_CaMKII_04_KCaM2N.png
 cp *.tiff $DST/
+cp *.pdf $DST/

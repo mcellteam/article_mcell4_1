@@ -30,14 +30,15 @@ For more information, please refer to [http://unlicense.org]
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.backends.backend_pdf
 import os
 import sys
 import argparse
 import math
+import pickle
 from load_data import *
 from shared import *
 
-plt.style.use(['../../_plotting/styles/plot_trajectories_single_plot.mplstyle','../../_plotting/styles/master.mplstyle'])
 
 class Options:
     def __init__(self):
@@ -144,11 +145,35 @@ def plot_extra_data(opts, ax, labels, current_label):
             if labels:
                 line.set_label(labels[current_label])
                 current_label += 1
-            ax.legend() # TODO: what does this do?
+            # ax.legend()
 
+import inspect
 def main():
-    
     opts = process_opts()
+
+    pdf = matplotlib.backends.backend_pdf.PdfPages(opts.output + '.pdf')
+    fig = plt.figure()
+
+    if opts.output=='snare_complex':
+        print('\nsetting snare_complex figure size to 3.75\n')
+        fig.set_figwidth(3.75)
+        plt.style.use(
+            ['../../_plotting/styles/snare_complex.mplstyle', '../../_plotting/styles/master.mplstyle'])
+    elif opts.output == '05_Membrane_localization':
+        fig.set_figwidth(3.75)
+        plt.style.use(['../../_plotting/styles/plot_trajectories_single_plot.mplstyle', '../../_plotting/styles/master.mplstyle'])
+    else:
+        fig.set_figwidth(7.5)
+        plt.style.use(['../../_plotting/styles/plot_trajectories_single_plot.mplstyle', '../../_plotting/styles/master.mplstyle'])
+
+    '''
+    print('\nplot_trajectories_single_plot.py:')
+    print('current directory is ', os.getcwd())
+    print('inspect.stack() is ', inspect.stack())
+    print('plot_trajectories_single_plot.py: opts.mcell4_dir = ', str(opts.mcell4_dir))
+    print('plot_trajectories_single_plot.py: opts.output = ', str(opts.output))
+    print('plot_trajectories_single_plot.py: opts.for_camkii = ', str(opts.for_camkii))
+    '''
     
     counts = load_counts(opts)
 
@@ -179,7 +204,7 @@ def main():
     ]
     
     if opts.for_autoph:
-        fig.set_size_inches((14,2.5))
+        # fig.set_size_inches((14,2.5))
 
         cm = plt.get_cmap('tab10')
         NUM_COLORS = 6
@@ -291,21 +316,25 @@ def main():
     plt.xlabel(X_LABEL_TIME_UNIT_S)
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
 
-    if opts.output in {'mcell4','mcell3','nfsim'}:
-        plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))  # original
+    if opts.output == 'snare_complex':
+        plt.legend(loc='upper left', bbox_to_anchor=(0, 1.04))
     else:
-        plt.legend(loc='upper right')  # jy
-    plt.tight_layout()
+        plt.legend()
 
+    # if opts.output in {'mcell4','mcell3','nfsim'}:
+    #     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))  # original
+    # else:
+    #     plt.legend()
+    #     plt.legend(loc='upper right')  # jy
 
     # plt.legend(loc='center left', bbox_to_anchor=(1, 0.5)) #original
     # plt.legend(loc='upper right') #jy
-    plt.subplots_adjust(right=0.7, bottom=0.2)
+    # plt.subplots_adjust(right=0.7, bottom=0.2)
 
     # print('opts.index_name = ', opts.index_name)
     # print('opts.output = ', opts.output)
 
-    
+    # plt.subplots_adjust(wspace=1.1, left=0.25, right=.95, bottom=0.11, top=0.94)
     if opts.index_name:
         # add_plot_index(plt, ax, opts.index_name)
         plt.text(.01, .99, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
@@ -313,7 +342,15 @@ def main():
     # plt.savefig(opts.output, dpi=OUTPUT_DPI) # 'dpi' now controlled by master stylesheet
     # plt.savefig(opts.output)
     # print("Plot " + opts.output + " generated")
-    plt.savefig(opts.output + '.tiff')
+    # plt.savefig(opts.output + '.tiff')
+
+    pickle_name = opts.output + '.pickle'
+    print('plot_trajectories_single_plot.py: pickling %s ...' % pickle_name)
+    pickle.dump((fig, ax), open(pickle_name, 'wb'))
+
+    pdf.savefig()
+    pdf.close()
+
 
 if __name__ == '__main__':
     main()

@@ -40,6 +40,7 @@ from shared import *
 import textwrap
 
 
+
 def create_argparse():
     parser = argparse.ArgumentParser(description='MCell4 Runner')
     parser.add_argument('-d', '--data', type=str, help='cvs file with benchmark results')
@@ -57,9 +58,10 @@ def main():
     dataA = '../smaller_ratio.csv'
     dataB = '../larger_ratio.csv'
     datas = [dataA, dataB]
-    base_name = 'Fig17_performance_ratio'
-    pdf_name = base_name + '.pdf'
-    pdf = matplotlib.backends.backend_pdf.PdfPages(pdf_name)
+    pdf = matplotlib.backends.backend_pdf.PdfPages('Fig17.pdf')
+    fig = plt.figure()
+    fig.set_figwidth(7.5)
+
 
     # FOR USE WITH CLI OPTIONS, RATHER THAN PRECONFIGURED
     # parser = create_argparse()
@@ -74,13 +76,6 @@ def main():
     # df = pd.read_csv(args.data)  # 'df' type: <class 'pandas.core.frame.DataFrame'>
     #
     # # df = df.sort_values(by=['Benchmark'])
-
-    # fig = plt.figure(figsize=(7,7))
-    # fig = plt.figure(constrained_layout=True)
-    # fig.set_figwidth(3.5)
-    # fig.set_size_inches(7,3.5)
-    fig = plt.figure()
-    fig.set_figwidth(7)
 
     for data in datas:
 
@@ -269,9 +264,12 @@ def main():
 
 
         # plt.subplots_adjust(wspace=1.4, left=0.25, bottom=0.15, top=0.9)
-        plt.subplots_adjust(wspace=1.1, left=0.25, right=.95, bottom=0.15, top=0.9)
-        plt.text(.01, .98, '(A)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-        plt.text(0.51, .98, '(B)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+        # plt.subplots_adjust(wspace=1.1, left=0.25, right=.95, bottom=0.15, top=0.9)
+        # plt.text(.01, .98, '(A)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+        # plt.text(0.51, .98, '(B)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+        plt.subplots_adjust(wspace=1.1, left=0.25, right=.95, bottom=0.11, top=0.94)
+        plt.text(.01, .97, '(A)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+        plt.text(0.51, .97, '(B)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
 
         # plt.subplot_tool()
         # plt.show()
@@ -296,12 +294,12 @@ def main():
     # pdf.savefig(figs[0])
     # pdf.savefig(figs[1])
 
-    # pdf.savefig(fig, bbox_inches='tight')
-    # pdf.savefig(fig)
-    plt.savefig(base_name + '.tiff')
-    # pdf.savefig(fig)
 
+    pdf.savefig()
     pdf.close()
+    # plt.savefig(base_name + '.tiff')
+    # plt.savefig('Fig17.tiff')
+
     # plt.show()
     # plt.close()
 

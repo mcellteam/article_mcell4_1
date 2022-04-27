@@ -3,6 +3,7 @@
 rm -r result/*.png
 rm -r result/*.eps
 rm -r result/*.tiff
+rm -r result/*.pdf
 
 ./autophosphorylation.sh &  
 ./camkii.sh &
@@ -11,4 +12,7 @@ rm -r result/*.tiff
 ./performance.sh &
 ./hybrid.sh &
 ./snare_complex.sh &
+
+./assemble_figures.sh
+
 wait

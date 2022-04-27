@@ -1,10 +1,11 @@
+savefig.dpi: 600
 figure.dpi: 600
 font.family: Arial
 font.size: 12
-axes.labelsize: 12
+axes.labelsize: 11
 legend.fontsize: 10
-xtick.labelsize: 12
-ytick.labelsize: 12
+xtick.labelsize: 11
+ytick.labelsize: 11
 #figure.constrained_layout.use: False
 #figure.autolayout: False
 legend.frameon: False
@@ -12,6 +13,11 @@ legend.labelspacing: 0.15
 lines.linewidth : 2
 axes.xmargin: 0
 axes.ymargin: 0
+
+
+
+
+
 
 
 

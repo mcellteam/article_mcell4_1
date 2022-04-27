@@ -30,6 +30,7 @@ For more information, please refer to [http://unlicense.org]
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.backends.backend_pdf
 import os
 import sys
 import argparse
@@ -85,6 +86,7 @@ def process_opts():
     return opts
 
 def main():
+    pdf = matplotlib.backends.backend_pdf.PdfPages('Fig13.pdf')
     
     opts = process_opts()
     
@@ -107,7 +109,7 @@ def main():
     clrs = ['b', 'g', 'r']
 
     fig = plt.figure()
-    fig.set_figwidth(7)
+    fig.set_figwidth(7.5)
         
     # generate one image per iteration
     index = 0
@@ -117,20 +119,19 @@ def main():
         
         #print("Processing observable " + obs)
 
-        
         # fig,ax = plt.subplots()
 
         if index == 0:
-            print('Working on subplot A')
+            print('  Working on subplot A - ', obs)
             ax = fig.add_subplot(221)
         elif  index == 1:
-            print('Working on subplot B')
+            print('  Working on subplot B - ', obs)
             ax = fig.add_subplot(222)
         elif index == 2:
-            print('Working on subplot C')
+            print('  Working on subplot C - ', obs)
             ax = fig.add_subplot(223)
         elif index == 3:
-            print('Working on subplot D')
+            print('  Working on subplot D - ', obs)
             ax = fig.add_subplot(224)
 
         ax.spines['right'].set_visible(False)
@@ -173,16 +174,18 @@ def main():
         # plt.text(.03, .95, '(' + index_names[index] + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
         #plt.text(.01, .99, '(' + index_names[index] + ')', horizontalalignment='left', verticalalignment='top',transform=fig.transFigure)
         plt.subplots_adjust(top=.90, bottom=.10, left=.10, right=.90, wspace=.5, hspace=.5)
-        plt.text(-.25, 1.10, index_names[index], horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
+        plt.text(-.25, 1.12, '(' + index_names[index] + ')', horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
         # plt.savefig(obs + '.png', dpi=OUTPUT_DPI) # 'dpi' now controlled by master stylesheet
         # plt.savefig(obs + '.png')
         # plt.savefig(obs + '.tiff')
-        print("Plot " + obs + " generated")
+        print("  Plot " + obs + " generated")
         index += 1
 
 
-    plt.savefig('Fig13_CAMKII_validation.tiff')
-
+    # plt.savefig('Fig13_CAMKII_validation.tiff')
+    # plt.savefig('fig13.tiff')
+    pdf.savefig()
+    pdf.close()
 
 
 if __name__ == '__main__':

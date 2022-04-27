@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import sys
 import os
+import pickle
 import matplotlib.patches as mpatches
 from io import StringIO
 from matplotlib.lines import Line2D
@@ -188,6 +189,10 @@ def plot_averages(dir, index_name):
     plt.text(.01, .99, '(' + index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
     # finalize_and_save_plot("hybrid_" + os.path.basename(dir) + ".png", fig)
     plt.savefig("hybrid_" + os.path.basename(dir) + '.tiff')
+
+    pickle_name="hybrid_" + os.path.basename(dir) + ".pickle"
+    print('pickling %s ...' % pickle_name)
+    pickle.dump((fig, ax), open(pickle_name, 'wb'))
         
 def plot_low_pass(out, nfsim_seed, index_name):
     fig, ax = plt.subplots()
@@ -222,6 +227,10 @@ def plot_low_pass(out, nfsim_seed, index_name):
     # finalize_and_save_plot(out, fig)
 
     plt.savefig(out + '.tiff')
+
+    pickle_name = out + '.pickle'
+    print('pickling %s ...' % pickle_name)
+    pickle.dump((fig, ax), open(pickle_name, 'wb'))
 
 def plot_peaks_error_bars(out, index_name):
     fig, ax = plt.subplots()
@@ -266,6 +275,10 @@ def plot_peaks_error_bars(out, index_name):
 
     plt.savefig(out + '.tiff')
     # finalize_and_save_plot(out, fig)
+
+    pickle_name = out + '.pickle'
+    print('pickling %s ...' % pickle_name)
+    pickle.dump((fig, ax), open(pickle_name, 'wb'))
 
 
 if __name__ == '__main__':

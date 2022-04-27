@@ -13,14 +13,14 @@ app['bg'] = '#2a636e'
 nb = Notebook(app)
 
 paths = ['styles/master.mplstyle',
-         'styles/hybrid_get_peaks.mplstyle',
+         'styles/snare_complex.mplstyle',
          'styles/plot_averages_plot_per_observable.mplstyle',
          'styles/plot_hybrid.mplstyle',
          'styles/plot_relative_performance.mplstyle',
          'styles/plot_trajectories_single_plot.mplstyle']
 
 plot_paths = ['MASTER stylesheet **has precedence**',
-              'scripts/hybrid_get_peaks.py',
+              'scripts/plot_trajectories_single_plot.py',
               'scripts/plot_averages_plot_per_observable.py',
               'scripts/plot_hybrid.py',
               'scripts/plot_relative_performance.py',

@@ -8,6 +8,7 @@ cd ../performance/plotting/
 #cp 05_Performance_larger_ratio.pdf $DST/
 #cp 05_Performance_smaller_ratio.pdf $DST/
 
-#cp *.pdf $DST/
+
 #cp *.eps $DST/
 cp *.tiff $DST/
+cp *.pdf $DST/
