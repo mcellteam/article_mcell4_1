@@ -347,6 +347,7 @@ def main():
         pickle.dump((fig, ax), open(pickle_name, 'wb'))
 
     # plt.savefig('Fig14.tiff')
+    plt.savefig('Fig14.png')
     pdf.savefig()
     pdf.close()
 

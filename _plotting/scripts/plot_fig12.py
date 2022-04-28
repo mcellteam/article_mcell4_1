@@ -152,7 +152,8 @@ def main():
     print('plot_fig12:')
     opts = process_opts()
 
-    pdf = matplotlib.backends.backend_pdf.PdfPages(opts.output + '.pdf')
+    # pdf = matplotlib.backends.backend_pdf.PdfPages(opts.output + '.pdf')
+    pdf = matplotlib.backends.backend_pdf.PdfPages('Fig12.pdf')
     fig = plt.figure()
     fig.set_figwidth(3.5)
     plt.style.use(['../../_plotting/styles/snare_complex.mplstyle', '../../_plotting/styles/master.mplstyle'])
@@ -308,6 +309,7 @@ def main():
     print('plot_fig12.py: pickling %s ...' % pickle_name)
     pickle.dump((fig, ax), open(pickle_name, 'wb'))
 
+    plt.savefig('Fig12.png')
     pdf.savefig()
     pdf.close()
 

@@ -362,7 +362,7 @@ def main():
         print('plot_fig16.py: pickling %s ...' % pickle_name)
         pickle.dump((fig, ax), open(pickle_name, 'wb'))
 
-
+    plt.savefig('Fig16.png')
     pdf.savefig()
     pdf.close()
 

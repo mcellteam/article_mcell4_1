@@ -304,7 +304,7 @@ def main():
     # pdf.savefig(figs[0])
     # pdf.savefig(figs[1])
 
-
+    plt.savefig('Fig17.png')
     pdf.savefig()
     pdf.close()
     # plt.savefig(base_name + '.tiff')

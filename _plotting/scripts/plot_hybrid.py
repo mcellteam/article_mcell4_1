@@ -364,6 +364,7 @@ if __name__ == '__main__':
     ax4.sharex(ax1)
     ax5.sharex(ax1)
 
+    plt.savefig('Fig21.png')
     pdf.savefig()
     pdf.close()
 

@@ -191,6 +191,7 @@ def main():
 
     # plt.savefig('Fig13_CAMKII_validation.tiff')
     # plt.savefig('fig13.tiff')
+    plt.savefig('Fig13.png')
     pdf.savefig()
     pdf.close()
 

@@ -1,5 +1,7 @@
 DST=`pwd`/result
 mkdir -p $DST
+mkdir -p $DST/pdf
+mkdir -p $DST/png
 cd ../hybrid_circadian_clock/plotting
 ./plot.sh
 
@@ -12,4 +14,5 @@ cd ../hybrid_circadian_clock/plotting
 #	$DST
 
 #cp *.tiff $DST/
-cp *.pdf $DST/
+cp Fig21.png $DST/png/
+cp Fig21.pdf $DST/pdf/

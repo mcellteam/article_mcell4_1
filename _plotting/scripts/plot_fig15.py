@@ -152,7 +152,8 @@ def main():
     print('plot_fig15:')
     opts = process_opts()
 
-    pdf = matplotlib.backends.backend_pdf.PdfPages(opts.output + '.pdf')
+    # pdf = matplotlib.backends.backend_pdf.PdfPages(opts.output + '.pdf')
+    pdf = matplotlib.backends.backend_pdf.PdfPages('Fig15.pdf')
     fig = plt.figure()
 
     fig.set_figwidth(3.5)
@@ -338,6 +339,7 @@ def main():
     print('plot_fig15.py: pickling %s ...' % pickle_name)
     pickle.dump((fig, ax), open(pickle_name, 'wb'))
 
+    plt.savefig('Fig15.png')
     pdf.savefig()
     pdf.close()
 
