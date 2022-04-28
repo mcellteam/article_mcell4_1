@@ -149,7 +149,7 @@ def plot_extra_data(opts, ax, labels, current_label):
             ax.legend() # TODO: what does this do?
 
 def main():
-    print('\nplot_fig14.py: current directory is ', os.getcwd())
+    print('plot_fig14:')
 
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig14.pdf')
 
@@ -167,7 +167,7 @@ def main():
     labels = load_labels('labels.txt')
 
     fig = plt.figure()
-    fig.set_figwidth(7.5)
+    fig.set_figwidth(7)
 
 
     for i in range(3):
@@ -200,23 +200,17 @@ def main():
 
 
         # opts = process_opts()
-
         counts = load_counts(opts)
-
         all_observables = get_all_observables_names(counts)
-
         current_label = 0
 
-        # if opts.labels:
-        #     labels = load_labels(opts.labels)
-        # else:
-        #     labels = None
+        if opts.labels:
+            labels = load_labels(opts.labels)
+        else:
+            labels = None
 
         M4 = 'MCell4'
         names = ['MCell4', 'MCell3R', 'BNG']
-
-
-        # fig,ax = plt.subplots() #original
 
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
@@ -343,39 +337,15 @@ def main():
         plt.xlabel(X_LABEL_TIME_UNIT_S)
         plt.ylabel(Y_LABEL_N_PARAM_TIME)
 
-        if opts.output in {'mcell4','mcell3','nfsim'}:
-            plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))  # original
-        else:
-            plt.legend(loc='upper right')  # jy
-        # plt.tight_layout()
+        plt.legend(loc='upper right', bbox_to_anchor=(1, 1), fontsize=12)
 
-
-        # plt.legend(loc='center left', bbox_to_anchor=(1, 0.5)) #original
-        # plt.legend(loc='upper right') #jy
-
-        # plt.subplots_adjust(right=0.7, bottom=0.2) #jy-original
-
-        # print('opts.index_name = ', opts.index_name)
-        # print('opts.output = ', opts.output)
-
-
-        # if opts.index_name:
-        #     # add_plot_index(plt, ax, opts.index_name)
-        #     plt.text(.01, .99, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-
-        # plt.savefig(opts.output, dpi=OUTPUT_DPI) # 'dpi' now controlled by master stylesheet
-        # plt.savefig(opts.output)
-        # print("Plot " + opts.output + " generated")
-        # plt.savefig(opts.output + '.tiff')
-
-        plt.subplots_adjust(top=.90, bottom=.10, left=.10, right=.90, wspace=.5, hspace=.5)
+        plt.subplots_adjust(top=.92, bottom=.10, left=.10, right=.92, wspace=.4, hspace=.4)
         plt.text(-.25, 1.12, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top',transform=ax.transAxes)
 
         pickle_name = opts.output + '.pickle'
-        print('plot_trajectories_single_plot.py: pickling %s ...' % pickle_name)
+        print('plot_fig14.py: pickling %s ...' % pickle_name)
         pickle.dump((fig, ax), open(pickle_name, 'wb'))
 
-    # plt.savefig('Fig14.tiff')
     # plt.savefig('Fig14.tiff')
     pdf.savefig()
     pdf.close()

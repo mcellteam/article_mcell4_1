@@ -86,6 +86,7 @@ def process_opts():
     return opts
 
 def main():
+    print('plot_averages_plot_per_observable.py')
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig13.pdf')
     
     opts = process_opts()
@@ -109,7 +110,7 @@ def main():
     clrs = ['b', 'g', 'r']
 
     fig = plt.figure()
-    fig.set_figwidth(7.5)
+    fig.set_figwidth(7)
         
     # generate one image per iteration
     index = 0
@@ -164,7 +165,13 @@ def main():
     
             legend_names.append(labels[i] + " " + obs)
 
-        plt.legend(legend_names)
+        # leg = plt.legend(legend_names, bbox_to_anchor=(1.80, 1.18), bbox_transform=ax.transAxes)
+
+
+        if index_names[index] == 'A' or index_names[index] == 'C':
+            plt.legend(loc='upper right', bbox_to_anchor=(0, 0, 1.0, 1.0), fontsize=10)
+        elif index_names[index] == 'B' or index_names[index] == 'D':
+            plt.legend(loc='lower right', bbox_to_anchor=(0, .05, 1.0, .95), fontsize=10)
 
 
         plt.xlabel(X_LABEL_TIME_UNIT_S)
@@ -173,8 +180,8 @@ def main():
         # add_plot_index(plt, ax, index_names[index], x_offset=-0.03)
         # plt.text(.03, .95, '(' + index_names[index] + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
         #plt.text(.01, .99, '(' + index_names[index] + ')', horizontalalignment='left', verticalalignment='top',transform=fig.transFigure)
-        plt.subplots_adjust(top=.90, bottom=.10, left=.10, right=.90, wspace=.5, hspace=.5)
-        plt.text(-.25, 1.12, '(' + index_names[index] + ')', horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
+        plt.subplots_adjust(top=.93, bottom=.10, left=.10, right=.95, wspace=.5, hspace=.5)
+        plt.text(-.25, 1.15, '(' + index_names[index] + ')', horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
         # plt.savefig(obs + '.png', dpi=OUTPUT_DPI) # 'dpi' now controlled by master stylesheet
         # plt.savefig(obs + '.png')
         # plt.savefig(obs + '.tiff')

@@ -2,8 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f23342e4-7770-4f01-98e0-33a11ab250fb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/_plotting/scripts/plot_fig12.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_plotting/scripts/plot_fig15.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/snare_complex/plotting/_labels.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/scripts/pickle_assembly.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/pickle_assembly.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_averages_plot_per_observable.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_averages_plot_per_observable.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_fig14.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_fig14.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_fig16.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_fig16.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_hybrid.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_hybrid.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_relative_performance.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_relative_performance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_trajectories_single_plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_trajectories_single_plot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/styles/master.mplstyle" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/styles/master.mplstyle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/styles/plot_hybrid.mplstyle" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/styles/plot_hybrid.mplstyle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/styles/plot_relative_performance.mplstyle" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/styles/plot_relative_performance.mplstyle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/styles/plot_trajectories_single_plot.mplstyle" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/styles/plot_trajectories_single_plot.mplstyle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/styles/snare_complex.mplstyle" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/styles/snare_complex.mplstyle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/membrane_localization/plotting/plot_17000.sh" beforeDir="false" afterPath="$PROJECT_DIR$/membrane_localization/plotting/plot_17000.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/snare_complex/plotting/plot.sh" beforeDir="false" afterPath="$PROJECT_DIR$/snare_complex/plotting/plot.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,9 +47,15 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/snare_complex/plotting" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/snare_complex/plotting" />
+      <recent name="$PROJECT_DIR$/_plotting/scripts" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -52,7 +75,7 @@
       <workItem from="1650651366061" duration="18635000" />
       <workItem from="1650756549999" duration="30206000" />
       <workItem from="1651038393169" duration="1055000" />
-      <workItem from="1651039609768" duration="1330000" />
+      <workItem from="1651039609768" duration="26455000" />
     </task>
     <servers />
   </component>

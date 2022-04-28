@@ -149,22 +149,14 @@ def plot_extra_data(opts, ax, labels, current_label):
 
 import inspect
 def main():
+    print('plot_fig15:')
     opts = process_opts()
 
     pdf = matplotlib.backends.backend_pdf.PdfPages(opts.output + '.pdf')
     fig = plt.figure()
 
-    if opts.output=='snare_complex':
-        print('\nsetting snare_complex figure size to 3.75\n')
-        fig.set_figwidth(3.5)
-        plt.style.use(
-            ['../../_plotting/styles/snare_complex.mplstyle', '../../_plotting/styles/master.mplstyle'])
-    elif opts.output == '05_Membrane_localization':
-        fig.set_figwidth(3.5)
-        plt.style.use(['../../_plotting/styles/plot_trajectories_single_plot.mplstyle', '../../_plotting/styles/master.mplstyle'])
-    else:
-        fig.set_figwidth(7)
-        plt.style.use(['../../_plotting/styles/plot_trajectories_single_plot.mplstyle', '../../_plotting/styles/master.mplstyle'])
+    fig.set_figwidth(3.5)
+    plt.style.use(['../../_plotting/styles/master.mplstyle'])
 
     '''
     print('\nplot_trajectories_single_plot.py:')
@@ -316,10 +308,8 @@ def main():
     plt.xlabel(X_LABEL_TIME_UNIT_S)
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
 
-    if opts.output == 'snare_complex':
-        plt.legend(loc='upper left', bbox_to_anchor=(0, 1.04))
-    else:
-        plt.legend()
+
+    plt.legend(loc='upper right', bbox_to_anchor=(0, 0, 1.0, 1.0), fontsize=12)
 
     # if opts.output in {'mcell4','mcell3','nfsim'}:
     #     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))  # original
@@ -334,7 +324,7 @@ def main():
     # print('opts.index_name = ', opts.index_name)
     # print('opts.output = ', opts.output)
 
-    # plt.subplots_adjust(wspace=1.1, left=0.25, right=.95, bottom=0.11, top=0.94)
+    plt.subplots_adjust(left=0.10, right=0.95, bottom=0.11, top=0.95)
     if opts.index_name:
         # add_plot_index(plt, ax, opts.index_name)
         plt.text(.01, .99, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
@@ -345,7 +335,7 @@ def main():
     # plt.savefig(opts.output + '.tiff')
 
     pickle_name = opts.output + '.pickle'
-    print('plot_trajectories_single_plot.py: pickling %s ...' % pickle_name)
+    print('plot_fig15.py: pickling %s ...' % pickle_name)
     pickle.dump((fig, ax), open(pickle_name, 'wb'))
 
     pdf.savefig()

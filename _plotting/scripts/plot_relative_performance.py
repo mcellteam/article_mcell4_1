@@ -60,7 +60,9 @@ def main():
     datas = [dataA, dataB]
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig17.pdf')
     fig = plt.figure()
-    fig.set_figwidth(7.5)
+    fig = plt.figure(figsize=(3.5, 3.5))
+    # fig.set_figwidth(3.5)
+    # fig.set_figwidth(7)
 
 
     # FOR USE WITH CLI OPTIONS, RATHER THAN PRECONFIGURED
@@ -101,6 +103,8 @@ def main():
     
         '''
 
+
+
         # NOTE: matplotlib pyplot.subplot is a wrapper for Figure.add_subplot which provides additional behavior when
         # working with the implicit API
         # https://matplotlib.org/3.5.0/api/_as_gen/matplotlib.pyplot.subplot.html
@@ -126,20 +130,28 @@ def main():
             # ax = fig.add_subplot(212)
             ax = plt.subplot2grid((7, 2), (0, 1), rowspan=3)
 
-
-
-
-
-        # fig.set_tight_layout(True)
-
         # df['MCell3/MCell4'].plot(kind="barh", width = .8)
 
         # df = pd.read_csv(args.data)
-
         df = pd.read_csv(data)
+
         dict = df.to_dict()
         names = list(dict['Benchmark'].values())
         results = list(dict['MCell3/MCell4'].values())
+
+        '''
+        original group/index names:
+        ['Synaptic Ca Homeostasis Presynaptic', 'Rat Neuromuscular Junction', 'Neuropil - full model', 'Neuropil - with simplified geometry', 'Mitochondria Presynaptic', 'Membrane Localization', 'Auto-phosphorylation']
+        and,
+        ['CaMKII Holoenzyme', 'CaMKII Monomer', 'SynGAP with TARP']
+
+        '''
+        if data == dataA:
+            names = ['Synaptic Ca Homeostasis Presynaptic', 'Rat NMJ', 'Neuropil    (full model)',
+                     'Neuropil (simplified geometry)', 'Mitochondria Presynaptic', 'Membrane Localization',
+                     'Auto-     phosphorylation']
+        elif data == dataB:
+            names = ['CaMKII     Holoenzyme', 'CaMKII      Monomer', 'SynGAP +      TARP']
 
         # df1 = pd.read_csv(dataA)
         # dict1 = df1.to_dict()
@@ -182,9 +194,9 @@ def main():
         if max(results) < 3:
             ax.xaxis.set_ticks(np.arange(0, 4, 1))
         if max(results) > 3:
-            ax.xaxis.set_ticks(np.arange(0, 50, 10))
+            ax.xaxis.set_ticks(np.arange(0, 50, 20))
 
-        ax.set_xlabel('Rel. Performance')
+        ax.set_xlabel('Rel. Performance', fontsize=9)
         # ax.yaxis.set_ticks(names)
         # plt.yticks(wrap=True,linespacing=0.8)
         # plt.yticks(x_axis, [textwrap.fill(label, 10) for name in names],
@@ -203,13 +215,13 @@ def main():
 
             if width < 1:
                 # plt.annotate("{:.2f}".format(width), xy=(1.05, label_y), ha='left', va='center')
-                plt.annotate("{:.2f}".format(width), xy=(1.05, label_y), ha='left', va='center')
+                plt.annotate("{:.2f}".format(width), xy=(1.05, label_y), ha='left', va='center', fontsize=9)
             else:
                 # plt.annotate("{:.2f}".format(width), xy=(width+.05, label_y), ha='left', va='center')
                 if data == dataA:
-                    plt.annotate("{:.2f}".format(width), xy=(width+.05, label_y), ha='left', va='center')
+                    plt.annotate("{:.2f}".format(width), xy=(width+.05, label_y), ha='left', va='center', fontsize=9)
                 elif data == dataB:
-                    plt.annotate("{:.2f}".format(width), xy=(width + .65, label_y), ha='left', va='center')
+                    plt.annotate("{:.2f}".format(width), xy=(width + .65, label_y), ha='left', va='center', fontsize=9)
 
 
 
@@ -236,11 +248,10 @@ def main():
             # plt.text(-2, 1.1, index_name, horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
             # plt.text(.1, .9, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transSubfigure)
             # plt.text(0, 1, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-            plt.yticks(names, [textwrap.fill(name, 20) for name in names], linespacing=1.0)
+            plt.yticks(names, [textwrap.fill(name, 15) for name in names], linespacing=1.0, fontsize=8)
             dataA_ylim = ax.get_ylim()
             plt.axvline(x=1, ymin=0, ymax=1, color='r', linestyle='--')
-            plt.tight_layout()
-
+            # plt.xticks(fontsize=8)
 
 
         elif data == dataB:
@@ -248,7 +259,7 @@ def main():
             # plt.text(-2, 1.1, index_name, horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
             # plt.text(.5, .9, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transSubfigure)
             # plt.text(.5, 1, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-            plt.yticks(names, [textwrap.fill(name, 10) for name in names], linespacing=1.0)
+            plt.yticks(names, [textwrap.fill(name, 15) for name in names], linespacing=1.0, fontsize=8)
 
             # ylim = ax.get_ylim()
             # print('\n\nold ylim = \n\n', str(ylim))
@@ -260,14 +271,13 @@ def main():
 
             # plt.axvline(x=1, ymin=0, ymax=4 / 7, color='r', linestyle='--')
             plt.axvline(x=1, ymin=0, ymax=1, color='r', linestyle='--')
-            plt.tight_layout()
 
 
         # plt.subplots_adjust(wspace=1.4, left=0.25, bottom=0.15, top=0.9)
         # plt.subplots_adjust(wspace=1.1, left=0.25, right=.95, bottom=0.15, top=0.9)
         # plt.text(.01, .98, '(A)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
         # plt.text(0.51, .98, '(B)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-        plt.subplots_adjust(wspace=1.1, left=0.25, right=.95, bottom=0.11, top=0.94)
+        plt.subplots_adjust(wspace=1.2, left=0.25, right=.93, bottom=0.11, top=0.94)
         plt.text(.01, .97, '(A)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
         plt.text(0.51, .97, '(B)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
 

@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import matplotlib.backends.backend_pdf
 import numpy as np
 import pandas as pd
 import sys
@@ -130,6 +131,22 @@ def finalize_and_save_plot(out, fig):
     print("Plot " + out + " generated")
 
 def plot_averages(dir, index_name):
+    if index_name == 'C':
+        global ax3
+        ax = ax3 = fig.add_subplot(513)
+        ax.xaxis.set_tick_params(labelbottom=False)
+        plt.yticks([0, 500, 1000, 1500])
+    elif index_name == 'D':
+        global ax4
+        ax = ax4 = fig.add_subplot(514)
+        ax.xaxis.set_tick_params(labelbottom=False)
+        plt.yticks([0, 500, 1000, 1500])
+    elif index_name == 'E':
+        global ax5
+        ax = ax5 = fig.add_subplot(515)
+        plt.yticks([0, 500, 1000, 1500])
+    else:
+        ax = fig.add_subplot()
     
     # load all .csv files in directory passed as the first argument
     data = {}
@@ -143,8 +160,7 @@ def plot_averages(dir, index_name):
                 data[name_ext[0]] = load_gdat(file_path)
             elif name_ext[1] == '.csv':
                 data[name_ext[0]] = load_csv(file_path)
-            
-    fig, ax = plt.subplots()
+
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
     legend = []
@@ -156,12 +172,12 @@ def plot_averages(dir, index_name):
         yR = df['R (mean)']
         
         if first:
-            ax_plot(ax, df.index, yA, c = 'b')
-            ax_plot(ax, df.index, yR, c = 'r')
+            ax_plot(ax, df.index, yA, c = 'b', linewidth=linewidth)
+            ax_plot(ax, df.index, yR, c = 'r', linewidth=linewidth)
             first = False    
         else:    
-            ax_plot(ax, df.index, yA)
-            ax_plot(ax, df.index, yR)
+            ax_plot(ax, df.index, yA, linewidth=linewidth)
+            ax_plot(ax, df.index, yR, linewidth=linewidth)
 
         if name == 'nfsim':
             name = 'NFSim'
@@ -179,23 +195,35 @@ def plot_averages(dir, index_name):
         legend.append(name + ' - A (mean)')
         legend.append(name + ' - R (mean)')
     
-    plt.legend(legend) #original
-    # plt.legend(legend, loc='center left', bbox_to_anchor=(1, 0.5)) #***
-    # print('dir = ', str(dir))
-    # print('index_name = ', str(index_name))
+    # plt.legend(legend) #original
+    leg = plt.legend(legend, loc='upper left', bbox_to_anchor=(1.05, 0.2, 0.3, 1.0), fontsize=6)
+
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
     
     # add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)
-    plt.text(.01, .99, '(' + index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+    plt.text(xcoord_index, ycoord_index, '(' + index_name + ')', transform=ax.transAxes)
     # finalize_and_save_plot("hybrid_" + os.path.basename(dir) + ".png", fig)
     plt.savefig("hybrid_" + os.path.basename(dir) + '.tiff')
+
+    plt.grid(axis="x")
+    border = 0.007857
+    plt.xlim([0 - border, 0.16 + border])
 
     pickle_name="hybrid_" + os.path.basename(dir) + ".pickle"
     print('pickling %s ...' % pickle_name)
     pickle.dump((fig, ax), open(pickle_name, 'wb'))
         
 def plot_low_pass(out, nfsim_seed, index_name):
-    fig, ax = plt.subplots()
+    # fig, ax = plt.subplots()
+    if index_name == 'A':
+        global ax1
+        ax = ax1 = fig.add_subplot(511)
+        ax.xaxis.set_tick_params(labelbottom=False)
+        plt.xticks([0,.04,.08,.12,.16])
+        plt.yticks([0, 500, 1000, 1500])
+    else:
+        ax = fig.add_subplot()
+
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
     
@@ -204,8 +232,8 @@ def plot_low_pass(out, nfsim_seed, index_name):
     
     df_nfsim_plot = df_nfsim.truncate(after = 0.16)
     if True:
-        ax_plot(ax, df_nfsim_plot.index, df_nfsim_plot['A'], label='A')
-        ax_plot(ax, df_nfsim_plot.index, df_nfsim_plot['R'], label='R')
+        ax_plot(ax, df_nfsim_plot.index, df_nfsim_plot['A'], label='A', linewidth=linewidth)
+        ax_plot(ax, df_nfsim_plot.index, df_nfsim_plot['R'], label='R', linewidth=linewidth)
 
     # must use full data for filter
     df_lowpass = df_nfsim.copy()
@@ -215,29 +243,40 @@ def plot_low_pass(out, nfsim_seed, index_name):
     df_lowpass = df_lowpass.truncate(after = 0.16)  
     #print(df_lowpass)
 
-    ax_plot(ax, df_lowpass.index, df_lowpass['A'], label='A', c = 'b')
-    ax_plot(ax, df_lowpass.index, df_lowpass['R'], label='R', c = 'r')
+    ax_plot(ax, df_lowpass.index, df_lowpass['A'], label='A', c = 'b', linewidth=linewidth)
+    ax_plot(ax, df_lowpass.index, df_lowpass['R'], label='R', c = 'r', linewidth=linewidth)
 
-    plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)']) #original
-    # plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)'], loc='center left', bbox_to_anchor=(1, 0.5)) #***
+    # plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)']) #original
+    leg = plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)'], loc='upper left', bbox_to_anchor=(1.05, 0.2, 0.3, 1.0), fontsize=6)
+
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
     
     # add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)
-    plt.text(.01, .99, '(' + index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+    ax.text(xcoord_index, ycoord_index, '(' + index_name + ')', transform=ax.transAxes)
     # finalize_and_save_plot(out, fig)
 
-    plt.savefig(out + '.tiff')
+    # plt.savefig(out + '.tiff')
+
+    plt.grid(axis="x")
+    border = 0.007857
+    plt.xlim([0 - border, 0.16 + border])
 
     pickle_name = out + '.pickle'
     print('pickling %s ...' % pickle_name)
     pickle.dump((fig, ax), open(pickle_name, 'wb'))
 
 def plot_peaks_error_bars(out, index_name):
-    fig, ax = plt.subplots()
+    # fig, ax = plt.subplots()
+    if index_name == 'B':
+        global ax2
+        ax = ax2 = fig.add_subplot(512)
+        ax.xaxis.set_tick_params(labelbottom=False)
+    else:
+        ax = fig.add_subplot()
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
     
-    plt.legend(['A (low pass)', 'R (low pass)']) #original
+
     # plt.legend(['A (low pass)', 'R (low pass)'], loc='center left', bbox_to_anchor=(1, 0.5)) #***
     
     base = 1350/10
@@ -260,20 +299,22 @@ def plot_peaks_error_bars(out, index_name):
             #  + 2.5
             # plt.text(0 - 0.0068, y - 3, d[3], c='k')
             # plt.text(0-0.0068, y - 3, d[3], c='k', font={'size': 9})
-            plt.text(0-0.0068, y - 3, d[3],  font={'size': 9})
+            plt.text(-0.01, y - 3, d[3],  font={'size': 6}, horizontalalignment='right', linespacing=None)
     
     plt.yticks([])
 
     red_patch = Line2D([0], [0], color='blue', label='A (low pass peaks)')
     blue_patch = Line2D([0], [0], color='red', label='R (low pass peaks)')
-    plt.legend(handles=[red_patch, blue_patch]) #original
-    # plt.legend(handles=[red_patch, blue_patch], loc='center left', bbox_to_anchor=(1, 0.5)) #***
-    # plt.legend(handles=[red_patch, blue_patch], loc='lower center', bbox_to_anchor=(1, 0.5))
+    # plt.legend(['A (low pass)', 'R (low pass)'])  # original
+    # plt.legend(handles=[red_patch, blue_patch]) #original
+    leg = plt.legend(handles=[red_patch, blue_patch],loc='upper left', bbox_to_anchor=(1.05, 0.2, 0.3, 1.0), fontsize=6)
 
-    # add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)
-    plt.text(.01, .99, '(' + index_name + ')', horizontalalignment='left', verticalalignment='top',transform=fig.transFigure)
+    plt.text(xcoord_index, ycoord_index, '(' + index_name + ')', transform=ax.transAxes)
+    plt.grid(axis="x")
+    border = 0.007857
+    plt.xlim([0 - border, 0.16 + border])
 
-    plt.savefig(out + '.tiff')
+    # plt.savefig(out + '.tiff')
     # finalize_and_save_plot(out, fig)
 
     pickle_name = out + '.pickle'
@@ -282,20 +323,50 @@ def plot_peaks_error_bars(out, index_name):
 
 
 if __name__ == '__main__':
-    
+    print('plot_hybrid.py:')
+    pdf = matplotlib.backends.backend_pdf.PdfPages('Fig21.pdf')
+    fig = plt.figure(linewidth=1)
+    fig.set_figwidth(7)
+
+    global legend_linewidth, legend_fontsize
+    xcoord_index=-.22
+    ycoord_index=1.15
+    linewidth=1
+
+
     #for s in range(1, 20):
     #    plot_low_pass("hybrid_low_pass_nfsim" + str(s).zfill(5) + ".png", s)
-    
+
+    print('Working on Fig 21 subplot A')
     # NFSim seed 14 quite nicely matches the averages 
     # plot_low_pass("hybrid_low_pass_nfsim.png", 14, "A")
     plot_low_pass("hybrid_low_pass_nfsim", 14, "A")
-    
+
+    print('Working on Fig 21 subplot B')
     # plot_peaks_error_bars("hybrid_peaks.png", "B")
     plot_peaks_error_bars("hybrid_peaks", "B")
-    
+
+    print('Working on Fig 21 subplot C')
     plot_averages("averages_fast", "C")
+
+    print('Working on Fig 21 subplot D')
     plot_averages("averages_hybrid_slow", "D")
+
+    print('Working on Fig 21 subplot E')
     plot_averages("averages_particle_slow", "E")
+
+    figs = list(map(plt.figure, plt.get_fignums()))
+
+    plt.subplots_adjust(top=.90, bottom=.05, left=.15, right=.78, hspace=.25)
+
+    ax2.sharex(ax1)
+    ax3.sharex(ax1)
+    ax4.sharex(ax1)
+    ax5.sharex(ax1)
+
+    pdf.savefig()
+    pdf.close()
+
     
     
     

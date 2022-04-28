@@ -155,7 +155,7 @@ def plot_extra_data(opts, ax, labels, current_label):
 
 
 def main():
-    print('\nplot_fig16.py: current directory is ', os.getcwd())
+    print('plot_fig16:')
 
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig16.pdf')
 
@@ -168,7 +168,7 @@ def main():
     '''
 
     fig = plt.figure()
-    fig.set_figwidth(7.5)
+    fig.set_figwidth(7)
 
     for i in range(3):
 
@@ -346,11 +346,15 @@ def main():
         plt.xlabel(X_LABEL_TIME_UNIT_S)
         plt.ylabel(Y_LABEL_N_PARAM_TIME)
 
+        if i == 0 or i == 1:
+            xlabel_i.set_visible(False)
+
+
         # if opts.output in {'mcell4', 'mcell3', 'nfsim'}:
         if opts.output in {'mcell3'}:
-            plt.legend(loc='upper left', bbox_to_anchor=(1.03, 1.09))  # original
+            plt.legend(loc='upper left', bbox_to_anchor=(1.05, 0, 0.3, 1.0), fontsize=11)
 
-        plt.subplots_adjust(top=.93, bottom=.10, left=.12, right=.70, wspace=.5, hspace=.75)
+        plt.subplots_adjust(top=.93, bottom=.10, left=.12, right=.70, wspace=.5, hspace=.65)
         plt.text(-.19, 1.22, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top',
                  transform=ax.transAxes)
 

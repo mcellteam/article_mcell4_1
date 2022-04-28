@@ -149,36 +149,16 @@ def plot_extra_data(opts, ax, labels, current_label):
 
 import inspect
 def main():
+    print('plot_fig12:')
     opts = process_opts()
 
     pdf = matplotlib.backends.backend_pdf.PdfPages(opts.output + '.pdf')
     fig = plt.figure()
+    fig.set_figwidth(3.5)
+    plt.style.use(['../../_plotting/styles/snare_complex.mplstyle', '../../_plotting/styles/master.mplstyle'])
 
-    if opts.output=='snare_complex':
-        print('\nsetting snare_complex figure size to 3.75\n')
-        fig.set_figwidth(3.5)
-        plt.style.use(
-            ['../../_plotting/styles/snare_complex.mplstyle', '../../_plotting/styles/master.mplstyle'])
-    elif opts.output == '05_Membrane_localization':
-        fig.set_figwidth(3.5)
-        plt.style.use(['../../_plotting/styles/plot_trajectories_single_plot.mplstyle', '../../_plotting/styles/master.mplstyle'])
-    else:
-        fig.set_figwidth(7)
-        plt.style.use(['../../_plotting/styles/plot_trajectories_single_plot.mplstyle', '../../_plotting/styles/master.mplstyle'])
-
-    '''
-    print('\nplot_trajectories_single_plot.py:')
-    print('current directory is ', os.getcwd())
-    print('inspect.stack() is ', inspect.stack())
-    print('plot_trajectories_single_plot.py: opts.mcell4_dir = ', str(opts.mcell4_dir))
-    print('plot_trajectories_single_plot.py: opts.output = ', str(opts.output))
-    print('plot_trajectories_single_plot.py: opts.for_camkii = ', str(opts.for_camkii))
-    '''
-    
     counts = load_counts(opts)
-
     all_observables = get_all_observables_names(counts)
-
     current_label = 0
 
     if opts.labels:
@@ -188,7 +168,6 @@ def main():
                         
     M4 = 'MCell4'
     names = ['MCell4', 'MCell3R', 'BNG']
-    
 
     fig,ax = plt.subplots()
     ax.spines['right'].set_visible(False)
@@ -316,36 +295,17 @@ def main():
     plt.xlabel(X_LABEL_TIME_UNIT_S)
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
 
-    if opts.output == 'snare_complex':
-        plt.legend(loc='upper left', bbox_to_anchor=(0, 1.04))
-    else:
-        plt.legend()
+    plt.legend(loc='upper left', bbox_to_anchor=(0.05, 1), fontsize=12)
 
-    # if opts.output in {'mcell4','mcell3','nfsim'}:
-    #     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))  # original
-    # else:
-    #     plt.legend()
-    #     plt.legend(loc='upper right')  # jy
-
-    # plt.legend(loc='center left', bbox_to_anchor=(1, 0.5)) #original
-    # plt.legend(loc='upper right') #jy
-    # plt.subplots_adjust(right=0.7, bottom=0.2)
-
-    # print('opts.index_name = ', opts.index_name)
-    # print('opts.output = ', opts.output)
-
-    # plt.subplots_adjust(wspace=1.1, left=0.25, right=.95, bottom=0.11, top=0.94)
+    plt.subplots_adjust(left=0.10, right=0.95, bottom=0.11, top=0.95)
     if opts.index_name:
         # add_plot_index(plt, ax, opts.index_name)
         plt.text(.01, .99, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
     
-    # plt.savefig(opts.output, dpi=OUTPUT_DPI) # 'dpi' now controlled by master stylesheet
-    # plt.savefig(opts.output)
-    # print("Plot " + opts.output + " generated")
-    # plt.savefig(opts.output + '.tiff')
 
+    # plt.savefig(opts.output + '.tiff')
     pickle_name = opts.output + '.pickle'
-    print('plot_trajectories_single_plot.py: pickling %s ...' % pickle_name)
+    print('plot_fig12.py: pickling %s ...' % pickle_name)
     pickle.dump((fig, ax), open(pickle_name, 'wb'))
 
     pdf.savefig()

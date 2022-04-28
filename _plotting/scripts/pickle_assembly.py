@@ -12,19 +12,23 @@ import matplotlib.backends.backend_pdf
 
 
 print('\npickle_assembly.py: Loading pickles...')
-print('curr dir =', os.getcwd()) # /article_mcell4/_plotting/scripts
+# print('curr dir =', os.getcwd()) # /article_mcell4/_plotting/scripts
+
+
 # os.chdir(sys.path[0])
 # print('new curr dir =', os.getcwd())
 
-# print('Loading Fig14 pickles...')
-# pdf = matplotlib.backends.backend_pdf.PdfPages('../result/Fig14.pdf')
-# # fig14a, ax14a = pickle.load(open('../../CaMKII_model_variations/plotting/PSD_transparent.pickle','rb'))
-# # fig14b, ax14b = pickle.load(open('../../CaMKII_model_variations/plotting/PSD.pickle','rb'))
-# fig14c, ax14c = pickle.load(open('../../CaMKII_model_variations/plotting/half_in_PSD.pickle','rb'))
-# pdf.savefig()
-# pdf.close()
 
-print('Loading Fig21 pickles...')
+'''print('Loading Fig14 pickles...')
+pdf = matplotlib.backends.backend_pdf.PdfPages('../result/Fig14.pdf')
+# fig14a, ax14a = pickle.load(open('../../CaMKII_model_variations/plotting/PSD_transparent.pickle','rb'))
+# fig14b, ax14b = pickle.load(open('../../CaMKII_model_variations/plotting/PSD.pickle','rb'))
+fig14c, ax14c = pickle.load(open('../../CaMKII_model_variations/plotting/half_in_PSD.pickle','rb'))
+pdf.savefig()
+pdf.close()'''
+
+
+'''print('Loading Fig21 pickles...')
 pdf = matplotlib.backends.backend_pdf.PdfPages('../result/Fig21.pdf')
 fig21a, ax21a = pickle.load(open('../../hybrid_circadian_clock/plotting/hybrid_low_pass_nfsim.pickle','rb'))
 fig21b, ax21b = pickle.load(open('../../hybrid_circadian_clock/plotting/hybrid_peaks.pickle','rb'))
@@ -36,10 +40,10 @@ pdf.savefig(fig21b)
 pdf.savefig(fig21c)
 pdf.savefig(fig21d)
 pdf.savefig(fig21e)
-pdf.close()
+pdf.close()'''
 
 
-
+# print('Done assembling pickled figures.')
 
 
 
