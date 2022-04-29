@@ -302,7 +302,8 @@ def main():
                 sys.exit("Must select plot type")
             
             color_index += 1
-            
+
+    # ax.margins(0.05) # might need axis margin for this plot #0428
 
     # extra data to be plotted
     plot_extra_data(opts, ax, labels, current_label)

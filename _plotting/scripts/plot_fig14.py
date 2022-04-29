@@ -338,9 +338,14 @@ def main():
         plt.xlabel(X_LABEL_TIME_UNIT_S)
         plt.ylabel(Y_LABEL_N_PARAM_TIME)
 
-        plt.legend(loc='upper right', bbox_to_anchor=(0, 0, 1.0, 1.0))
+        correct_legend_labels = ['pKCaM2C', 'pCaMKII', 'pCaM4ca']
+        L = plt.legend(loc='upper right', bbox_to_anchor=(0, 0, 1.0, 1.0))
+        L.get_texts()[0].set_text(correct_legend_labels[0])
+        L.get_texts()[1].set_text(correct_legend_labels[1])
+        L.get_texts()[2].set_text(correct_legend_labels[2])
 
-        plt.subplots_adjust(top=.92, bottom=.10, left=.12, right=.95, wspace=.25, hspace=.25)
+
+        plt.subplots_adjust(top=.94, bottom=.10, left=.12, right=.95, wspace=.35, hspace=.35)
         plt.text(-.25, 1.12, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top',transform=ax.transAxes)
 
         pickle_name = opts.output + '.pickle'
