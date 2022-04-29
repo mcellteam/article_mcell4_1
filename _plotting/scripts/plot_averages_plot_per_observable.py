@@ -36,8 +36,9 @@ import sys
 import argparse
 from load_data import *
 from shared import *
+from fontrc import configure_fonts
 
-plt.style.use(['../../_plotting/styles/plot_averages_plot_per_observable.mplstyle','../../_plotting/styles/master.mplstyle'])
+plt.style.use(['../../_plotting/styles/plot_multiple.mplstyle','../../_plotting/styles/master.mplstyle'])
 
 class Options:
     def __init__(self):
@@ -86,10 +87,10 @@ def process_opts():
     return opts
 
 def main():
-    print('plot_averages_plot_per_observable.py')
-    pdf = matplotlib.backends.backend_pdf.PdfPages('Fig13.pdf')
-    
+    print('plot_averages_plot_per_observable.py:')
     opts = process_opts()
+    configure_fonts()
+    pdf = matplotlib.backends.backend_pdf.PdfPages('Fig13.pdf')
     
     counts = load_counts(opts)
 
@@ -101,7 +102,7 @@ def main():
         labels = load_labels(opts.labels)
     else:
         labels = None
-    
+
     index_names = []    
     selected_observables = []
     if opts.selected_observables:
@@ -110,8 +111,22 @@ def main():
     clrs = ['b', 'g', 'r']
 
     fig = plt.figure()
-    fig.set_figwidth(7)
-        
+    '''
+    str(sorted(all_observables)) = ['Ca', 'CaM', 'CaM1C', 'CaM1C1N', 'CaM1C2N', 'CaM1N', 'CaM2C', 'CaM2N', 'Cam2C1N',
+                                    'Cam4Ca', 'KCaM', 'KCaM0', 'KCaM1C', 'KCaM1C1N', 'KCaM1C2N', 'KCaM1N', 'KCaM2C',
+                                    'KCaM2N', 'KCaMII', 'KCaMKII_tot', 'KCam2C1N', 'KCam4Ca', 'pKCaM', 'pKCaM0',
+                                    'pKCaM1C', 'pKCaM1C1N', 'pKCaM1C2N', 'pKCaM1N', 'pKCaM2C', 'pKCaM2N', 'pKCaMII',
+                                    'pKCaM_tot', 'pKCam2C1N', 'pKCam4Ca', 'uKCaMII_tot']
+    '''
+
+    '''
+    loop:
+    obs = 
+        Ca
+        CaM1C
+        CaM1N
+        KCaM2N
+    '''
     # generate one image per iteration
     index = 0
     for obs in sorted(all_observables): 
@@ -120,11 +135,11 @@ def main():
         
         #print("Processing observable " + obs)
 
-        # fig,ax = plt.subplots()
 
         if index == 0:
             print('  Working on subplot A - ', obs)
             ax = fig.add_subplot(221)
+            # ax.set_ylim(0, 600)
         elif  index == 1:
             print('  Working on subplot B - ', obs)
             ax = fig.add_subplot(222)
@@ -137,7 +152,6 @@ def main():
 
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
-        #ax.set_title(obs)
         
         legend_names = []
         for i in range(len(counts)):
@@ -162,25 +176,35 @@ def main():
                 df['time'], 
                 df['mean_minus_std'], df['mean_plus_std'],
                 alpha=0.1, facecolor=clrs[i])
-    
-            legend_names.append(labels[i] + " " + obs)
 
-        # leg = plt.legend(legend_names, bbox_to_anchor=(1.80, 1.18), bbox_transform=ax.transAxes)
 
+        '''
+        ax.get_legend_handles_labels() =  ([<matplotlib.lines.Line2D object at 0x1b14877f0>, 
+                                            <matplotlib.lines.Line2D object at 0x1b14a5c70>, 
+                                            <matplotlib.lines.Line2D object at 0x1b14b3430>], 
+                                            ['KCaM2N1', 'KCaM2N1', 'KCaM2N1'])
+        ^ 4th iteration
+        '''
 
         if index_names[index] == 'A' or index_names[index] == 'C':
-            plt.legend(loc='upper right', bbox_to_anchor=(0, 0, 1.0, 1.0), fontsize=10)
+            L = plt.legend(loc='upper right', bbox_to_anchor=(0, 0, 1.0, 1.0))
         elif index_names[index] == 'B' or index_names[index] == 'D':
-            plt.legend(loc='lower right', bbox_to_anchor=(0, .05, 1.0, .95), fontsize=10)
+            L = plt.legend(loc='lower right', bbox_to_anchor=(0, .05, 1.0, .95))
 
+        correct_legend_labels = ['MCell4 ' + obs, 'MCell3 ' + obs, 'NFSim ' + obs]
+        L.get_texts()[0].set_text(correct_legend_labels[0])
+        L.get_texts()[1].set_text(correct_legend_labels[1])
+        L.get_texts()[2].set_text(correct_legend_labels[2])
 
-        plt.xlabel(X_LABEL_TIME_UNIT_S)
-        plt.ylabel(Y_LABEL_N_PARAM_TIME)
+        # plt.xlabel(X_LABEL_TIME_UNIT_S)
+        # plt.ylabel(Y_LABEL_N_PARAM_TIME)
+
+        ax.margins(0.05) # these plots run up against the axes, margin is good for this exact situation
 
         # add_plot_index(plt, ax, index_names[index], x_offset=-0.03)
         # plt.text(.03, .95, '(' + index_names[index] + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
         #plt.text(.01, .99, '(' + index_names[index] + ')', horizontalalignment='left', verticalalignment='top',transform=fig.transFigure)
-        plt.subplots_adjust(top=.93, bottom=.10, left=.10, right=.95, wspace=.5, hspace=.5)
+        plt.subplots_adjust(top=.93, bottom=.10, left=.10, right=.95, wspace=.4, hspace=.4)
         plt.text(-.25, 1.15, '(' + index_names[index] + ')', horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
         # plt.savefig(obs + '.png', dpi=OUTPUT_DPI) # 'dpi' now controlled by master stylesheet
         # plt.savefig(obs + '.png')
@@ -189,11 +213,11 @@ def main():
         index += 1
 
 
-    # plt.savefig('Fig13_CAMKII_validation.tiff')
-    # plt.savefig('fig13.tiff')
+    # plt.savefig('Fig13.tiff')
     plt.savefig('Fig13.png')
     pdf.savefig()
     pdf.close()
+    print_summary(fig, 'Figure 13')
 
 
 if __name__ == '__main__':

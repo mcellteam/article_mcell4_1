@@ -38,7 +38,7 @@ import math
 import pickle
 from load_data import *
 from shared import *
-
+from fontrc import configure_fonts
 
 class Options:
     def __init__(self):
@@ -147,17 +147,18 @@ def plot_extra_data(opts, ax, labels, current_label):
                 current_label += 1
             # ax.legend()
 
-import inspect
+
 def main():
     print('plot_fig15:')
     opts = process_opts()
+    configure_fonts()
 
     # pdf = matplotlib.backends.backend_pdf.PdfPages(opts.output + '.pdf')
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig15.pdf')
     fig = plt.figure()
 
     fig.set_figwidth(3.5)
-    plt.style.use(['../../_plotting/styles/master.mplstyle'])
+    plt.style.use(['../../_plotting/styles/plot_single.mplstyle','../../_plotting/styles/master.mplstyle'])
 
     '''
     print('\nplot_trajectories_single_plot.py:')
@@ -309,8 +310,12 @@ def main():
     plt.xlabel(X_LABEL_TIME_UNIT_S)
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
 
+    ax.set_ylim(0,150)
+    ax.set_xticks([0, 1, 2])
+    ax.set_yticks([0, 50, 100, 150])
 
-    plt.legend(loc='upper right', bbox_to_anchor=(0, 0, 1.0, 1.0), fontsize=12)
+
+    plt.legend(loc='upper right', bbox_to_anchor=(0, 0, 1.0, 1.0))
 
     # if opts.output in {'mcell4','mcell3','nfsim'}:
     #     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))  # original
@@ -325,7 +330,7 @@ def main():
     # print('opts.index_name = ', opts.index_name)
     # print('opts.output = ', opts.output)
 
-    plt.subplots_adjust(left=0.10, right=0.95, bottom=0.11, top=0.95)
+    plt.subplots_adjust(left=0.14, right=0.96, bottom=0.16, top=0.95)
     if opts.index_name:
         # add_plot_index(plt, ax, opts.index_name)
         plt.text(.01, .99, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
@@ -342,6 +347,7 @@ def main():
     plt.savefig('Fig15.png')
     pdf.savefig()
     pdf.close()
+    print_summary(fig, 'Figure 15')
 
 
 if __name__ == '__main__':

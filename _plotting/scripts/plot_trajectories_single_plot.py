@@ -38,6 +38,7 @@ import math
 import pickle
 from load_data import *
 from shared import *
+from fontrc import configure_fonts
 
 
 class Options:
@@ -150,7 +151,7 @@ def plot_extra_data(opts, ax, labels, current_label):
 import inspect
 def main():
     opts = process_opts()
-
+    configure_fonts()
     pdf = matplotlib.backends.backend_pdf.PdfPages(opts.output + '.pdf')
     fig = plt.figure()
 
@@ -163,7 +164,7 @@ def main():
         fig.set_figwidth(3.5)
         plt.style.use(['../../_plotting/styles/plot_trajectories_single_plot.mplstyle', '../../_plotting/styles/master.mplstyle'])
     else:
-        fig.set_figwidth(7)
+        fig.set_figwidth(6.5)
         plt.style.use(['../../_plotting/styles/plot_trajectories_single_plot.mplstyle', '../../_plotting/styles/master.mplstyle'])
 
     '''
@@ -350,6 +351,7 @@ def main():
 
     pdf.savefig()
     pdf.close()
+    print_summary(fig)
 
 
 if __name__ == '__main__':

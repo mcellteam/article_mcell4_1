@@ -1,4 +1,6 @@
-
+import sys
+import inspect
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
@@ -44,4 +46,19 @@ def add_plot_index(plt, ax, name, x_offset = 0):
     plt.text(-0.02 + x_offset, 1.15, '(' + name + ')', horizontalalignment='center',
              verticalalignment='center', transform=ax.transAxes, fontsize=16)
 
-    
+
+def print_summary(fig, comment=''):
+    print('\n-------------------------------------------')
+    print('comment: %s' % str(comment))
+    print('-------------------------------------------')
+    print('Summary of: ',sys.argv[0])
+    print('figure size: %sinches, %spixels' % (fig.get_size_inches(), fig.get_size_inches() * fig.dpi))
+    print('savefig.dpi: %s' % mpl.rcParams['savefig.dpi'])
+    print('figure.dpi: %s' % mpl.rcParams['figure.dpi'])
+    print('font: %s, font.size: %s, pdf.fonttype: %s' % (mpl.rcParams['font.family'],mpl.rcParams['font.size'],mpl.rcParams['pdf.fonttype']))
+    print('legend.fontsize: %s, axes.labelsize: %s, xtick.labelsize: %s' % (mpl.rcParams['legend.fontsize'], mpl.rcParams['axes.labelsize'],mpl.rcParams['xtick.labelsize']))
+    print('lines.linewidth: %s' % mpl.rcParams['lines.linewidth'])
+    print('-------------------------------------------\n')
+
+
+

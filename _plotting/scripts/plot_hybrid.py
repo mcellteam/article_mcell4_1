@@ -1,18 +1,18 @@
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+from matplotlib.lines import Line2D
 import matplotlib.backends.backend_pdf
 import numpy as np
 import pandas as pd
 import sys
 import os
 import pickle
-import matplotlib.patches as mpatches
 from io import StringIO
-from matplotlib.lines import Line2D
 from hybrid_get_peaks import prepare_data
-
 from shared import *
+from fontrc import configure_fonts
 
-plt.style.use(['../../_plotting/styles/plot_hybrid.mplstyle','../../_plotting/styles/master.mplstyle'])
+plt.style.use(['../../_plotting/styles/plot_multiple.mplstyle','../../_plotting/styles/master.mplstyle'])
 
 INDEX_NAME_OFFSET=0.02
 
@@ -125,7 +125,7 @@ def finalize_and_save_plot(out, fig):
     border = 0.007857
     plt.xlim([0 - border, 0.16 + border])
     
-    fig.set_size_inches((14,2.5))                
+    # fig.set_size_inches((14,2.5))
     # plt.savefig(out, dpi=600) # 'dpi' now controlled by master stylesheet
     plt.savefig(out)
     print("Plot " + out + " generated")
@@ -172,12 +172,17 @@ def plot_averages(dir, index_name):
         yR = df['R (mean)']
         
         if first:
-            ax_plot(ax, df.index, yA, c = 'b', linewidth=linewidth)
-            ax_plot(ax, df.index, yR, c = 'r', linewidth=linewidth)
+            # ax_plot(ax, df.index, yA, c = 'b', linewidth=linewidth)
+            # ax_plot(ax, df.index, yR, c = 'r', linewidth=linewidth)
+            ax_plot(ax, df.index, yA, c = 'b')
+            ax_plot(ax, df.index, yR, c = 'r')
+
             first = False    
         else:    
-            ax_plot(ax, df.index, yA, linewidth=linewidth)
-            ax_plot(ax, df.index, yR, linewidth=linewidth)
+            # ax_plot(ax, df.index, yA, linewidth=linewidth)
+            # ax_plot(ax, df.index, yR, linewidth=linewidth)
+            ax_plot(ax, df.index, yA)
+            ax_plot(ax, df.index, yR)
 
         if name == 'nfsim':
             name = 'NFSim'
@@ -196,7 +201,7 @@ def plot_averages(dir, index_name):
         legend.append(name + ' - R (mean)')
     
     # plt.legend(legend) #original
-    leg = plt.legend(legend, loc='upper left', bbox_to_anchor=(1.05, 0.2, 0.3, 1.0), fontsize=6)
+    leg = plt.legend(legend, loc='upper left', bbox_to_anchor=(1.02, 0.12, 0.3, 1.0), fontsize=6)
 
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
     
@@ -232,8 +237,10 @@ def plot_low_pass(out, nfsim_seed, index_name):
     
     df_nfsim_plot = df_nfsim.truncate(after = 0.16)
     if True:
-        ax_plot(ax, df_nfsim_plot.index, df_nfsim_plot['A'], label='A', linewidth=linewidth)
-        ax_plot(ax, df_nfsim_plot.index, df_nfsim_plot['R'], label='R', linewidth=linewidth)
+        # ax_plot(ax, df_nfsim_plot.index, df_nfsim_plot['A'], label='A', linewidth=linewidth)
+        # ax_plot(ax, df_nfsim_plot.index, df_nfsim_plot['R'], label='R', linewidth=linewidth)
+        ax_plot(ax, df_nfsim_plot.index, df_nfsim_plot['A'], label='A')
+        ax_plot(ax, df_nfsim_plot.index, df_nfsim_plot['R'], label='R')
 
     # must use full data for filter
     df_lowpass = df_nfsim.copy()
@@ -243,11 +250,13 @@ def plot_low_pass(out, nfsim_seed, index_name):
     df_lowpass = df_lowpass.truncate(after = 0.16)  
     #print(df_lowpass)
 
-    ax_plot(ax, df_lowpass.index, df_lowpass['A'], label='A', c = 'b', linewidth=linewidth)
-    ax_plot(ax, df_lowpass.index, df_lowpass['R'], label='R', c = 'r', linewidth=linewidth)
+    # ax_plot(ax, df_lowpass.index, df_lowpass['A'], label='A', c = 'b', linewidth=linewidth)
+    # ax_plot(ax, df_lowpass.index, df_lowpass['R'], label='R', c = 'r', linewidth=linewidth)
+    ax_plot(ax, df_lowpass.index, df_lowpass['A'], label='A', c='b')
+    ax_plot(ax, df_lowpass.index, df_lowpass['R'], label='R', c='r')
 
     # plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)']) #original
-    leg = plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)'], loc='upper left', bbox_to_anchor=(1.05, 0.2, 0.3, 1.0), fontsize=6)
+    leg = plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)'], loc='upper left', bbox_to_anchor=(1.02, 0.12, 0.3, 1.0), fontsize=6)
 
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
     
@@ -307,12 +316,17 @@ def plot_peaks_error_bars(out, index_name):
     blue_patch = Line2D([0], [0], color='red', label='R (low pass peaks)')
     # plt.legend(['A (low pass)', 'R (low pass)'])  # original
     # plt.legend(handles=[red_patch, blue_patch]) #original
-    leg = plt.legend(handles=[red_patch, blue_patch],loc='upper left', bbox_to_anchor=(1.05, 0.2, 0.3, 1.0), fontsize=6)
+    leg = plt.legend(handles=[red_patch, blue_patch],loc='upper left', bbox_to_anchor=(1.02, 0.12, 0.3, 1.0), fontsize=6)
 
     plt.text(xcoord_index, ycoord_index, '(' + index_name + ')', transform=ax.transAxes)
     plt.grid(axis="x")
     border = 0.007857
     plt.xlim([0 - border, 0.16 + border])
+
+    plt.text(.3, .5, 'fig 21b has ylim of ~163 -> ~306\nwhat does it mean? - joel', transform=ax.transAxes, fontsize=6, backgroundcolor='w', color='k')
+
+    plt.text(.8, .03, 'this figure is under construction', transform=fig.transFigure, fontsize=7, backgroundcolor='k', color='w', weight='bold')
+
 
     # plt.savefig(out + '.tiff')
     # finalize_and_save_plot(out, fig)
@@ -324,14 +338,14 @@ def plot_peaks_error_bars(out, index_name):
 
 if __name__ == '__main__':
     print('plot_hybrid.py:')
+    configure_fonts()
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig21.pdf')
-    fig = plt.figure(linewidth=1)
-    fig.set_figwidth(7)
+    fig = plt.figure()
+    fig.set_figwidth(6.5)
 
-    global legend_linewidth, legend_fontsize
-    xcoord_index=-.22
-    ycoord_index=1.15
-    linewidth=1
+    xcoord_index=-.18
+    ycoord_index=1.10
+    # linewidth=1
 
 
     #for s in range(1, 20):
@@ -357,16 +371,27 @@ if __name__ == '__main__':
 
     figs = list(map(plt.figure, plt.get_fignums()))
 
-    plt.subplots_adjust(top=.90, bottom=.05, left=.15, right=.78, hspace=.25)
+    plt.subplots_adjust(top=.90, bottom=.05, left=.13, right=.78, hspace=.30)
+
+    ax1.set_ylim([0, 1900])
 
     ax2.sharex(ax1)
     ax3.sharex(ax1)
     ax4.sharex(ax1)
     ax5.sharex(ax1)
 
+    # ax2.sharey(ax1)
+    ax3.sharey(ax1)
+    ax4.sharey(ax1)
+    ax5.sharey(ax1)
+
+
+
+
     plt.savefig('Fig21.png')
     pdf.savefig()
     pdf.close()
+    print_summary(fig, 'Figure 21')
 
     
     

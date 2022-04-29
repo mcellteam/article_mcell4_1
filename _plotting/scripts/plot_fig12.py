@@ -38,6 +38,7 @@ import math
 import pickle
 from load_data import *
 from shared import *
+from fontrc import configure_fonts
 
 
 class Options:
@@ -151,12 +152,11 @@ import inspect
 def main():
     print('plot_fig12:')
     opts = process_opts()
-
-    # pdf = matplotlib.backends.backend_pdf.PdfPages(opts.output + '.pdf')
+    configure_fonts()
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig12.pdf')
     fig = plt.figure()
     fig.set_figwidth(3.5)
-    plt.style.use(['../../_plotting/styles/snare_complex.mplstyle', '../../_plotting/styles/master.mplstyle'])
+    plt.style.use(['../../_plotting/styles/plot_single.mplstyle', '../../_plotting/styles/master.mplstyle'])
 
     counts = load_counts(opts)
     all_observables = get_all_observables_names(counts)
@@ -292,13 +292,16 @@ def main():
 
     # extra data to be plotted
     plot_extra_data(opts, ax, labels, current_label)
-
+    ax.set_xticks([0,1])
     plt.xlabel(X_LABEL_TIME_UNIT_S)
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
 
-    plt.legend(loc='upper left', bbox_to_anchor=(0.05, 1), fontsize=12)
+    ax.set_ylim(0,70)
 
-    plt.subplots_adjust(left=0.10, right=0.95, bottom=0.11, top=0.95)
+    plt.legend(loc='upper left', bbox_to_anchor=(0.07, 1.02))
+
+    # plt.subplots_adjust(left=0.14, right=0.96, bottom=0.13, top=0.95)
+    plt.subplots_adjust(left=0.12, right=0.96, bottom=0.16, top=0.90)
     if opts.index_name:
         # add_plot_index(plt, ax, opts.index_name)
         plt.text(.01, .99, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
@@ -312,6 +315,7 @@ def main():
     plt.savefig('Fig12.png')
     pdf.savefig()
     pdf.close()
+    print_summary(fig, 'Figure 12')
 
 
 if __name__ == '__main__':

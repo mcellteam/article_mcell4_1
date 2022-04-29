@@ -38,8 +38,9 @@ import math
 import pickle
 from load_data import *
 from shared import *
+from fontrc import configure_fonts
 
-plt.style.use(['../../_plotting/styles/master.mplstyle'])
+plt.style.use(['../../_plotting/styles/plot_multiple.mplstyle','../../_plotting/styles/master.mplstyle'])
 
 
 class Options:
@@ -156,7 +157,7 @@ def plot_extra_data(opts, ax, labels, current_label):
 
 def main():
     print('plot_fig16:')
-
+    configure_fonts()
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig16.pdf')
 
     fig_names = []
@@ -168,7 +169,7 @@ def main():
     '''
 
     fig = plt.figure()
-    fig.set_figwidth(7)
+    fig.set_figwidth(6.5)
 
     for i in range(3):
 
@@ -237,9 +238,17 @@ def main():
         if opts.for_autoph:
             # fig.set_size_inches((14, 2.5)) #jy
 
-            cm = plt.get_cmap('tab10')
             NUM_COLORS = 6
-            colors = [cm(i) for i in range(NUM_COLORS)]
+            cm = plt.get_cmap('tab10')
+            print('type(cm) = ',type(cm))
+            cm_colorblind_friendly = colors = ['#377eb8', '#ff7f00', '#4daf4a',
+                                               '#f781bf', '#a65628', '#984ea3',
+                                               '#999999', '#e41a1c', '#dede00']
+            # colors = [cm(i) for i in range(NUM_COLORS)]
+            colors = [cm_colorblind_friendly[i] for i in range(NUM_COLORS)]
+
+
+
             ax.set_prop_cycle(linestyle=linestyles, color=colors)
 
             clrs = [None] * 10
@@ -351,12 +360,14 @@ def main():
 
 
         # if opts.output in {'mcell4', 'mcell3', 'nfsim'}:
-        if opts.output in {'mcell3'}:
-            plt.legend(loc='upper left', bbox_to_anchor=(1.05, 0, 0.3, 1.0), fontsize=11)
+        # if opts.output in {'mcell3'}:
+        plt.legend(loc='upper left', bbox_to_anchor=(1.02, 0, 0.3, .92))
 
-        plt.subplots_adjust(top=.93, bottom=.10, left=.12, right=.70, wspace=.5, hspace=.65)
-        plt.text(-.19, 1.22, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top',
+        plt.subplots_adjust(top=.93, bottom=.10, left=.10 , right=.75, wspace=.5, hspace=.60)
+        plt.text(-.14, 1.22, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top',
                  transform=ax.transAxes)
+
+        plt.xticks(np.arange(0, 25, 5))
 
         pickle_name = opts.output + '.pickle'
         print('plot_fig16.py: pickling %s ...' % pickle_name)
@@ -365,6 +376,7 @@ def main():
     plt.savefig('Fig16.png')
     pdf.savefig()
     pdf.close()
+    print_summary(fig,'Figure 16')
 
 
 if __name__ == '__main__':

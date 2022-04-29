@@ -30,16 +30,17 @@ For more information, please refer to [http://unlicense.org]
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.backends.backend_pdf
 import os
 import sys
 import argparse
 import math
 import pickle
-import matplotlib.backends.backend_pdf
 from load_data import *
 from shared import *
+from fontrc import configure_fonts
 
-plt.style.use(['../../_plotting/styles/master.mplstyle'])
+plt.style.use(['../../_plotting/styles/plot_multiple.mplstyle','../../_plotting/styles/master.mplstyle'])
 
 class Options:
     def __init__(self):
@@ -150,7 +151,7 @@ def plot_extra_data(opts, ax, labels, current_label):
 
 def main():
     print('plot_fig14:')
-
+    configure_fonts()
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig14.pdf')
 
 
@@ -167,7 +168,7 @@ def main():
     labels = load_labels('labels.txt')
 
     fig = plt.figure()
-    fig.set_figwidth(7)
+    fig.set_figwidth(6.5)
 
 
     for i in range(3):
@@ -225,7 +226,7 @@ def main():
         ]
 
         if opts.for_autoph:
-            fig.set_size_inches((14,2.5))
+            # fig.set_size_inches((14,2.5))
 
             cm = plt.get_cmap('tab10')
             NUM_COLORS = 6
@@ -337,9 +338,9 @@ def main():
         plt.xlabel(X_LABEL_TIME_UNIT_S)
         plt.ylabel(Y_LABEL_N_PARAM_TIME)
 
-        plt.legend(loc='upper right', bbox_to_anchor=(1, 1), fontsize=12)
+        plt.legend(loc='upper right', bbox_to_anchor=(0, 0, 1.0, 1.0))
 
-        plt.subplots_adjust(top=.92, bottom=.10, left=.10, right=.92, wspace=.4, hspace=.4)
+        plt.subplots_adjust(top=.92, bottom=.10, left=.12, right=.95, wspace=.25, hspace=.25)
         plt.text(-.25, 1.12, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top',transform=ax.transAxes)
 
         pickle_name = opts.output + '.pickle'
@@ -350,6 +351,7 @@ def main():
     plt.savefig('Fig14.png')
     pdf.savefig()
     pdf.close()
+    print_summary(fig, 'Figure 14')
 
 
 if __name__ == '__main__':

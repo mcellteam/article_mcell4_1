@@ -6,14 +6,11 @@ import pickle
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import matplotlib.backends.backend_pdf
-# from matplotlib.backends.backend_pdf import PdfPages
+from shared import *
+from fontrc import configure_fonts
 
-
-
-
-print('\npickle_assembly.py: Loading pickles...')
+# print('\npickle_assembly.py: Loading pickles...')
 # print('curr dir =', os.getcwd()) # /article_mcell4/_plotting/scripts
-
 
 # os.chdir(sys.path[0])
 # print('new curr dir =', os.getcwd())

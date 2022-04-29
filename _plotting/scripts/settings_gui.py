@@ -13,28 +13,17 @@ app['bg'] = '#2a636e'
 nb = Notebook(app)
 
 paths = ['styles/master.mplstyle',
-         'styles/snare_complex.mplstyle',
-         'styles/plot_averages_plot_per_observable.mplstyle',
-         'styles/plot_hybrid.mplstyle',
-         'styles/plot_relative_performance.mplstyle',
-         'styles/plot_trajectories_single_plot.mplstyle']
+         'styles/plot_single.mplstyle',
+         'styles/plot_multiple.mplstyle',
+         'styles/plot_relative_performance.mplstyle']
 
-plot_paths = ['MASTER stylesheet **has precedence**',
-              'scripts/plot_trajectories_single_plot.py',
-              'scripts/plot_averages_plot_per_observable.py',
-              'scripts/plot_hybrid.py',
-              'scripts/plot_relative_performance.py',
-              'scripts/plot_trajectories_single_plot.py']
-
-cli_paths = ['all.sh',
-             '',
-             '',
-             'hybrid.sh',
-             'performance.sh',
-             '']
-
+style_index = ['MASTER stylesheet **has precedence**',
+               'fig12, fig15',
+               'fig13, fig14, fig16, fig21',
+               'fig17']
 
 def save():
+    # for path in paths:
     frame = nb.select()
     index = nb.index(nb.select())
     path = paths[index]
@@ -98,7 +87,7 @@ for i, path in enumerate(paths):
     nb.pack(expand=True, fill=BOTH, padx=5, pady=5)
 
     ttk.Label(frames[i],
-              text = 'Editing: %s\nUsed by: %s' % (paths[i], plot_paths[i]),
+              text = 'Applies to: ' + style_index[i],
               font = 'Helvetica 12 bold').pack(fill='both', side="top", expand=1)
 
     # adding scrollbars
