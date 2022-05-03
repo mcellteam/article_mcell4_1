@@ -336,7 +336,13 @@ def main():
         plot_extra_data(opts, ax, labels, current_label)
 
         plt.xlabel(X_LABEL_TIME_UNIT_S)
-        plt.ylabel(Y_LABEL_N_PARAM_TIME)
+        # plt.ylabel(Y_LABEL_N_PARAM_TIME)
+        plt.ylabel('N(t)')
+
+        ax.set_xlim(0, 3)
+        ax.set_xticks([0, 1, 2, 3])
+        ax.set_ylim(0, .5)
+        ax.set_yticks([0, .1, .2, .3, .4, .5])
 
         correct_legend_labels = ['pKCaM2C', 'pCaMKII', 'pCaM4ca']
         L = plt.legend(loc='upper right', bbox_to_anchor=(0, 0, 1.0, 1.0))

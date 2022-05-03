@@ -42,7 +42,9 @@ def save():
 
 def run_all():
     print('Running all scripts...')
-    subprocess.call('./all.sh')
+    # subprocess.call('./all.sh')
+    # subprocess.call('./all.sh', shell=True)
+    p = subprocess.Popen('./all.sh')
     print('Done.')
 
 def print_rcParams():

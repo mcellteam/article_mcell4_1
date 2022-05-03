@@ -176,7 +176,7 @@ def main():
         opts = Options()
 
         if i == 0:
-            ax = fig.add_subplot(311)
+            ax = ax1 = fig.add_subplot(311)
             opts.for_autoph = True
             opts.mcell3_dir = 'react_data_mcell3/'
             opts.output = 'mcell3'
@@ -184,8 +184,12 @@ def main():
             opts.index_name = 'A'
             opts.extra = 'extra_mcell.txt'
             labels = load_labels('labels_mcell3.txt')
+            ax.set_xlim([0, 20])
+            ax.set_xticks([0, 5, 10, 15, 20])
+            ax.set_ylim([0, 120])
+            ax.set_yticks([0, 40, 80, 120])
         elif i == 1:
-            ax = fig.add_subplot(312)
+            ax = ax2 = fig.add_subplot(312)
             opts.for_autoph = True
             opts.mcell4_dir = 'react_data_mcell4/'
             opts.output = 'mcell4'
@@ -193,8 +197,10 @@ def main():
             opts.index_name = 'B'
             opts.extra = 'extra_mcell.txt'
             labels = load_labels('labels_mcell.txt')
+            ax2.sharex(ax1)
+            ax2.sharey(ax1)
         elif i == 2:
-            ax = fig.add_subplot(313)
+            ax = ax3 = fig.add_subplot(313)
             opts.for_autoph = True
             opts.output = 'nfsim'
             opts.max_time = float(20)
@@ -202,6 +208,9 @@ def main():
             opts.extra = 'extra_nfsim.txt'
             labels = load_labels('labels_nfsim.txt')
             opts.bng_dir = 'nfsim'
+            ax3.sharex(ax1)
+            ax3.sharey(ax1)
+            plt.xlabel(X_LABEL_TIME_UNIT_S)
 
         print('  plot_fig16.py: Working on subplot %s - %s' % (opts.index_name, opts.output))
 
@@ -257,22 +266,11 @@ def main():
         else:
             clrs = ['b', 'g', 'r']
 
-        if opts.for_camkii:
-            ax.set_ylim([0, 0.5])
-
         dfs = {}
         color_index = 0
         # prepare data for
         for obs in sorted(all_observables):
             # print("Processing observable " + obs)
-
-            if opts.for_membrane_localization:
-                if obs != 'MA':
-                    continue
-
-            if opts.for_camkii:
-                if obs not in ['pKCaM2C', 'pKCaM_tot', 'pKCam4Ca']:
-                    continue
 
             legend_names = []
             for i in range(len(counts)):
@@ -290,12 +288,8 @@ def main():
 
                 df[sim_obs_name] = data.iloc[:, 1:].mean(axis=1)
 
-                if opts.for_camkii:
-                    df[sim_obs_name + '_minus_std'] = df[sim_obs_name] - data.iloc[:, 1:].sem(axis=1)
-                    df[sim_obs_name + '_plus_std'] = df[sim_obs_name] + data.iloc[:, 1:].sem(axis=1)
-                else:
-                    df[sim_obs_name + '_minus_std'] = df[sim_obs_name] - data.iloc[:, 1:].std(axis=1)
-                    df[sim_obs_name + '_plus_std'] = df[sim_obs_name] + data.iloc[:, 1:].std(axis=1)
+                df[sim_obs_name + '_minus_std'] = df[sim_obs_name] - data.iloc[:, 1:].std(axis=1)
+                df[sim_obs_name + '_plus_std'] = df[sim_obs_name] + data.iloc[:, 1:].std(axis=1)
 
                 df = df.set_index('time')
 
@@ -352,26 +346,24 @@ def main():
         # extra data to be plotted
         plot_extra_data(opts, ax, labels, current_label)
 
-        plt.xlabel(X_LABEL_TIME_UNIT_S)
+        # plt.xlabel(X_LABEL_TIME_UNIT_S)
         plt.ylabel(Y_LABEL_N_PARAM_TIME)
 
         if i == 0 or i == 1:
             xlabel_i.set_visible(False)
 
+        # plt.legend(loc='upper left', bbox_to_anchor=(1.02, 0, 0.3, .87))
+        plt.legend(loc='upper left', bbox_to_anchor=(1.02, 0, 0.3, .81))
 
-        # if opts.output in {'mcell4', 'mcell3', 'nfsim'}:
-        # if opts.output in {'mcell3'}:
-        plt.legend(loc='upper left', bbox_to_anchor=(1.02, 0, 0.3, .92))
-
-        plt.subplots_adjust(top=.93, bottom=.10, left=.10 , right=.75, wspace=.5, hspace=.60)
-        plt.text(-.14, 1.22, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top',
+        # plt.subplots_adjust(top=.93, bottom=.10, left=.10 , right=.75, wspace=.5, hspace=.60)
+        plt.subplots_adjust(top=.93, bottom=.10, left=.10 , right=.75, wspace=.5, hspace=.30)
+        plt.text(-.14, 1.15, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top',
                  transform=ax.transAxes)
-
-        plt.xticks(np.arange(0, 25, 5))
 
         pickle_name = opts.output + '.pickle'
         print('plot_fig16.py: pickling %s ...' % pickle_name)
         pickle.dump((fig, ax), open(pickle_name, 'wb'))
+
 
     plt.savefig('Fig16.png')
     pdf.savefig()

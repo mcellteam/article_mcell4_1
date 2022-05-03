@@ -202,19 +202,29 @@ def main():
     
     dfs = {}
     color_index = 0
-    # prepare data for 
+    # prepare data for
+
+    '''
+    labels:
+    BNGL ODE SNARE_async
+    MCell4 SNARE_async
+    BNGL ODE SNARE_sync
+    MCell4 SNARE_sync
+    BNGL ODE V release
+    MCell4 V release
+    
+    
+    '''
+
+    # python ../../_plotting/scripts/plot_fig12.py -m4 ../mcellsim/react_data -b ../bngl/bng -l labels.txt -o snare_complex --snare -t 1
+    # snare: str(sorted(all_observables)) =  ['SNARE_async', 'SNARE_sync', 'V_release']
+    # snare: len(counts) =  3
     for obs in sorted(all_observables): 
         #print("Processing observable " + obs)
-        
-        if opts.for_membrane_localization:
-            if obs != 'MA':
-                continue
 
-        if opts.for_camkii:
-            if obs not in ['pKCaM2C', 'pKCaM_tot', 'pKCam4Ca']:
-                continue
-        
         legend_names = []
+
+
         for i in range(len(counts)):
             if obs not in counts[i]:
                 continue
@@ -230,12 +240,9 @@ def main():
             
             df[sim_obs_name] = data.iloc[:, 1:].mean(axis=1)
             
-            if opts.for_camkii:
-                df[sim_obs_name + '_minus_std'] = df[sim_obs_name] - data.iloc[:, 1:].sem(axis=1)
-                df[sim_obs_name + '_plus_std'] = df[sim_obs_name] + data.iloc[:, 1:].sem(axis=1)
-            else:
-                df[sim_obs_name + '_minus_std'] = df[sim_obs_name] - data.iloc[:, 1:].std(axis=1)
-                df[sim_obs_name + '_plus_std'] = df[sim_obs_name] + data.iloc[:, 1:].std(axis=1)
+
+            df[sim_obs_name + '_minus_std'] = df[sim_obs_name] - data.iloc[:, 1:].std(axis=1)
+            df[sim_obs_name + '_plus_std'] = df[sim_obs_name] + data.iloc[:, 1:].std(axis=1)
                 
 
             df = df.set_index('time')
@@ -252,56 +259,33 @@ def main():
             else:
                 l = 'MCell4'
             
-            if opts.for_membrane_localization:
+
+            if i == 0:
+                # first file
                 s = 'solid'
-            
-                if i == 0:
-                    ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s, linewidth=2, zorder=100, c=clrs[color_index]) #
-                else:
-                    ax_plot(ax, df.index, df[sim_obs_name], label=l, c=clrs[color_index]) #
-                    
-            elif  opts.for_snare:
-                if i == 0:
-                    # first file
-                    s = 'solid'
-                else:
-                    s = '--'
-                ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s, c=clrs[color_index])
-            
-            elif opts.for_camkii:
-                ax_plot(ax, df.index, df[sim_obs_name], label=l, color=clrs[color_index]) #
-                ax_fill_between(
-                    ax,
-                    df.index, 
-                    df[sim_obs_name + '_minus_std'], df[sim_obs_name + '_plus_std'],
-                    alpha=0.2, 
-                    color=clrs[color_index])
-                
-            elif opts.for_autoph:            
-                ax_plot(ax, df.index, df[sim_obs_name], label=l) #
-                ax_fill_between(
-                    ax,
-                    df.index, 
-                    df[sim_obs_name + '_minus_std'], df[sim_obs_name + '_plus_std'],
-                    alpha=0.2)
             else:
-                sys.exit("Must select plot type")
+                s = '--'
+            ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s, c=clrs[color_index])
+
             
             color_index += 1
             
 
     # extra data to be plotted
     plot_extra_data(opts, ax, labels, current_label)
-    ax.set_xticks([0,1])
+    ax.set_xlim([0, 1])
+    ax.set_xticks([0, .2, .4, .6, .8, 1])
     plt.xlabel(X_LABEL_TIME_UNIT_S)
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
+    ax.set_ylim([0, 60])
+    ax.set_yticks([0, 20, 40, 60])
 
-    ax.set_ylim(0,70)
-
-    plt.legend(loc='upper left', bbox_to_anchor=(0.07, 1.02))
+    plt.legend(loc='upper left', bbox_to_anchor=(0.04, 1.02), prop={'size': 7})
+    # plt.legend(loc='upper left', bbox_to_anchor=(1.02, 0, 0.3, .92))
 
     # plt.subplots_adjust(left=0.14, right=0.96, bottom=0.13, top=0.95)
-    plt.subplots_adjust(left=0.12, right=0.96, bottom=0.16, top=0.90)
+    plt.subplots_adjust(left=0.15, right=0.90, bottom=0.20, top=0.90)
+    # plt.subplots_adjust(left=0.12, right=0.55, bottom=0.16, top=0.90)
     if opts.index_name:
         # add_plot_index(plt, ax, opts.index_name)
         plt.text(.01, .99, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)

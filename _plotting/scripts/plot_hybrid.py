@@ -14,8 +14,6 @@ from fontrc import configure_fonts
 
 plt.style.use(['../../_plotting/styles/plot_multiple.mplstyle','../../_plotting/styles/master.mplstyle'])
 
-INDEX_NAME_OFFSET=0.02
-
 particle_D10 = {
 'A_first': (0.01292041015625, 0.0009311716138931673),
 'A_second': (0.07806904296875, 0.009939225324979456),
@@ -123,7 +121,7 @@ def finalize_and_save_plot(out, fig):
                 
     plt.grid(axis="x")
     border = 0.007857
-    plt.xlim([0 - border, 0.16 + border])
+    # plt.xlim([0 - border, 0.16 + border])
     
     # fig.set_size_inches((14,2.5))
     # plt.savefig(out, dpi=600) # 'dpi' now controlled by master stylesheet
@@ -135,22 +133,24 @@ def plot_averages(dir, index_name):
         global ax3
         ax = ax3 = fig.add_subplot(513)
         ax.xaxis.set_tick_params(labelbottom=False)
-        plt.yticks([0, 500, 1000, 1500])
+        # plt.yticks([0, .16])
+
     elif index_name == 'D':
         global ax4
         ax = ax4 = fig.add_subplot(514)
         ax.xaxis.set_tick_params(labelbottom=False)
-        plt.yticks([0, 500, 1000, 1500])
+        # plt.yticks([0, 500, 1000, 1500])
     elif index_name == 'E':
         global ax5
         ax = ax5 = fig.add_subplot(515)
-        plt.yticks([0, 500, 1000, 1500])
+        # plt.yticks([0, 500, 1000, 1500])
+        plt.xlabel(X_LABEL_TIME_UNIT_S)
     else:
         ax = fig.add_subplot()
-    
+
     # load all .csv files in directory passed as the first argument
     data = {}
-    
+
     file_list = os.listdir(dir)
     for file in file_list:
         file_path = os.path.join(dir, file)
@@ -166,19 +166,19 @@ def plot_averages(dir, index_name):
     legend = []
     first = True
     for name,df in data.items():
-        df = df.truncate(after = 0.16)  
+        df = df.truncate(after = 0.16)
         df = df.rename({'A_mean': 'A (mean)', 'R_mean': 'R (mean)'}, axis='columns')
         yA = df['A (mean)']
         yR = df['R (mean)']
-        
+
         if first:
             # ax_plot(ax, df.index, yA, c = 'b', linewidth=linewidth)
             # ax_plot(ax, df.index, yR, c = 'r', linewidth=linewidth)
             ax_plot(ax, df.index, yA, c = 'b')
             ax_plot(ax, df.index, yR, c = 'r')
 
-            first = False    
-        else:    
+            first = False
+        else:
             # ax_plot(ax, df.index, yA, linewidth=linewidth)
             # ax_plot(ax, df.index, yR, linewidth=linewidth)
             ax_plot(ax, df.index, yA)
@@ -196,23 +196,31 @@ def plot_averages(dir, index_name):
             name = 'hybrid D=' + str(1e-7)
         elif name == 'particle_D10':
             name = 'particle D=' + str(1e-7)
-        
+
         legend.append(name + ' - A (mean)')
         legend.append(name + ' - R (mean)')
-    
-    # plt.legend(legend) #original
-    leg = plt.legend(legend, loc='upper left', bbox_to_anchor=(1.02, 0.12, 0.3, 1.0), fontsize=6)
+
+    if index_name == 'C':
+        leg = plt.legend(legend, loc='upper right', bbox_to_anchor=(0, 0, .98, 1.02), fontsize=6, ncol = 4)
+    else:
+        leg = plt.legend(legend, loc='upper right', bbox_to_anchor=(0, 0, .98, 1.02), fontsize=6, ncol = 1)
 
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
-    
+
     # add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)
     plt.text(xcoord_index, ycoord_index, '(' + index_name + ')', transform=ax.transAxes)
     # finalize_and_save_plot("hybrid_" + os.path.basename(dir) + ".png", fig)
-    plt.savefig("hybrid_" + os.path.basename(dir) + '.tiff')
+    # plt.xlabel("time [s]")
 
     plt.grid(axis="x")
     border = 0.007857
-    plt.xlim([0 - border, 0.16 + border])
+    # plt.xlim([0 - border, 0.16 + border]) #original #0429
+
+    grid_x_ticks = np.arange(0, .16, 0.02)
+    ax.set_xticks(grid_x_ticks, minor=True)
+    ax.grid(which='minor', alpha=0.4, linestyle='--')
+
+    # plt.savefig("hybrid_" + os.path.basename(dir) + '.tiff')
 
     pickle_name="hybrid_" + os.path.basename(dir) + ".pickle"
     print('pickling %s ...' % pickle_name)
@@ -224,8 +232,15 @@ def plot_low_pass(out, nfsim_seed, index_name):
         global ax1
         ax = ax1 = fig.add_subplot(511)
         ax.xaxis.set_tick_params(labelbottom=False)
-        plt.xticks([0,.04,.08,.12,.16])
-        plt.yticks([0, 500, 1000, 1500])
+        # plt.xticks([0,.04,.08,.12,.16])
+        # plt.yticks([0, 500, 1000, 1500])
+        ax.set_xlim([0, .16])
+        ax.set_xticks([0, .16])
+        # ax.set_ylim([0, 1800])
+        # ax.set_yticks([0, 1800])
+        ax.set_ylim([0, 1800])
+        ax.set_yticks([0, 1800])
+
     else:
         ax = fig.add_subplot()
 
@@ -256,19 +271,23 @@ def plot_low_pass(out, nfsim_seed, index_name):
     ax_plot(ax, df_lowpass.index, df_lowpass['R'], label='R', c='r')
 
     # plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)']) #original
-    leg = plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)'], loc='upper left', bbox_to_anchor=(1.02, 0.12, 0.3, 1.0), fontsize=6)
+
+    leg = plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)'], loc='upper right', bbox_to_anchor=(0, 0, .98, 1.02),fontsize=6, ncol=2)
 
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
     
     # add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)
     ax.text(xcoord_index, ycoord_index, '(' + index_name + ')', transform=ax.transAxes)
     # finalize_and_save_plot(out, fig)
-
-    # plt.savefig(out + '.tiff')
-
+    # plt.xlabel("time [s]")
     plt.grid(axis="x")
     border = 0.007857
-    plt.xlim([0 - border, 0.16 + border])
+    # plt.xlim([0 - border, 0.16 + border])
+
+    grid_x_ticks = np.arange(0, .16, 0.02)
+    ax.set_xticks(grid_x_ticks, minor=True)
+    ax.grid(which='minor', alpha=0.4, linestyle='--')
+    matplotlib.pyplot.tick_params(bottom=False)
 
     pickle_name = out + '.pickle'
     print('pickling %s ...' % pickle_name)
@@ -308,28 +327,38 @@ def plot_peaks_error_bars(out, index_name):
             #  + 2.5
             # plt.text(0 - 0.0068, y - 3, d[3], c='k')
             # plt.text(0-0.0068, y - 3, d[3], c='k', font={'size': 9})
-            plt.text(-0.01, y - 3, d[3],  font={'size': 6}, horizontalalignment='right', linespacing=None)
+            plt.text(-0.002, y - 3, d[3],  font={'size': 6}, horizontalalignment='right', linespacing=None)
     
     plt.yticks([])
+    plt.xticks([])
 
     red_patch = Line2D([0], [0], color='blue', label='A (low pass peaks)')
     blue_patch = Line2D([0], [0], color='red', label='R (low pass peaks)')
     # plt.legend(['A (low pass)', 'R (low pass)'])  # original
     # plt.legend(handles=[red_patch, blue_patch]) #original
-    leg = plt.legend(handles=[red_patch, blue_patch],loc='upper left', bbox_to_anchor=(1.02, 0.12, 0.3, 1.0), fontsize=6)
+    leg = plt.legend(handles=[red_patch, blue_patch],loc='upper right', bbox_to_anchor=(0, 0, .98, 1.02), fontsize=6)
 
     plt.text(xcoord_index, ycoord_index, '(' + index_name + ')', transform=ax.transAxes)
     plt.grid(axis="x")
     border = 0.007857
-    plt.xlim([0 - border, 0.16 + border])
+    # plt.xlim([0 - border, 0.16 + border])
 
-    plt.text(.3, .5, 'fig 21b has ylim of ~163 -> ~306\nwhat does it mean? - joel', transform=ax.transAxes, fontsize=6, backgroundcolor='w', color='k')
+    # plt.text(.3, .5, 'fig 21b has ylim of ~163 -> ~306\nwhat does it mean? - joel', transform=ax.transAxes, fontsize=6, backgroundcolor='w', color='k')
 
-    plt.text(.8, .03, 'this figure is under construction', transform=fig.transFigure, fontsize=7, backgroundcolor='k', color='w', weight='bold')
+    plt.text(.75, .03, 'this figure is under construction', transform=fig.transFigure, fontsize=7, backgroundcolor='k', color='w', weight='bold')
 
 
     # plt.savefig(out + '.tiff')
     # finalize_and_save_plot(out, fig)
+
+    # plt.xlabel("time [s]")
+
+    grid_x_ticks = np.arange(0, .16, 0.02)
+    ax.set_xticks(grid_x_ticks, minor=True)
+    ax.grid(which='minor', alpha=0.4, linestyle='--')
+
+    ax.spines['left'].set_visible(False)
+    ax.spines['bottom'].set_visible(False)
 
     pickle_name = out + '.pickle'
     print('pickling %s ...' % pickle_name)
@@ -344,7 +373,7 @@ if __name__ == '__main__':
     fig.set_figwidth(6.5)
 
     xcoord_index=-.18
-    ycoord_index=1.10
+    ycoord_index=1.06
     # linewidth=1
 
 
@@ -371,9 +400,7 @@ if __name__ == '__main__':
 
     figs = list(map(plt.figure, plt.get_fignums()))
 
-    plt.subplots_adjust(top=.90, bottom=.05, left=.13, right=.78, hspace=.30)
-
-    ax1.set_ylim([0, 1900])
+    plt.subplots_adjust(top=.95, bottom=.10, left=.16, right=.93, hspace=.30)
 
     ax2.sharex(ax1)
     ax3.sharex(ax1)
@@ -384,9 +411,6 @@ if __name__ == '__main__':
     ax3.sharey(ax1)
     ax4.sharey(ax1)
     ax5.sharey(ax1)
-
-
-
 
     plt.savefig('Fig21.png')
     pdf.savefig()

@@ -270,7 +270,8 @@ def main():
                 s = 'solid'
             
                 if i == 0:
-                    ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s, linewidth=2, zorder=100, c=clrs[color_index]) #
+                    # ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s, linewidth=2, zorder=100, c=clrs[color_index]) #original
+                    ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s, linewidth=1.5, zorder=100, c=clrs[color_index]) #original
                 else:
                     ax_plot(ax, df.index, df[sim_obs_name], label=l, c=clrs[color_index]) #
                     
@@ -292,7 +293,7 @@ def main():
                     color=clrs[color_index])
                 
             elif opts.for_autoph:            
-                ax_plot(ax, df.index, df[sim_obs_name], label=l) #
+                ax_plot(ax, df.index, df[sim_obs_name], label=l)
                 ax_fill_between(
                     ax,
                     df.index, 
@@ -311,10 +312,17 @@ def main():
     plt.xlabel(X_LABEL_TIME_UNIT_S)
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
 
-    ax.set_ylim(0,150)
-    ax.set_xticks([0, 1, 2])
-    ax.set_yticks([0, 50, 100, 150])
 
+    # ax.set_xticks([0, 1, 2])
+    # ax.set_xlim(0, 2.0)
+    # ax.set_xticks([0, 2.0])
+    # ax.set_ylim(0, 150)
+    # ax.set_yticks([0, 50, 100, 150])
+    ax.margins(.05)
+    plt.ylim(top=150)
+    plt.xlim(right=plt.xticks()[0][-2])
+
+    # ax.margins(x=0.05, y=0.05)  # these plots run up against the axes, margin is good for this exact situation
 
     plt.legend(loc='upper right', bbox_to_anchor=(0, 0, 1.0, 1.0))
 
@@ -331,7 +339,8 @@ def main():
     # print('opts.index_name = ', opts.index_name)
     # print('opts.output = ', opts.output)
 
-    plt.subplots_adjust(left=0.14, right=0.96, bottom=0.16, top=0.95)
+    # plt.subplots_adjust(left=0.14, right=0.96, bottom=0.16, top=0.95)
+    plt.subplots_adjust(left=0.15, right=0.90, bottom=0.20, top=0.90) #.15/.90/.20/.90 <- same as Fig12 #0502
     if opts.index_name:
         # add_plot_index(plt, ax, opts.index_name)
         plt.text(.01, .99, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)

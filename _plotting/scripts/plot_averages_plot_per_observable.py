@@ -134,21 +134,37 @@ def main():
             continue
         
         #print("Processing observable " + obs)
-
-
         if index == 0:
             print('  Working on subplot A - ', obs)
             ax = fig.add_subplot(221)
+            # left, right = ax.get_xbound()
+            # xmargin = -(right - left)*.05
+            # print('fig13: left = ', left)
+            # print('fig13: right = ', right)
+            # print('fig13: xmargin = ', xmargin)
+
             # ax.set_ylim(0, 600)
+            # ax.set_ylim(top=800)
+            # ax.set_xlim(left=xmargin, right=0.10)
+            # set_xmargin(ax, left=0.05, right=0)
         elif  index == 1:
             print('  Working on subplot B - ', obs)
             ax = fig.add_subplot(222)
+            # ax.set_ylim(top=250)
+            # ax.set_xlim(right=0.10)
         elif index == 2:
             print('  Working on subplot C - ', obs)
             ax = fig.add_subplot(223)
+            # ax.set_ylim(top=350)
+            # ax.set_xlim(right=0.10)
         elif index == 3:
             print('  Working on subplot D - ', obs)
             ax = fig.add_subplot(224)
+            # ax.set_ylim(top=12)
+            # ax.set_xlim(right=0.10)
+
+        # ax.margins(0.05)
+
 
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
@@ -187,19 +203,21 @@ def main():
         '''
 
         if index_names[index] == 'A' or index_names[index] == 'C':
-            L = plt.legend(loc='upper right', bbox_to_anchor=(0, 0, 1.0, 1.0))
+            # L = plt.legend(loc='upper right', bbox_to_anchor=(0, 0, 1.0, 1.0))
+            L = plt.legend(loc='upper right', bbox_to_anchor=(0, 0, .96, 1.0))
         elif index_names[index] == 'B' or index_names[index] == 'D':
-            L = plt.legend(loc='lower right', bbox_to_anchor=(0, .05, 1.0, .95))
+            # L = plt.legend(loc='lower right', bbox_to_anchor=(0, .05, 1.0, .95))
+            L = plt.legend(loc='lower right', bbox_to_anchor=(0, .05, .96, .95))
 
         correct_legend_labels = ['MCell4 ' + obs, 'MCell3 ' + obs, 'NFSim ' + obs]
         L.get_texts()[0].set_text(correct_legend_labels[0])
         L.get_texts()[1].set_text(correct_legend_labels[1])
         L.get_texts()[2].set_text(correct_legend_labels[2])
 
-        # plt.xlabel(X_LABEL_TIME_UNIT_S)
-        # plt.ylabel(Y_LABEL_N_PARAM_TIME)
+        plt.xlabel(X_LABEL_TIME_UNIT_S)
+        plt.ylabel(Y_LABEL_N_PARAM_TIME)
 
-        ax.margins(0.05) # these plots run up against the axes, margin is good for this exact situation
+        # ax.margins(0.05) # these plots run up against the axes, margin is good for this exact situation
 
         # add_plot_index(plt, ax, index_names[index], x_offset=-0.03)
         # plt.text(.03, .95, '(' + index_names[index] + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)

@@ -59,6 +59,7 @@ def main():
     datas = [dataA, dataB]
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig17.pdf')
     fig = plt.figure()
+
     # fig = plt.figure(figsize=(3.5, 3.5))
     # fig.set_figwidth(3.5)
 
@@ -109,12 +110,15 @@ def main():
             print('Working on subplot A')
             # ax = fig.add_subplot(121)
             # ax = fig.add_subplot(211)
-            ax = plt.subplot2grid((7, 2), (0, 0), rowspan=7)
+            # ax = plt.subplot2grid((7, 2), (0, 0), rowspan=7)
+            ax = plt.subplot2grid((21, 2), (0, 0), rowspan=21)
         elif data == dataB:
             print('Working on subplot B')
             # ax = fig.add_subplot(122)
             # ax = fig.add_subplot(212)
-            ax = plt.subplot2grid((7, 2), (0, 1), rowspan=3)
+            # ax = plt.subplot2grid((7, 2), (0, 1), rowspan=3)
+            ax = plt.subplot2grid((21, 2), (0, 1), rowspan=10)
+
 
         # df['MCell3/MCell4'].plot(kind="barh", width = .8)
 
@@ -134,7 +138,7 @@ def main():
         '''
         if data == dataA:
             names = ['Synaptic Ca Homeostasis Presynaptic', 'Rat NMJ', 'Neuropil             (full model)',
-                     'Neuropil          (simplified geometry)', 'Mitochondria Presynaptic', 'Membrane          Localization',
+                     'Neuropil          (simple geometry)', 'Mitochondria Presynaptic', 'Membrane          Localization',
                      'Auto-    phosphorylation']
         elif data == dataB:
             names = ['CaMKII              Holoenzyme', 'CaMKII Monomer', 'SynGAP +      TARP']
@@ -155,10 +159,8 @@ def main():
         cm = plt.cm.get_cmap('tab10')
         NUM_COLORS = len(names)
         colors = [cm(i) for i in range(NUM_COLORS)]  # type is list
-        bar_height = 0.8
-        # bars = plt.barh(names, results, color=colors, align='center', height=bar_height)
-        # bars = plt.barh(names, results, color='b', align='center', height=bar_height)
-        bars = plt.barh(names, results, color='b', align='center', height=bar_height)
+        bars = plt.barh(names, results, color='b', align='center', height=1, linewidth = .8)
+        # bars = plt.barh(names, results, color='b', align='edge', height=1)
 
         # rects = ax.barh(range(len(names)), results, color=colors)
 
@@ -167,34 +169,38 @@ def main():
         ax.spines['right'].set_visible(False)
         ax.spines['bottom'].set_visible(False)
         # ax.spines['left'].set_visible(False)
-        ax.axes.yaxis.set_ticklabels([])
         # ax.annotate('1', (1, len(names)-1), color='red')
+        ax.yaxis.set_tick_params(length=0) # hide ticks but keep tiok labels
+        ax.tick_params(width=.8) # thickness of ticks
 
         if max(results) < 3:
             ax.xaxis.set_ticks(np.arange(0, 4, 1))
         if max(results) > 3:
-            ax.xaxis.set_ticks(np.arange(0, 50, 20))
+            ax.xaxis.set_ticks(np.arange(0, 50, 10))
 
         ax.set_xlabel('Rel. Performance')
-        # ax.yaxis.set_ticks(names)
-        # plt.yticks(wrap=True,linespacing=0.8)
-        # plt.yticks(x_axis, [textwrap.fill(label, 10) for name in names],
-        #            rotation=10, fontsize=12, horizontalalignment="center")
-
+        # ax.margins(x=0, y=0)
+        # ax.margins(0.05)
 
         for bar in bars:
             width = bar.get_width()
-            label_y = bar.get_y() + bar.get_height() / 2
+            print('bar.get_y() = ',bar.get_y())
+            print('bar.get_height() = ', bar.get_height())
+            # ylabel_pos = bar.get_y() + bar.get_height() / 2
+            ylabel_pos = bar.get_y() +.45
+            ylabel_valign = 'center'
 
+            # original offsets: 1.05, .05, .65
             if width < 1:
-                # plt.annotate("{:.2f}".format(width), xy=(1.05, label_y), ha='left', va='center')
-                plt.annotate("{:.2f}".format(width), xy=(1.05, label_y), ha='left', va='center')
+                # plt.annotate("{:.2f}".format(width), xy=(1.07, ylabel_pos), ha='left', va=ylabel_valign)
+                plt.annotate("{:.2f}".format(width), xy=(1.07, ylabel_pos), ha='left', va=ylabel_valign)
             else:
-                # plt.annotate("{:.2f}".format(width), xy=(width+.05, label_y), ha='left', va='center')
+                # plt.annotate("{:.2f}".format(width), xy=(width+.07, ylabel_pos), ha='left', va=ylabel_valign)
                 if data == dataA:
-                    plt.annotate("{:.2f}".format(width), xy=(width+.05, label_y), ha='left', va='center')
+                    plt.annotate("{:.2f}".format(width), xy=(width+.07, ylabel_pos), ha='left', va=ylabel_valign)
                 elif data == dataB:
-                    plt.annotate("{:.2f}".format(width), xy=(width + .65, label_y), ha='left', va='center')
+                    # plt.annotate("{:.2f}".format(width), xy=(width + .65, ylabel_pos), ha='left', va=ylabel_valign)
+                    plt.annotate("{:.2f}".format(width), xy=(width + .95, ylabel_pos), ha='left', va=ylabel_valign)
 
 
 
@@ -205,9 +211,13 @@ def main():
             # plt.text(-2, 1.1, index_name, horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
             # plt.text(.1, .9, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transSubfigure)
             # plt.text(0, 1, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-            plt.yticks(names, [textwrap.fill(name, 21) for name in names], linespacing=1.0)
-            dataA_ylim = ax.get_ylim()
-            plt.axvline(x=1, ymin=0, ymax=1, color='r', linestyle='--')
+            plt.yticks(names, [textwrap.fill(name, 21) for name in names], linespacing=.9)
+
+            # plt.axvline(x=1, ymin=0, ymax=1, color='r', linestyle='--', linewidth=1)
+            # plt.axvline(x=1, ymin=.04, ymax=.96, color='r', linestyle='--', linewidth=1)
+            plt.axvline(x=1, ymin=.04, color='r', linestyle='--', linewidth=.8)
+
+            # ax.margins(x=0,y=0)
 
 
         elif data == dataB:
@@ -215,7 +225,7 @@ def main():
             # plt.text(-2, 1.1, index_name, horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
             # plt.text(.5, .9, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transSubfigure)
             # plt.text(.5, 1, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-            plt.yticks(names, [textwrap.fill(name, 13) for name in names], linespacing=1.0)
+            plt.yticks(names, [textwrap.fill(name, 13) for name in names], linespacing=.9)
 
             # ylim = ax.get_ylim()
             # print('\n\nold ylim = \n\n', str(ylim))
@@ -224,15 +234,17 @@ def main():
             # print("new ylim = %s\n\n" % str(dataA_ylim))
 
             # plt.axvline(x=1, ymin=0, ymax=4 / 7, color='r', linestyle='--')
-            plt.axvline(x=1, ymin=0, ymax=1, color='r', linestyle='--', linewidth=1)
+            # plt.axvline(x=1, ymin=0, ymax=1, color='r', linestyle='--', linewidth=1)
+            plt.axvline(x=1, color='r', linestyle='--', linewidth=.8)
+            ax.margins(y=.05*(7/3))
 
         # plt.subplots_adjust(wspace=1.4, left=0.25, bottom=0.15, top=0.9)
         # plt.subplots_adjust(wspace=1.1, left=0.25, right=.95, bottom=0.15, top=0.9)
         # plt.text(.01, .98, '(A)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
         # plt.text(0.51, .98, '(B)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-        plt.subplots_adjust(wspace=1.3, left=0.32, right=.94, bottom=0.15, top=0.94)
-        plt.text(0, .99, '(A)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-        plt.text(0.50, .99, '(B)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+        plt.subplots_adjust(wspace=1.2, left=0.26, right=.94, bottom=0.15, top=0.94)
+        plt.text(.01, .99, '(A)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+        plt.text(0.52, .99, '(B)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
 
     # print('Getting figures list..')
     # figs = list(map(plt.figure, plt.get_fignums()))

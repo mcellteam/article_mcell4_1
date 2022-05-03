@@ -7,7 +7,7 @@ rm -r result/*.pdf
 rm -r result/pdf/*
 rm -r result/png/*
 
-./autophosphorylation.sh &  
+./autophosphorylation.sh &
 ./camkii.sh &
 ./camkii_variations.sh &
 ./membrane_loc.sh &
@@ -15,6 +15,6 @@ rm -r result/png/*
 ./hybrid.sh &
 ./snare_complex.sh &
 
-./assemble_figures.sh
-
 wait
+
+./scripts/combine_all.py
