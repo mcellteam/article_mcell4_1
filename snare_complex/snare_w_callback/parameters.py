@@ -22,4 +22,4 @@ def not_defined(parameter_name):
 # ---- simulation setup ----
 
 if not_defined('ITERATIONS'):
-    ITERATIONS = 1e6
+    ITERATIONS = 1e4

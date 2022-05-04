@@ -78,7 +78,8 @@ def custom_init_and_run(model):
     import re
 
     model.initialize()
-
+    #glu = model.find_elementery_molecule_type('glu')
+    #glu.diffusion_constant_3d =
     mol_rel_info = [
         {  'species': m.Complex('glu'),
             'number': parameters.n_glu,
