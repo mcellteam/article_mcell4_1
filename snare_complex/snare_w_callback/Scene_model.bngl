@@ -21,7 +21,7 @@ begin parameters
   k_dock 0.2 # 1/s
   a 0.025 # Reduced release probability for asynchronous
   b 0.25 # Calcium binding cooperativity factor
-  Ca0  1e-7*NA_V # Basal calcium concentratiom # 1/M Nr_ca_molecules
+  Ca0  1e-7*NA_V # Basal calcium concentration # 1/M Nr_ca_molecules
 end parameters
 
 begin compartments
