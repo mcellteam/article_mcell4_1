@@ -78,7 +78,8 @@ def custom_init_and_run(model):
     import re
 
     model.initialize()
-
+    #glu = model.find_elementery_molecule_type('glu')
+    #glu.diffusion_constant_3d =
     mol_rel_info = [
         {  'species': m.Complex('glu'),
             'number': parameters.n_glu,
@@ -93,16 +94,11 @@ def custom_init_and_run(model):
     )
 
     #when these reactions occur glutame is released
-    #rel_rxns = ['sr','asr']
+    rel_rxns = ['sync','async']
 
-    sync_pat = re.compile('^sync.*')
-    async_pat = re.compile('^async.*')
-    rel_rxn_pat = re.compile('^[a]?sync.*')
-
-    rel_rxns = [ rxn for rxn in model.reaction_rules if rel_rxn_pat.fullmatch(rxn.name) ]
-    print(rel_rxns)
-
-    for rxn in rel_rxns:
+    for rxn_name in rel_rxns:
+        rxn = model.find_reaction_rule(rxn_name)
+        print(rxn.name)
         model.register_reaction_callback(
             release_event_callback,
             rel_evnt_ctx,

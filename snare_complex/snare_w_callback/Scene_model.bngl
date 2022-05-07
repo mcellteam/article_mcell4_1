@@ -3,15 +3,15 @@ begin model
 begin parameters
 #check units for MCell (now SA compartment)
 
-  MCELL_DIFFUSION_CONSTANT_3D_Ca 1e-6
+  MCELL_DIFFUSION_CONSTANT_3D_Ca 2.2e-6
   MCELL_DIFFUSION_CONSTANT_3D_V_release 0
   MCELL_DIFFUSION_CONSTANT_2D_snare 0
-  MCELL_DIFFUSION_CONSTANT_3D_glu 1e-6
+  MCELL_DIFFUSION_CONSTANT_3D_glu 2.2e-6
   NA  6.022e23
   V  1 * 1e-15 #lt
   NA_V  NA * V
   #MCELL_REDEFINE_NA_V 1
-  #ITERATIONS 5000
+  ITERATIONS 5000
   ksp   0.612e8/NA_V # 1/M 1/s
   ksm 2.32e3 # 1/s
   kap  3.82e6/NA_V # 1/M 1/s
@@ -21,13 +21,14 @@ begin parameters
   k_dock 0.2 # 1/s
   a 0.025 # Reduced release probability for asynchronous
   b 0.25 # Calcium binding cooperativity factor
-  Ca0  1e-7*NA_V # Basal calcium concentratiom # 1/M Nr_ca_molecules
+  Ca0  1e-7*NA_V # Basal calcium concentration # 1/M Nr_ca_molecules
 end parameters
 
 begin compartments
 # 3D (volume) compartment with volume 1um^3
-    #Plasma membrane: 0.01 um x SA 
-    PM 2 1e-2 
+    #Plasma membrane: 0.01 um x SA
+    EC 3 3e-3
+    PM 2 1e-2 EC
     #Cytosol
     CP 3 1e-3 PM
 end compartments
@@ -37,7 +38,7 @@ begin molecule types
   snare(s~0~1~2~3~4~5,a~0~1~2,dv~0~1)
   Ca
   V_release()
-
+  glu
 end molecule types
 
 begin species
@@ -56,7 +57,7 @@ end observables
 begin reaction rules
 
   # Calcium binding to synchronous sensor
-  snare(s~0)@PM + Ca@CP <-> snare(s~1)@PM 5*ksp, 1*b^0*ksm 
+  snare(s~0)@PM + Ca@CP <-> snare(s~1)@PM 5*ksp, 1*b^0*ksm
   snare(s~1)@PM + Ca@CP <-> snare(s~2)@PM 4*ksp, 2*b^1*ksm
   snare(s~2)@PM + Ca@CP <-> snare(s~3)@PM 3*ksp, 3*b^2*ksm
   snare(s~3)@PM + Ca@CP <-> snare(s~4)@PM 2*ksp, 4*b^3*ksm

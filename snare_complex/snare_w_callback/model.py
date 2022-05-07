@@ -50,5 +50,5 @@ else:
     if EXPORT_DATA_MODEL and model.viz_outputs:
         model.export_data_model()
 
-    model.run_iterations(1e6)
+    model.run_iterations(1e3)
     model.end_simulation()
