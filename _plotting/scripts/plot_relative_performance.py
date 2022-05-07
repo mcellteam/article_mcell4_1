@@ -155,11 +155,17 @@ def main():
 
         # df = df.sort_values(by=['Benchmark'])
 
+
+
         # cm = plt.get_cmap('tab10')
         cm = plt.cm.get_cmap('tab10')
         NUM_COLORS = len(names)
         colors = [cm(i) for i in range(NUM_COLORS)]  # type is list
+        # ax.set_prop_cycle(linestyle=linestyles, color=colors)
+        ax.set_prop_cycle(color=colors)
         bars = plt.barh(names, results, color='b', align='center', height=1, linewidth = .8)
+        # bars = plt.barh(names, results, color=colors[0],align='center', height=1, linewidth = .8)
+        # bars = plt.barh(names, results, color=colors[5], align='center', height=1, linewidth=.8)
         # bars = plt.barh(names, results, color='b', align='edge', height=1)
 
         # rects = ax.barh(range(len(names)), results, color=colors)
@@ -184,8 +190,6 @@ def main():
 
         for bar in bars:
             width = bar.get_width()
-            print('bar.get_y() = ',bar.get_y())
-            print('bar.get_height() = ', bar.get_height())
             # ylabel_pos = bar.get_y() + bar.get_height() / 2
             ylabel_pos = bar.get_y() +.45
             ylabel_valign = 'center'
@@ -215,7 +219,7 @@ def main():
 
             # plt.axvline(x=1, ymin=0, ymax=1, color='r', linestyle='--', linewidth=1)
             # plt.axvline(x=1, ymin=.04, ymax=.96, color='r', linestyle='--', linewidth=1)
-            plt.axvline(x=1, ymin=.04, color='r', linestyle='--', linewidth=.8)
+            plt.axvline(x=1, ymin=.04, color='r', linestyle='--', linewidth=1.0)
 
             # ax.margins(x=0,y=0)
 
@@ -235,16 +239,16 @@ def main():
 
             # plt.axvline(x=1, ymin=0, ymax=4 / 7, color='r', linestyle='--')
             # plt.axvline(x=1, ymin=0, ymax=1, color='r', linestyle='--', linewidth=1)
-            plt.axvline(x=1, color='r', linestyle='--', linewidth=.8)
+            plt.axvline(x=1, color='r', linestyle='--', linewidth=1.0)
             ax.margins(y=.05*(7/3))
 
         # plt.subplots_adjust(wspace=1.4, left=0.25, bottom=0.15, top=0.9)
         # plt.subplots_adjust(wspace=1.1, left=0.25, right=.95, bottom=0.15, top=0.9)
         # plt.text(.01, .98, '(A)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
         # plt.text(0.51, .98, '(B)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-        plt.subplots_adjust(wspace=1.2, left=0.26, right=.94, bottom=0.15, top=0.94)
-        plt.text(.01, .99, '(A)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-        plt.text(0.52, .99, '(B)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+        plt.subplots_adjust(wspace=1.0, left=0.26, right=.92, bottom=0.15, top=0.94)
+        plt.text(.01, .98, '(A)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+        plt.text(0.51, .98, '(B)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
 
     # print('Getting figures list..')
     # figs = list(map(plt.figure, plt.get_fignums()))

@@ -340,7 +340,7 @@ def main():
     # print('opts.output = ', opts.output)
 
     # plt.subplots_adjust(left=0.14, right=0.96, bottom=0.16, top=0.95)
-    plt.subplots_adjust(left=0.15, right=0.90, bottom=0.20, top=0.90) #.15/.90/.20/.90 <- same as Fig12 #0502
+    plt.subplots_adjust(left=0.20, right=0.90, bottom=0.20, top=0.90) #.15/.90/.20/.90 <- same as Fig12 #0502
     if opts.index_name:
         # add_plot_index(plt, ax, opts.index_name)
         plt.text(.01, .99, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)

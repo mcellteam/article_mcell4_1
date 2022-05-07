@@ -182,23 +182,19 @@ def main():
         'dashdot', 
         (0, (3, 1, 1, 1, 1, 1)),    # 'densely dashdotdotted', 
     ]
-    
-    if opts.for_autoph:
-        # fig.set_size_inches((14,2.5))
 
-        cm = plt.get_cmap('tab10')
-        NUM_COLORS = 6
-        colors = [cm(i) for i in range(NUM_COLORS)]
-        ax.set_prop_cycle(linestyle = linestyles, color = colors)
-        
-        clrs = [None]*10
-    elif opts.for_snare: 
-        clrs = ['b', 'b', 'r', 'r', 'g', 'g']
-    else:
-        clrs = ['b', 'g', 'r']
-        
-    if opts.for_camkii:
-        ax.set_ylim([0, 0.5])
+    cm = plt.cm.get_cmap('tab10')
+    NUM_COLORS = len(names)
+    NUM_COLORS = 10
+    colors = [cm(i) for i in range(NUM_COLORS)]  # type is list
+    # ax.set_prop_cycle(linestyle=linestyles, color=colors)
+    ax.set_prop_cycle(color=colors)
+
+
+    # clrs = ['b', 'b', 'r', 'r', 'g', 'g'] #original
+    clrs = [colors[1], colors[1], colors[3], colors[3], colors[5], colors[5]]
+    # ax.set_prop_cycle(color=clrs)
+
     
     dfs = {}
     color_index = 0
@@ -266,8 +262,9 @@ def main():
             else:
                 s = '--'
             ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s, c=clrs[color_index])
+            # ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s)
 
-            
+            # ax.set_prop_cycle(color=clrs)
             color_index += 1
             
 

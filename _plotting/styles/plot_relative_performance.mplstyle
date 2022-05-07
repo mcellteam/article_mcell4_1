@@ -1,21 +1,9 @@
 figure.figsize: 3.25,2.25
-font.size: 7
-axes.labelsize: 7
-xtick.labelsize: 7
+font.size: 8
+axes.labelsize: 8
+xtick.labelsize: 8
 ytick.labelsize: 7
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+axes.labelpad: 3 #<4.0>
+xaxis.labellocation: left
+ytick.major.pad: 2.0 # <3.5>
 

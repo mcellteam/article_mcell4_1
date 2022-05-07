@@ -337,7 +337,7 @@ def main():
 
         plt.xlabel(X_LABEL_TIME_UNIT_S)
         # plt.ylabel(Y_LABEL_N_PARAM_TIME)
-        plt.ylabel('N(t)')
+        plt.ylabel('# molecules')
 
         ax.set_xlim(0, 3)
         ax.set_xticks([0, 1, 2, 3])
@@ -351,7 +351,7 @@ def main():
         L.get_texts()[2].set_text(correct_legend_labels[2])
 
 
-        plt.subplots_adjust(top=.94, bottom=.10, left=.12, right=.95, wspace=.35, hspace=.35)
+        plt.subplots_adjust(top=.94, bottom=.10, left=.10, right=.95, wspace=.40, hspace=.35)
         plt.text(-.25, 1.12, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top',transform=ax.transAxes)
 
         pickle_name = opts.output + '.pickle'
