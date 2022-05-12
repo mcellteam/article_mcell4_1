@@ -25,14 +25,14 @@ GCG
 
 
 #Load mcell output
-mc_snare_syn = np.genfromtxt('./SNARE_sync.dat',
+mc_snare_syn = np.genfromtxt('./react_data/seed_00001/SNARE_sync.dat',
                       dtype=float,
                       delimiter=' ')
 #
-mc_snare_asyn = np.genfromtxt('./SNARE_async.dat',
+mc_snare_asyn = np.genfromtxt('./react_data/seed_00001/SNARE_async.dat',
                       dtype=float,#
                       delimiter=' ')
-mc_vrel = np.genfromtxt('./V_release.dat',
+mc_vrel = np.genfromtxt('./react_data/seed_00001/V_release.dat',
                       dtype=float,#
                       delimiter=' ')
 
