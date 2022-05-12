@@ -53,14 +53,14 @@ else:
 #Proc = sp.call(['bionetgen' + exe_ext,'run','-i',dir,'-o',outdir],cwd = tdir)
 
 #Load mcell output
-mc_snare_syn = np.genfromtxt('../mcellsim/SNARE_sync.dat',
+mc_snare_syn = np.genfromtxt('../mcellsim/react_data/seed_00001/SNARE_sync.dat',
                       dtype=float,
                       delimiter=' ')
 #
-mc_snare_asyn = np.genfromtxt('../mcellsim/SNARE_async.dat',
+mc_snare_asyn = np.genfromtxt('../mcellsim/react_data/seed_00001/SNARE_async.dat',
                       dtype=float,#
                       delimiter=' ')
-mc_vrel = np.genfromtxt('../mcellsim/V_release.dat',
+mc_vrel = np.genfromtxt('../mcellsim/react_data/seed_00001/V_release.dat',
                       dtype=float,#
                       delimiter=' ')
 
