@@ -1,8 +1,6 @@
 begin model
 
 begin parameters
-#check units for MCell (now SA compartment)
-
   MCELL_DIFFUSION_CONSTANT_3D_Ca 1e-6
   MCELL_DIFFUSION_CONSTANT_3D_V_release 0
   MCELL_DIFFUSION_CONSTANT_2D_snare 0
@@ -10,7 +8,6 @@ begin parameters
   V  1 * 1e-15 #lt
   NA_V  NA * V
   #MCELL_REDEFINE_NA_V 1
-  #ITERATIONS 5000
   ksp   0.612e8/NA_V # 1/M 1/s
   ksm 2.32e3 # 1/s
   kap  3.82e6/NA_V # 1/M 1/s
@@ -24,25 +21,22 @@ begin parameters
 end parameters
 
 begin compartments
-# 3D (volume) compartment with volume 1um^3
-    #Plasma membrane: 0.01 um x SA 
-    PM 2 6e-2 
-    #Cytosol
+    # Plasma membrane (PM) 2D compartment with volume 0.01 um x SA um^2
+    PM 2 6e-4
+    # Cytosol (CP) 3D volume compartment with volume 1e-3um^3
     CP 3 1e-3 PM
 end compartments
 
 begin molecule types
-
   snare(s~0~1~2~3~4~5,a~0~1~2,dv~0~1)
   Ca
   V_release()
-
 end molecule types
 
 begin species
-  # SNARE complex
+  # SNARE complex are released in the PM
   snare(s~0,a~0,dv~1)@PM 70
-  # fixed calcium number
+  # Fixed calcium number in the cytosol
   Ca@CP Ca0
 end species
 
@@ -54,23 +48,22 @@ end observables
 
 begin reaction rules
 
-  # Calcium binding to synchronous sensor
-  snare(s~0)@PM + Ca@CP <-> snare(s~1)@PM 5*ksp, 1*b^0*ksm 
+  # Calcium binding to the synchronous component of the sensor
+  snare(s~0)@PM + Ca@CP <-> snare(s~1)@PM 5*ksp, 1*b^0*ksm
   snare(s~1)@PM + Ca@CP <-> snare(s~2)@PM 4*ksp, 2*b^1*ksm
   snare(s~2)@PM + Ca@CP <-> snare(s~3)@PM 3*ksp, 3*b^2*ksm
   snare(s~3)@PM + Ca@CP <-> snare(s~4)@PM 2*ksp, 4*b^3*ksm
   snare(s~4)@PM + Ca@CP <-> snare(s~5)@PM 1*ksp, 5*b^4*ksm
 
-  # Calcium binding to asynchronous sensor
+  # Calcium binding to asynchronous component of the sensor
   snare(a~0)@PM + Ca@CP <-> snare(a~1)@PM 2*kap, 1*b^0*kam
   snare(a~1)@PM + Ca@CP <-> snare(a~2)@PM 1*kap, 2*b^1*kam
 
-  # Vesicle release
-  #synchronous
+  # Synchronous vesicle release
   sync: snare(s~5,dv~1)@PM -> snare(s~5,dv~0)@PM + V_release()@CP gamma
-  # asynchronous
+  # Asynchronous vesicle release
   async: snare(dv~1,a~2)@PM -> snare(dv~0,a~2)@PM + V_release()@CP a*gamma
-  #Vesicle docking to SNARE
+  # Vesicle docking to SNARE
   snare(dv~0) -> snare(dv~1) k_dock
 
  end reaction rules
