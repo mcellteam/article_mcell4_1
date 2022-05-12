@@ -111,6 +111,7 @@ def main():
     clrs = ['b', 'g', 'r']
 
     fig = plt.figure()
+    fig.set_figwidth(6.5)
     '''
     str(sorted(all_observables)) = ['Ca', 'CaM', 'CaM1C', 'CaM1C1N', 'CaM1C2N', 'CaM1N', 'CaM2C', 'CaM2N', 'Cam2C1N',
                                     'Cam4Ca', 'KCaM', 'KCaM0', 'KCaM1C', 'KCaM1C1N', 'KCaM1C2N', 'KCaM1N', 'KCaM2C',
@@ -223,7 +224,7 @@ def main():
         # plt.text(.03, .95, '(' + index_names[index] + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
         #plt.text(.01, .99, '(' + index_names[index] + ')', horizontalalignment='left', verticalalignment='top',transform=fig.transFigure)
         plt.subplots_adjust(top=.93, bottom=.10, left=.10, right=.95, wspace=.4, hspace=.4)
-        plt.text(-.25, 1.15, '(' + index_names[index] + ')', horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
+        plt.text(-.25, 1.15, index_names[index], weight="bold", horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
         # plt.savefig(obs + '.png', dpi=OUTPUT_DPI) # 'dpi' now controlled by master stylesheet
         # plt.savefig(obs + '.png')
         # plt.savefig(obs + '.tiff')

@@ -92,16 +92,24 @@ ode = {
 }
         
 # used in plot_peaks_error_bars        
+# data = [
+#     (1, particle_D10, 'r', 'particle D=1e-7'),
+#     (2, hybrid_D10, 'b', 'hybrid D=1e-7'),
+#     (3, particle_D1000, 'g', 'particle D=1e-5'),
+#     (4, hybrid_D1000, 'm', 'hybrid D=1e-5'),
+#     (5, nfsim, 'c', 'NFSim'),
+#     (6, nfsim, 'y', 'SSA'),
+#     (7, ode, 'k', 'ODE')
+# ]
 data = [
-    (1, particle_D10, 'r', 'particle D=1e-7'),
-    (2, hybrid_D10, 'b', 'hybrid D=1e-7'),
-    (3, particle_D1000, 'g', 'particle D=1e-5'),
-    (4, hybrid_D1000, 'm', 'hybrid D=1e-5'),
+    (1, particle_D10, 'r', 'particle D=$10^{-7} \, cm^2/s$'),
+    (2, hybrid_D10, 'b', 'hybrid D=$10^{-7} \, cm^2/s$'),
+    (3, particle_D1000, 'g', 'particle D=$10^{-5} \, cm^2/s$'),
+    (4, hybrid_D1000, 'm', 'hybrid D=$10^{-5} \, cm^2/s$'),
     (5, nfsim, 'c', 'NFSim'),
     (6, nfsim, 'y', 'SSA'),
     (7, ode, 'k', 'ODE')
-]        
-
+]
 
 def load_gdat_file(file):
     print("Loading " + file)
@@ -119,7 +127,7 @@ def load_csv(file):
 def finalize_and_save_plot(out, fig):
     plt.xlabel("time [s]")
                 
-    plt.grid(axis="x")
+    # plt.grid(axis="x")
     border = 0.007857
     # plt.xlim([0 - border, 0.16 + border])
     
@@ -129,24 +137,39 @@ def finalize_and_save_plot(out, fig):
     print("Plot " + out + " generated")
 
 def plot_averages(dir, index_name):
-    if index_name == 'C':
+    if index_name == 'A':
+    # if 1:
         global ax3
-        ax = ax3 = fig.add_subplot(513)
-        ax.xaxis.set_tick_params(labelbottom=False)
+        ax = ax3 = fig.add_subplot(311)
+        # ax.xaxis.set_tick_params(labelbottom=False)
+        # ax.set_xlim([0, .16])
+        # ax.set_xticks([0, .16])
+        # ax.set_ylim([0, 1800])
+        # ax.set_yticks([0, 1800])
+        ax.set_xlim([0, .16])
+        ax.set_xticks([0, .02, .04, .06, .08, .10, .12, .14, .16])
+        ax.set_ylim([0, 2000])
+        ax.set_yticks([0, 1000, 2000])
+        # ax.grid(which='minor', alpha=0.4, linestyle='--')
+        ax.xaxis.grid(True, which='major', alpha=0.6, linestyle='--')
+        ax.yaxis.grid(False, which='major')  # ensure only vertical lines are plotted
         # plt.yticks([0, .16])
-
-    elif index_name == 'D':
+    elif index_name == 'B':
         global ax4
-        ax = ax4 = fig.add_subplot(514)
+        ax = ax4 = fig.add_subplot(312)
         ax.xaxis.set_tick_params(labelbottom=False)
+        ax.xaxis.grid(True, which='major', alpha=0.6, linestyle='--')
+        ax.yaxis.grid(False, which='major')  # ensure only vertical lines are plotted
         # plt.yticks([0, 500, 1000, 1500])
-    elif index_name == 'E':
+    elif index_name == 'C':
         global ax5
-        ax = ax5 = fig.add_subplot(515)
+        ax = ax5 = fig.add_subplot(313)
         # plt.yticks([0, 500, 1000, 1500])
         plt.xlabel(X_LABEL_TIME_UNIT_S)
-    else:
-        ax = fig.add_subplot()
+        ax.xaxis.grid(True, which='major', alpha=0.6, linestyle='--')
+        ax.yaxis.grid(False, which='major')  # ensure only vertical lines are plotted
+        # grid_x_ticks = np.arange(0, .16, 0.02)
+        # ax.set_xticks(grid_x_ticks, minor=True)
 
     # load all .csv files in directory passed as the first argument
     data = {}
@@ -189,38 +212,36 @@ def plot_averages(dir, index_name):
         elif name == 'ssa':
             name = 'SSA'
         elif name == 'hybrid_D1000':
-            name = 'hybrid D=' + str(1e-5)
+            # name = 'hybrid D=' + str(1e-5)
+            name = 'hybrid D = $10^{-5} \, cm^2/s$'
         elif name == 'particle_D1000':
-            name = 'particle D=' + str(1e-5)
+            # name = 'particle D=' + str(1e-5)
+            name = 'particle D = $10^{-5} \, cm^2/s$'
         elif name == 'hybrid_D10':
-            name = 'hybrid D=' + str(1e-7)
+            # name = 'hybrid D=' + str(1e-7)
+            name = 'hybrid D = $10^{-7} \, cm^2/s$'
         elif name == 'particle_D10':
-            name = 'particle D=' + str(1e-7)
+            # name = 'particle D=' + str(1e-7)
+            name = 'particle D = $10^{-7} \, cm^2/s$'
 
         legend.append(name + ' - A (mean)')
         legend.append(name + ' - R (mean)')
 
-    if index_name == 'C':
-        leg = plt.legend(legend, loc='upper right', bbox_to_anchor=(0, 0, .98, 1.02), fontsize=6, ncol = 4)
+    if index_name == 'A':
+        leg = plt.legend(legend, loc='upper right', bbox_to_anchor=(0, 0, 1.00, 1.05), fontsize=6, ncol = 2, labelspacing=2, frameon=1)
+        frame = leg.get_frame()
+        frame.set_color('white')
+        frame.set_alpha(None)
     else:
-        leg = plt.legend(legend, loc='upper right', bbox_to_anchor=(0, 0, .98, 1.02), fontsize=6, ncol = 1)
+        leg = plt.legend(legend, loc='upper right', bbox_to_anchor=(0, 0, 1.00, 1.05), fontsize=6, ncol = 1, frameon=1)
+        frame = leg.get_frame()
+        frame.set_color('white')
+        frame.set_alpha(None)
 
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
 
     # add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)
-    plt.text(xcoord_index, ycoord_index, '(' + index_name + ')', transform=ax.transAxes)
-    # finalize_and_save_plot("hybrid_" + os.path.basename(dir) + ".png", fig)
-    # plt.xlabel("time [s]")
-
-    plt.grid(axis="x")
-    border = 0.007857
-    # plt.xlim([0 - border, 0.16 + border]) #original #0429
-
-    grid_x_ticks = np.arange(0, .16, 0.02)
-    ax.set_xticks(grid_x_ticks, minor=True)
-    ax.grid(which='minor', alpha=0.4, linestyle='--')
-
-    # plt.savefig("hybrid_" + os.path.basename(dir) + '.tiff')
+    plt.text(xcoord_index, ycoord_index, index_name,  fontweight="bold", transform=ax.transAxes)
 
     pickle_name="hybrid_" + os.path.basename(dir) + ".pickle"
     print('pickling %s ...' % pickle_name)
@@ -230,16 +251,17 @@ def plot_low_pass(out, nfsim_seed, index_name):
     # fig, ax = plt.subplots()
     if index_name == 'A':
         global ax1
-        ax = ax1 = fig.add_subplot(511)
+        ax = ax1 = fig.add_subplot(211)
         ax.xaxis.set_tick_params(labelbottom=False)
         # plt.xticks([0,.04,.08,.12,.16])
         # plt.yticks([0, 500, 1000, 1500])
         ax.set_xlim([0, .16])
-        ax.set_xticks([0, .16])
+        ax.set_xticks([0, .02, .04, .06, .08, .10, .12, .14, .16])
+        ax.set_ylim([0, 2000])
+        ax.set_yticks([0, 1000, 2000])
         # ax.set_ylim([0, 1800])
         # ax.set_yticks([0, 1800])
-        ax.set_ylim([0, 1800])
-        ax.set_yticks([0, 1800])
+
 
     else:
         ax = fig.add_subplot()
@@ -265,44 +287,48 @@ def plot_low_pass(out, nfsim_seed, index_name):
     df_lowpass = df_lowpass.truncate(after = 0.16)  
     #print(df_lowpass)
 
-    # ax_plot(ax, df_lowpass.index, df_lowpass['A'], label='A', c = 'b', linewidth=linewidth)
-    # ax_plot(ax, df_lowpass.index, df_lowpass['R'], label='R', c = 'r', linewidth=linewidth)
     ax_plot(ax, df_lowpass.index, df_lowpass['A'], label='A', c='b')
     ax_plot(ax, df_lowpass.index, df_lowpass['R'], label='R', c='r')
 
-    # plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)']) #original
-
-    leg = plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)'], loc='upper right', bbox_to_anchor=(0, 0, .98, 1.02),fontsize=6, ncol=2)
+    leg = plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)'], loc='upper right', bbox_to_anchor=(0, 0, 1.00, 1.05),fontsize=6, ncol=2, frameon = 1)
+    frame = leg.get_frame()
+    frame.set_color('white')
+    frame.set_alpha(None)
 
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
     
     # add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)
-    ax.text(xcoord_index, ycoord_index, '(' + index_name + ')', transform=ax.transAxes)
+    ax.text(xcoord_index + xadjust_errorbars, ycoord_index, index_name,  fontweight="bold", transform=ax.transAxes)
     # finalize_and_save_plot(out, fig)
     # plt.xlabel("time [s]")
-    plt.grid(axis="x")
+    # plt.grid(axis="x")
     border = 0.007857
     # plt.xlim([0 - border, 0.16 + border])
 
-    grid_x_ticks = np.arange(0, .16, 0.02)
-    ax.set_xticks(grid_x_ticks, minor=True)
-    ax.grid(which='minor', alpha=0.4, linestyle='--')
-    matplotlib.pyplot.tick_params(bottom=False)
+    # ax.grid(which='minor', alpha=0.4, linestyle='--')
+    # matplotlib.pyplot.tick_params(bottom=False)
+
+    ax.xaxis.grid(True, which='major', alpha=0.6, linestyle='--') ###
+    ax.yaxis.grid(False, which='major')  # ensure only vertical lines are plotted ###
 
     pickle_name = out + '.pickle'
     print('pickling %s ...' % pickle_name)
     pickle.dump((fig, ax), open(pickle_name, 'wb'))
 
+
 def plot_peaks_error_bars(out, index_name):
     # fig, ax = plt.subplots()
     if index_name == 'B':
         global ax2
-        ax = ax2 = fig.add_subplot(512)
-        ax.xaxis.set_tick_params(labelbottom=False)
+        ax = ax2 = fig.add_subplot(212)
+        # ax.xaxis.set_tick_params(labelbottom=False)
+        plt.xlabel(X_LABEL_TIME_UNIT_S)
     else:
         ax = fig.add_subplot()
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
+    ax.spines['left'].set_visible(False)
+    ax.spines['bottom'].set_visible(False)
     
 
     # plt.legend(['A (low pass)', 'R (low pass)'], loc='center left', bbox_to_anchor=(1, 0.5)) #***
@@ -321,44 +347,52 @@ def plot_peaks_error_bars(out, index_name):
             # also vary with the x-position
             c = 'b' if 'A' in v else 'r'
             
-            ax_errorbar(ax, x, y, xerr=xerr, fmt='|', capsize=3, c=c)
-            
+            # ax_errorbar(ax, x, y, xerr=xerr, fmt='|', capsize=3, c=c)
+            ax_errorbar(ax, x, y, xerr=xerr, fmt='o', capsize=2, c=c, markersize=2)
+
             # 0.007
             #  + 2.5
             # plt.text(0 - 0.0068, y - 3, d[3], c='k')
             # plt.text(0-0.0068, y - 3, d[3], c='k', font={'size': 9})
-            plt.text(-0.002, y - 3, d[3],  font={'size': 6}, horizontalalignment='right', linespacing=None)
+            plt.text(-0.002, y - 3, d[3],  font={'size': 7}, horizontalalignment='right', linespacing=None)
     
-    plt.yticks([])
-    plt.xticks([])
+
 
     red_patch = Line2D([0], [0], color='blue', label='A (low pass peaks)')
     blue_patch = Line2D([0], [0], color='red', label='R (low pass peaks)')
     # plt.legend(['A (low pass)', 'R (low pass)'])  # original
     # plt.legend(handles=[red_patch, blue_patch]) #original
-    leg = plt.legend(handles=[red_patch, blue_patch],loc='upper right', bbox_to_anchor=(0, 0, .98, 1.02), fontsize=6)
+    # leg = plt.legend(handles=[red_patch, blue_patch],loc='upper right', bbox_to_anchor=(0, 0, .98, 1.02), fontsize=6)
 
-    plt.text(xcoord_index, ycoord_index, '(' + index_name + ')', transform=ax.transAxes)
-    plt.grid(axis="x")
+    plt.text(xcoord_index + xadjust_errorbars, ycoord_index, index_name,  fontweight="bold", transform=ax.transAxes)
+    # plt.grid(axis="x")
     border = 0.007857
     # plt.xlim([0 - border, 0.16 + border])
 
     # plt.text(.3, .5, 'fig 21b has ylim of ~163 -> ~306\nwhat does it mean? - joel', transform=ax.transAxes, fontsize=6, backgroundcolor='w', color='k')
+    # plt.text(.75, .03, 'this figure is under construction', transform=fig.transFigure, fontsize=7, backgroundcolor='k', color='w', weight='bold')
 
-    plt.text(.75, .03, 'this figure is under construction', transform=fig.transFigure, fontsize=7, backgroundcolor='k', color='w', weight='bold')
+    # grid_x_ticks = np.arange(0, .16, 0.02)
+    # ax.set_xticks(grid_x_ticks, minor=True)
+    ax.xaxis.grid(True, which='major', alpha=0.6, linestyle='--')
+    ax.yaxis.grid(False, which='major') # ensure only vertical lines are plotted
+    ax.set_yticklabels([])
+    plt.yticks(visible=True)
 
+    # THIS WORKS
+    for tick in ax.xaxis.get_major_ticks():
+        tick.tick1line.set_visible(False)
+        tick.tick2line.set_visible(False)
+        # tick.label1.set_visible(False)
+        # tick.label2.set_visible(False)
 
-    # plt.savefig(out + '.tiff')
-    # finalize_and_save_plot(out, fig)
+    for tick in ax.yaxis.get_major_ticks():
+        tick.tick1line.set_visible(False)
+        tick.tick2line.set_visible(False)
+        # tick.label1.set_visible(False)
+        # tick.label2.set_visible(False)
 
-    # plt.xlabel("time [s]")
-
-    grid_x_ticks = np.arange(0, .16, 0.02)
-    ax.set_xticks(grid_x_ticks, minor=True)
-    ax.grid(which='minor', alpha=0.4, linestyle='--')
-
-    ax.spines['left'].set_visible(False)
-    ax.spines['bottom'].set_visible(False)
+    ax.set_xticks(np.arange(0, .16, 0.02))
 
     pickle_name = out + '.pickle'
     print('pickling %s ...' % pickle_name)
@@ -367,13 +401,19 @@ def plot_peaks_error_bars(out, index_name):
 
 if __name__ == '__main__':
     print('plot_hybrid.py:')
+
+    ### PLOT FIGURE 21
+    plt.rcParams["figure.figsize"] = [6.5, 3.0]
     configure_fonts()
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig21.pdf')
     fig = plt.figure()
-    fig.set_figwidth(6.5)
+    # fig.set_figwidth(6.5)
+    # fig.set_size_inches(6.5, 3)
 
-    xcoord_index=-.18
-    ycoord_index=1.06
+    xcoord_index = -.18
+    ycoord_index = 1.06
+    xadjust_errorbars = -.08
+
     # linewidth=1
 
 
@@ -389,33 +429,48 @@ if __name__ == '__main__':
     # plot_peaks_error_bars("hybrid_peaks.png", "B")
     plot_peaks_error_bars("hybrid_peaks", "B")
 
-    print('Working on Fig 21 subplot C')
-    plot_averages("averages_fast", "C")
-
-    print('Working on Fig 21 subplot D')
-    plot_averages("averages_hybrid_slow", "D")
-
-    print('Working on Fig 21 subplot E')
-    plot_averages("averages_particle_slow", "E")
-
     figs = list(map(plt.figure, plt.get_fignums()))
-
-    plt.subplots_adjust(top=.95, bottom=.10, left=.16, right=.93, hspace=.30)
-
+    plt.subplots_adjust(top=.93, bottom=.14, left=.20, right=.93, hspace=.30)
     ax2.sharex(ax1)
-    ax3.sharex(ax1)
-    ax4.sharex(ax1)
-    ax5.sharex(ax1)
-
-    # ax2.sharey(ax1)
-    ax3.sharey(ax1)
-    ax4.sharey(ax1)
-    ax5.sharey(ax1)
 
     plt.savefig('Fig21.png')
     pdf.savefig()
     pdf.close()
     print_summary(fig, 'Figure 21')
+
+    ### PLOT FIGURE 22
+    plt.rcParams["figure.figsize"] = [6.5, 4.5]
+    pdf = matplotlib.backends.backend_pdf.PdfPages('Fig22.pdf')
+    fig = plt.figure()
+    # fig.set_figwidth(6.5)
+    # fig.set_size_inches(6.5, 4)
+
+    print('Working on Fig 22 subplot A')
+    plot_averages("averages_fast", "A")
+
+    print('Working on Fig 22 subplot B')
+    plot_averages("averages_hybrid_slow", "B")
+
+    print('Working on Fig 22 subplot C')
+    plot_averages("averages_particle_slow", "C")
+
+    plt.subplots_adjust(top=.95, bottom=.12, left=.16, right=.93, hspace=.30)
+
+    # ax3.sharex(ax1)
+    ax4.sharex(ax3)
+    ax5.sharex(ax3)
+    # ax3.sharey(ax1)
+    ax4.sharey(ax3)
+    ax5.sharey(ax3)
+
+    plt.savefig('Fig22.png')
+    pdf.savefig()
+    pdf.close()
+
+    print_summary(fig, 'Figure 22')
+
+
+
 
     
     

@@ -157,7 +157,7 @@ def main():
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig15.pdf')
     fig = plt.figure()
 
-    fig.set_figwidth(3.5)
+    fig.set_figwidth(3.25)
     plt.style.use(['../../_plotting/styles/plot_single.mplstyle','../../_plotting/styles/master.mplstyle'])
 
     '''
@@ -341,14 +341,6 @@ def main():
 
     # plt.subplots_adjust(left=0.14, right=0.96, bottom=0.16, top=0.95)
     plt.subplots_adjust(left=0.20, right=0.90, bottom=0.20, top=0.90) #.15/.90/.20/.90 <- same as Fig12 #0502
-    if opts.index_name:
-        # add_plot_index(plt, ax, opts.index_name)
-        plt.text(.01, .99, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-    
-    # plt.savefig(opts.output, dpi=OUTPUT_DPI) # 'dpi' now controlled by master stylesheet
-    # plt.savefig(opts.output)
-    # print("Plot " + opts.output + " generated")
-    # plt.savefig(opts.output + '.tiff')
 
     pickle_name = opts.output + '.pickle'
     print('plot_fig15.py: pickling %s ...' % pickle_name)

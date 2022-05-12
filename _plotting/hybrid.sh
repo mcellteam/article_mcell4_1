@@ -16,3 +16,5 @@ cd ../hybrid_circadian_clock/plotting
 #cp *.tiff $DST/
 cp Fig21.png $DST/png/
 cp Fig21.pdf $DST/pdf/
+cp Fig22.png $DST/png/
+cp Fig22.pdf $DST/pdf/

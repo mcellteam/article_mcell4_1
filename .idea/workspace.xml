@@ -2,14 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f23342e4-7770-4f01-98e0-33a11ab250fb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/snare_complex/snare_complex_rxn_diagram_mod.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/hybrid.sh" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/hybrid.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_averages_plot_per_observable.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_averages_plot_per_observable.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_fig12.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_fig12.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_fig14.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_fig14.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_fig15.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_fig15.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_fig16.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_fig16.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_hybrid.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_hybrid.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_relative_performance.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_relative_performance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/scripts/shared.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/shared.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_plotting/styles/master.mplstyle" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/styles/master.mplstyle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_plotting/styles/plot_multiple.mplstyle" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/styles/plot_multiple.mplstyle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_plotting/styles/plot_relative_performance.mplstyle" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/styles/plot_relative_performance.mplstyle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/styles/plot_single.mplstyle" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/styles/plot_single.mplstyle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,15 +42,40 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/snare_complex/plotting" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/snare_complex/plotting" />
       <recent name="$PROJECT_DIR$/_plotting/scripts" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/opt/anaconda3/envs/ges11/bin/python3.9" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -69,6 +100,12 @@
       <workItem from="1651192922985" duration="25131000" />
       <workItem from="1651307172973" duration="302000" />
       <workItem from="1651365247336" duration="24026000" />
+      <workItem from="1652151849970" duration="43000" />
+      <workItem from="1652216361457" duration="1570000" />
+      <workItem from="1652224900152" duration="9796000" />
+      <workItem from="1652297113437" duration="10000" />
+      <workItem from="1652303315574" duration="5529000" />
+      <workItem from="1652311309378" duration="11394000" />
     </task>
     <servers />
   </component>

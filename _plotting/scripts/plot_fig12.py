@@ -31,6 +31,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.backends.backend_pdf
+import matplotlib.image as mpimg
+from matplotlib.offsetbox import TextArea, DrawingArea, OffsetImage, AnnotationBbox
 import os
 import sys
 import argparse
@@ -39,6 +41,9 @@ import pickle
 from load_data import *
 from shared import *
 from fontrc import configure_fonts
+from matplotlib.offsetbox import TextArea, DrawingArea, OffsetImage, AnnotationBbox
+from matplotlib.gridspec import GridSpec
+
 
 
 class Options:
@@ -150,13 +155,50 @@ def plot_extra_data(opts, ax, labels, current_label):
 
 import inspect
 def main():
+    plt.style.use(['../../_plotting/styles/plot_single.mplstyle', '../../_plotting/styles/master.mplstyle'])
+    plt.rcParams["figure.figsize"] = [6.5, 2]
+
+
     print('plot_fig12:')
     opts = process_opts()
     configure_fonts()
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig12.pdf')
     fig = plt.figure()
-    fig.set_figwidth(3.5)
-    plt.style.use(['../../_plotting/styles/plot_single.mplstyle', '../../_plotting/styles/master.mplstyle'])
+
+    # fig = plt.figure(constrained_layout=True)
+
+    # gs = GridSpec(1, 3, figure=fig)
+
+    # fig = plt.figure()
+    # gs = GridSpec(1, 3, figure=fig)
+    # ax = fig.add_subplot(gs[0, :-1])
+    gs = GridSpec(1, 7, figure=fig)
+    ax = fig.add_subplot(gs[0, 0:5])
+    # plt.gca().set_position((0, 0, 1.5, 1.5))
+
+
+    # fig = plt.figure(constrained_layout=True)
+    # fig, ax = plt.subplots(1, 2, gridspec_kw={'width_ratios': [3, 1]})
+    # fig.tight_layout()
+    # fig.set_figwidth(6.5)
+
+
+    # fig.add_subplot(121)
+    # plt.subplot(1, 2, 1)
+    # ax = plt.gca()
+    # ax = plt.subplot2grid((1, 10), (0, 0), colspan=7)
+    img = mpimg.imread('../snare_complex_rxn_diagram_mod.png')
+    plt.imshow(img)
+    ax = plt.gca()
+    ax.spines['right'].set_visible(False)
+    ax.spines['top'].set_visible(False)
+    ax.spines['left'].set_visible(False)
+    ax.spines['bottom'].set_visible(False)
+    ax.tick_params(labelbottom=False, labelleft=False)
+    ax.set_xticks([])
+    ax.set_yticks([])
+    # ax.autoscale_view()
+    plt.text(0.01, 0.98, 'A', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
 
     counts = load_counts(opts)
     all_observables = get_all_observables_names(counts)
@@ -170,7 +212,20 @@ def main():
     M4 = 'MCell4'
     names = ['MCell4', 'MCell3R', 'BNG']
 
-    fig,ax = plt.subplots()
+    # ax = fig.add_subplot(gs[0, 2:3])
+    ax = fig.add_subplot(gs[0, 5:7])
+    # plt.gca().set_position((0, 0, 0.5, 0.5))
+
+
+    # fig,ax = plt.subplots() #original
+    # fig, ax = plt.subplots()
+    # ax = fig.add_subplot(gs[2:3, 0])
+    # ax = plt.gca()
+    # fig.add_subplot(221)
+    # fig.add_subplot(122)
+    # plt.subplot(1, 3, 2)
+    # ax = plt.subplot2grid((1, 10), (0, 8), colspan=2)
+
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
 
@@ -192,7 +247,8 @@ def main():
 
 
     # clrs = ['b', 'b', 'r', 'r', 'g', 'g'] #original
-    clrs = [colors[1], colors[1], colors[3], colors[3], colors[5], colors[5]]
+    # clrs = [colors[1], colors[1], colors[3], colors[3], colors[5], colors[5]]
+    clrs = ['darkblue', colors[1], colors[3], colors[3], colors[5], colors[5]]
     # ax.set_prop_cycle(color=clrs)
 
     
@@ -277,16 +333,18 @@ def main():
     ax.set_ylim([0, 60])
     ax.set_yticks([0, 20, 40, 60])
 
-    plt.legend(loc='upper left', bbox_to_anchor=(0.04, 1.02), prop={'size': 7})
+    plt.text(.62, .98, 'B', weight="bold", horizontalalignment='left', verticalalignment='top',
+             transform=fig.transFigure)
+    plt.legend(loc='upper left', bbox_to_anchor=(0.04, 1.02), prop={'size': 5})
+    # plt.legend(loc='upper left', bbox_to_anchor=(1.02, 1), prop={'size': 6})
     # plt.legend(loc='upper left', bbox_to_anchor=(1.02, 0, 0.3, .92))
 
-    # plt.subplots_adjust(left=0.14, right=0.96, bottom=0.13, top=0.95)
-    plt.subplots_adjust(left=0.15, right=0.90, bottom=0.20, top=0.90)
-    # plt.subplots_adjust(left=0.12, right=0.55, bottom=0.16, top=0.90)
-    if opts.index_name:
-        # add_plot_index(plt, ax, opts.index_name)
-        plt.text(.01, .99, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-    
+    # plt.subplots_adjust(left=0.02, right=0.80, bottom=0.20, top=0.88)
+    plt.subplots_adjust(left=0, right=0.96, bottom=0.20, top=0.88)
+
+
+    # with get_sample_data("grace_hopper.jpg") as file:
+    #     arr_img = plt.imread('../snare_complex_rxn_diagram_mod.png')
 
     # plt.savefig(opts.output + '.tiff')
     pickle_name = opts.output + '.pickle'

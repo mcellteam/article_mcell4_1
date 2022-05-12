@@ -1,12 +1,15 @@
-figure.figsize: 6.5,4.5
+#figure.figsize: 6.5,4.5
 font.size: 8
 legend.fontsize: 8
 xtick.labelsize: 8
 ytick.labelsize: 8
-axes.labelsize: 10
-legend.labelspacing: 0.4
-legend.handlelength: 1.5 #<2.0>
+axes.labelsize: 9
+#legend.handlelength: 1.5 #<2.0>
 legend.columnspacing: 1.2 #<2.0>
+
+
+
+
 
 
 

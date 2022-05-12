@@ -357,7 +357,7 @@ def main():
 
         # plt.subplots_adjust(top=.93, bottom=.10, left=.10 , right=.75, wspace=.5, hspace=.60)
         plt.subplots_adjust(top=.93, bottom=.10, left=.10 , right=.75, wspace=.5, hspace=.30)
-        plt.text(-.14, 1.15, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top',
+        plt.text(-.14, 1.15, opts.index_name,  fontweight="bold", horizontalalignment='left', verticalalignment='top',
                  transform=ax.transAxes)
 
         pickle_name = opts.output + '.pickle'
