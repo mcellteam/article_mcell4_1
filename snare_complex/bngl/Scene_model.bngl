@@ -26,7 +26,7 @@ end parameters
 begin compartments
 # 3D (volume) compartment with volume 1um^3
     #Plasma membrane: 0.01 um x SA 
-    PM 2 1e-2 
+    PM 2 6e-2 
     #Cytosol
     CP 3 1e-3 PM
 end compartments
