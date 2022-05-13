@@ -156,7 +156,7 @@ def plot_extra_data(opts, ax, labels, current_label):
 import inspect
 def main():
     plt.style.use(['../../_plotting/styles/plot_single.mplstyle', '../../_plotting/styles/master.mplstyle'])
-    plt.rcParams["figure.figsize"] = [6.5, 2]
+    plt.rcParams["figure.figsize"] = [6.5,4.5]
 
 
     print('plot_fig12:')
@@ -164,6 +164,9 @@ def main():
     configure_fonts()
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig12.pdf')
     fig = plt.figure()
+    # fig.set_figwidth(6.5)
+    # fig = plt.figure(constrained_layout=True)
+    # fig = plt.figure(tight_layout=True)
 
     # fig = plt.figure(constrained_layout=True)
 
@@ -172,9 +175,13 @@ def main():
     # fig = plt.figure()
     # gs = GridSpec(1, 3, figure=fig)
     # ax = fig.add_subplot(gs[0, :-1])
-    gs = GridSpec(1, 7, figure=fig)
-    ax = fig.add_subplot(gs[0, 0:5])
-    # plt.gca().set_position((0, 0, 1.5, 1.5))
+    # gs = GridSpec(3, 2, figure=fig, width_ratios=[2,1], height_ratios=[1, 7, 2])
+    gs = GridSpec(2, 4, figure=fig, width_ratios=[.10, 1, 1, 1], height_ratios=[2, 1])
+    # ax = fig.add_subplot(gs[:, 0:5])
+    # ax = fig.add_subplot(gs[:, 0])
+    ax = fig.add_subplot(gs[0, :])
+    # ax.set_anchor('C') # center
+    ax.set_anchor('W')
 
 
     # fig = plt.figure(constrained_layout=True)
@@ -188,6 +195,9 @@ def main():
     # ax = plt.gca()
     # ax = plt.subplot2grid((1, 10), (0, 0), colspan=7)
     img = mpimg.imread('../snare_complex_rxn_diagram_mod.png')
+    #extent=[longitude_top_left,longitude_top_right,latitude_bottom_left,latitude_top_left]
+    # plt.imshow(img,aspect='auto',extent=(30, 100, 30, 100))
+    # plt.imshow(img,aspect='auto')
     plt.imshow(img)
     ax = plt.gca()
     ax.spines['right'].set_visible(False)
@@ -197,8 +207,7 @@ def main():
     ax.tick_params(labelbottom=False, labelleft=False)
     ax.set_xticks([])
     ax.set_yticks([])
-    # ax.autoscale_view()
-    plt.text(0.01, 0.98, 'A', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+    plt.text(0.05, 0.98, 'A', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
 
     counts = load_counts(opts)
     all_observables = get_all_observables_names(counts)
@@ -213,8 +222,8 @@ def main():
     names = ['MCell4', 'MCell3R', 'BNG']
 
     # ax = fig.add_subplot(gs[0, 2:3])
-    ax = fig.add_subplot(gs[0, 5:7])
-    # plt.gca().set_position((0, 0, 0.5, 0.5))
+    # ax = fig.add_subplot(gs[1, 5:7])
+    # ax = fig.add_subplot(gs[1, 1])
 
 
     # fig,ax = plt.subplots() #original
@@ -226,8 +235,7 @@ def main():
     # plt.subplot(1, 3, 2)
     # ax = plt.subplot2grid((1, 10), (0, 8), colspan=2)
 
-    ax.spines['right'].set_visible(False)
-    ax.spines['top'].set_visible(False)
+
 
     linestyles = [
         'solid',
@@ -248,7 +256,7 @@ def main():
 
     # clrs = ['b', 'b', 'r', 'r', 'g', 'g'] #original
     # clrs = [colors[1], colors[1], colors[3], colors[3], colors[5], colors[5]]
-    clrs = ['darkblue', colors[1], colors[3], colors[3], colors[5], colors[5]]
+    clrs = [colors[1], colors[1], colors[3], colors[3], 'darkblue', 'darkblue']
     # ax.set_prop_cycle(color=clrs)
 
     
@@ -264,20 +272,43 @@ def main():
     MCell4 SNARE_sync
     BNGL ODE V release
     MCell4 V release
-    
-    
     '''
 
     # python ../../_plotting/scripts/plot_fig12.py -m4 ../mcellsim/react_data -b ../bngl/bng -l labels.txt -o snare_complex --snare -t 1
     # snare: str(sorted(all_observables)) =  ['SNARE_async', 'SNARE_sync', 'V_release']
     # snare: len(counts) =  3
-    for obs in sorted(all_observables): 
-        #print("Processing observable " + obs)
+
+
+
+    for obs in sorted(all_observables):
+
+        if obs == 'SNARE_sync':
+            ax = fig.add_subplot(gs[1, 1])
+            # plt.text(-.30, 1.20, 'B', weight="bold", horizontalalignment='left', verticalalignment='top',transform=ax.transAxes)
+            plt.text(0.05, 0.43, 'B', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+
+        elif obs == 'SNARE_async':
+            ax = fig.add_subplot(gs[1, 2])
+            # plt.text(-.30, 1.20, 'C', weight="bold", horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
+            plt.text(0.37, 0.43, 'C', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+            ax.yaxis.label.set_visible(False)
+
+
+        elif obs == 'V_release':
+            ax = fig.add_subplot(gs[1, 3])
+            # plt.text(-.30, 1.20, 'D', weight="bold", horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
+            plt.text(0.66, 0.43, 'D', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+            ax.yaxis.label.set_visible(False)
+
+        ax.spines['right'].set_visible(False)
+        ax.spines['top'].set_visible(False)
+
 
         legend_names = []
 
-
         for i in range(len(counts)):
+            # loops 3x
+
             if obs not in counts[i]:
                 continue
             
@@ -317,39 +348,43 @@ def main():
                 s = 'solid'
             else:
                 s = '--'
+
+
             ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s, c=clrs[color_index])
             # ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s)
 
             # ax.set_prop_cycle(color=clrs)
             color_index += 1
+
+        # extra data to be plotted
+        plot_extra_data(opts, ax, labels, current_label)
+        ax.set_xlim([0, 1])
+        ax.set_xticks([0, .2, .4, .6, .8, 1])
+        plt.xlabel(X_LABEL_TIME_UNIT_S)
+        plt.ylabel(Y_LABEL_N_PARAM_TIME)
+        ax.set_ylim([0, 60])
+        ax.set_yticks([0, 20, 40, 60])
+        plt.legend(loc='upper left', bbox_to_anchor=(0.08, 1.02), prop={'size': 6})
+
             
 
-    # extra data to be plotted
-    plot_extra_data(opts, ax, labels, current_label)
-    ax.set_xlim([0, 1])
-    ax.set_xticks([0, .2, .4, .6, .8, 1])
-    plt.xlabel(X_LABEL_TIME_UNIT_S)
-    plt.ylabel(Y_LABEL_N_PARAM_TIME)
-    ax.set_ylim([0, 60])
-    ax.set_yticks([0, 20, 40, 60])
 
-    plt.text(.62, .98, 'B', weight="bold", horizontalalignment='left', verticalalignment='top',
-             transform=fig.transFigure)
-    plt.legend(loc='upper left', bbox_to_anchor=(0.04, 1.02), prop={'size': 5})
-    # plt.legend(loc='upper left', bbox_to_anchor=(1.02, 1), prop={'size': 6})
-    # plt.legend(loc='upper left', bbox_to_anchor=(1.02, 0, 0.3, .92))
+
+
+    # plt.legend(loc='upper left', bbox_to_anchor=(0.05, 1.02), prop={'size': 5})
+    # plt.legend(loc='upper left', bbox_to_anchor=(1.05, 1.02), prop={'size': 5})
+    # plt.legend(loc='upper left', bbox_to_anchor=(1.05, 1.02), prop={'size': 7})
 
     # plt.subplots_adjust(left=0.02, right=0.80, bottom=0.20, top=0.88)
-    plt.subplots_adjust(left=0, right=0.96, bottom=0.20, top=0.88)
-
-
-    # with get_sample_data("grace_hopper.jpg") as file:
-    #     arr_img = plt.imread('../snare_complex_rxn_diagram_mod.png')
-
-    # plt.savefig(opts.output + '.tiff')
-    pickle_name = opts.output + '.pickle'
-    print('plot_fig12.py: pickling %s ...' % pickle_name)
-    pickle.dump((fig, ax), open(pickle_name, 'wb'))
+    # plt.subplots_adjust(left=0.02, right=0.98, bottom=0.05, top=1.00)
+    # plt.subplots_adjust(left=0.02, right=0.83, bottom=0.05, top=1.00)
+    # plt.subplots_adjust(left=0.05, right=0.95, bottom=0.15, top=1.00, wspace=.35)
+    plt.subplots_adjust(wspace=.35)
+    plt.subplots_adjust(hspace=.20)
+    plt.subplots_adjust(top=.98)
+    plt.subplots_adjust(bottom=0.12)
+    # plt.subplots_adjust(left=0.10, right=0.96)
+    plt.subplots_adjust(left=.05, right=0.95)
 
     plt.savefig('Fig12.png')
     pdf.savefig()

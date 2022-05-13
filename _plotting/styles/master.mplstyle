@@ -18,13 +18,15 @@ legend.frameon       : False
 legend.borderpad     : 0
 legend.borderaxespad : 0
 legend.labelspacing  : .15 # <0.5>
-legend.handlelength  : 1.5 # <2.0>
+legend.handlelength  : 1.6 # <2.0>
 legend.handletextpad : 0.5 # <0.8>
 #axes.prop_cycle      : cycler(color='bgrcmyk')
 
 #patch.facecolor      : bc80bd
 patch.force_edgecolor : True
 #axes.prop_cycle : (cycler('color', ['bc80bd' ,'fb8072', 'b3de69','fdb462','fccde5','8dd3c7','ffed6f','bebada','80b1d3', 'ccebc5', 'd9d9d9']))
+
+
 
 
 

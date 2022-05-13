@@ -2,20 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f23342e4-7770-4f01-98e0-33a11ab250fb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/snare_complex/snare_complex_rxn_diagram_mod.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_plotting/hybrid.sh" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/hybrid.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_averages_plot_per_observable.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_averages_plot_per_observable.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/scripts/pickle_assembly.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_fig12.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_fig12.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_fig14.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_fig14.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_fig15.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_fig15.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_fig16.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_fig16.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_hybrid.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_hybrid.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_relative_performance.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_relative_performance.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_plotting/scripts/shared.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/shared.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_plotting/styles/master.mplstyle" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/styles/master.mplstyle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_plotting/styles/plot_multiple.mplstyle" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/styles/plot_multiple.mplstyle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_plotting/styles/plot_single.mplstyle" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/styles/plot_single.mplstyle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/snare_complex/snare_complex_rxn_diagram_mod.png" beforeDir="false" afterPath="$PROJECT_DIR$/snare_complex/snare_complex_rxn_diagram_mod.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +98,7 @@
       <workItem from="1652224900152" duration="9796000" />
       <workItem from="1652297113437" duration="10000" />
       <workItem from="1652303315574" duration="5529000" />
-      <workItem from="1652311309378" duration="11394000" />
+      <workItem from="1652311309378" duration="27000000" />
     </task>
     <servers />
   </component>

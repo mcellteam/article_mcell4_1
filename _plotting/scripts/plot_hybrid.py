@@ -394,9 +394,6 @@ def plot_peaks_error_bars(out, index_name):
 
     ax.set_xticks(np.arange(0, .16, 0.02))
 
-    pickle_name = out + '.pickle'
-    print('pickling %s ...' % pickle_name)
-    pickle.dump((fig, ax), open(pickle_name, 'wb'))
 
 
 if __name__ == '__main__':

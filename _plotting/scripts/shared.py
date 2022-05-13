@@ -8,7 +8,8 @@ plt.style.use('../../_plotting/styles/master.mplstyle')
 
 
 
-X_LABEL_TIME_UNIT_S = 'time [s]'
+# X_LABEL_TIME_UNIT_S = 'time [s]'
+X_LABEL_TIME_UNIT_S = 'time (s)'
 # Y_LABEL_N_PARAM_TIME = "N(t)"
 Y_LABEL_N_PARAM_TIME = '# molecules'
 
