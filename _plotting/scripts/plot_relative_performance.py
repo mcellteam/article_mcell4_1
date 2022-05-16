@@ -53,12 +53,16 @@ def main():
     print('plot_relative_performance.py:')
     configure_fonts()
     plt.style.use(
-        ['../../_plotting/styles/plot_relative_performance.mplstyle','../../_plotting/styles/master.mplstyle'])
+        ['../../_plotting/styles/master.mplstyle','../../_plotting/styles/plot_relative_performance.mplstyle'])
     dataA = '../smaller_ratio.csv'
     dataB = '../larger_ratio.csv'
     datas = [dataA, dataB]
-    pdf = matplotlib.backends.backend_pdf.PdfPages('Fig17.pdf')
-    fig = plt.figure()
+    pdf = matplotlib.backends.backend_pdf.PdfPages('Fig18.pdf')
+
+    # fig18 size was 3.25, 2.25
+    # fig18 size is now 3.25, 2
+    # fig = plt.figure()
+    fig = plt.figure(figsize=(3.25, 2.0))
 
     # fig = plt.figure(figsize=(3.5, 3.5))
     # fig.set_figwidth(3.5)
@@ -163,7 +167,7 @@ def main():
         colors = [cm(i) for i in range(NUM_COLORS)]  # type is list
         # ax.set_prop_cycle(linestyle=linestyles, color=colors)
         ax.set_prop_cycle(color=colors)
-        bars = plt.barh(names, results, color='b', align='center', height=1, linewidth = .8)
+        bars = plt.barh(names, results, color='b', align='center', height=.9, linewidth = 0)
         # bars = plt.barh(names, results, color=colors[0],align='center', height=1, linewidth = .8)
         # bars = plt.barh(names, results, color=colors[5], align='center', height=1, linewidth=.8)
         # bars = plt.barh(names, results, color='b', align='edge', height=1)
@@ -177,14 +181,11 @@ def main():
         # ax.spines['left'].set_visible(False)
         # ax.annotate('1', (1, len(names)-1), color='red')
         ax.yaxis.set_tick_params(length=0) # hide ticks but keep tiok labels
-        ax.tick_params(width=.8) # thickness of ticks
+        ax.xaxis.set_tick_params(length=5)
+        # ax.tick_params(width=1.3) # thickness of ticks
 
-        if max(results) < 3:
-            ax.xaxis.set_ticks(np.arange(0, 4, 1))
-        if max(results) > 3:
-            ax.xaxis.set_ticks(np.arange(0, 50, 10))
 
-        ax.set_xlabel('Rel. Performance')
+        ax.set_xlabel('Rel. Performance',labelpad=3)
         # ax.margins(x=0, y=0)
         # ax.margins(0.05)
 
@@ -215,11 +216,13 @@ def main():
             # plt.text(-2, 1.1, index_name, horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
             # plt.text(.1, .9, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transSubfigure)
             # plt.text(0, 1, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-            plt.yticks(names, [textwrap.fill(name, 21) for name in names], linespacing=.9)
+            # plt.yticks(names, [textwrap.fill(name, 21) for name in names], linespacing=.9)
+            plt.yticks(names, [textwrap.fill(name, 21) for name in names], linespacing=.82)
 
             # plt.axvline(x=1, ymin=0, ymax=1, color='r', linestyle='--', linewidth=1)
             # plt.axvline(x=1, ymin=.04, ymax=.96, color='r', linestyle='--', linewidth=1)
-            plt.axvline(x=1, ymin=.04, color='r', linestyle='--', linewidth=1.0)
+            plt.axvline(x=1, ymin=.01, color='red', linestyle='--', dashes=(4, 1.3), linewidth=1.2)
+            ax.xaxis.set_ticks(np.arange(0, 4, 1))
 
             # ax.margins(x=0,y=0)
 
@@ -229,7 +232,8 @@ def main():
             # plt.text(-2, 1.1, index_name, horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
             # plt.text(.5, .9, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transSubfigure)
             # plt.text(.5, 1, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-            plt.yticks(names, [textwrap.fill(name, 13) for name in names], linespacing=.9)
+            # plt.yticks(names, [textwrap.fill(name, 13) for name in names], linespacing=.9)
+            plt.yticks(names, [textwrap.fill(name, 13) for name in names], linespacing=.82)
 
             # ylim = ax.get_ylim()
             # print('\n\nold ylim = \n\n', str(ylim))
@@ -239,23 +243,29 @@ def main():
 
             # plt.axvline(x=1, ymin=0, ymax=4 / 7, color='r', linestyle='--')
             # plt.axvline(x=1, ymin=0, ymax=1, color='r', linestyle='--', linewidth=1)
-            plt.axvline(x=1, color='r', linestyle='--', linewidth=1.0)
+            plt.axvline(x=1, ymin=.01, ymax=1.25, color='red', linestyle='--', dashes=(4, 1.2), linewidth=1.3)
             ax.margins(y=.05*(7/3))
+            # plt.xticks([0,10,20,30,40])
+            ax.xaxis.set_ticks([0,12,24,36])
+
+        # ax.set_ymargin(0)
+        xticks = ax.xaxis.get_major_ticks()
+        # xticks[0].label1.set_visible(False)
 
         # plt.subplots_adjust(wspace=1.4, left=0.25, bottom=0.15, top=0.9)
         # plt.subplots_adjust(wspace=1.1, left=0.25, right=.95, bottom=0.15, top=0.9)
         # plt.text(.01, .98, '(A)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
         # plt.text(0.51, .98, '(B)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-        plt.subplots_adjust(wspace=1.0, left=0.26, right=.92, bottom=0.15, top=0.94)
+        plt.subplots_adjust(wspace=.9, left=0.24, right=.89, bottom=0.22, top=0.90)
         # plt.text(.01, .98, 'A', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-        plt.text(.01, .98, 'A', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-        plt.text(0.51, .98, 'B', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+        plt.text(.04, .98, 'A', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure, fontsize=8)
+        plt.text(0.51, .98, 'B', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure, fontsize=8)
 
 
-    plt.savefig('Fig17.png')
+    plt.savefig('Fig18.png')
     pdf.savefig()
     pdf.close()
-    print_summary(fig, 'Figure 17')
+    print_summary(fig, 'Figure 18')
 
 
 if __name__ == '__main__':

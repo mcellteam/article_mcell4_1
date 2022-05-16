@@ -159,10 +159,10 @@ def main():
     plt.rcParams["figure.figsize"] = [6.5,4.5]
 
 
-    print('plot_fig12:')
+    print('plot_fig13:')
     opts = process_opts()
     configure_fonts()
-    pdf = matplotlib.backends.backend_pdf.PdfPages('Fig12.pdf')
+    pdf = matplotlib.backends.backend_pdf.PdfPages('Fig13.pdf')
     fig = plt.figure()
     # fig.set_figwidth(6.5)
     # fig = plt.figure(constrained_layout=True)
@@ -176,10 +176,10 @@ def main():
     # gs = GridSpec(1, 3, figure=fig)
     # ax = fig.add_subplot(gs[0, :-1])
     # gs = GridSpec(3, 2, figure=fig, width_ratios=[2,1], height_ratios=[1, 7, 2])
-    gs = GridSpec(2, 4, figure=fig, width_ratios=[.10, 1, 1, 1], height_ratios=[2, 1])
+    gs = GridSpec(2, 4, figure=fig, width_ratios=[.05, 1, 1, 1], height_ratios=[2.3, 1])
     # ax = fig.add_subplot(gs[:, 0:5])
     # ax = fig.add_subplot(gs[:, 0])
-    ax = fig.add_subplot(gs[0, :])
+    ax = fig.add_subplot(gs[0, 1:])
     # ax.set_anchor('C') # center
     ax.set_anchor('W')
 
@@ -207,7 +207,7 @@ def main():
     ax.tick_params(labelbottom=False, labelleft=False)
     ax.set_xticks([])
     ax.set_yticks([])
-    plt.text(0.05, 0.98, 'A', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+    plt.text(0.07, 0.98, 'A', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
 
     counts = load_counts(opts)
     all_observables = get_all_observables_names(counts)
@@ -285,20 +285,25 @@ def main():
         if obs == 'SNARE_sync':
             ax = fig.add_subplot(gs[1, 1])
             # plt.text(-.30, 1.20, 'B', weight="bold", horizontalalignment='left', verticalalignment='top',transform=ax.transAxes)
-            plt.text(0.05, 0.43, 'B', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+            plt.text(0.07, 0.40, 'B', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+            ax.set_ylim([0, 9])
+            ax.set_yticks([0, 3, 6, 9])
 
         elif obs == 'SNARE_async':
             ax = fig.add_subplot(gs[1, 2])
             # plt.text(-.30, 1.20, 'C', weight="bold", horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
-            plt.text(0.37, 0.43, 'C', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+            plt.text(0.37, 0.40, 'C', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
             ax.yaxis.label.set_visible(False)
-
+            ax.set_ylim([0, 21])
+            ax.set_yticks([0, 7, 14, 21])
 
         elif obs == 'V_release':
             ax = fig.add_subplot(gs[1, 3])
             # plt.text(-.30, 1.20, 'D', weight="bold", horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
-            plt.text(0.66, 0.43, 'D', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+            plt.text(0.67, 0.40, 'D', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
             ax.yaxis.label.set_visible(False)
+            ax.set_ylim([0, 60])
+            ax.set_yticks([0, 20, 40, 60])
 
         ax.spines['right'].set_visible(False)
         ax.spines['top'].set_visible(False)
@@ -362,9 +367,8 @@ def main():
         ax.set_xticks([0, .2, .4, .6, .8, 1])
         plt.xlabel(X_LABEL_TIME_UNIT_S)
         plt.ylabel(Y_LABEL_N_PARAM_TIME)
-        ax.set_ylim([0, 60])
-        ax.set_yticks([0, 20, 40, 60])
-        plt.legend(loc='upper left', bbox_to_anchor=(0.08, 1.02), prop={'size': 6})
+        # ax.set_ylim([0, 60])
+        plt.legend(loc='upper left', bbox_to_anchor=(0.08, 1.02), prop={'size': 7})
 
             
 
@@ -380,16 +384,16 @@ def main():
     # plt.subplots_adjust(left=0.02, right=0.83, bottom=0.05, top=1.00)
     # plt.subplots_adjust(left=0.05, right=0.95, bottom=0.15, top=1.00, wspace=.35)
     plt.subplots_adjust(wspace=.35)
-    plt.subplots_adjust(hspace=.20)
+    plt.subplots_adjust(hspace=.16)
     plt.subplots_adjust(top=.98)
     plt.subplots_adjust(bottom=0.12)
     # plt.subplots_adjust(left=0.10, right=0.96)
-    plt.subplots_adjust(left=.05, right=0.95)
+    plt.subplots_adjust(left=.05, right=0.96)
 
-    plt.savefig('Fig12.png')
+    plt.savefig('Fig13.png')
     pdf.savefig()
     pdf.close()
-    print_summary(fig, 'Figure 12')
+    print_summary(fig, 'Figure 13')
 
 
 if __name__ == '__main__':

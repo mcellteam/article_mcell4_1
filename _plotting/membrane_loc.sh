@@ -6,5 +6,5 @@ cd ../membrane_localization/plotting/
 ./plot_17000.sh
 #cp 05_Membrane_localization.png $DST/
 #cp *.tiff $DST/Fig15.tiff
-cp Fig15.png $DST/png/
-cp Fig15.pdf $DST/pdf/
+cp Fig16.png $DST/png/
+cp Fig16.pdf $DST/pdf/

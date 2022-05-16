@@ -190,9 +190,12 @@ def plot_averages(dir, index_name):
     first = True
     for name,df in data.items():
         df = df.truncate(after = 0.16)
-        df = df.rename({'A_mean': 'A (mean)', 'R_mean': 'R (mean)'}, axis='columns')
-        yA = df['A (mean)']
-        yR = df['R (mean)']
+        # df = df.rename({'A_mean': 'A (mean)', 'R_mean': 'R (mean)'}, axis='columns')
+        # yA = df['A (mean)']
+        # yR = df['R (mean)']
+        df = df.rename({'A_mean': 'A', 'R_mean': 'R'}, axis='columns')
+        yA = df['A']
+        yR = df['R']
 
         if first:
             # ax_plot(ax, df.index, yA, c = 'b', linewidth=linewidth)
@@ -224,16 +227,17 @@ def plot_averages(dir, index_name):
             # name = 'particle D=' + str(1e-7)
             name = 'particle D = $10^{-7} \, cm^2/s$'
 
-        legend.append(name + ' - A (mean)')
-        legend.append(name + ' - R (mean)')
+        legend.append(name + ' - A')
+        legend.append(name + ' - R')
 
     if index_name == 'A':
-        leg = plt.legend(legend, loc='upper right', bbox_to_anchor=(0, 0, 1.00, 1.05), fontsize=6, ncol = 2, labelspacing=2, frameon=1)
+        # leg = plt.legend(legend, loc='upper right', bbox_to_anchor=(0, 0, 1.00, 1.05), fontsize=6, ncol = 4, labelspacing=1, frameon=1)
+        leg = plt.legend(legend, loc='upper right', bbox_to_anchor=(0, 0, 1.00, 1.05), fontsize=7, ncol = 4, frameon=1)
         frame = leg.get_frame()
         frame.set_color('white')
         frame.set_alpha(None)
     else:
-        leg = plt.legend(legend, loc='upper right', bbox_to_anchor=(0, 0, 1.00, 1.05), fontsize=6, ncol = 1, frameon=1)
+        leg = plt.legend(legend, loc='upper right', bbox_to_anchor=(0, 0, 1.00, 1.05), fontsize=7, ncol = 1, frameon=1)
         frame = leg.get_frame()
         frame.set_color('white')
         frame.set_alpha(None)
@@ -241,7 +245,9 @@ def plot_averages(dir, index_name):
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
 
     # add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)
-    plt.text(xcoord_index, ycoord_index, index_name,  fontweight="bold", transform=ax.transAxes)
+    # xcoord_index = -.18
+    # ycoord_index = 1.06
+    plt.text(-.16, 1.06, index_name,  fontweight="bold", transform=ax.transAxes)
 
     pickle_name="hybrid_" + os.path.basename(dir) + ".pickle"
     print('pickling %s ...' % pickle_name)
@@ -290,7 +296,7 @@ def plot_low_pass(out, nfsim_seed, index_name):
     ax_plot(ax, df_lowpass.index, df_lowpass['A'], label='A', c='b')
     ax_plot(ax, df_lowpass.index, df_lowpass['R'], label='R', c='r')
 
-    leg = plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)'], loc='upper right', bbox_to_anchor=(0, 0, 1.00, 1.05),fontsize=6, ncol=2, frameon = 1)
+    leg = plt.legend(['A', 'R', 'A (low pass)', 'R (low pass)'], loc='upper right', bbox_to_anchor=(0, 0, 1.00, 1.05),fontsize=7, ncol=2, frameon = 1)
     frame = leg.get_frame()
     frame.set_color('white')
     frame.set_alpha(None)
@@ -399,10 +405,9 @@ def plot_peaks_error_bars(out, index_name):
 if __name__ == '__main__':
     print('plot_hybrid.py:')
 
-    ### PLOT FIGURE 21
-    plt.rcParams["figure.figsize"] = [6.5, 3.0]
+    plt.rcParams["figure.figsize"] = [6.5, 2.25]
     configure_fonts()
-    pdf = matplotlib.backends.backend_pdf.PdfPages('Fig21.pdf')
+    pdf = matplotlib.backends.backend_pdf.PdfPages('Fig22.pdf')
     fig = plt.figure()
     # fig.set_figwidth(6.5)
     # fig.set_size_inches(6.5, 3)
@@ -417,41 +422,41 @@ if __name__ == '__main__':
     #for s in range(1, 20):
     #    plot_low_pass("hybrid_low_pass_nfsim" + str(s).zfill(5) + ".png", s)
 
-    print('Working on Fig 21 subplot A')
+    print('Working on Fig 22 subplot A')
     # NFSim seed 14 quite nicely matches the averages 
     # plot_low_pass("hybrid_low_pass_nfsim.png", 14, "A")
     plot_low_pass("hybrid_low_pass_nfsim", 14, "A")
 
-    print('Working on Fig 21 subplot B')
+    print('Working on Fig 22 subplot B')
     # plot_peaks_error_bars("hybrid_peaks.png", "B")
     plot_peaks_error_bars("hybrid_peaks", "B")
 
     figs = list(map(plt.figure, plt.get_fignums()))
-    plt.subplots_adjust(top=.93, bottom=.14, left=.20, right=.93, hspace=.30)
+    plt.subplots_adjust(top=.93, bottom=.16, left=.20, right=.93, hspace=.30)
     ax2.sharex(ax1)
 
-    plt.savefig('Fig21.png')
+    plt.savefig('Fig22.png')
     pdf.savefig()
     pdf.close()
-    print_summary(fig, 'Figure 21')
+    print_summary(fig, 'Figure 22')
 
     ### PLOT FIGURE 22
-    plt.rcParams["figure.figsize"] = [6.5, 4.5]
-    pdf = matplotlib.backends.backend_pdf.PdfPages('Fig22.pdf')
+    plt.rcParams["figure.figsize"] = [6.5, 3.5]
+    pdf = matplotlib.backends.backend_pdf.PdfPages('Fig23.pdf')
     fig = plt.figure()
     # fig.set_figwidth(6.5)
     # fig.set_size_inches(6.5, 4)
 
-    print('Working on Fig 22 subplot A')
+    print('Working on Fig 23 subplot A')
     plot_averages("averages_fast", "A")
 
-    print('Working on Fig 22 subplot B')
+    print('Working on Fig 23 subplot B')
     plot_averages("averages_hybrid_slow", "B")
 
-    print('Working on Fig 22 subplot C')
+    print('Working on Fig 23 subplot C')
     plot_averages("averages_particle_slow", "C")
 
-    plt.subplots_adjust(top=.95, bottom=.12, left=.16, right=.93, hspace=.30)
+    plt.subplots_adjust(top=.95, bottom=.12, left=.14, right=.93, hspace=.35)
 
     # ax3.sharex(ax1)
     ax4.sharex(ax3)
@@ -460,11 +465,11 @@ if __name__ == '__main__':
     ax4.sharey(ax3)
     ax5.sharey(ax3)
 
-    plt.savefig('Fig22.png')
+    plt.savefig('Fig23.png')
     pdf.savefig()
     pdf.close()
 
-    print_summary(fig, 'Figure 22')
+    print_summary(fig, 'Figure 23')
 
 
 

@@ -9,5 +9,5 @@ cd ../CaMKII_model_variations/plotting
 #cp PSD_transparent.png $DST/PSD_transparent.png
 
 #cp *.tiff $DST/
-cp Fig14.png $DST/png/
-cp Fig14.pdf $DST/pdf/
+cp Fig15.png $DST/png/
+cp Fig15.pdf $DST/pdf/

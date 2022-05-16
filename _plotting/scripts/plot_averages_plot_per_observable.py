@@ -90,7 +90,7 @@ def main():
     print('plot_averages_plot_per_observable.py:')
     opts = process_opts()
     configure_fonts()
-    pdf = matplotlib.backends.backend_pdf.PdfPages('Fig13.pdf')
+    pdf = matplotlib.backends.backend_pdf.PdfPages('Fig14.pdf')
     
     counts = load_counts(opts)
 
@@ -138,16 +138,6 @@ def main():
         if index == 0:
             print('  Working on subplot A - ', obs)
             ax = fig.add_subplot(221)
-            # left, right = ax.get_xbound()
-            # xmargin = -(right - left)*.05
-            # print('fig13: left = ', left)
-            # print('fig13: right = ', right)
-            # print('fig13: xmargin = ', xmargin)
-
-            # ax.set_ylim(0, 600)
-            # ax.set_ylim(top=800)
-            # ax.set_xlim(left=xmargin, right=0.10)
-            # set_xmargin(ax, left=0.05, right=0)
         elif  index == 1:
             print('  Working on subplot B - ', obs)
             ax = fig.add_subplot(222)
@@ -231,12 +221,10 @@ def main():
         print("  Plot " + obs + " generated")
         index += 1
 
-
-    # plt.savefig('Fig13.tiff')
-    plt.savefig('Fig13.png')
+    plt.savefig('Fig14.png')
     pdf.savefig()
     pdf.close()
-    print_summary(fig, 'Figure 13')
+    print_summary(fig, 'Figure 14')
 
 
 if __name__ == '__main__':

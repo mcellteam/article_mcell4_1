@@ -9,5 +9,5 @@ cd ../camkii_only_output_data/plotting
 #cp CaM1N.png $DST/05_CaMKII_03_CaM1N.png
 #cp KCaM2N.png $DST/05_CaMKII_04_KCaM2N.png
 #cp *.tiff $DST/
-cp Fig13.png $DST/png/
-cp Fig13.pdf $DST/pdf/
+cp Fig14.png $DST/png/
+cp Fig14.pdf $DST/pdf/

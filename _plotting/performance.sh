@@ -13,5 +13,5 @@ cd ../performance/plotting/
 
 #cp *.eps $DST/
 #cp *.tiff $DST/
-cp Fig17.png $DST/png/
-cp Fig17.pdf $DST/pdf/
+cp Fig18.png $DST/png/
+cp Fig18.pdf $DST/pdf/

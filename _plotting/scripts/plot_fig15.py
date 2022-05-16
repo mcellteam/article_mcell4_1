@@ -40,6 +40,8 @@ from load_data import *
 from shared import *
 from fontrc import configure_fonts
 
+plt.style.use(['../../_plotting/styles/plot_multiple.mplstyle','../../_plotting/styles/master.mplstyle'])
+
 class Options:
     def __init__(self):
         self.mcell3_dir = None
@@ -81,7 +83,7 @@ def process_opts():
     opts = Options()
     
     if args.mcell4:
-        opts.mcell4_dir = args.mcell4 
+        opts.mcell4_dir = args.mcell4
 
     if args.mcell3:
         opts.mcell3_dir = args.mcell3 
@@ -145,207 +147,214 @@ def plot_extra_data(opts, ax, labels, current_label):
             if labels:
                 line.set_label(labels[current_label])
                 current_label += 1
-            # ax.legend()
-
+            ax.legend() # TODO: what does this do?
 
 def main():
     print('plot_fig15:')
-    opts = process_opts()
     configure_fonts()
-
-    # pdf = matplotlib.backends.backend_pdf.PdfPages(opts.output + '.pdf')
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig15.pdf')
+
+
+    fig_names = []
+
+
+    '''
+    python ../../_plotting/scripts/plot_trajectories_single_plot.py -m4 ../PSD_transparent/react_data_wm -o PSD_transparent --camkii -t 3 -l labels.txt -i A & 	
+    python ../../_plotting/scripts/plot_trajectories_single_plot.py -m4 ../PSD/react_data_wm -o PSD --camkii -t 3 -l labels.txt -i B &
+    python ../../_plotting/scripts/plot_trajectories_single_plot.py -m4 ../half_in_PSD/react_data_wm -o half_in_PSD --camkii -t 3 -l labels.txt -i C & 
+    
+    '''
+
+    labels = load_labels('labels.txt')
+
     fig = plt.figure()
+    fig.set_figwidth(6.5)
 
-    fig.set_figwidth(3.25)
-    plt.style.use(['../../_plotting/styles/plot_single.mplstyle','../../_plotting/styles/master.mplstyle'])
 
-    '''
-    print('\nplot_trajectories_single_plot.py:')
-    print('current directory is ', os.getcwd())
-    print('inspect.stack() is ', inspect.stack())
-    print('plot_trajectories_single_plot.py: opts.mcell4_dir = ', str(opts.mcell4_dir))
-    print('plot_trajectories_single_plot.py: opts.output = ', str(opts.output))
-    print('plot_trajectories_single_plot.py: opts.for_camkii = ', str(opts.for_camkii))
-    '''
-    
-    counts = load_counts(opts)
+    for i in range(3):
 
-    all_observables = get_all_observables_names(counts)
+        opts = Options()
 
-    current_label = 0
+        if i == 0:
+            ax = fig.add_subplot(221)
+            opts.mcell4_dir = '../PSD_transparent/react_data_wm'
+            opts.output = 'PSD_transparent'
+            opts.for_camkii = True
+            opts.max_time = float(3)
+            opts.index_name = 'A'
+        elif i == 1:
+            ax = fig.add_subplot(222)
+            opts.mcell4_dir = '../PSD/react_data_wm'
+            opts.output = 'PSD'
+            opts.for_camkii = True
+            opts.max_time = float(3)
+            opts.index_name = 'B'
+        elif i == 2:
+            ax = fig.add_subplot(223)
+            opts.mcell4_dir = '../half_in_PSD/react_data_wm'
+            opts.output = 'half_in_PSD'
+            opts.for_camkii = True
+            opts.max_time = float(3)
+            opts.index_name = 'C'
 
-    if opts.labels:
-        labels = load_labels(opts.labels)
-    else:
-        labels = None
-                        
-    M4 = 'MCell4'
-    names = ['MCell4', 'MCell3R', 'BNG']
-    
+        print('  plot_fig15.py: Working on subplot %s - %s' % (opts.index_name,opts.output))
 
-    fig,ax = plt.subplots()
-    ax.spines['right'].set_visible(False)
-    ax.spines['top'].set_visible(False)
 
-    linestyles = [
-        'solid',
-        'solid',
-        'dashed', 
-        'dotted', 
-        'dashdot', 
-        (0, (3, 1, 1, 1, 1, 1)),    # 'densely dashdotdotted', 
-    ]
-    
-    if opts.for_autoph:
-        # fig.set_size_inches((14,2.5))
+        # opts = process_opts()
+        counts = load_counts(opts)
+        all_observables = get_all_observables_names(counts)
+        current_label = 0
 
-        cm = plt.get_cmap('tab10')
-        NUM_COLORS = 6
-        colors = [cm(i) for i in range(NUM_COLORS)]
-        ax.set_prop_cycle(linestyle = linestyles, color = colors)
-        
-        clrs = [None]*10
-    elif opts.for_snare: 
-        clrs = ['b', 'b', 'r', 'r', 'g', 'g']
-    else:
-        clrs = ['b', 'g', 'r']
-        
-    if opts.for_camkii:
-        ax.set_ylim([0, 0.5])
-    
-    dfs = {}
-    color_index = 0
-    # prepare data for 
-    for obs in sorted(all_observables): 
-        #print("Processing observable " + obs)
-        
-        if opts.for_membrane_localization:
-            if obs != 'MA':
-                continue
+        if opts.labels:
+            labels = load_labels(opts.labels)
+        else:
+            labels = None
+
+        M4 = 'MCell4'
+        names = ['MCell4', 'MCell3R', 'BNG']
+
+        ax.spines['right'].set_visible(False)
+        ax.spines['top'].set_visible(False)
+
+        linestyles = [
+            'solid',
+            'solid',
+            'dashed',
+            'dotted',
+            'dashdot',
+            (0, (3, 1, 1, 1, 1, 1)),    # 'densely dashdotdotted',
+        ]
+
+        if opts.for_autoph:
+            # fig.set_size_inches((14,2.5))
+
+            cm = plt.get_cmap('tab10')
+            NUM_COLORS = 6
+            colors = [cm(i) for i in range(NUM_COLORS)]
+            ax.set_prop_cycle(linestyle = linestyles, color = colors)
+
+            clrs = [None]*10
+        elif opts.for_snare:
+            clrs = ['b', 'b', 'r', 'r', 'g', 'g']
+        else:
+            clrs = ['b', 'g', 'r']
 
         if opts.for_camkii:
-            if obs not in ['pKCaM2C', 'pKCaM_tot', 'pKCam4Ca']:
-                continue
-        
-        legend_names = []
-        for i in range(len(counts)):
-            if obs not in counts[i]:
-                continue
-            
-            data = counts[i][obs]
-            #print(obs)
-            
-            df = pd.DataFrame()           
-            df['time'] = data.iloc[:, 0]
-            
-            sim_name = names[i]
-            sim_obs_name = sim_name + '_' + obs 
-            
-            df[sim_obs_name] = data.iloc[:, 1:].mean(axis=1)
-            
-            if opts.for_camkii:
-                df[sim_obs_name + '_minus_std'] = df[sim_obs_name] - data.iloc[:, 1:].sem(axis=1)
-                df[sim_obs_name + '_plus_std'] = df[sim_obs_name] + data.iloc[:, 1:].sem(axis=1)
-            else:
-                df[sim_obs_name + '_minus_std'] = df[sim_obs_name] - data.iloc[:, 1:].std(axis=1)
-                df[sim_obs_name + '_plus_std'] = df[sim_obs_name] + data.iloc[:, 1:].std(axis=1)
-                
+            ax.set_ylim([0, 0.5])
 
-            df = df.set_index('time')
-            
-            if opts.max_time:
-                df = df[df.index <= opts.max_time]
-    
-            # free collected data to decrease memory consumption        
-            del data
-            
-            if labels:
-                l = labels[current_label]
-                current_label += 1
-            else:
-                l = 'MCell4'
-            
+        dfs = {}
+        color_index = 0
+        # prepare data for
+        for obs in sorted(all_observables):
+            #print("Processing observable " + obs)
+
             if opts.for_membrane_localization:
-                s = 'solid'
-            
-                if i == 0:
-                    # ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s, linewidth=2, zorder=100, c=clrs[color_index]) #original
-                    ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s, linewidth=1.5, zorder=100, c=clrs[color_index]) #original
+                if obs != 'MA':
+                    continue
+
+            if opts.for_camkii:
+                if obs not in ['pKCaM2C', 'pKCaM_tot', 'pKCam4Ca']:
+                    continue
+
+            legend_names = []
+            for i in range(len(counts)):
+                if obs not in counts[i]:
+                    continue
+
+                data = counts[i][obs]
+                #print(obs)
+
+                df = pd.DataFrame()
+                df['time'] = data.iloc[:, 0]
+
+                sim_name = names[i]
+                sim_obs_name = sim_name + '_' + obs
+
+                df[sim_obs_name] = data.iloc[:, 1:].mean(axis=1)
+
+                if opts.for_camkii:
+                    df[sim_obs_name + '_minus_std'] = df[sim_obs_name] - data.iloc[:, 1:].sem(axis=1)
+                    df[sim_obs_name + '_plus_std'] = df[sim_obs_name] + data.iloc[:, 1:].sem(axis=1)
                 else:
-                    ax_plot(ax, df.index, df[sim_obs_name], label=l, c=clrs[color_index]) #
-                    
-            elif  opts.for_snare:
-                if i == 0:
-                    # first file
+                    df[sim_obs_name + '_minus_std'] = df[sim_obs_name] - data.iloc[:, 1:].std(axis=1)
+                    df[sim_obs_name + '_plus_std'] = df[sim_obs_name] + data.iloc[:, 1:].std(axis=1)
+
+
+                df = df.set_index('time')
+
+                if opts.max_time:
+                    df = df[df.index <= opts.max_time]
+
+                # free collected data to decrease memory consumption
+                del data
+
+                if labels:
+                    l = labels[current_label]
+                    current_label += 1
+                else:
+                    l = 'MCell4'
+
+                if opts.for_membrane_localization:
                     s = 'solid'
+
+                    if i == 0:
+                        ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s, linewidth=2, zorder=100, c=clrs[color_index]) #
+                    else:
+                        ax_plot(ax, df.index, df[sim_obs_name], label=l, c=clrs[color_index]) #
+
+                elif  opts.for_snare:
+                    if i == 0:
+                        # first file
+                        s = 'solid'
+                    else:
+                        s = '--'
+                    ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s, c=clrs[color_index])
+
+                elif opts.for_camkii:
+                    ax_plot(ax, df.index, df[sim_obs_name], label=l, color=clrs[color_index]) #
+                    ax_fill_between(
+                        ax,
+                        df.index,
+                        df[sim_obs_name + '_minus_std'], df[sim_obs_name + '_plus_std'],
+                        alpha=0.2,
+                        color=clrs[color_index])
+
+                elif opts.for_autoph:
+                    ax_plot(ax, df.index, df[sim_obs_name], label=l) #
+                    ax_fill_between(
+                        ax,
+                        df.index,
+                        df[sim_obs_name + '_minus_std'], df[sim_obs_name + '_plus_std'],
+                        alpha=0.2)
                 else:
-                    s = '--'
-                ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s, c=clrs[color_index])
-            
-            elif opts.for_camkii:
-                ax_plot(ax, df.index, df[sim_obs_name], label=l, color=clrs[color_index]) #
-                ax_fill_between(
-                    ax,
-                    df.index, 
-                    df[sim_obs_name + '_minus_std'], df[sim_obs_name + '_plus_std'],
-                    alpha=0.2, 
-                    color=clrs[color_index])
-                
-            elif opts.for_autoph:            
-                ax_plot(ax, df.index, df[sim_obs_name], label=l)
-                ax_fill_between(
-                    ax,
-                    df.index, 
-                    df[sim_obs_name + '_minus_std'], df[sim_obs_name + '_plus_std'],
-                    alpha=0.2)
-            else:
-                sys.exit("Must select plot type")
-            
-            color_index += 1
+                    sys.exit("Must select plot type")
 
-    # ax.margins(0.05) # might need axis margin for this plot #0428
-
-    # extra data to be plotted
-    plot_extra_data(opts, ax, labels, current_label)
-
-    plt.xlabel(X_LABEL_TIME_UNIT_S)
-    plt.ylabel(Y_LABEL_N_PARAM_TIME)
+                color_index += 1
 
 
-    # ax.set_xticks([0, 1, 2])
-    # ax.set_xlim(0, 2.0)
-    # ax.set_xticks([0, 2.0])
-    # ax.set_ylim(0, 150)
-    # ax.set_yticks([0, 50, 100, 150])
-    ax.margins(.05)
-    plt.ylim(top=150)
-    plt.xlim(right=plt.xticks()[0][-2])
+        # extra data to be plotted
+        plot_extra_data(opts, ax, labels, current_label)
 
-    # ax.margins(x=0.05, y=0.05)  # these plots run up against the axes, margin is good for this exact situation
+        plt.xlabel(X_LABEL_TIME_UNIT_S)
+        # plt.ylabel(Y_LABEL_N_PARAM_TIME)
+        plt.ylabel('# molecules')
 
-    plt.legend(loc='upper right', bbox_to_anchor=(0, 0, 1.0, 1.0))
+        ax.set_xlim(0, 3)
+        ax.set_xticks([0, 1, 2, 3])
+        ax.set_ylim(0, .5)
+        ax.set_yticks([0, .1, .2, .3, .4, .5])
 
-    # if opts.output in {'mcell4','mcell3','nfsim'}:
-    #     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))  # original
-    # else:
-    #     plt.legend()
-    #     plt.legend(loc='upper right')  # jy
+        correct_legend_labels = ['pKCaM2C', 'pCaMKII', 'pCaM4ca']
+        L = plt.legend(loc='upper right', bbox_to_anchor=(0, 0, 1.0, 1.0))
+        L.get_texts()[0].set_text(correct_legend_labels[0])
+        L.get_texts()[1].set_text(correct_legend_labels[1])
+        L.get_texts()[2].set_text(correct_legend_labels[2])
 
-    # plt.legend(loc='center left', bbox_to_anchor=(1, 0.5)) #original
-    # plt.legend(loc='upper right') #jy
-    # plt.subplots_adjust(right=0.7, bottom=0.2)
 
-    # print('opts.index_name = ', opts.index_name)
-    # print('opts.output = ', opts.output)
+        plt.subplots_adjust(top=.94, bottom=.10, left=.09, right=.95, wspace=.30, hspace=.35)
+        plt.text(-.21, 1.12, opts.index_name, fontweight="bold", horizontalalignment='left', verticalalignment='top',transform=ax.transAxes)
 
-    # plt.subplots_adjust(left=0.14, right=0.96, bottom=0.16, top=0.95)
-    plt.subplots_adjust(left=0.20, right=0.90, bottom=0.20, top=0.90) #.15/.90/.20/.90 <- same as Fig12 #0502
-
-    pickle_name = opts.output + '.pickle'
-    print('plot_fig15.py: pickling %s ...' % pickle_name)
-    pickle.dump((fig, ax), open(pickle_name, 'wb'))
-
+    # plt.savefig('Fig15.tiff')
     plt.savefig('Fig15.png')
     pdf.savefig()
     pdf.close()
