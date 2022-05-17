@@ -156,17 +156,18 @@ def plot_extra_data(opts, ax, labels, current_label):
 import inspect
 def main():
     plt.style.use(['../../_plotting/styles/plot_single.mplstyle', '../../_plotting/styles/master.mplstyle'])
-    plt.rcParams["figure.figsize"] = [6.5,4.5]
+    # plt.rcParams["figure.figsize"] = [6.5,4.5]
 
 
     print('plot_fig13:')
     opts = process_opts()
     configure_fonts()
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig13.pdf')
-    fig = plt.figure()
-    # fig.set_figwidth(6.5)
-    # fig = plt.figure(constrained_layout=True)
-    # fig = plt.figure(tight_layout=True)
+
+    # was 6.5x4.5
+    # plt.rcParams["figure.figsize"] = [3.25, 3.25]
+    # fig = plt.figure()
+    fig = plt.figure(figsize=(6.5, 4))
 
     # fig = plt.figure(constrained_layout=True)
 
@@ -176,7 +177,7 @@ def main():
     # gs = GridSpec(1, 3, figure=fig)
     # ax = fig.add_subplot(gs[0, :-1])
     # gs = GridSpec(3, 2, figure=fig, width_ratios=[2,1], height_ratios=[1, 7, 2])
-    gs = GridSpec(2, 4, figure=fig, width_ratios=[.05, 1, 1, 1], height_ratios=[2.3, 1])
+    gs = GridSpec(2, 4, figure=fig, width_ratios=[.05, 1, 1, 1], height_ratios=[1.8, 1])
     # ax = fig.add_subplot(gs[:, 0:5])
     # ax = fig.add_subplot(gs[:, 0])
     ax = fig.add_subplot(gs[0, 1:])
@@ -285,22 +286,22 @@ def main():
         if obs == 'SNARE_sync':
             ax = fig.add_subplot(gs[1, 1])
             # plt.text(-.30, 1.20, 'B', weight="bold", horizontalalignment='left', verticalalignment='top',transform=ax.transAxes)
-            plt.text(0.07, 0.40, 'B', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+            plt.text(0.07, 0.45, 'B', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
             ax.set_ylim([0, 9])
             ax.set_yticks([0, 3, 6, 9])
 
         elif obs == 'SNARE_async':
             ax = fig.add_subplot(gs[1, 2])
             # plt.text(-.30, 1.20, 'C', weight="bold", horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
-            plt.text(0.37, 0.40, 'C', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+            plt.text(0.37, 0.45, 'C', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
             ax.yaxis.label.set_visible(False)
             ax.set_ylim([0, 21])
-            ax.set_yticks([0, 7, 14, 21])
+            ax.set_yticks([0, 8, 16, 24])
 
         elif obs == 'V_release':
             ax = fig.add_subplot(gs[1, 3])
             # plt.text(-.30, 1.20, 'D', weight="bold", horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
-            plt.text(0.67, 0.40, 'D', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
+            plt.text(0.67, 0.45, 'D', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
             ax.yaxis.label.set_visible(False)
             ax.set_ylim([0, 60])
             ax.set_yticks([0, 20, 40, 60])

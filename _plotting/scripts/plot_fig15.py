@@ -167,35 +167,45 @@ def main():
 
     labels = load_labels('labels.txt')
 
-    fig = plt.figure()
-    fig.set_figwidth(6.5)
+    # was 6.5x4.8
 
+    # fig = plt.figure()
+    # fig.set_figwidth(6.5)
+    # fig = plt.figure(figsize=(3.25, 3.25))
+    # fig = plt.figure(figsize=(6.25, 2.25))
+    # fig = plt.figure(figsize=(6.5, 2.25))
+    fig = plt.figure(figsize=(6.5, 2))
 
     for i in range(3):
 
         opts = Options()
 
         if i == 0:
-            ax = fig.add_subplot(221)
+            ax = fig.add_subplot(131)
             opts.mcell4_dir = '../PSD_transparent/react_data_wm'
             opts.output = 'PSD_transparent'
             opts.for_camkii = True
             opts.max_time = float(3)
             opts.index_name = 'A'
+            ax.title.set_text('Transparent PSD')
+            plt.ylabel('# molecules')
         elif i == 1:
-            ax = fig.add_subplot(222)
+            ax = fig.add_subplot(132)
             opts.mcell4_dir = '../PSD/react_data_wm'
             opts.output = 'PSD'
             opts.for_camkii = True
             opts.max_time = float(3)
             opts.index_name = 'B'
+            ax.title.set_text('Homogeneously\nDistributed')
         elif i == 2:
-            ax = fig.add_subplot(223)
+            ax = fig.add_subplot(133)
             opts.mcell4_dir = '../half_in_PSD/react_data_wm'
             opts.output = 'half_in_PSD'
             opts.for_camkii = True
             opts.max_time = float(3)
             opts.index_name = 'C'
+            ax.title.set_text('50% of CaMKII in PSD')
+
 
         print('  plot_fig15.py: Working on subplot %s - %s' % (opts.index_name,opts.output))
 
@@ -337,22 +347,42 @@ def main():
 
         plt.xlabel(X_LABEL_TIME_UNIT_S)
         # plt.ylabel(Y_LABEL_N_PARAM_TIME)
-        plt.ylabel('# molecules')
+
 
         ax.set_xlim(0, 3)
         ax.set_xticks([0, 1, 2, 3])
         ax.set_ylim(0, .5)
         ax.set_yticks([0, .1, .2, .3, .4, .5])
 
+        '''
         correct_legend_labels = ['pKCaM2C', 'pCaMKII', 'pCaM4ca']
         L = plt.legend(loc='upper right', bbox_to_anchor=(0, 0, 1.0, 1.0))
         L.get_texts()[0].set_text(correct_legend_labels[0])
         L.get_texts()[1].set_text(correct_legend_labels[1])
         L.get_texts()[2].set_text(correct_legend_labels[2])
+        '''
+
+        if i==2:
+            correct_legend_labels = ['pKCaM2C', 'pCaMKII', 'pCaM4ca']
+            # L = plt.legend(loc='upper right', bbox_to_anchor=(0, 0, 1, 1), bbox_transform=fig.transFigure)
+            L = plt.legend(loc='upper right', bbox_to_anchor=(0, 0, .99, .97), bbox_transform=fig.transFigure)
+            L.get_texts()[0].set_text(correct_legend_labels[0])
+            L.get_texts()[1].set_text(correct_legend_labels[1])
+            L.get_texts()[2].set_text(correct_legend_labels[2])
 
 
-        plt.subplots_adjust(top=.94, bottom=.10, left=.09, right=.95, wspace=.30, hspace=.35)
-        plt.text(-.21, 1.12, opts.index_name, fontweight="bold", horizontalalignment='left', verticalalignment='top',transform=ax.transAxes)
+
+
+
+        plt.subplots_adjust(top=.83, bottom=.19, left=.09, right=.86, wspace=.20)
+        # plt.text(-.21, 1.12, opts.index_name, fontweight="bold", horizontalalignment='left', verticalalignment='top',transform=ax.transAxes)
+
+        #original
+        # plt.text(-.70, 1.50, opts.index_name, weight="bold", horizontalalignment='left', verticalalignment='top',transform=ax.transAxes)
+
+        plt.text(-.19, 1.23, opts.index_name, weight="bold", horizontalalignment='left', verticalalignment='top',
+                 transform=ax.transAxes)
+
 
     # plt.savefig('Fig15.tiff')
     plt.savefig('Fig15.png')

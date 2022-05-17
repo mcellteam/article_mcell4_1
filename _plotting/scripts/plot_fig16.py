@@ -153,12 +153,16 @@ def main():
     opts = process_opts()
     configure_fonts()
 
+    plt.style.use(['../../_plotting/styles/plot_single.mplstyle', '../../_plotting/styles/master.mplstyle'])
+
     # pdf = matplotlib.backends.backend_pdf.PdfPages(opts.output + '.pdf')
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig16.pdf')
-    fig = plt.figure()
+    # fig = plt.figure()
 
-    fig.set_figwidth(3.25)
-    plt.style.use(['../../_plotting/styles/plot_single.mplstyle','../../_plotting/styles/master.mplstyle'])
+    # was 3.25x2.25
+    # fig.set_figwidth(3.25)
+    fig = plt.figure(figsize=(3.25, 2), dpi=300)
+
 
     '''
     print('\nplot_trajectories_single_plot.py:')
@@ -340,7 +344,7 @@ def main():
     # print('opts.output = ', opts.output)
 
     # plt.subplots_adjust(left=0.14, right=0.96, bottom=0.16, top=0.95)
-    plt.subplots_adjust(left=0.20, right=0.90, bottom=0.17, top=0.90) #.15/.90/.20/.90 <- same as Fig12 #0502
+    plt.subplots_adjust(left=0.15, right=0.95, bottom=0.18, top=0.95) #.15/.90/.20/.90 <- same as Fig12 #0502
 
     pickle_name = opts.output + '.pickle'
     print('plot_fig16.py: pickling %s ...' % pickle_name)

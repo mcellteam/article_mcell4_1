@@ -232,12 +232,12 @@ def plot_averages(dir, index_name):
 
     if index_name == 'A':
         # leg = plt.legend(legend, loc='upper right', bbox_to_anchor=(0, 0, 1.00, 1.05), fontsize=6, ncol = 4, labelspacing=1, frameon=1)
-        leg = plt.legend(legend, loc='upper right', bbox_to_anchor=(0, 0, 1.00, 1.05), fontsize=7, ncol = 4, frameon=1)
+        leg = plt.legend(legend, loc='upper right', bbox_to_anchor=(0, 0, 1, 1.06), fontsize=7, ncol = 4, frameon=1)
         frame = leg.get_frame()
         frame.set_color('white')
         frame.set_alpha(None)
     else:
-        leg = plt.legend(legend, loc='upper right', bbox_to_anchor=(0, 0, 1.00, 1.05), fontsize=7, ncol = 1, frameon=1)
+        leg = plt.legend(legend, loc='upper right', bbox_to_anchor=(0, 0, 1, 1.06), fontsize=7, ncol = 1, frameon=1)
         frame = leg.get_frame()
         frame.set_color('white')
         frame.set_alpha(None)
@@ -247,7 +247,7 @@ def plot_averages(dir, index_name):
     # add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)
     # xcoord_index = -.18
     # ycoord_index = 1.06
-    plt.text(-.16, 1.06, index_name,  fontweight="bold", transform=ax.transAxes)
+    plt.text(-.10, 1.06, index_name,  fontweight="bold", transform=ax.transAxes)
 
     pickle_name="hybrid_" + os.path.basename(dir) + ".pickle"
     print('pickling %s ...' % pickle_name)
@@ -304,7 +304,8 @@ def plot_low_pass(out, nfsim_seed, index_name):
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
     
     # add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)
-    ax.text(xcoord_index + xadjust_errorbars, ycoord_index, index_name,  fontweight="bold", transform=ax.transAxes)
+    # ax.text(xcoord_index + xadjust_errorbars, ycoord_index, index_name,  fontweight="bold", transform=ax.transAxes)
+    plt.text(-.22, 1.06, index_name,  fontweight="bold", transform=ax.transAxes)
     # finalize_and_save_plot(out, fig)
     # plt.xlabel("time [s]")
     # plt.grid(axis="x")
@@ -370,7 +371,8 @@ def plot_peaks_error_bars(out, index_name):
     # plt.legend(handles=[red_patch, blue_patch]) #original
     # leg = plt.legend(handles=[red_patch, blue_patch],loc='upper right', bbox_to_anchor=(0, 0, .98, 1.02), fontsize=6)
 
-    plt.text(xcoord_index + xadjust_errorbars, ycoord_index, index_name,  fontweight="bold", transform=ax.transAxes)
+    # plt.text(xcoord_index + xadjust_errorbars, ycoord_index, index_name,  fontweight="bold", transform=ax.transAxes)
+    plt.text(-.22, 1.06, index_name,  fontweight="bold", transform=ax.transAxes)
     # plt.grid(axis="x")
     border = 0.007857
     # plt.xlim([0 - border, 0.16 + border])
@@ -405,10 +407,13 @@ def plot_peaks_error_bars(out, index_name):
 if __name__ == '__main__':
     print('plot_hybrid.py:')
 
-    plt.rcParams["figure.figsize"] = [6.5, 2.25]
+    # plt.rcParams["figure.figsize"] = [6.5, 2.25] #orig
     configure_fonts()
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig22.pdf')
-    fig = plt.figure()
+    # fig = plt.figure() #orig
+
+    # fig = plt.figure(figsize=(2250 / dpi, 1000 / dpi), dpi=dpi)
+    fig = plt.figure(figsize=(6.5, 2))
     # fig.set_figwidth(6.5)
     # fig.set_size_inches(6.5, 3)
 
@@ -432,7 +437,7 @@ if __name__ == '__main__':
     plot_peaks_error_bars("hybrid_peaks", "B")
 
     figs = list(map(plt.figure, plt.get_fignums()))
-    plt.subplots_adjust(top=.93, bottom=.16, left=.20, right=.93, hspace=.30)
+    plt.subplots_adjust(top=.90, bottom=.17, left=.18, right=.96, hspace=.30)
     ax2.sharex(ax1)
 
     plt.savefig('Fig22.png')
@@ -441,9 +446,10 @@ if __name__ == '__main__':
     print_summary(fig, 'Figure 22')
 
     ### PLOT FIGURE 22
-    plt.rcParams["figure.figsize"] = [6.5, 3.5]
+    # plt.rcParams["figure.figsize"] = [6.5, 3.5]
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig23.pdf')
-    fig = plt.figure()
+    fig = plt.figure(figsize=(7.5, 3))
+    # fig = plt.figure()
     # fig.set_figwidth(6.5)
     # fig.set_size_inches(6.5, 4)
 
@@ -456,7 +462,7 @@ if __name__ == '__main__':
     print('Working on Fig 23 subplot C')
     plot_averages("averages_particle_slow", "C")
 
-    plt.subplots_adjust(top=.95, bottom=.12, left=.14, right=.93, hspace=.35)
+    plt.subplots_adjust(top=.95, bottom=.12, left=.10, right=.96, hspace=.35)
 
     # ax3.sharex(ax1)
     ax4.sharex(ax3)

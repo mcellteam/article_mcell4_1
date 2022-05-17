@@ -148,6 +148,7 @@ def plot_extra_data(opts, ax, labels, current_label):
     for i in range(len(extra_dfs)):
         df = extra_dfs[i]
         for name, col in df.iteritems():
+
             line, = ax_plot(ax, df.index, col, label=name)
             if labels:
                 line.set_label(labels[current_label])
@@ -173,7 +174,8 @@ def main():
 
     # fig size was 6.5, 4.8
     # fig size is now 6.5, 3.4
-    fig = plt.figure(figsize=(6.5, 3.5))
+    # fig = plt.figure(figsize=(6.5, 3.5))
+    fig = plt.figure(figsize=(6.5, 3))
 
     for i in range(3):
 
@@ -182,12 +184,12 @@ def main():
         if i == 0:
             ax = ax1 = fig.add_subplot(311)
             opts.for_autoph = True
-            opts.mcell3_dir = 'react_data_mcell3/'
-            opts.output = 'mcell3'
+            opts.mcell3_dir = 'react_data_mcell4/'
+            opts.output = 'mcell4'
             opts.max_time = float(20)
             opts.index_name = 'A'
             opts.extra = 'extra_mcell.txt'
-            labels = load_labels('labels_mcell3.txt')
+            labels = load_labels('labels_mcell.txt')
             ax.set_xlim([0, 20])
             ax.set_xticks([0, 5, 10, 15, 20])
             ax.set_ylim([0, 120])
@@ -195,12 +197,12 @@ def main():
         elif i == 1:
             ax = ax2 = fig.add_subplot(312)
             opts.for_autoph = True
-            opts.mcell4_dir = 'react_data_mcell4/'
-            opts.output = 'mcell4'
+            opts.mcell4_dir = 'react_data_mcell3/'
+            opts.output = 'mcell3'
             opts.max_time = float(20)
             opts.index_name = 'B'
             opts.extra = 'extra_mcell.txt'
-            labels = load_labels('labels_mcell.txt')
+            labels = load_labels('labels_mcell3.txt')
             ax2.sharex(ax1)
             ax2.sharey(ax1)
         elif i == 2:
@@ -356,11 +358,14 @@ def main():
         if i == 0 or i == 1:
             xlabel_i.set_visible(False)
 
+
         # plt.legend(loc='upper left', bbox_to_anchor=(1.02, 0, 0.3, .87))
-        plt.legend(loc='upper left', bbox_to_anchor=(1.02, 0, 0.3, .81))
+        # plt.legend(loc='upper left', bbox_to_anchor=(1.02, 0, 0.3, .81))
+        plt.legend(loc='upper left', bbox_to_anchor=(1.02, 0, 0.3, 1.0))
+        # plt.legend(loc='upper left', bbox_to_anchor=(1, 1, 1, 1), bbox_transform=fig.transFigure)
 
         # plt.subplots_adjust(top=.93, bottom=.10, left=.10 , right=.75, wspace=.5, hspace=.60)
-        plt.subplots_adjust(top=.93, bottom=.11, left=.10 , right=.75, wspace=.5, hspace=.30)
+        plt.subplots_adjust(top=.94, bottom=.13, left=.10 , right=.75, wspace=.5, hspace=.30)
         plt.text(-.14, 1.15, opts.index_name,  fontweight="bold", horizontalalignment='left', verticalalignment='top',
                  transform=ax.transAxes)
 

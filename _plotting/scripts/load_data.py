@@ -181,15 +181,20 @@ def load_gdat_file(fname, sel_str, time_mult):
         
     return df_sel
         
-
+#lines
 def load_extra_data(fname):
     res = []
+
+
     
     info = pd.read_csv(fname, names=['file', 'sim', 'cols', 'time_mult'], sep=',')
-    
+
+
     for index, line in info.iterrows():
         res.append(load_gdat_file(line['file'], str(line['cols']), line['time_mult']))
-    
+
+    # print('\n\nres =\n' + str(res) + '\n\n')
+
     return res    
     
 

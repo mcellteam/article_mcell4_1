@@ -62,7 +62,7 @@ def main():
     # fig18 size was 3.25, 2.25
     # fig18 size is now 3.25, 2
     # fig = plt.figure()
-    fig = plt.figure(figsize=(3.25, 2.0))
+    fig = plt.figure(figsize=(3.25, 2.25))
 
     # fig = plt.figure(figsize=(3.5, 3.5))
     # fig.set_figwidth(3.5)
@@ -256,7 +256,7 @@ def main():
         # plt.subplots_adjust(wspace=1.1, left=0.25, right=.95, bottom=0.15, top=0.9)
         # plt.text(.01, .98, '(A)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
         # plt.text(0.51, .98, '(B)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-        plt.subplots_adjust(wspace=.9, left=0.24, right=.89, bottom=0.22, top=0.90)
+        plt.subplots_adjust(wspace=.9, left=0.23, right=.90, bottom=0.20, top=0.90)
         # plt.text(.01, .98, 'A', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
         plt.text(.04, .98, 'A', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure, fontsize=8)
         plt.text(0.51, .98, 'B', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure, fontsize=8)

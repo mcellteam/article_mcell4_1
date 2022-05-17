@@ -110,8 +110,18 @@ def main():
 
     clrs = ['b', 'g', 'r']
 
-    fig = plt.figure()
-    fig.set_figwidth(6.5)
+
+    # was 6.5x4.8
+    # fig = plt.figure()
+    # fig = plt.figure(figsize=(3.25, 3.25))
+
+    # fig = plt.figure(figsize=(6.25, 1.75))
+    # dpi = 600
+    # fig = plt.figure(figsize=(2250/dpi, 1000/dpi), dpi=dpi)
+    # fig.set_figwidth(6.5)
+    # fig = plt.figure(figsize=(6.5, 1.75))
+    fig = plt.figure(figsize=(6.5, 2))
+
     '''
     str(sorted(all_observables)) = ['Ca', 'CaM', 'CaM1C', 'CaM1C1N', 'CaM1C2N', 'CaM1N', 'CaM2C', 'CaM2N', 'Cam2C1N',
                                     'Cam4Ca', 'KCaM', 'KCaM0', 'KCaM1C', 'KCaM1C1N', 'KCaM1C2N', 'KCaM1N', 'KCaM2C',
@@ -137,24 +147,22 @@ def main():
         #print("Processing observable " + obs)
         if index == 0:
             print('  Working on subplot A - ', obs)
-            ax = fig.add_subplot(221)
+            ax = fig.add_subplot(141)
         elif  index == 1:
             print('  Working on subplot B - ', obs)
-            ax = fig.add_subplot(222)
+            ax = fig.add_subplot(142)
             # ax.set_ylim(top=250)
             # ax.set_xlim(right=0.10)
         elif index == 2:
             print('  Working on subplot C - ', obs)
-            ax = fig.add_subplot(223)
+            ax = fig.add_subplot(143)
             # ax.set_ylim(top=350)
             # ax.set_xlim(right=0.10)
         elif index == 3:
             print('  Working on subplot D - ', obs)
-            ax = fig.add_subplot(224)
+            ax = fig.add_subplot(144)
             # ax.set_ylim(top=12)
             # ax.set_xlim(right=0.10)
-
-        # ax.margins(0.05)
 
 
         ax.spines['right'].set_visible(False)
@@ -193,29 +201,60 @@ def main():
         ^ 4th iteration
         '''
 
+        '''
         if index_names[index] == 'A' or index_names[index] == 'C':
             # L = plt.legend(loc='upper right', bbox_to_anchor=(0, 0, 1.0, 1.0))
-            L = plt.legend(loc='upper right', bbox_to_anchor=(0, 0, .96, 1.0))
+            # L = plt.legend(loc='upper right', bbox_to_anchor=(0, 0, .96, 1.0))
+            L = plt.legend(loc='upper right', bbox_to_anchor=(0, 0, 1.0, 1.0))
         elif index_names[index] == 'B' or index_names[index] == 'D':
             # L = plt.legend(loc='lower right', bbox_to_anchor=(0, .05, 1.0, .95))
-            L = plt.legend(loc='lower right', bbox_to_anchor=(0, .05, .96, .95))
-
-        correct_legend_labels = ['MCell4 ' + obs, 'MCell3 ' + obs, 'NFSim ' + obs]
+            # L = plt.legend(loc='lower right', bbox_to_anchor=(0, .05, .96, .95))
+            L = plt.legend(loc='lower right', bbox_to_anchor=(0, .05, 1.0, 1.0))
+            
+            
+        # correct_legend_labels = ['MCell4 ' + obs, 'MCell3 ' + obs, 'NFSim ' + obs]
+        correct_legend_labels = ['MCell4 ', 'MCell3 ', 'NFSim ']
         L.get_texts()[0].set_text(correct_legend_labels[0])
         L.get_texts()[1].set_text(correct_legend_labels[1])
         L.get_texts()[2].set_text(correct_legend_labels[2])
+        '''
+
+        if index_names[index] == 'A':
+            # ax.set_xticks([0, 300, 600, 900])
+            plt.ylabel(Y_LABEL_N_PARAM_TIME)
+
+        elif index_names[index] == 'B':
+            pass
+            # ax.set_xticks([0, 80, 160, 240])
+
+        elif index_names[index] == 'C':
+            pass
+            # ax.set_xticks([0, 100, 200, 300])
+
+        elif index_names[index] == 'D':
+            # ax.set_xticks([0, 4, 8, 12])
+            L = plt.legend(loc='upper right', bbox_to_anchor=(0, 0, .99, .96), bbox_transform=fig.transFigure)
+            # correct_legend_labels = ['MCell4 ' + obs, 'MCell3 ' + obs, 'NFSim ' + obs]
+            correct_legend_labels = ['MCell4 ', 'MCell3 ', 'NFSim '] #orig
+            # correct_legend_labels = ['NFSim ', 'MCell3 ','MCell4 ']
+            L.get_texts()[0].set_text(correct_legend_labels[0])
+            L.get_texts()[1].set_text(correct_legend_labels[1])
+            L.get_texts()[2].set_text(correct_legend_labels[2])
+
 
         plt.xlabel(X_LABEL_TIME_UNIT_S)
-        plt.ylabel(Y_LABEL_N_PARAM_TIME)
+        # plt.ylabel(Y_LABEL_N_PARAM_TIME)
 
         # ax.margins(0.05) # these plots run up against the axes, margin is good for this exact situation
-
+        ax.title.set_text(obs)
         # add_plot_index(plt, ax, index_names[index], x_offset=-0.03)
         # plt.text(.03, .95, '(' + index_names[index] + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
         #plt.text(.01, .99, '(' + index_names[index] + ')', horizontalalignment='left', verticalalignment='top',transform=fig.transFigure)
-        plt.subplots_adjust(top=.93, bottom=.10, left=.10, right=.95, wspace=.4, hspace=.4)
-        plt.text(-.25, 1.15, index_names[index], weight="bold", horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
-        # plt.savefig(obs + '.png', dpi=OUTPUT_DPI) # 'dpi' now controlled by master stylesheet
+        # plt.subplots_adjust(top=.93, bottom=.10, left=.15, right=.95, wspace=.4, hspace=.4) # full width
+        # plt.subplots_adjust(top=.90, bottom=.12, left=.14, right=.80, wspace=.50, hspace=.7)
+        plt.subplots_adjust(top=.82, bottom=.20, left=.07, right=.89, wspace=.25)
+        plt.text(-.18, 1.23, index_names[index], weight="bold", horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
+        # plt.savefig(obs + '.png', dpi=OUTPUT_DPI) # ' dpi' now controlled by master stylesheet
         # plt.savefig(obs + '.png')
         # plt.savefig(obs + '.tiff')
         print("  Plot " + obs + " generated")
