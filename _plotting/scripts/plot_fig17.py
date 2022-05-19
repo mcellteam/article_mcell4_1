@@ -35,7 +35,6 @@ import os
 import sys
 import argparse
 import math
-import pickle
 from load_data import *
 from shared import *
 from fontrc import configure_fonts
@@ -153,8 +152,6 @@ def plot_extra_data(opts, ax, labels, current_label):
             if labels:
                 line.set_label(labels[current_label])
                 current_label += 1
-            # ax.legend()  # TODO: what does this do? #0426
-
 
 def main():
     print('plot_fig17:')
@@ -162,19 +159,6 @@ def main():
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig17.pdf')
 
     fig_names = []
-
-    '''
-    python ../../_plotting/scripts/plot_trajectories_single_plot.py --autophosphorylation -m3 react_data_mcell3/ -t 20 -e extra_mcell.txt -l labels_mcell3.txt -o mcell3 -i B
-    python ../../_plotting/scripts/plot_trajectories_single_plot.py --autophosphorylation -m4 react_data_mcell4/ -e extra_mcell.txt -t 20 -l labels_mcell.txt -o mcell4 -i A
-    python ../../_plotting/scripts/plot_trajectories_single_plot.py --autophosphorylation -b nfsim -e extra_nfsim.txt -t 20 -l labels_nfsim.txt -o nfsim -i C
-    '''
-
-    # fig = plt.figure()
-    # fig.set_figwidth(6.5)
-
-    # fig size was 6.5, 4.8
-    # fig size is now 6.5, 3.4
-    # fig = plt.figure(figsize=(6.5, 3.5))
     fig = plt.figure(figsize=(6.5, 3))
 
     for i in range(3):
@@ -359,19 +343,10 @@ def main():
             xlabel_i.set_visible(False)
 
 
-        # plt.legend(loc='upper left', bbox_to_anchor=(1.02, 0, 0.3, .87))
-        # plt.legend(loc='upper left', bbox_to_anchor=(1.02, 0, 0.3, .81))
         plt.legend(loc='upper left', bbox_to_anchor=(1.02, 0, 0.3, 1.0))
-        # plt.legend(loc='upper left', bbox_to_anchor=(1, 1, 1, 1), bbox_transform=fig.transFigure)
-
-        # plt.subplots_adjust(top=.93, bottom=.10, left=.10 , right=.75, wspace=.5, hspace=.60)
-        plt.subplots_adjust(top=.94, bottom=.13, left=.10 , right=.75, wspace=.5, hspace=.30)
+        plt.subplots_adjust(top=.94, bottom=.13, left=.12 , right=.73, wspace=.5, hspace=.30)
         plt.text(-.14, 1.15, opts.index_name,  fontweight="bold", horizontalalignment='left', verticalalignment='top',
                  transform=ax.transAxes)
-
-        pickle_name = opts.output + '.pickle'
-        print('plot_fig17.py: pickling %s ...' % pickle_name)
-        pickle.dump((fig, ax), open(pickle_name, 'wb'))
 
 
     plt.savefig('Fig17.png')
@@ -382,8 +357,5 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-# 2022-05-13
-# Print size	16.51x12.19 cm, 6.50x4.80 inches
-
-
+    
+    

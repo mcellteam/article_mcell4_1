@@ -37,7 +37,6 @@ import os
 import sys
 import argparse
 import math
-import pickle
 from load_data import *
 from shared import *
 from fontrc import configure_fonts
@@ -156,50 +155,21 @@ def plot_extra_data(opts, ax, labels, current_label):
 import inspect
 def main():
     plt.style.use(['../../_plotting/styles/plot_single.mplstyle', '../../_plotting/styles/master.mplstyle'])
-    # plt.rcParams["figure.figsize"] = [6.5,4.5]
-
 
     print('plot_fig13:')
     opts = process_opts()
     configure_fonts()
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig13.pdf')
 
-    # was 6.5x4.5
-    # plt.rcParams["figure.figsize"] = [3.25, 3.25]
-    # fig = plt.figure()
     fig = plt.figure(figsize=(6.5, 4))
-
-    # fig = plt.figure(constrained_layout=True)
-
-    # gs = GridSpec(1, 3, figure=fig)
-
-    # fig = plt.figure()
-    # gs = GridSpec(1, 3, figure=fig)
-    # ax = fig.add_subplot(gs[0, :-1])
-    # gs = GridSpec(3, 2, figure=fig, width_ratios=[2,1], height_ratios=[1, 7, 2])
     gs = GridSpec(2, 4, figure=fig, width_ratios=[.05, 1, 1, 1], height_ratios=[1.8, 1])
-    # ax = fig.add_subplot(gs[:, 0:5])
-    # ax = fig.add_subplot(gs[:, 0])
+
     ax = fig.add_subplot(gs[0, 1:])
-    # ax.set_anchor('C') # center
     ax.set_anchor('W')
 
-
-    # fig = plt.figure(constrained_layout=True)
-    # fig, ax = plt.subplots(1, 2, gridspec_kw={'width_ratios': [3, 1]})
-    # fig.tight_layout()
-    # fig.set_figwidth(6.5)
-
-
-    # fig.add_subplot(121)
-    # plt.subplot(1, 2, 1)
-    # ax = plt.gca()
-    # ax = plt.subplot2grid((1, 10), (0, 0), colspan=7)
     img = mpimg.imread('../snare_complex_rxn_diagram_mod.png')
-    #extent=[longitude_top_left,longitude_top_right,latitude_bottom_left,latitude_top_left]
-    # plt.imshow(img,aspect='auto',extent=(30, 100, 30, 100))
-    # plt.imshow(img,aspect='auto')
     plt.imshow(img)
+    
     ax = plt.gca()
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
@@ -222,22 +192,6 @@ def main():
     M4 = 'MCell4'
     names = ['MCell4', 'MCell3R', 'BNG']
 
-    # ax = fig.add_subplot(gs[0, 2:3])
-    # ax = fig.add_subplot(gs[1, 5:7])
-    # ax = fig.add_subplot(gs[1, 1])
-
-
-    # fig,ax = plt.subplots() #original
-    # fig, ax = plt.subplots()
-    # ax = fig.add_subplot(gs[2:3, 0])
-    # ax = plt.gca()
-    # fig.add_subplot(221)
-    # fig.add_subplot(122)
-    # plt.subplot(1, 3, 2)
-    # ax = plt.subplot2grid((1, 10), (0, 8), colspan=2)
-
-
-
     linestyles = [
         'solid',
         'solid',
@@ -250,7 +204,7 @@ def main():
     cm = plt.cm.get_cmap('tab10')
     NUM_COLORS = len(names)
     NUM_COLORS = 10
-    colors = [cm(i) for i in range(NUM_COLORS)]  # type is list
+    colors = [cm(i) for i in range(NUM_COLORS)]
     # ax.set_prop_cycle(linestyle=linestyles, color=colors)
     ax.set_prop_cycle(color=colors)
 
@@ -259,11 +213,6 @@ def main():
     # clrs = [colors[1], colors[1], colors[3], colors[3], colors[5], colors[5]]
     clrs = [colors[1], colors[1], colors[3], colors[3], 'darkblue', 'darkblue']
     # ax.set_prop_cycle(color=clrs)
-
-    
-    dfs = {}
-    color_index = 0
-    # prepare data for
 
     '''
     labels:
@@ -274,13 +223,9 @@ def main():
     BNGL ODE V release
     MCell4 V release
     '''
-
-    # python ../../_plotting/scripts/plot_fig12.py -m4 ../mcellsim/react_data -b ../bngl/bng -l labels.txt -o snare_complex --snare -t 1
-    # snare: str(sorted(all_observables)) =  ['SNARE_async', 'SNARE_sync', 'V_release']
-    # snare: len(counts) =  3
-
-
-
+    
+    dfs = {}
+    color_index = 0
     for obs in sorted(all_observables):
 
         if obs == 'SNARE_sync':
@@ -359,7 +304,6 @@ def main():
             ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s, c=clrs[color_index])
             # ax_plot(ax, df.index, df[sim_obs_name], label=l, linestyle=s)
 
-            # ax.set_prop_cycle(color=clrs)
             color_index += 1
 
         # extra data to be plotted
@@ -368,27 +312,13 @@ def main():
         ax.set_xticks([0, .2, .4, .6, .8, 1])
         plt.xlabel(X_LABEL_TIME_UNIT_S)
         plt.ylabel(Y_LABEL_N_PARAM_TIME)
-        # ax.set_ylim([0, 60])
         plt.legend(loc='upper left', bbox_to_anchor=(0.08, 1.02), prop={'size': 7})
 
             
-
-
-
-
-    # plt.legend(loc='upper left', bbox_to_anchor=(0.05, 1.02), prop={'size': 5})
-    # plt.legend(loc='upper left', bbox_to_anchor=(1.05, 1.02), prop={'size': 5})
-    # plt.legend(loc='upper left', bbox_to_anchor=(1.05, 1.02), prop={'size': 7})
-
-    # plt.subplots_adjust(left=0.02, right=0.80, bottom=0.20, top=0.88)
-    # plt.subplots_adjust(left=0.02, right=0.98, bottom=0.05, top=1.00)
-    # plt.subplots_adjust(left=0.02, right=0.83, bottom=0.05, top=1.00)
-    # plt.subplots_adjust(left=0.05, right=0.95, bottom=0.15, top=1.00, wspace=.35)
     plt.subplots_adjust(wspace=.35)
     plt.subplots_adjust(hspace=.16)
     plt.subplots_adjust(top=.98)
     plt.subplots_adjust(bottom=0.12)
-    # plt.subplots_adjust(left=0.10, right=0.96)
     plt.subplots_adjust(left=.05, right=0.96)
 
     plt.savefig('Fig13.png')

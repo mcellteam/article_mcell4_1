@@ -6,7 +6,6 @@ import numpy as np
 import pandas as pd
 import sys
 import os
-import pickle
 from io import StringIO
 from hybrid_get_peaks import prepare_data
 from shared import *
@@ -90,17 +89,6 @@ ode = {
 #lag_time1: (0.0281, 0),
 #lag_time2: (0.025599999999999998, 0),
 }
-        
-# used in plot_peaks_error_bars        
-# data = [
-#     (1, particle_D10, 'r', 'particle D=1e-7'),
-#     (2, hybrid_D10, 'b', 'hybrid D=1e-7'),
-#     (3, particle_D1000, 'g', 'particle D=1e-5'),
-#     (4, hybrid_D1000, 'm', 'hybrid D=1e-5'),
-#     (5, nfsim, 'c', 'NFSim'),
-#     (6, nfsim, 'y', 'SSA'),
-#     (7, ode, 'k', 'ODE')
-# ]
 data = [
     (1, particle_D10, 'r', 'particle D=$10^{-7} \, cm^2/s$'),
     (2, hybrid_D10, 'b', 'hybrid D=$10^{-7} \, cm^2/s$'),
@@ -126,13 +114,6 @@ def load_csv(file):
 # shared function to store plots
 def finalize_and_save_plot(out, fig):
     plt.xlabel("time [s]")
-                
-    # plt.grid(axis="x")
-    border = 0.007857
-    # plt.xlim([0 - border, 0.16 + border])
-    
-    # fig.set_size_inches((14,2.5))
-    # plt.savefig(out, dpi=600) # 'dpi' now controlled by master stylesheet
     plt.savefig(out)
     print("Plot " + out + " generated")
 
@@ -141,26 +122,18 @@ def plot_averages(dir, index_name):
     # if 1:
         global ax3
         ax = ax3 = fig.add_subplot(311)
-        # ax.xaxis.set_tick_params(labelbottom=False)
-        # ax.set_xlim([0, .16])
-        # ax.set_xticks([0, .16])
-        # ax.set_ylim([0, 1800])
-        # ax.set_yticks([0, 1800])
         ax.set_xlim([0, .16])
         ax.set_xticks([0, .02, .04, .06, .08, .10, .12, .14, .16])
         ax.set_ylim([0, 2000])
         ax.set_yticks([0, 1000, 2000])
-        # ax.grid(which='minor', alpha=0.4, linestyle='--')
         ax.xaxis.grid(True, which='major', alpha=0.6, linestyle='--')
         ax.yaxis.grid(False, which='major')  # ensure only vertical lines are plotted
-        # plt.yticks([0, .16])
     elif index_name == 'B':
         global ax4
         ax = ax4 = fig.add_subplot(312)
         ax.xaxis.set_tick_params(labelbottom=False)
         ax.xaxis.grid(True, which='major', alpha=0.6, linestyle='--')
         ax.yaxis.grid(False, which='major')  # ensure only vertical lines are plotted
-        # plt.yticks([0, 500, 1000, 1500])
     elif index_name == 'C':
         global ax5
         ax = ax5 = fig.add_subplot(313)
@@ -168,8 +141,7 @@ def plot_averages(dir, index_name):
         plt.xlabel(X_LABEL_TIME_UNIT_S)
         ax.xaxis.grid(True, which='major', alpha=0.6, linestyle='--')
         ax.yaxis.grid(False, which='major')  # ensure only vertical lines are plotted
-        # grid_x_ticks = np.arange(0, .16, 0.02)
-        # ax.set_xticks(grid_x_ticks, minor=True)
+
 
     # load all .csv files in directory passed as the first argument
     data = {}
@@ -190,23 +162,16 @@ def plot_averages(dir, index_name):
     first = True
     for name,df in data.items():
         df = df.truncate(after = 0.16)
-        # df = df.rename({'A_mean': 'A (mean)', 'R_mean': 'R (mean)'}, axis='columns')
-        # yA = df['A (mean)']
-        # yR = df['R (mean)']
         df = df.rename({'A_mean': 'A', 'R_mean': 'R'}, axis='columns')
         yA = df['A']
         yR = df['R']
 
         if first:
-            # ax_plot(ax, df.index, yA, c = 'b', linewidth=linewidth)
-            # ax_plot(ax, df.index, yR, c = 'r', linewidth=linewidth)
             ax_plot(ax, df.index, yA, c = 'b')
             ax_plot(ax, df.index, yR, c = 'r')
 
             first = False
         else:
-            # ax_plot(ax, df.index, yA, linewidth=linewidth)
-            # ax_plot(ax, df.index, yR, linewidth=linewidth)
             ax_plot(ax, df.index, yA)
             ax_plot(ax, df.index, yR)
 
@@ -215,23 +180,18 @@ def plot_averages(dir, index_name):
         elif name == 'ssa':
             name = 'SSA'
         elif name == 'hybrid_D1000':
-            # name = 'hybrid D=' + str(1e-5)
             name = 'hybrid D = $10^{-5} \, cm^2/s$'
         elif name == 'particle_D1000':
-            # name = 'particle D=' + str(1e-5)
             name = 'particle D = $10^{-5} \, cm^2/s$'
         elif name == 'hybrid_D10':
-            # name = 'hybrid D=' + str(1e-7)
             name = 'hybrid D = $10^{-7} \, cm^2/s$'
         elif name == 'particle_D10':
-            # name = 'particle D=' + str(1e-7)
             name = 'particle D = $10^{-7} \, cm^2/s$'
 
         legend.append(name + ' - A')
         legend.append(name + ' - R')
 
     if index_name == 'A':
-        # leg = plt.legend(legend, loc='upper right', bbox_to_anchor=(0, 0, 1.00, 1.05), fontsize=6, ncol = 4, labelspacing=1, frameon=1)
         leg = plt.legend(legend, loc='upper right', bbox_to_anchor=(0, 0, 1, 1.06), fontsize=7, ncol = 4, frameon=1)
         frame = leg.get_frame()
         frame.set_color('white')
@@ -244,14 +204,7 @@ def plot_averages(dir, index_name):
 
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
 
-    # add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)
-    # xcoord_index = -.18
-    # ycoord_index = 1.06
     plt.text(-.10, 1.06, index_name,  fontweight="bold", transform=ax.transAxes)
-
-    pickle_name="hybrid_" + os.path.basename(dir) + ".pickle"
-    print('pickling %s ...' % pickle_name)
-    pickle.dump((fig, ax), open(pickle_name, 'wb'))
         
 def plot_low_pass(out, nfsim_seed, index_name):
     # fig, ax = plt.subplots()
@@ -259,15 +212,10 @@ def plot_low_pass(out, nfsim_seed, index_name):
         global ax1
         ax = ax1 = fig.add_subplot(211)
         ax.xaxis.set_tick_params(labelbottom=False)
-        # plt.xticks([0,.04,.08,.12,.16])
-        # plt.yticks([0, 500, 1000, 1500])
         ax.set_xlim([0, .16])
         ax.set_xticks([0, .02, .04, .06, .08, .10, .12, .14, .16])
         ax.set_ylim([0, 2000])
         ax.set_yticks([0, 1000, 2000])
-        # ax.set_ylim([0, 1800])
-        # ax.set_yticks([0, 1800])
-
 
     else:
         ax = fig.add_subplot()
@@ -291,7 +239,6 @@ def plot_low_pass(out, nfsim_seed, index_name):
     df_lowpass = prepare_data(df_lowpass, 'R')
 
     df_lowpass = df_lowpass.truncate(after = 0.16)  
-    #print(df_lowpass)
 
     ax_plot(ax, df_lowpass.index, df_lowpass['A'], label='A', c='b')
     ax_plot(ax, df_lowpass.index, df_lowpass['R'], label='R', c='r')
@@ -302,25 +249,10 @@ def plot_low_pass(out, nfsim_seed, index_name):
     frame.set_alpha(None)
 
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
-    
-    # add_plot_index(plt, ax, index_name, x_offset=INDEX_NAME_OFFSET)
-    # ax.text(xcoord_index + xadjust_errorbars, ycoord_index, index_name,  fontweight="bold", transform=ax.transAxes)
     plt.text(-.22, 1.06, index_name,  fontweight="bold", transform=ax.transAxes)
-    # finalize_and_save_plot(out, fig)
-    # plt.xlabel("time [s]")
-    # plt.grid(axis="x")
-    border = 0.007857
-    # plt.xlim([0 - border, 0.16 + border])
-
-    # ax.grid(which='minor', alpha=0.4, linestyle='--')
-    # matplotlib.pyplot.tick_params(bottom=False)
 
     ax.xaxis.grid(True, which='major', alpha=0.6, linestyle='--') ###
     ax.yaxis.grid(False, which='major')  # ensure only vertical lines are plotted ###
-
-    pickle_name = out + '.pickle'
-    print('pickling %s ...' % pickle_name)
-    pickle.dump((fig, ax), open(pickle_name, 'wb'))
 
 
 def plot_peaks_error_bars(out, index_name):
@@ -328,7 +260,6 @@ def plot_peaks_error_bars(out, index_name):
     if index_name == 'B':
         global ax2
         ax = ax2 = fig.add_subplot(212)
-        # ax.xaxis.set_tick_params(labelbottom=False)
         plt.xlabel(X_LABEL_TIME_UNIT_S)
     else:
         ax = fig.add_subplot()
@@ -336,7 +267,6 @@ def plot_peaks_error_bars(out, index_name):
     ax.spines['top'].set_visible(False)
     ax.spines['left'].set_visible(False)
     ax.spines['bottom'].set_visible(False)
-    
 
     # plt.legend(['A (low pass)', 'R (low pass)'], loc='center left', bbox_to_anchor=(1, 0.5)) #***
     
@@ -357,83 +287,45 @@ def plot_peaks_error_bars(out, index_name):
             # ax_errorbar(ax, x, y, xerr=xerr, fmt='|', capsize=3, c=c)
             ax_errorbar(ax, x, y, xerr=xerr, fmt='o', capsize=2, c=c, markersize=2)
 
-            # 0.007
-            #  + 2.5
-            # plt.text(0 - 0.0068, y - 3, d[3], c='k')
-            # plt.text(0-0.0068, y - 3, d[3], c='k', font={'size': 9})
             plt.text(-0.002, y - 3, d[3],  font={'size': 7}, horizontalalignment='right', linespacing=None)
     
 
 
     red_patch = Line2D([0], [0], color='blue', label='A (low pass peaks)')
     blue_patch = Line2D([0], [0], color='red', label='R (low pass peaks)')
-    # plt.legend(['A (low pass)', 'R (low pass)'])  # original
-    # plt.legend(handles=[red_patch, blue_patch]) #original
+    # plt.legend(['A (low pass)', 'R (low pass)'])
+    # plt.legend(handles=[red_patch, blue_patch])
     # leg = plt.legend(handles=[red_patch, blue_patch],loc='upper right', bbox_to_anchor=(0, 0, .98, 1.02), fontsize=6)
 
-    # plt.text(xcoord_index + xadjust_errorbars, ycoord_index, index_name,  fontweight="bold", transform=ax.transAxes)
     plt.text(-.22, 1.06, index_name,  fontweight="bold", transform=ax.transAxes)
-    # plt.grid(axis="x")
-    border = 0.007857
-    # plt.xlim([0 - border, 0.16 + border])
 
-    # plt.text(.3, .5, 'fig 21b has ylim of ~163 -> ~306\nwhat does it mean? - joel', transform=ax.transAxes, fontsize=6, backgroundcolor='w', color='k')
-    # plt.text(.75, .03, 'this figure is under construction', transform=fig.transFigure, fontsize=7, backgroundcolor='k', color='w', weight='bold')
-
-    # grid_x_ticks = np.arange(0, .16, 0.02)
-    # ax.set_xticks(grid_x_ticks, minor=True)
     ax.xaxis.grid(True, which='major', alpha=0.6, linestyle='--')
     ax.yaxis.grid(False, which='major') # ensure only vertical lines are plotted
     ax.set_yticklabels([])
     plt.yticks(visible=True)
 
-    # THIS WORKS
     for tick in ax.xaxis.get_major_ticks():
         tick.tick1line.set_visible(False)
         tick.tick2line.set_visible(False)
-        # tick.label1.set_visible(False)
-        # tick.label2.set_visible(False)
 
     for tick in ax.yaxis.get_major_ticks():
         tick.tick1line.set_visible(False)
         tick.tick2line.set_visible(False)
-        # tick.label1.set_visible(False)
-        # tick.label2.set_visible(False)
 
     ax.set_xticks(np.arange(0, .16, 0.02))
-
 
 
 if __name__ == '__main__':
     print('plot_hybrid.py:')
 
-    # plt.rcParams["figure.figsize"] = [6.5, 2.25] #orig
     configure_fonts()
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig22.pdf')
-    # fig = plt.figure() #orig
-
-    # fig = plt.figure(figsize=(2250 / dpi, 1000 / dpi), dpi=dpi)
     fig = plt.figure(figsize=(6.5, 2))
-    # fig.set_figwidth(6.5)
-    # fig.set_size_inches(6.5, 3)
-
-    xcoord_index = -.18
-    ycoord_index = 1.06
-    xadjust_errorbars = -.08
-
-    # linewidth=1
-
-
-    #for s in range(1, 20):
-    #    plot_low_pass("hybrid_low_pass_nfsim" + str(s).zfill(5) + ".png", s)
 
     print('Working on Fig 22 subplot A')
-    # NFSim seed 14 quite nicely matches the averages 
-    # plot_low_pass("hybrid_low_pass_nfsim.png", 14, "A")
     plot_low_pass("hybrid_low_pass_nfsim", 14, "A")
 
     print('Working on Fig 22 subplot B')
-    # plot_peaks_error_bars("hybrid_peaks.png", "B")
     plot_peaks_error_bars("hybrid_peaks", "B")
 
     figs = list(map(plt.figure, plt.get_fignums()))
@@ -445,13 +337,8 @@ if __name__ == '__main__':
     pdf.close()
     print_summary(fig, 'Figure 22')
 
-    ### PLOT FIGURE 22
-    # plt.rcParams["figure.figsize"] = [6.5, 3.5]
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig23.pdf')
     fig = plt.figure(figsize=(7.5, 3))
-    # fig = plt.figure()
-    # fig.set_figwidth(6.5)
-    # fig.set_size_inches(6.5, 4)
 
     print('Working on Fig 23 subplot A')
     plot_averages("averages_fast", "A")
@@ -464,10 +351,8 @@ if __name__ == '__main__':
 
     plt.subplots_adjust(top=.95, bottom=.12, left=.10, right=.96, hspace=.35)
 
-    # ax3.sharex(ax1)
     ax4.sharex(ax3)
     ax5.sharex(ax3)
-    # ax3.sharey(ax1)
     ax4.sharey(ax3)
     ax5.sharey(ax3)
 

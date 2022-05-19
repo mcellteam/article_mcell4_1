@@ -17,4 +17,3 @@ rm -r result/png/*
 
 wait
 
-./scripts/combine_all.py

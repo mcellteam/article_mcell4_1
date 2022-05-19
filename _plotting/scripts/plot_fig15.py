@@ -35,7 +35,6 @@ import os
 import sys
 import argparse
 import math
-import pickle
 from load_data import *
 from shared import *
 from fontrc import configure_fonts
@@ -147,7 +146,7 @@ def plot_extra_data(opts, ax, labels, current_label):
             if labels:
                 line.set_label(labels[current_label])
                 current_label += 1
-            ax.legend() # TODO: what does this do?
+            ax.legend()
 
 def main():
     print('plot_fig15:')
@@ -157,23 +156,8 @@ def main():
 
     fig_names = []
 
-
-    '''
-    python ../../_plotting/scripts/plot_trajectories_single_plot.py -m4 ../PSD_transparent/react_data_wm -o PSD_transparent --camkii -t 3 -l labels.txt -i A & 	
-    python ../../_plotting/scripts/plot_trajectories_single_plot.py -m4 ../PSD/react_data_wm -o PSD --camkii -t 3 -l labels.txt -i B &
-    python ../../_plotting/scripts/plot_trajectories_single_plot.py -m4 ../half_in_PSD/react_data_wm -o half_in_PSD --camkii -t 3 -l labels.txt -i C & 
-    
-    '''
-
     labels = load_labels('labels.txt')
 
-    # was 6.5x4.8
-
-    # fig = plt.figure()
-    # fig.set_figwidth(6.5)
-    # fig = plt.figure(figsize=(3.25, 3.25))
-    # fig = plt.figure(figsize=(6.25, 2.25))
-    # fig = plt.figure(figsize=(6.5, 2.25))
     fig = plt.figure(figsize=(6.5, 2))
 
     for i in range(3):
@@ -354,13 +338,7 @@ def main():
         ax.set_ylim(0, .5)
         ax.set_yticks([0, .1, .2, .3, .4, .5])
 
-        '''
-        correct_legend_labels = ['pKCaM2C', 'pCaMKII', 'pCaM4ca']
-        L = plt.legend(loc='upper right', bbox_to_anchor=(0, 0, 1.0, 1.0))
-        L.get_texts()[0].set_text(correct_legend_labels[0])
-        L.get_texts()[1].set_text(correct_legend_labels[1])
-        L.get_texts()[2].set_text(correct_legend_labels[2])
-        '''
+        # correct_legend_labels = ['pKCaM2C', 'pCaMKII', 'pCaM4ca']
 
         if i==2:
             correct_legend_labels = ['pKCaM2C', 'pCaMKII', 'pCaM4ca']
@@ -371,20 +349,11 @@ def main():
             L.get_texts()[2].set_text(correct_legend_labels[2])
 
 
-
-
-
-        plt.subplots_adjust(top=.83, bottom=.19, left=.09, right=.86, wspace=.20)
-        # plt.text(-.21, 1.12, opts.index_name, fontweight="bold", horizontalalignment='left', verticalalignment='top',transform=ax.transAxes)
-
-        #original
-        # plt.text(-.70, 1.50, opts.index_name, weight="bold", horizontalalignment='left', verticalalignment='top',transform=ax.transAxes)
-
-        plt.text(-.19, 1.23, opts.index_name, weight="bold", horizontalalignment='left', verticalalignment='top',
+        plt.subplots_adjust(top=.81, bottom=.19, left=.08, right=.86, wspace=.24)
+        plt.text(-.23, 1.26, opts.index_name, weight="bold", horizontalalignment='left', verticalalignment='top',
                  transform=ax.transAxes)
 
 
-    # plt.savefig('Fig15.tiff')
     plt.savefig('Fig15.png')
     pdf.savefig()
     pdf.close()

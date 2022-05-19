@@ -35,7 +35,6 @@ import os
 import sys
 import argparse
 import math
-import pickle
 from load_data import *
 from shared import *
 from fontrc import configure_fonts
@@ -167,15 +166,6 @@ def main():
         fig.set_figwidth(6.5)
         plt.style.use(['../../_plotting/styles/plot_trajectories_single_plot.mplstyle', '../../_plotting/styles/master.mplstyle'])
 
-    '''
-    print('\nplot_trajectories_single_plot.py:')
-    print('current directory is ', os.getcwd())
-    print('inspect.stack() is ', inspect.stack())
-    print('plot_trajectories_single_plot.py: opts.mcell4_dir = ', str(opts.mcell4_dir))
-    print('plot_trajectories_single_plot.py: opts.output = ', str(opts.output))
-    print('plot_trajectories_single_plot.py: opts.for_camkii = ', str(opts.for_camkii))
-    '''
-    
     counts = load_counts(opts)
 
     all_observables = get_all_observables_names(counts)
@@ -224,9 +214,7 @@ def main():
     dfs = {}
     color_index = 0
     # prepare data for 
-    for obs in sorted(all_observables): 
-        #print("Processing observable " + obs)
-        
+    for obs in sorted(all_observables):         
         if opts.for_membrane_localization:
             if obs != 'MA':
                 continue
@@ -322,32 +310,9 @@ def main():
     else:
         plt.legend()
 
-    # if opts.output in {'mcell4','mcell3','nfsim'}:
-    #     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))  # original
-    # else:
-    #     plt.legend()
-    #     plt.legend(loc='upper right')  # jy
-
-    # plt.legend(loc='center left', bbox_to_anchor=(1, 0.5)) #original
-    # plt.legend(loc='upper right') #jy
-    # plt.subplots_adjust(right=0.7, bottom=0.2)
-
-    # print('opts.index_name = ', opts.index_name)
-    # print('opts.output = ', opts.output)
-
-    # plt.subplots_adjust(wspace=1.1, left=0.25, right=.95, bottom=0.11, top=0.94)
     if opts.index_name:
-        # add_plot_index(plt, ax, opts.index_name)
         plt.text(.01, .99, '(' + opts.index_name + ')', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-    
-    # plt.savefig(opts.output, dpi=OUTPUT_DPI) # 'dpi' now controlled by master stylesheet
-    # plt.savefig(opts.output)
-    # print("Plot " + opts.output + " generated")
-    # plt.savefig(opts.output + '.tiff')
 
-    pickle_name = opts.output + '.pickle'
-    print('plot_trajectories_single_plot.py: pickling %s ...' % pickle_name)
-    pickle.dump((fig, ax), open(pickle_name, 'wb'))
 
     pdf.savefig()
     pdf.close()

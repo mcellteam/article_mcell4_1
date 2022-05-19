@@ -35,7 +35,6 @@ import os
 import sys
 import argparse
 import math
-import pickle
 from load_data import *
 from shared import *
 from fontrc import configure_fonts
@@ -154,25 +153,9 @@ def main():
     configure_fonts()
 
     plt.style.use(['../../_plotting/styles/plot_single.mplstyle', '../../_plotting/styles/master.mplstyle'])
-
-    # pdf = matplotlib.backends.backend_pdf.PdfPages(opts.output + '.pdf')
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig16.pdf')
-    # fig = plt.figure()
-
-    # was 3.25x2.25
-    # fig.set_figwidth(3.25)
     fig = plt.figure(figsize=(3.25, 2), dpi=300)
 
-
-    '''
-    print('\nplot_trajectories_single_plot.py:')
-    print('current directory is ', os.getcwd())
-    print('inspect.stack() is ', inspect.stack())
-    print('plot_trajectories_single_plot.py: opts.mcell4_dir = ', str(opts.mcell4_dir))
-    print('plot_trajectories_single_plot.py: opts.output = ', str(opts.output))
-    print('plot_trajectories_single_plot.py: opts.for_camkii = ', str(opts.for_camkii))
-    '''
-    
     counts = load_counts(opts)
 
     all_observables = get_all_observables_names(counts)
@@ -308,7 +291,6 @@ def main():
             
             color_index += 1
 
-    # ax.margins(0.05) # might need axis margin for this plot #0428
 
     # extra data to be plotted
     plot_extra_data(opts, ax, labels, current_label)
@@ -317,38 +299,12 @@ def main():
     plt.ylabel(Y_LABEL_N_PARAM_TIME)
 
 
-    # ax.set_xticks([0, 1, 2])
-    # ax.set_xlim(0, 2.0)
-    # ax.set_xticks([0, 2.0])
-    # ax.set_ylim(0, 150)
-    # ax.set_yticks([0, 50, 100, 150])
-    ax.margins(.05)
+    ax.margins(.05) # these plots run up against the axes, margin is good for this exact situation
     plt.ylim(top=150)
     plt.xlim(right=plt.xticks()[0][-2])
 
-    # ax.margins(x=0.05, y=0.05)  # these plots run up against the axes, margin is good for this exact situation
-
     plt.legend(loc='upper right', bbox_to_anchor=(0, 0, 1.0, 1.0))
-
-    # if opts.output in {'mcell4','mcell3','nfsim'}:
-    #     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))  # original
-    # else:
-    #     plt.legend()
-    #     plt.legend(loc='upper right')  # jy
-
-    # plt.legend(loc='center left', bbox_to_anchor=(1, 0.5)) #original
-    # plt.legend(loc='upper right') #jy
-    # plt.subplots_adjust(right=0.7, bottom=0.2)
-
-    # print('opts.index_name = ', opts.index_name)
-    # print('opts.output = ', opts.output)
-
-    # plt.subplots_adjust(left=0.14, right=0.96, bottom=0.16, top=0.95)
-    plt.subplots_adjust(left=0.15, right=0.95, bottom=0.18, top=0.95) #.15/.90/.20/.90 <- same as Fig12 #0502
-
-    pickle_name = opts.output + '.pickle'
-    print('plot_fig16.py: pickling %s ...' % pickle_name)
-    pickle.dump((fig, ax), open(pickle_name, 'wb'))
+    plt.subplots_adjust(left=0.19, right=0.88, bottom=0.17, top=0.95)
 
     plt.savefig('Fig16.png')
     pdf.savefig()

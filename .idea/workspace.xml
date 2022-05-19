@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f23342e4-7770-4f01-98e0-33a11ab250fb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_plotting/scripts/load_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/load_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/all.sh" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/all.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/assemble_figures.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/scripts/combine_all.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_averages_plot_per_observable.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_averages_plot_per_observable.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_fig13.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_fig13.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_fig15.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_fig15.py" afterDir="false" />
@@ -11,10 +13,9 @@
       <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_fig17.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_fig17.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_hybrid.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_hybrid.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_relative_performance.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_relative_performance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/scripts/plot_trajectories_single_plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/scripts/plot_trajectories_single_plot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_plotting/scripts/rcParams.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_plotting/styles/master.mplstyle" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/styles/master.mplstyle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_plotting/styles/plot_single.mplstyle" beforeDir="false" afterPath="$PROJECT_DIR$/_plotting/styles/plot_single.mplstyle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/camkii_only_output_data/plotting/labels.txt" beforeDir="false" afterPath="$PROJECT_DIR$/camkii_only_output_data/plotting/labels.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/camkii_only_output_data/plotting/plot.sh" beforeDir="false" afterPath="$PROJECT_DIR$/camkii_only_output_data/plotting/plot.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +107,8 @@
       <workItem from="1652303315574" duration="5529000" />
       <workItem from="1652311309378" duration="45787000" />
       <workItem from="1652728800250" duration="20246000" />
-      <workItem from="1652802682199" duration="319000" />
+      <workItem from="1652802682199" duration="2222000" />
+      <workItem from="1652984444770" duration="1776000" />
     </task>
     <servers />
   </component>

@@ -48,7 +48,6 @@ def create_argparse():
     parser.add_argument('-i', '--index-name', type=str)
     return parser
 
-
 def main():
     print('plot_relative_performance.py:')
     configure_fonts()
@@ -58,29 +57,7 @@ def main():
     dataB = '../larger_ratio.csv'
     datas = [dataA, dataB]
     pdf = matplotlib.backends.backend_pdf.PdfPages('Fig18.pdf')
-
-    # fig18 size was 3.25, 2.25
-    # fig18 size is now 3.25, 2
-    # fig = plt.figure()
     fig = plt.figure(figsize=(3.25, 2.25))
-
-    # fig = plt.figure(figsize=(3.5, 3.5))
-    # fig.set_figwidth(3.5)
-
-
-    # FOR USE WITH CLI OPTIONS, RATHER THAN PRECONFIGURED
-    # parser = create_argparse()
-    # args = parser.parse_args()
-    # if not args.data:
-    #     sys.exit("Input file must be set with -d.")
-    #
-    # print("Loading " + args.data)
-    # filename, file_extension = os.path.splitext(args.output)
-    # pdf_name = filename + '.pdf'
-    # pdf = matplotlib.backends.backend_pdf.PdfPages(pdf_name)
-    # df = pd.read_csv(args.data)  # 'df' type: <class 'pandas.core.frame.DataFrame'>
-    #
-    # # df = df.sort_values(by=['Benchmark'])
 
     for data in datas:
 
@@ -102,44 +79,21 @@ def main():
         0   CaMKII Holoenzyme                   53625.778073  17193.5000   3.118900 
         1   CaMKII Monomer                      224.550784    21.3375      10.52376
         2   SynGAP with TARP                    487.276863    13.8517      35.178127
-                                                                           ^ this data is plotted   
     
         '''
 
-        # NOTE: matplotlib pyplot.subplot is a wrapper for Figure.add_subplot which provides additional behavior when
-        # working with the implicit API
-        # https://matplotlib.org/3.5.0/api/_as_gen/matplotlib.pyplot.subplot.html
-
         if data == dataA:
             print('Working on subplot A')
-            # ax = fig.add_subplot(121)
-            # ax = fig.add_subplot(211)
-            # ax = plt.subplot2grid((7, 2), (0, 0), rowspan=7)
             ax = plt.subplot2grid((21, 2), (0, 0), rowspan=21)
         elif data == dataB:
             print('Working on subplot B')
-            # ax = fig.add_subplot(122)
-            # ax = fig.add_subplot(212)
-            # ax = plt.subplot2grid((7, 2), (0, 1), rowspan=3)
             ax = plt.subplot2grid((21, 2), (0, 1), rowspan=10)
 
-
-        # df['MCell3/MCell4'].plot(kind="barh", width = .8)
-
-        # df = pd.read_csv(args.data)
         df = pd.read_csv(data)
-
         dict = df.to_dict()
         names = list(dict['Benchmark'].values())
         results = list(dict['MCell3/MCell4'].values())
 
-        '''
-        original group/index names:
-        ['Synaptic Ca Homeostasis Presynaptic', 'Rat Neuromuscular Junction', 'Neuropil - full model', 'Neuropil - with simplified geometry', 'Mitochondria Presynaptic', 'Membrane Localization', 'Auto-phosphorylation']
-        and,
-        ['CaMKII Holoenzyme', 'CaMKII Monomer', 'SynGAP with TARP']
-
-        '''
         if data == dataA:
             names = ['Synaptic Ca Homeostasis Presynaptic', 'Rat NMJ', 'Neuropil             (full model)',
                      'Neuropil          (simple geometry)', 'Mitochondria Presynaptic', 'Membrane          Localization',
@@ -147,117 +101,46 @@ def main():
         elif data == dataB:
             names = ['CaMKII              Holoenzyme', 'CaMKII Monomer', 'SynGAP +      TARP']
 
-        # df1 = pd.read_csv(dataA)
-        # dict1 = df1.to_dict()
-        # names1 = list(dict1['Benchmark'].values())
-        # results1 = list(dict1['MCell3/MCell4'].values())
-
-        # df2 = pd.read_csv(dataB)
-        # dict2 = df2.to_dict()
-        # names2 = list(dict1['Benchmark'].values())
-        # results2 = list(dict1['MCell3/MCell4'].values())
-
-        # df = df.sort_values(by=['Benchmark'])
-
-
-
-        # cm = plt.get_cmap('tab10')
-        cm = plt.cm.get_cmap('tab10')
-        NUM_COLORS = len(names)
-        colors = [cm(i) for i in range(NUM_COLORS)]  # type is list
-        # ax.set_prop_cycle(linestyle=linestyles, color=colors)
-        ax.set_prop_cycle(color=colors)
         bars = plt.barh(names, results, color='b', align='center', height=.9, linewidth = 0)
-        # bars = plt.barh(names, results, color=colors[0],align='center', height=1, linewidth = .8)
-        # bars = plt.barh(names, results, color=colors[5], align='center', height=1, linewidth=.8)
-        # bars = plt.barh(names, results, color='b', align='edge', height=1)
-
-        # rects = ax.barh(range(len(names)), results, color=colors)
-
 
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
         ax.spines['bottom'].set_visible(False)
-        # ax.spines['left'].set_visible(False)
-        # ax.annotate('1', (1, len(names)-1), color='red')
         ax.yaxis.set_tick_params(length=0) # hide ticks but keep tiok labels
         ax.xaxis.set_tick_params(length=5)
-        # ax.tick_params(width=1.3) # thickness of ticks
-
-
         ax.set_xlabel('Rel. Performance',labelpad=3)
-        # ax.margins(x=0, y=0)
-        # ax.margins(0.05)
+
 
         for bar in bars:
             width = bar.get_width()
-            # ylabel_pos = bar.get_y() + bar.get_height() / 2
             ylabel_pos = bar.get_y() +.45
             ylabel_valign = 'center'
 
-            # original offsets: 1.05, .05, .65
             if width < 1:
-                # plt.annotate("{:.2f}".format(width), xy=(1.07, ylabel_pos), ha='left', va=ylabel_valign)
                 plt.annotate("{:.2f}".format(width), xy=(1.07, ylabel_pos), ha='left', va=ylabel_valign)
             else:
-                # plt.annotate("{:.2f}".format(width), xy=(width+.07, ylabel_pos), ha='left', va=ylabel_valign)
                 if data == dataA:
                     plt.annotate("{:.2f}".format(width), xy=(width+.07, ylabel_pos), ha='left', va=ylabel_valign)
                 elif data == dataB:
-                    # plt.annotate("{:.2f}".format(width), xy=(width + .65, ylabel_pos), ha='left', va=ylabel_valign)
                     plt.annotate("{:.2f}".format(width), xy=(width + .95, ylabel_pos), ha='left', va=ylabel_valign)
 
 
-
-        #plt.subplots_adjust(wspace=1.3)
         index_name = '(?)'
         if data == dataA:
             index_name = '(A)'
-            # plt.text(-2, 1.1, index_name, horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
-            # plt.text(.1, .9, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transSubfigure)
-            # plt.text(0, 1, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-            # plt.yticks(names, [textwrap.fill(name, 21) for name in names], linespacing=.9)
             plt.yticks(names, [textwrap.fill(name, 21) for name in names], linespacing=.82)
-
-            # plt.axvline(x=1, ymin=0, ymax=1, color='r', linestyle='--', linewidth=1)
-            # plt.axvline(x=1, ymin=.04, ymax=.96, color='r', linestyle='--', linewidth=1)
             plt.axvline(x=1, ymin=.01, color='red', linestyle='--', dashes=(4, 1.3), linewidth=1.2)
             ax.xaxis.set_ticks(np.arange(0, 4, 1))
 
-            # ax.margins(x=0,y=0)
-
-
         elif data == dataB:
             index_name = '(B)'
-            # plt.text(-2, 1.1, index_name, horizontalalignment='left', verticalalignment='top', transform=ax.transAxes)
-            # plt.text(.5, .9, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transSubfigure)
-            # plt.text(.5, 1, index_name, horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-            # plt.yticks(names, [textwrap.fill(name, 13) for name in names], linespacing=.9)
             plt.yticks(names, [textwrap.fill(name, 13) for name in names], linespacing=.82)
-
-            # ylim = ax.get_ylim()
-            # print('\n\nold ylim = \n\n', str(ylim))
-            # figs = list(map(plt.figure, plt.get_fignums()))
-            # dataA_ylim = (dataA_ylim[0] + 4, dataA_ylim[1] + 4)
-            # print("new ylim = %s\n\n" % str(dataA_ylim))
-
-            # plt.axvline(x=1, ymin=0, ymax=4 / 7, color='r', linestyle='--')
-            # plt.axvline(x=1, ymin=0, ymax=1, color='r', linestyle='--', linewidth=1)
             plt.axvline(x=1, ymin=.01, ymax=1.25, color='red', linestyle='--', dashes=(4, 1.2), linewidth=1.3)
             ax.margins(y=.05*(7/3))
-            # plt.xticks([0,10,20,30,40])
             ax.xaxis.set_ticks([0,12,24,36])
 
-        # ax.set_ymargin(0)
         xticks = ax.xaxis.get_major_ticks()
-        # xticks[0].label1.set_visible(False)
-
-        # plt.subplots_adjust(wspace=1.4, left=0.25, bottom=0.15, top=0.9)
-        # plt.subplots_adjust(wspace=1.1, left=0.25, right=.95, bottom=0.15, top=0.9)
-        # plt.text(.01, .98, '(A)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
-        # plt.text(0.51, .98, '(B)', horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
         plt.subplots_adjust(wspace=.9, left=0.23, right=.90, bottom=0.20, top=0.90)
-        # plt.text(.01, .98, 'A', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure)
         plt.text(.04, .98, 'A', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure, fontsize=8)
         plt.text(0.51, .98, 'B', weight="bold", horizontalalignment='left', verticalalignment='top', transform=fig.transFigure, fontsize=8)
 
