@@ -49,6 +49,7 @@ begin observables
   Molecules SNARE_sync snare(s~5)
   Molecules SNARE_async snare(a~2)
   Molecules V_release V_release()
+  Molecules glu glu
 end observables
 
 begin reaction rules
