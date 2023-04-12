@@ -109,8 +109,8 @@ def custom_init_and_run(model):
     model.end_simulation()
 
 
-    #output_path = './react_data/seed_%05d/' % (model.config.seed)
-    output_path = './'
+    output_path = './react_data/seed_%05d/' % (model.config.seed)
+    #output_path = './'
 
     try:
         os.makedirs(output_path)
